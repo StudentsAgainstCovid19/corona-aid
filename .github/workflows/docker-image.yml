@@ -1,0 +1,28 @@
+name: Docker Image CI
+
+on:
+  push:
+    branches: [ master ]
+  pull_request:
+    branches: [ master ]
+
+jobs:
+
+  build:
+
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v2
+    - name: Build the front-end Docker image
+      run: | 
+        docker build . --file Dockerfile -t docker.pkg.github.com/studentsagainstcovid19/corona-aid/corona-aid-frontend:latest
+        echo "Build completed"
+        
+        echo ${GITHUB_TOKEN} | docker login docker.pkg.github.com -u ${GITHUB_REPOSITORY_OWNER} --password-stdin
+        echo "Login successful"
+        
+        docker push docker.pkg.github.com/studentsagainstcovid19/corona-aid/corona-aid-frontend:latest    
+        echo "Push successful"
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
