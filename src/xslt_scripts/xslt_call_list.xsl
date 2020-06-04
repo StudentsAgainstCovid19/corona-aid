@@ -8,7 +8,7 @@
 
                 <xsl:variable name="div_classtag">
                     <xsl:choose>
-                        <xsl:when test="calledbool = true">calledAlready</xsl:when>
+                        <xsl:when test="calledbool = 'true'">calledAlready</xsl:when>
                         <xsl:when test="round(priority) = 1 or round(priority) = 0">lowprio</xsl:when>
                         <xsl:when test="round(priority) = 2">intermediateprio</xsl:when>
                         <xsl:when test="round(priority) = 3">highprio</xsl:when>
