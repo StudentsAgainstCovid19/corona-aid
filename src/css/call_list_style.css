@@ -1,0 +1,49 @@
+#call_list_div
+{
+    position: fixed;
+    overflow: auto;
+    background-color: #4488ff;
+    z-index: 5;
+    height: 100%;
+}
+
+.wellbeing_imagespan {
+    position: relative;
+    top: 4px;
+    margin-right: 5px;
+}
+
+
+.wellbeing_indicator
+{
+    height: 20px;
+    width: 20px;
+}
+
+.call_box {
+    border-style: solid;
+    background-color: white;
+    border-width: 5px;
+    border-radius: 5px;
+    margin: 5px;
+    padding: 5px;
+}
+.lowprio {
+    border-color: green;
+}
+
+.intermediateprio {
+    border-color: orange;
+}
+
+.highprio {
+    border-color: red;
+}
+
+.veryhighprio {
+    border-color: darkred;
+}
+
+.calledAlready {
+    border-color: purple;
+}
