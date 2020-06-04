@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<people>
+    <person>
+        <firstnames>Abraham</firstnames>
+        <lastname>Lincoln</lastname>
+        <age>69</age>
+        <calledbool>false</calledbool>
+        <lastcall>000</lastcall>
+        <phone>0721 373446</phone>
+        <subjectiveWellbeing>3</subjectiveWellbeing>
+        <sumPreExIllnes>2</sumPreExIllnes>
+        <sumSymptoms>5</sumSymptoms>
+    </person>
+    <person>
+        <firstnames>Abraham</firstnames>
+        <lastname>Lincoln</lastname>
+        <age>69</age>
+        <calledbool>false</calledbool>
+        <lastcall>000</lastcall>
+        <phone>0721 373446</phone>
+        <subjectiveWellbeing>2</subjectiveWellbeing>
+        <sumPreExIllnes>2</sumPreExIllnes>
+        <sumSymptoms>5</sumSymptoms>
+    </person>
+    <person>
+        <firstnames>Fast</firstnames>
+        <lastname>Tot</lastname>
+        <age>88</age>
+        <calledbool>false</calledbool>
+        <lastcall>000</lastcall>
+        <phone>0721 373446</phone>
+        <subjectiveWellbeing>1</subjectiveWellbeing>
+        <sumPreExIllnes>10</sumPreExIllnes>
+        <sumSymptoms>5</sumSymptoms>
+    </person>
+    <person>
+        <firstnames>Abraham</firstnames>
+        <lastname>Lincoln</lastname>
+        <age>12</age>
+        <calledbool>false</calledbool>
+        <lastcall>000</lastcall>
+        <phone>0721 373446</phone>
+        <subjectiveWellbeing>5</subjectiveWellbeing>
+        <sumPreExIllnes>0</sumPreExIllnes>
+        <sumSymptoms>0</sumSymptoms>
+    </person>
+    <person>
+        <firstnames>Abraham</firstnames>
+        <lastname>Lincoln</lastname>
+        <age>69</age>
+        <calledbool>false</calledbool>
+        <lastcall>000</lastcall>
+        <phone>0721 373446</phone>
+        <subjectiveWellbeing>5</subjectiveWellbeing>
+        <sumPreExIllnes>2</sumPreExIllnes>
+        <sumSymptoms>5</sumSymptoms>
+    </person>
+
+    <person>
+        <firstnames>Julien</firstnames>
+        <lastname>Meier</lastname>
+        <age>19</age>
+        <calledbool>true</calledbool>
+        <lastcall>10:42</lastcall>
+        <phone>0721 2112354</phone>
+        <subjectiveWellbeing>5</subjectiveWellbeing>
+        <sumPreExIllnes>1</sumPreExIllnes>
+        <sumSymptoms>2</sumSymptoms>
+    </person>
+    <person>
+        <firstnames>JoJo</firstnames>
+        <lastname>Quast</lastname>
+        <age>28</age>
+        <calledbool>false</calledbool>
+        <lastcall>000</lastcall>
+        <phone>0721 3453435</phone>
+        <subjectiveWellbeing>4</subjectiveWellbeing>
+        <sumPreExIllnes>5</sumPreExIllnes>
+        <sumSymptoms>3</sumSymptoms>
+    </person>
+    <person>
+        <firstnames>Marc</firstnames>
+        <lastname>Auberer</lastname>
+        <age>48</age>
+        <calledbool>false</calledbool>
+        <lastcall>000</lastcall>
+        <phone>0721 1221165</phone>
+        <subjectiveWellbeing>2</subjectiveWellbeing>
+        <sumPreExIllnes>5</sumPreExIllnes>
+        <sumSymptoms>3</sumSymptoms>
+    </person>
+</people>

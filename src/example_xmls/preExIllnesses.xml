@@ -1,0 +1,12 @@
+<preExistingIllnesses>
+    <illness>
+        <id>1</id>
+        <name>stupidity</name>
+        <severity>2</severity>
+    </illness>
+    <illness>
+        <id>2</id>
+        <name>Javascript</name>
+        <severity>9001</severity>
+    </illness>
+</preExistingIllnesses>
