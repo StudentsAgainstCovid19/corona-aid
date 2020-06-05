@@ -1,2 +1,2 @@
-FROM nginx:1.18-alpine
-ADD ./src/ /usr/share/nginx/html
+FROM httpd:latest
+ADD ./src/ /usr/local/apache2/htdocs
