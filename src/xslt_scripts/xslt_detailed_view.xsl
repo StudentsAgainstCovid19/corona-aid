@@ -77,12 +77,66 @@
         <xsl:value-of select="$days"></xsl:value-of><xsl:text> </xsl:text><xsl:value-of select="$dayText"></xsl:value-of>
     </xsl:template>
 
-    <xsl:template match="subjectiveWellbeings"> 5
-        <xsl:for-each select="subjectiveWellbeings/subjectiveWellBeing">
-            <xsl:sort select="timestamp" data-type="number"></xsl:sort>
+    <xsl:template name="getWellbeingColor">
+        <xsl:param name="wellbeing"></xsl:param>
+        <xsl:choose>
+            <xsl:when test="$wellbeing = 1">darkred</xsl:when>
+            <xsl:when test="$wellbeing = 2">red</xsl:when>
+            <xsl:when test="$wellbeing = 3">orange</xsl:when>
+            <xsl:when test="$wellbeing = 4">lightgreen</xsl:when>
+            <xsl:when test="$wellbeing = 5">darkgreen</xsl:when>
+        </xsl:choose>
+    </xsl:template>
 
-            <xsl:value-of select="wellbeing"></xsl:value-of>
-        </xsl:for-each>
+    <xsl:template match="subjectiveWellbeings">
+
+        <xsl:variable name="amountValues" select="count(subjectiveWellBeing)"></xsl:variable>
+        <xsl:variable name="width">
+            <xsl:choose>
+                <xsl:when test="$amountValues = 0">0</xsl:when>
+                <xsl:otherwise><xsl:value-of select="$amountValues * 120 - 20"></xsl:value-of></xsl:otherwise>
+            </xsl:choose>
+        </xsl:variable>
+        <xsl:if test="$amountValues > 0">
+
+            <xsl:variable name="daysBeforeText">
+                <xsl:call-template name="dayFormatting">
+                    <xsl:with-param name="days" select="$amountValues"></xsl:with-param>
+                </xsl:call-template>
+            </xsl:variable>
+
+            vor <xsl:value-of select="$daysBeforeText"></xsl:value-of>
+        </xsl:if>
+        <svg id="wellbeing_indicator_history" height="100">
+            <xsl:attribute name="width"><xsl:value-of select="$width"></xsl:value-of></xsl:attribute>
+
+            <xsl:for-each select="subjectiveWellBeing">
+                <xsl:sort select="timestamp" data-type="number"></xsl:sort>
+                <xsl:variable name="color">
+                    <xsl:call-template name="getWellbeingColor">
+                        <xsl:with-param name="wellbeing" select="wellbeing"></xsl:with-param>
+                    </xsl:call-template>
+                </xsl:variable>
+                <xsl:variable name="circle_x_pos" select="position()*120 - 70"></xsl:variable>
+                <circle cy="50" r="49" stroke-width="2px" stroke="black">
+                    <xsl:attribute name="fill"><xsl:value-of select="$color"></xsl:value-of></xsl:attribute>
+                    <xsl:attribute name="cx"><xsl:value-of select="$circle_x_pos"></xsl:value-of></xsl:attribute>
+                </circle>
+                <xsl:if test="not(position() = $amountValues)">
+                    <xsl:variable name="line_x1_pos" select="position()*120 - 21"></xsl:variable>
+                    <xsl:variable name="line_x2_pos" select="position()*120 + 1"></xsl:variable>
+
+                    <line y1="50" y2="50" stroke="black" stroke-width="15">
+                        <xsl:attribute name="x1"><xsl:value-of select="$line_x1_pos"></xsl:value-of></xsl:attribute>
+                        <xsl:attribute name="x2"><xsl:value-of select="$line_x2_pos"></xsl:value-of></xsl:attribute>
+                    </line>
+                </xsl:if>
+            </xsl:for-each>
+        </svg>
+
+        <xsl:if test="$amountValues > 0">
+            gestern
+        </xsl:if>
     </xsl:template>
 
 
@@ -107,17 +161,25 @@
         <p>Risikoeinschätzung: <span><img><xsl:attribute name="src">./assets/wellbeing_indicators/wellbeing_<xsl:value-of select="$prio_svg"></xsl:value-of>.svg</xsl:attribute></img></span>
             <xsl:value-of select="$prio_desc"></xsl:value-of>
         </p>
+        <button id="preexisting_illness_button">Vorerkrankungen</button>
         <p>Krankheitsverlauf</p>
 
         <input type="checkbox" id="test_result_checkbox" name="test_result">
             <xsl:attribute name="checked"><xsl:value-of select="test/result"></xsl:value-of></xsl:attribute>
         </input>
-        <label for="test_result">Test <xsl:choose>
-            <xsl:when test="test/result = 'true'">positiv (vor <xsl:value-of select="test/timeDue"></xsl:value-of><xsl:text> </xsl:text><xsl:choose>
-                <xsl:when test="test/timeDue = 1">Tag</xsl:when>
-                <xsl:otherwise>Tagen</xsl:otherwise>
-            </xsl:choose>)</xsl:when>
-        </xsl:choose></label>
+
+        <xsl:variable name="testDaysText">
+            <xsl:call-template name="dayFormatting">
+                <xsl:with-param name="days" select="test/timeDue"></xsl:with-param>
+            </xsl:call-template>
+        </xsl:variable>
+
+
+        <label for="test_result">
+            Test <xsl:if test="test/result = 'true'">
+                positiv (vor <xsl:value-of select="$testDaysText"></xsl:value-of>)
+            </xsl:if>
+        </label>
 
         <p><xsl:attribute name="class"><xsl:choose>
             <xsl:when test="test/prescribed = 1">alreadyPrescribed</xsl:when>
@@ -150,11 +212,9 @@
             </xsl:for-each>
         </div>
 
-        <xsl:variable name="wellbeingProgression">
-            <xsl:apply-templates select="subjectiveWellBeing"></xsl:apply-templates>
-        </xsl:variable>
+        <p> Verlauf (subj.) <xsl:apply-templates select="subjectiveWellbeings"></xsl:apply-templates></p>
 
-        <p> Verlauf (subj.) <span>hi<xsl:value-of select="$wellbeingProgression"></xsl:value-of></span></p>
-
+        <button id="cancel_detail_button">Abbrechen</button>
+        <button id="submit_detail_button">Senden</button>
     </xsl:template>
 </xsl:stylesheet>

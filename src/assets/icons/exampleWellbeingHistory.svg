@@ -1,0 +1,19 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="220" height="100">
+    <circle cx="50" cy="50" r="49" fill="red" stroke-width="2px" stroke="black"></circle>
+    <line x1="99" y1="50" x2="121" y2="50" stroke="black" stroke-width="15"></line>
+    <circle cx="170" cy="50" r="49" fill="orange" stroke-width="2px" stroke="black"></circle>
+</svg>
+
+        <!--
+        n: amount of circles
+        i: current index of circle (starting with i=1)
+
+        size: n * 100 + (n-1)*20 = 120*n-20
+
+        circle:
+        - cx: 120 * i - 70
+
+        line:
+        - x1: i*120 - 21
+        - x2: i*120 + 1
+        -->
