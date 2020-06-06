@@ -1,0 +1,76 @@
+.floating_object {
+    position: absolute;
+    background-color: #4488ff;
+    z-index: 5;
+    color: white;
+}
+
+#zoom_buttons {
+    position: absolute;
+    bottom: 10%;
+    left: 20%;
+    background-color: transparent;
+}
+
+#zoom_in_button {
+    margin-left: 100px;
+    right: 0;
+}
+
+#zoom_out_button {
+    left: 0;
+}
+
+.zoom_button {
+    width: 90px;
+    height: 90px;
+    border-radius: 50%;
+    background-color: #4488ff;
+    border: 0;
+    position: relative;
+    color: white;
+    font-size: 2em;
+    box-shadow: 2px 2px black;
+    outline: none;
+}
+.zoom_button:active{
+    transform: translateY(4px);
+}
+
+.zoom_button:hover {
+    background-color: white;
+    color: #4488ff;
+    box-shadow: 5px 5px black;
+}
+
+.flex_div {
+    display: flex;
+}
+
+#search_bar {
+    padding: 10px 10px 5px 5px;
+    top: 3%;
+    left: 15%;
+    border-radius: 10px;
+    height: 3%;
+    outline: none;
+}
+
+#search_input {
+    margin: 10px;
+    height: 6%;
+    border-radius: 5px;
+    border-width: 0;
+}
+
+#open_list_button {
+    background-color: transparent;
+    outline: none;
+    border-radius: 50%;
+    border-width: 0;
+}
+
+#open_list_svg {
+    width: 15%;
+    height: 15%;
+}

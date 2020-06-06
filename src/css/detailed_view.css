@@ -1,0 +1,32 @@
+
+#infected_detailed_view_right {
+    width: 20%;
+    height: 100%;
+    right: 0;
+    position: fixed;
+}
+
+.alreadyPrescribed {
+    color: grey;
+}
+
+.notPrescribed {
+    color: green;
+}
+
+#addSymptomButton {
+
+}
+
+.symptom_checkbox {
+
+}
+
+.sinceDays {
+    color: #4488ff;
+}
+
+#symptomsDiv {
+    background-color: white;
+    color: black;
+}

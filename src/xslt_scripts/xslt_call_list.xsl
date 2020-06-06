@@ -38,7 +38,7 @@
                 <tr>
                     <td>
                         <div>
-                            <xsl:attribute name="class">call_box <xsl:value-of select="$div_classtag"></xsl:value-of></xsl:attribute>
+                            <xsl:attribute name="class"><xsl:value-of select="$div_classtag"></xsl:value-of> call_box</xsl:attribute>
 
                             <p><xsl:value-of select="lastname"></xsl:value-of>, <xsl:value-of select="firstnames"></xsl:value-of></p>
                             <p>Zustand:
@@ -53,7 +53,7 @@
                             <xsl:choose>
                                 <xsl:when test="$div_classtag = 'calledAlready'">
                                     <p>Letzter Versuch:</p>
-                                    <p>Heute, <xsl:value-of select="lastcall"></xsl:value-of>Uhr</p>
+                                    <p>Heute, <xsl:value-of select="lastcall"></xsl:value-of> Uhr</p>
                                 </xsl:when>
                             </xsl:choose>
                         </div>

@@ -30,6 +30,7 @@ function initMap() {
             clicked_marker(2)
         });
         markers.addMarker(marker);
+        clicked_marker(5);
 
     // var elements = document.querySelectorAll('[id^=OpenLayers_Layer_Markers]');
     // var newElm = document.createElement('div', {id:"OL_Icon_88", style:"position: absolute; width: 25px; height: 25px; left: 917.5px; top: -27px;"});
@@ -41,6 +42,8 @@ function initMap() {
 
 
 function clicked_marker(id) {
-    alert("Marker: "+id);
-
+    var detailedXML = loadXMLDoc("./example_xmls/detailed_infected.xml");
+    console.log(detailedXML);
+    setDetailedView(detailedXML);
+    console.log("Called...");
 }
