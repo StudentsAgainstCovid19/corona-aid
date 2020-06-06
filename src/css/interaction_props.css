@@ -57,10 +57,21 @@
 }
 
 #search_input {
-    margin: 10px;
+    margin: 10px 10px 0 10px;
     height: 6%;
-    border-radius: 5px;
     border-width: 0;
+    border-top-left-radius: 5px;
+    border-bottom-left-radius: 5px;
+}
+
+#search_div {
+    display: flex;
+    color: white;
+}
+
+#search_span {
+    top: 25%;
+    vertical-align: middle;
 }
 
 #open_list_button {
@@ -73,4 +84,13 @@
 #open_list_svg {
     width: 15%;
     height: 15%;
+}
+
+#search_button {
+    background-color: transparent;
+    border-top-right-radius: 5px;
+    border-bottom-right-radius: 5px;
+    border-color: white;
+    outline: none;
+
 }

@@ -11,7 +11,6 @@
 
 
     <script src="https://cdn.jsdelivr.net/gh/openlayers/openlayers.github.io@master/en/v6.3.1/build/ol.js"></script>
-    <script src="./js/openlayers/OpenLayers.js"></script>
     <script src="./js/load_xslt.js"></script>
     <script src="./js/detailed_bar.js"></script>
 	<script src="./js/CoronaOSM.js"></script>
@@ -33,9 +32,11 @@
 
   <div id="search_bar" class="floating_object">
     <div class="flex_div">
-      <button id="open_list_button" onclick="toggle_call_list();"><img src="./assets/icons/list_button.svg" id="open_list_svg"></button>
-      <input type="text" placeholder="Search.." id="search_input">
-      <p>Search</p>
+      <button id="open_list_button" onclick="toggle_call_list();"><img src="./assets/icons/list_button.svg" id="open_list_svg"></img></button>
+      <form>
+        <input type="text" placeholder="Suche..." id="search_input">
+        <button id="search_button"><div id="search_div"><img src="./assets/icons/search_magnifier.svg"></img><p>Suche</p></div></button>
+      </form>
     </div>
   </div>
 

@@ -8,6 +8,6 @@ function setDetailedView(xml_doc)
     {
         var displayDetailed = loadXMLDoc("./xslt_scripts/xslt_detailed_view.xsl");
         console.log(displayDetailed);
-        runXSLTDisplayHtml(displayDetailed, xml_doc, "infected_detailed_view_right");
+        runXSLTDisplayHtml([displayDetailed], xml_doc, "infected_detailed_view_right");
     }
 }

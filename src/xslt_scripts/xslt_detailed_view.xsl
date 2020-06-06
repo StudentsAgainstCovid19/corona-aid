@@ -213,8 +213,22 @@
         </div>
 
         <p> Verlauf (subj.) <xsl:apply-templates select="subjectiveWellbeings"></xsl:apply-templates></p>
+        <xsl:variable name="lastWellbeing">2</xsl:variable>
 
-        <button id="cancel_detail_button">Abbrechen</button>
-        <button id="submit_detail_button">Senden</button>
+        <xsl:variable name="pronoun">
+            <xsl:choose>
+                <xsl:when test="gender = 'male'">ihm</xsl:when>
+                <xsl:otherwise>ihr</xsl:otherwise>
+            </xsl:choose>
+        </xsl:variable>
+
+        <p>Wie geht's <xsl:value-of select="$pronoun"></xsl:value-of> heute?
+            <input type="range" min="1" max="5" step="1" id="wellbeing_slider">
+                <xsl:attribute name="value"><xsl:value-of select="$lastWellbeing"></xsl:value-of></xsl:attribute>
+            </input>
+        </p>
+
+        <button id="cancel_detail_button" class="dialogButton">Abbrechen<i class="fa fa-search"></i></button>
+        <button id="submit_detail_button" class="dialogButton">Senden</button>
     </xsl:template>
 </xsl:stylesheet>

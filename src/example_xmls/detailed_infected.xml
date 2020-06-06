@@ -5,6 +5,7 @@
     <amountInApartment>1</amountInApartment>
     <age>28</age>
     <phone>0314 15926525</phone>
+    <gender>male</gender>
     <street>Central City</street>
     <housenumber>20</housenumber>
     <postalcode>1917</postalcode>

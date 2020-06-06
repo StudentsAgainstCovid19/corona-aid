@@ -14,7 +14,18 @@ function initMap() {
             zoom: 13
         })
     });
-        clicked_marker(5);
+
+    var marker_layer = new ol.layer.Vector({
+        source: new ol.source.Vector({
+            features: [
+                new ol.Feature({
+                    geometry: new ol.geom.Point(ol.proj.fromLonLat(lonlat))
+                })
+            ]
+        })
+    });
+    map.addLayer(marker_layer);
+    clicked_marker(5);
 
     // var elements = document.querySelectorAll('[id^=OpenLayers_Layer_Markers]');
     // var newElm = document.createElement('div', {id:"OL_Icon_88", style:"position: absolute; width: 25px; height: 25px; left: 917.5px; top: -27px;"});

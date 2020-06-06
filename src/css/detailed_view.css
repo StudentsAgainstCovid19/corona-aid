@@ -15,6 +15,11 @@
 }
 
 #addSymptomButton {
+    border-radius: 50%;
+    outline: none;
+    background-color: white;
+    color: black;
+    box-shadow: black;
 
 }
 
@@ -35,12 +40,48 @@
 }
 
 #cancel_detail_button {
-
+    background-color: red;
 }
-#submit_detail_button {
+#cancel_detail_button:hover {
+    color: red;
+    background-color: white;
+    border-color: red;
+}
 
+#submit_detail_button {
+    background-color: deepskyblue;
+}
+#submit_detail_button:hover {
+    color: deepskyblue;
+    background-color: white;
+    border-color: deepskyblue;
 }
 
 #preexisting_illness_button {
+
+}
+
+.dialogButton {
+    border-radius: 5px;
+    border-color: white;
+    color: white;
+    outline: none;
+}
+
+.dialogButton :hover {
+}
+
+
+
+#wellbeing_slider:focus {
+    outline: none;
+}
+
+#wellbeing_slider::-webkit-slider-runnable-track {
+    width: 200px;
+    height: 8.4px;
+    cursor: pointer;
+    box-shadow: 1px 1px 1px #000000, 0px 0px 1px #0d0d0d;
+    background: url('../assets/icons/wellbeing_slider.svg');
 
 }
