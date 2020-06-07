@@ -31,8 +31,6 @@ function runXSLTDisplayHtml(xsl_list, xml, id)
     {
         xsltProcessor = new XSLTProcessor();
         xsl_list.forEach(function (xsl) {
-            console.log("Iter");
-            console.log(xsl);
             xsltProcessor.importStylesheet(xsl);
         });
         resultDocument = xsltProcessor.transformToFragment(xml, document);
@@ -59,8 +57,6 @@ function runXSLT(xsl_list, xml)
     {
         xsltProcessor = new XSLTProcessor();
         xsl_list.forEach(function (xsl) {
-            console.log("Iter");
-            console.log(xsl);
             xsltProcessor.importStylesheet(xsl);
         });
         return xsltProcessor.transformToDocument(xml);

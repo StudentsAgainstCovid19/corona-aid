@@ -1,5 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <xsl:stylesheet version="1.0" xmlns:xsl="http://www.w3.org/1999/XSL/Transform">
+    <xsl:import href="./xslt_string_helpers.xsl"></xsl:import>
+
     <xsl:template match="/">
         <p>Meine Anrufsliste</p>
         <table>
@@ -7,32 +9,22 @@
                 <xsl:sort select="priority" order="descending" data-type="number"></xsl:sort>
 
                 <xsl:variable name="div_classtag">
-                    <xsl:choose>
-                        <xsl:when test="calledbool = 'true'">calledAlready</xsl:when>
-                        <xsl:when test="round(priority) = 1 or round(priority) = 0">lowprio</xsl:when>
-                        <xsl:when test="round(priority) = 2">intermediateprio</xsl:when>
-                        <xsl:when test="round(priority) = 3">highprio</xsl:when>
-                        <xsl:otherwise>veryhighprio</xsl:otherwise>
-                    </xsl:choose>
+                    <xsl:call-template name="div_classtag_template">
+                        <xsl:with-param name="called" select="calledbool"></xsl:with-param>
+                        <xsl:with-param name="prio" select="priority"></xsl:with-param>
+                    </xsl:call-template>
                 </xsl:variable>
 
                 <xsl:variable name="wellbeing_svg">
-                    <xsl:choose>
-                        <xsl:when test="subjectiveWellbeing = 1">verybad</xsl:when>
-                        <xsl:when test="subjectiveWellbeing = 2">bad</xsl:when>
-                        <xsl:when test="subjectiveWellbeing = 3">intermediate</xsl:when>
-                        <xsl:when test="subjectiveWellbeing = 4">good</xsl:when>
-                        <xsl:otherwise>verygood</xsl:otherwise>
-                    </xsl:choose>
+                    <xsl:call-template name="wellbeing_svg_template">
+                        <xsl:with-param name="wellbeing" select="subjectiveWellbeing"></xsl:with-param>
+                    </xsl:call-template>
                 </xsl:variable>
+
                 <xsl:variable name="wellbeing_desc">
-                    <xsl:choose>
-                        <xsl:when test="subjectiveWellbeing = 1">Sehr schlecht</xsl:when>
-                        <xsl:when test="subjectiveWellbeing = 2">Schlecht</xsl:when>
-                        <xsl:when test="subjectiveWellbeing = 3">Mittelmäßig</xsl:when>
-                        <xsl:when test="subjectiveWellbeing = 4">Gut</xsl:when>
-                        <xsl:otherwise>Sehr gut</xsl:otherwise>
-                    </xsl:choose>
+                    <xsl:call-template name="wellbeing_desc">
+                        <xsl:with-param name="wellbeing" select="subjectiveWellbeing"></xsl:with-param>
+                    </xsl:call-template>
                 </xsl:variable>
 
                 <tr>

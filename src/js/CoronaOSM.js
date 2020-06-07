@@ -38,7 +38,5 @@ function initMap() {
 
 function clicked_marker(id) {
     var detailedXML = loadXMLDoc("./example_xmls/detailed_infected.xml");
-    console.log(detailedXML);
     setDetailedView(detailedXML);
-    console.log("Called...");
 }
