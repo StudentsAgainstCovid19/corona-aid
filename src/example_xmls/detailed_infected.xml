@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<infected>
+    <firstnames>Roy</firstnames>
+    <lastname>Mustang</lastname>
+    <amountInApartment>1</amountInApartment>
+    <age>28</age>
+    <phone>0314 15926525</phone>
+    <gender>male</gender>
+    <street>Central City</street>
+    <housenumber>20</housenumber>
+    <postalcode>1917</postalcode>
+    <sumSymptoms>8</sumSymptoms>
+    <sumPreIllnesses>2</sumPreIllnesses>
+    <test>
+        <result>true</result>
+        <timeDue>5</timeDue>
+        <prescribed>0</prescribed>
+    </test>
+
+    <symptoms>
+        <symptom>
+            <sinceDays>4</sinceDays>
+            <name>Fieber</name>
+            <degreeOfDanger>2</degreeOfDanger>
+        </symptom>
+        <symptom>
+            <sinceDays>2</sinceDays>
+            <name>Durchfall</name>
+            <degreeOfDanger>3</degreeOfDanger>
+        </symptom>
+    </symptoms>
+
+    <subjectiveWellbeings>
+        <subjectiveWellBeing>
+            <timestamp>1231231213</timestamp>
+            <wellbeing>2</wellbeing>
+        </subjectiveWellBeing>
+        <subjectiveWellBeing>
+            <timestamp>1231231214</timestamp>
+            <wellbeing>3</wellbeing>
+        </subjectiveWellBeing>
+        <subjectiveWellBeing>
+            <timestamp>1231231215</timestamp>
+            <wellbeing>2</wellbeing>
+        </subjectiveWellBeing>
+        <subjectiveWellBeing>
+            <timestamp>1231231216</timestamp>
+            <wellbeing>1</wellbeing>
+        </subjectiveWellBeing>
+    </subjectiveWellbeings>
+
+    <preExIllnesses>
+        <illness>
+            <name>Herzinsuffizienz</name>
+            <degreeOfDanger>4</degreeOfDanger>
+        </illness>
+    </preExIllnesses>
+</infected>

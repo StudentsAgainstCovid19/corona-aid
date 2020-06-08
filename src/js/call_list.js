@@ -3,11 +3,10 @@ function initCallList()
 
     var callListsXML = loadXMLDoc("./example_xmls/call_list.xml");
     var prioCalcXSL = loadXMLDoc("./xslt_scripts/xslt_calculate_prio.xsl");
-    console.log(callListsXML);
-    console.log(prioCalcXSL)
+    var prioHelpersXSL = loadXMLDoc("./xslt_scripts/xslt_priority_helpers.xsl");
 
-    var ret = runXSLT(prioCalcXSL, callListsXML);
-    console.log(ret);
+    var ret = runXSLT([prioHelpersXSL, prioCalcXSL], callListsXML);
     var displayCallXSL = loadXMLDoc("./xslt_scripts/xslt_call_list.xsl");
-    runXSLTDisplayHtml(displayCallXSL, ret, "call_list_div");
+    var stringHelpersXSL = loadXMLDoc("./xslt_scripts/xslt_string_helpers.xsl");
+    runXSLTDisplayHtml([stringHelpersXSL, displayCallXSL], ret, "call_list_div");
 }
