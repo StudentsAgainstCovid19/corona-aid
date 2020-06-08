@@ -1,0 +1,87 @@
+
+#infected_detailed_view_right {
+    width: 20%;
+    height: 100%;
+    right: 0;
+    position: fixed;
+}
+
+.alreadyPrescribed {
+    color: grey;
+}
+
+.notPrescribed {
+    color: green;
+}
+
+#addSymptomButton {
+    border-radius: 50%;
+    outline: none;
+    background-color: white;
+    color: black;
+    box-shadow: black;
+
+}
+
+.symptom_checkbox {
+
+}
+
+.sinceDays {
+    color: #4488ff;
+}
+
+#symptomsDiv {
+    background-color: white;
+    color: black;
+}
+
+#wellbeing_indicator_history {
+}
+
+#cancel_detail_button {
+    background-color: red;
+}
+#cancel_detail_button:hover {
+    color: red;
+    background-color: white;
+    border-color: red;
+}
+
+#submit_detail_button {
+    background-color: deepskyblue;
+}
+#submit_detail_button:hover {
+    color: deepskyblue;
+    background-color: white;
+    border-color: deepskyblue;
+}
+
+#preexisting_illness_button {
+
+}
+
+.dialogButton {
+    border-radius: 5px;
+    border-color: white;
+    color: white;
+    outline: none;
+}
+
+.dialogButton :hover {
+}
+
+
+
+#wellbeing_slider:focus {
+    outline: none;
+}
+
+#wellbeing_slider::-webkit-slider-runnable-track {
+    width: 200px;
+    height: 8.4px;
+    cursor: pointer;
+    box-shadow: 1px 1px 1px #000000, 0px 0px 1px #0d0d0d;
+    background: url('../assets/icons/wellbeing_slider.svg');
+
+}

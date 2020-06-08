@@ -3,29 +3,49 @@
   <head>
     <title>Corona Aid v1.0</title>
 
-	<link rel="stylesheet" href="https://cdn.rawgit.com/openlayers/openlayers.github.io/master/en/v5.3.0/css/ol.css" type="text/css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/openlayers/openlayers.github.io@master/en/v6.3.1/css/ol.css" type="text/css">
     <link rel="stylesheet" href="./css/call_list_style.css" type="text/css">
     <link rel="stylesheet" href="./css/detailed_view.css" type="text/css">
     <link rel="stylesheet" href="./css/map_style.css" type="text/css">
+    <link rel="stylesheet" href="./css/interaction_props.css" type="text/css">
 
 
-    <script src="https://cdn.rawgit.com/openlayers/openlayers.github.io/master/en/v5.3.0/build/ol.js"></script>
-    <script src="./js/openlayers/OpenLayers.js"></script>
+    <script src="https://cdn.jsdelivr.net/gh/openlayers/openlayers.github.io@master/en/v6.3.1/build/ol.js"></script>
     <script src="./js/load_xslt.js"></script>
+    <script src="./js/detailed_bar.js"></script>
 	<script src="./js/CoronaOSM.js"></script>
     <script src="./js/call_list.js"></script>
+    <script src="./js/slide_animations_listeners.js"></script>
 
 
   </head>
   <body onload="initMap();initCallList();">
-  <div id="call_list_div"></div>
+  <div id="call_list_div" class="floating_object"></div>
 
-  <div id="basicMap"></div>
+  <div id="map_div"></div>
 
 
-  <div id="infected_detailed_view_left"></div>
+  <div id="infected_detailed_view_right" class="floating_object"></div>
 
-  <div id="footer"></div>
+  <div id="footer" class="floating_object"></div>
+
+
+  <div id="search_bar" class="floating_object">
+    <div class="flex_div">
+      <button id="open_list_button" onclick="toggle_call_list();"><img src="./assets/icons/list_button.svg" id="open_list_svg"></img></button>
+      <form>
+        <input type="text" placeholder="Suche..." id="search_input">
+        <button id="search_button"><div id="search_div"><img src="./assets/icons/search_magnifier.svg"></img><p>Suche</p></div></button>
+      </form>
+    </div>
+  </div>
+
+  <div id="zoom_buttons" class="floating_object">
+    <div class="flex_div">
+      <button id="zoom_in_button" class="zoom_button">+</button>
+      <button id="zoom_out_button" class="zoom_button">-</button>
+    </div>
+  </div>
 	
   </body>
 </html>

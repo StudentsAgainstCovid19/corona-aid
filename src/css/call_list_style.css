@@ -3,9 +3,42 @@
     position: fixed;
     overflow: auto;
     background-color: #4488ff;
+    width: 12%;
     z-index: 5;
     height: 100%;
 }
+
+.call_list_slide {
+    animation-name: slidein_call_div;
+    animation-duration: 1s;
+}
+.call_list_slideout {
+    animation-name: slideout_call_div;
+    animation-duration: 1s;
+}
+
+@keyframes slidein_call_div {
+    from {
+        left: -12%;
+    }
+
+    to {
+        left: 0;
+    }
+}
+
+
+@keyframes slideout_call_div {
+    from {
+        left: 0;
+    }
+
+    to {
+        left: -12%;
+    }
+}
+
+
 
 .wellbeing_imagespan {
     position: relative;
@@ -21,6 +54,7 @@
 }
 
 .call_box {
+    color: black;
     border-style: solid;
     background-color: white;
     border-width: 5px;
