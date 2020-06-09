@@ -57,9 +57,9 @@
     color: black;
     border-style: solid;
     background-color: white;
-    border-width: 5px;
-    border-radius: 5px;
-    margin: 5px;
+    border-width: 3px;
+    border-radius: 10px;
+    margin: 2px;
     padding: 5px;
 }
 .lowprio {

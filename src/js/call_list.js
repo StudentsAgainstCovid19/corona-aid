@@ -1,6 +1,5 @@
 function initCallList()
 {
-
     var callListsXML = loadXMLDoc("./example_xmls/call_list.xml");
     var prioCalcXSL = loadXMLDoc("./xslt_scripts/xslt_calculate_prio.xsl");
     var prioHelpersXSL = loadXMLDoc("./xslt_scripts/xslt_priority_helpers.xsl");

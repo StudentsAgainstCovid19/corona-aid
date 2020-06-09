@@ -1,0 +1,7 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="100px" height="100px">
+    <circle cx="50" cy="50" r="50" fill="yellow"></circle>
+    <path d="M50 0 A 50 50, 0, 0, 1, 90.9576022144496, 78.67882181755232 L50 50 Z" fill="green"></path>
+    <text text-anchor="middle" font-size="30">
+        <tspan y="60" x="50">90</tspan>
+    </text>
+</svg>
