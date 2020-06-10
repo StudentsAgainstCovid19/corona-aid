@@ -6,9 +6,15 @@
         <div>
             <xsl:for-each select="symptoms/symptom">
                 <xsl:sort select="proba" order="descending"></xsl:sort>
-                <p><xsl:value-of select="name"></xsl:value-of></p>
+                <p>
+                    <input type="checkbox">
+                        
+                    </input>
+                    <label><xsl:value-of select="name"></xsl:value-of></label>
+                </p>
             </xsl:for-each>
         </div>
         <button id="close_edit_symptoms_button" onclick="hidePopUp();">Schließen</button>
+        <button id="submit_edit_symptoms_button" onclick="submitSymptoms();">Bestätigen</button>
     </xsl:template>
 </xsl:stylesheet>

@@ -57,6 +57,11 @@ function showPreExistingIllnesses()
     displayPopUp();
 }
 
+function submitSymptoms()
+{
+
+}
+
 function slideOpenRightBar()
 {
 

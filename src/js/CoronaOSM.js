@@ -115,11 +115,11 @@ async function setMarkers()
         });
         console.log(clicked_ids);
         if (clicked_ids.length == 1)
-        { //TODO
+        {
             try_acquire_lock(clicked_ids[0]);
         }
         else
-        { //TODO
+        {
             // open list with people with according ids
             displayClusteredMap(clicked_ids);
         }
