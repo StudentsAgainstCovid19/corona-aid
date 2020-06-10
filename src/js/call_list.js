@@ -9,4 +9,5 @@ function initCallList()
     var displayCallXSL = loadXMLDoc("./xslt_scripts/xslt_call_list.xsl");
     var stringHelpersXSL = loadXMLDoc("./xslt_scripts/xslt_string_helpers.xsl");
     runXSLTDisplayHtml([stringHelpersXSL, displayCallXSL], prioList, "call_list_div");
+    setMarkers();
 }

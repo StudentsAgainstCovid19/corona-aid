@@ -19,6 +19,7 @@
 	<script src="./js/CoronaOSM.js"></script>
     <script src="./js/call_list.js"></script>
     <script src="./js/slide_animations_listeners.js"></script>
+    <script src="./js/search_call_list.js"></script>
 
 
   </head>
@@ -36,10 +37,9 @@
   <div id="search_bar" class="floating_object">
     <div class="flex_div">
       <button id="open_list_button" onclick="toggle_call_list();"><img src="./assets/icons/list_button.svg" id="open_list_svg"></img></button>
-      <form>
-        <input type="text" placeholder="Suche..." id="search_input">
-        <button id="search_button"><div id="search_div"><img src="./assets/icons/search_magnifier.svg"></img><p>Suche</p></div></button>
-      </form>
+      <input type="text" placeholder="Suche..." id="search_input">
+      <button id="search_button" onclick="search_call_list();"><div id="search_div"><img src="./assets/icons/search_magnifier.svg"></img><p>Suche</p></div></button>
+
     </div>
   </div>
 

@@ -49,6 +49,10 @@
             <timestamp>1231231216</timestamp>
             <wellbeing>1</wellbeing>
         </subjectiveWellBeing>
+        <subjectiveWellBeing>
+            <timestamp>1231231216</timestamp>
+            <wellbeing>5</wellbeing>
+        </subjectiveWellBeing>
     </subjectiveWellbeings>
 
     <preExIllnesses>

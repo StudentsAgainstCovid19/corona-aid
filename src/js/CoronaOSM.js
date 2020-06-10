@@ -14,45 +14,51 @@ function initMap() {
         ],
         view: new ol.View({
             center: ol.proj.fromLonLat(lonlat),
+            projection: "EPSG:3857",
             zoom: 13
         })
     });
-    setMarkers();
+}
 
+function readExt(feature, extensionsNode)
+{
+    //var parser = new DOMParser();
+    //var extensionXml = parser.parseFromString(extensionsNode, 'application/xml');
+    var val = extensionsNode.getElementsByTagName("id");
 
+    function parseExtensions(tagName)
+    {
+        return extensionsNode.getElementsByTagName(tagName)[0].childNodes[0].nodeValue;
+    }
 
+    feature.set("id", parseInt(parseExtensions("id")));
+    feature.set("priority", parseFloat(parseExtensions("priority")));
+    feature.set("type", parseExtensions("type"));
+    feature.set("called", parseExtensions("called")==="1");
+    feature.set("done", parseExtensions("done")==="1");
 }
 
 // asynchronous to prevent extreme slowdowns
 async function setMarkers()
 {
-    // TODO: priorities are not actually in the received xml (or won't be)
-    var geoXML = loadXMLDoc("./example_xmls/example_map_data.xml");
+    var gpxXSL = loadXMLDoc("./xslt_scripts/xslt_prio_gpx.xsl");
+    var gpxData = runXSLT([gpxXSL], prioList);
+
     var clusterDistance = 25;
 
-    var features = []
-    var nodes = geoXML.getElementsByTagName("marker");
-    for (var i=0; i<nodes.length; i++){
-        console.log(nodes);
-        features.push(new ol.Feature({
-            id: parseInt(nodes[i].getElementsByTagName("id")[0].childNodes[0].nodeValue),
-            type: getType(nodes[i]),
-            geometry: new ol.geom.Point(ol.proj.fromLonLat([
-                parseFloat(nodes[i].getElementsByTagName("lon")[0].childNodes[0].nodeValue),
-                parseFloat(nodes[i].getElementsByTagName("lat")[0].childNodes[0].nodeValue)
-            ])),
-            done: (nodes[i].getElementsByTagName("done")[0].childNodes[0].nodeValue==="1"),
-            called: (nodes[i].getElementsByTagName("called")[0].childNodes[0].nodeValue==="1")
-        }));
-    }
-
-
     var styles = getStyles();
+
+    var xmlSerializer = new XMLSerializer();
+    // read features in gpx
+    var gpx = new ol.format.GPX({readExtensions: readExt});
+    var gpxFeatures = gpx.readFeatures(xmlSerializer.serializeToString(gpxData), {
+        featureProjection: 'EPSG:3857'
+    });
 
     var clusterSource = new ol.source.Cluster({
         distance: clusterDistance,
         source: new ol.source.Vector({
-            features: features
+            features: gpxFeatures
         })
     });
 
@@ -64,20 +70,20 @@ async function setMarkers()
             var style;
             if (size < 2)
             {
-                switch (feature.get('features')[0].get('type')) {
+                switch (feature.get('features')[0].get("type")) {
                     case "calledAlready":
                         style = styles[0];
                         break;
-                    case "low":
+                    case "lowprio":
                         style = styles[1];
                         break;
-                    case "intermediate":
+                    case "intermediateprio":
                         style = styles[2];
                         break;
-                    case "high":
+                    case "highprio":
                         style = styles[3];
                         break;
-                    case "veryhigh":
+                    case "veryhighprio":
                         style = styles[4];
                         break;
                     default:
@@ -114,7 +120,7 @@ async function setMarkers()
             clicked_ids.push(child.get('id'))
         });
         console.log(clicked_ids);
-        if (clicked_ids.length == 1)
+        if (clicked_ids.length === 1)
         {
             try_acquire_lock(clicked_ids[0]);
         }
@@ -132,7 +138,7 @@ function getAmountDone(array)
     var amount=0;
     for (var i=0; i<array.length; i++)
     {
-        if (array[i].get('done'))
+        if (array[i].get('cmt'))
         {
             amount+=1;
         }

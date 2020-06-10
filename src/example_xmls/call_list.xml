@@ -11,6 +11,9 @@
         <subjectiveWellbeing>3</subjectiveWellbeing>
         <sumPreExIllnes>2</sumPreExIllnes>
         <sumSymptoms>5</sumSymptoms>
+        <lon>8.0</lon>
+        <lat>49.0</lat>
+        <done>0</done>
     </person>
     <person>
         <id>2</id>
@@ -23,6 +26,9 @@
         <subjectiveWellbeing>2</subjectiveWellbeing>
         <sumPreExIllnes>2</sumPreExIllnes>
         <sumSymptoms>5</sumSymptoms>
+        <lat>49.1</lat>
+        <lon>8.0</lon>
+        <done>0</done>
     </person>
     <person>
         <id>3</id>
@@ -35,6 +41,9 @@
         <subjectiveWellbeing>1</subjectiveWellbeing>
         <sumPreExIllnes>10</sumPreExIllnes>
         <sumSymptoms>5</sumSymptoms>
+        <lat>49.1</lat>
+        <lon>8.1</lon>
+        <done>0</done>
     </person>
     <person>
         <id>4</id>
@@ -47,6 +56,9 @@
         <subjectiveWellbeing>5</subjectiveWellbeing>
         <sumPreExIllnes>0</sumPreExIllnes>
         <sumSymptoms>0</sumSymptoms>
+        <lat>49.1</lat>
+        <lon>8.2</lon>
+        <done>0</done>
     </person>
     <person>
         <id>5</id>
@@ -59,6 +71,9 @@
         <subjectiveWellbeing>5</subjectiveWellbeing>
         <sumPreExIllnes>2</sumPreExIllnes>
         <sumSymptoms>5</sumSymptoms>
+        <lat>49.2</lat>
+        <lon>8.2</lon>
+        <done>0</done>
     </person>
 
     <person>
@@ -72,6 +87,9 @@
         <subjectiveWellbeing>5</subjectiveWellbeing>
         <sumPreExIllnes>1</sumPreExIllnes>
         <sumSymptoms>2</sumSymptoms>
+        <lat>49.0</lat>
+        <lon>8.3</lon>
+        <done>0</done>
     </person>
     <person>
         <id>7</id>
@@ -84,6 +102,9 @@
         <subjectiveWellbeing>4</subjectiveWellbeing>
         <sumPreExIllnes>5</sumPreExIllnes>
         <sumSymptoms>3</sumSymptoms>
+        <lat>49.1</lat>
+        <lon>8.3</lon>
+        <done>0</done>
     </person>
     <person>
         <id>8</id>
@@ -96,5 +117,8 @@
         <subjectiveWellbeing>2</subjectiveWellbeing>
         <sumPreExIllnes>5</sumPreExIllnes>
         <sumSymptoms>3</sumSymptoms>
+        <lat>49.2</lat>
+        <lon>8.3</lon>
+        <done>0</done>
     </person>
 </people>

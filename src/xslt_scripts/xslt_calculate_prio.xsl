@@ -33,6 +33,15 @@
                     <subjectiveWellbeing>
                         <xsl:value-of select="subjectiveWellbeing"></xsl:value-of>
                     </subjectiveWellbeing>
+                    <lat>
+                        <xsl:value-of select="lat"></xsl:value-of>
+                    </lat>
+                    <lon>
+                        <xsl:value-of select="lon"></xsl:value-of>
+                    </lon>
+                    <done>
+                        <xsl:value-of select="done"></xsl:value-of>
+                    </done>
 
 
 
