@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <people>
     <person>
+        <id>1</id>
         <firstnames>Abraham</firstnames>
         <lastname>Lincoln</lastname>
         <age>69</age>
@@ -12,6 +13,7 @@
         <sumSymptoms>5</sumSymptoms>
     </person>
     <person>
+        <id>2</id>
         <firstnames>Abraham</firstnames>
         <lastname>Lincoln</lastname>
         <age>69</age>
@@ -23,6 +25,7 @@
         <sumSymptoms>5</sumSymptoms>
     </person>
     <person>
+        <id>3</id>
         <firstnames>Fast</firstnames>
         <lastname>Tot</lastname>
         <age>88</age>
@@ -34,6 +37,7 @@
         <sumSymptoms>5</sumSymptoms>
     </person>
     <person>
+        <id>4</id>
         <firstnames>Abraham</firstnames>
         <lastname>Lincoln</lastname>
         <age>12</age>
@@ -45,6 +49,7 @@
         <sumSymptoms>0</sumSymptoms>
     </person>
     <person>
+        <id>5</id>
         <firstnames>Abraham</firstnames>
         <lastname>Lincoln</lastname>
         <age>69</age>
@@ -57,6 +62,7 @@
     </person>
 
     <person>
+        <id>6</id>
         <firstnames>Julien</firstnames>
         <lastname>Meier</lastname>
         <age>19</age>
@@ -68,6 +74,7 @@
         <sumSymptoms>2</sumSymptoms>
     </person>
     <person>
+        <id>7</id>
         <firstnames>JoJo</firstnames>
         <lastname>Quast</lastname>
         <age>28</age>
@@ -79,6 +86,7 @@
         <sumSymptoms>3</sumSymptoms>
     </person>
     <person>
+        <id>8</id>
         <firstnames>Marc</firstnames>
         <lastname>Auberer</lastname>
         <age>48</age>

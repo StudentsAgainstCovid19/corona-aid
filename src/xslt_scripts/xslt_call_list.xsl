@@ -31,6 +31,7 @@
                     <td>
                         <div>
                             <xsl:attribute name="class"><xsl:value-of select="$div_classtag"></xsl:value-of> call_box</xsl:attribute>
+                            <xsl:attribute name="onclick">try_acquire_lock(<xsl:value-of select="id"></xsl:value-of>)</xsl:attribute>
 
                             <p><xsl:value-of select="lastname"></xsl:value-of>, <xsl:value-of select="firstnames"></xsl:value-of></p>
                             <p>Zustand:

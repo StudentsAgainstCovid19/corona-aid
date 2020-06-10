@@ -9,6 +9,9 @@
             <xsl:for-each select="people/person">
 
                 <person>
+                    <id>
+                        <xsl:value-of select="id"></xsl:value-of>
+                    </id>
                     <firstnames>
                         <xsl:value-of select="firstnames"></xsl:value-of>
                     </firstnames>

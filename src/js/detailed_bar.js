@@ -1,9 +1,19 @@
 
+function try_acquire_lock(id)
+{ // id for infected
+    slideOpenRightBar();
+    console.log(id);
+    detailedXML = loadXMLDoc("./example_xmls/detailed_infected.xml"); // TODO
+    setDetailedView(detailedXML);
+}
+
 // set the detailed view with a given xml file for all specific data
 function setDetailedView(xml_doc)
 {
     if (xml_doc != null)
     {
+        var detailed_view = document.getElementById("infected_detailed_view_right");
+        detailed_view.innerHTML = "";
         var stringHelpersXSL = loadXMLDoc("./xslt_scripts/xslt_string_helpers.xsl");
         var prioHelperXSL = loadXMLDoc("./xslt_scripts/xslt_calculate_prio.xsl");
         var displayDetailed = loadXMLDoc("./xslt_scripts/xslt_detailed_view.xsl");
@@ -45,5 +55,14 @@ function showPreExistingIllnesses()
     console.log(detailedXML)
     runXSLTDisplayHtml([illnessXSL], detailedXML, "popup_window");
     displayPopUp();
+}
+
+function slideOpenRightBar()
+{
+
+}
+
+function closeRightBar()
+{
 
 }

@@ -1,6 +1,7 @@
 
 var map;
 var detailedXML;
+var prioList;
 
 function initMap() {
     var lonlat=[8.40631,49.01175];
@@ -19,7 +20,6 @@ function initMap() {
     setMarkers();
 
 
-    clicked_marker(5);
 
 }
 
@@ -33,6 +33,7 @@ async function setMarkers()
     var features = []
     var nodes = geoXML.getElementsByTagName("marker");
     for (var i=0; i<nodes.length; i++){
+        console.log(nodes);
         features.push(new ol.Feature({
             id: parseInt(nodes[i].getElementsByTagName("id")[0].childNodes[0].nodeValue),
             type: getType(nodes[i]),
@@ -115,19 +116,16 @@ async function setMarkers()
         console.log(clicked_ids);
         if (clicked_ids.length == 1)
         { //TODO
-            // open detailed view for specfic person
+            try_acquire_lock(clicked_ids[0]);
         }
         else
         { //TODO
             // open list with people with according ids
+            displayClusteredMap(clicked_ids);
         }
     })
 }
 
-function clicked_marker(id) {
-    detailedXML = loadXMLDoc("./example_xmls/detailed_infected.xml");
-    setDetailedView(detailedXML);
-}
 
 function getAmountDone(array)
 {
