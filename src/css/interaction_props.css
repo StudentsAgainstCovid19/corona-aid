@@ -32,6 +32,12 @@
     font-size: 2em;
     box-shadow: 2px 2px black;
     outline: none;
+
+    -moz-user-select: none;
+    -webkit-user-select: none;
+    -ms-user-select:none;
+    user-select:none;
+    -o-user-select:none;
 }
 .zoom_button:active{
     transform: translateY(4px);

@@ -18,6 +18,7 @@ function initMap() {
 
 
     clicked_marker(5);
+
 }
 
 // asynchronous to prevent extreme slowdowns
@@ -52,7 +53,7 @@ async function setMarkers()
         })
     });
 
-    var styleCache = {};
+    var piechart_cache = {};
     var clusters = new ol.layer.Vector({
         source: clusterSource,
         style: function(feature) {
@@ -82,13 +83,14 @@ async function setMarkers()
                 }
             }
             else {
+                // use a pie chart
                 var amountDone = getAmountDone(feature.get('features'));
                 var amountCalled = getAmountCalled(feature.get('features'));
-                sytle = styleCache[[size,amountDone,amountCalled]]
+                sytle = piechart_cache[[size,amountDone,amountCalled]]
                 if (!style)
                 {
                     style = createPieChart(size, amountDone, amountCalled);
-                    styleCache[[size,amountDone,amountCalled]] = style;
+                    piechart_cache[[size,amountDone,amountCalled]] = style;
                 }
             }
             return style;
@@ -191,4 +193,15 @@ function createPieChart(size, amountDone, amountCalled)
             scale: 0.4
         })
     })
+}
+
+// button listeners for zooming
+function zoom_in()
+{
+    map.getView().setZoom(map.getView().getZoom()+1/3.0);
+}
+
+function zoom_out()
+{
+    map.getView().setZoom(map.getView().getZoom()-1/3.0);
 }
