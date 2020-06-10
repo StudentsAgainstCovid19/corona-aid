@@ -11,3 +11,39 @@ function setDetailedView(xml_doc)
         runXSLTDisplayHtml([stringHelpersXSL, prioHelperXSL, displayDetailed], xml_doc, "infected_detailed_view_right");
     }
 }
+
+function displayPopUp()
+{
+    var filter_overlay = document.getElementById("global_overlay");
+    var popup_window = document.getElementById("popup_window");
+    filter_overlay.className = "";
+    popup_window.className = "";
+}
+
+function hidePopUp()
+{
+    var filter_overlay = document.getElementById("global_overlay");
+    var popup_window = document.getElementById("popup_window");
+    filter_overlay.className = "invisible_object";
+    popup_window.className = "invisible_object";
+    popup_window.innerHTML = "";
+}
+
+function showSymptoms ()
+{ // TODO
+    if (!detailedXML) return;
+    var symptomsXSL = loadXMLDoc("./xslt_scripts/xslt_edit_symptoms.xsl");
+    runXSLTDisplayHtml([symptomsXSL], detailedXML, "popup_window");
+    displayPopUp();
+}
+
+function showPreExistingIllnesses()
+{
+    if (!detailedXML) return;
+    var illnessXSL = loadXMLDoc("./xslt_scripts/xslt_show_illnesses.xsl");
+    console.log(illnessXSL)
+    console.log(detailedXML)
+    runXSLTDisplayHtml([illnessXSL], detailedXML, "popup_window");
+    displayPopUp();
+
+}

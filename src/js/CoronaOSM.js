@@ -1,5 +1,7 @@
 
 var map;
+var detailedXML;
+
 function initMap() {
     var lonlat=[8.40631,49.01175];
     map = new ol.Map({
@@ -123,7 +125,7 @@ async function setMarkers()
 }
 
 function clicked_marker(id) {
-    var detailedXML = loadXMLDoc("./example_xmls/detailed_infected.xml");
+    detailedXML = loadXMLDoc("./example_xmls/detailed_infected.xml");
     setDetailedView(detailedXML);
 }
 

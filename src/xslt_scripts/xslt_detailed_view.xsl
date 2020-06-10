@@ -100,7 +100,7 @@
         <p>Risikoeinschätzung: <span><img><xsl:attribute name="src">./assets/wellbeing_indicators/wellbeing_<xsl:value-of select="$prio_svg"></xsl:value-of>.svg</xsl:attribute></img></span>
             <xsl:value-of select="$prio_desc"></xsl:value-of>
         </p>
-        <button id="preexisting_illness_button">Vorerkrankungen</button>
+        <button id="preexisting_illness_button" onclick="showPreExistingIllnesses();">Vorerkrankungen</button>
         <p>Krankheitsverlauf</p>
 
         <input type="checkbox" id="test_result_checkbox" name="test_result">
@@ -128,7 +128,7 @@
 
 
         <p>Symptome</p>
-        <button id="addSymptomButton">+</button>
+        <button id="addSymptomButton" onclick="showSymptoms();">+</button>
 
         <div id="symptomsDiv">
             <xsl:for-each select="symptoms/symptom">

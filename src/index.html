@@ -8,6 +8,7 @@
     <link rel="stylesheet" href="./css/detailed_view.css" type="text/css">
     <link rel="stylesheet" href="./css/map_style.css" type="text/css">
     <link rel="stylesheet" href="./css/interaction_props.css" type="text/css">
+    <link rel="stylesheet" href="./css/popup_style.css" type="text/css">
 
 
     <script src="https://cdn.jsdelivr.net/gh/openlayers/openlayers.github.io@master/en/v6.3.1/build/ol.js"></script>
@@ -46,6 +47,9 @@
       <button id="zoom_out_button" class="zoom_button" onclick="zoom_out();">-</button>
     </div>
   </div>
+
+  <img id="global_overlay" class="invisible_object" src="./assets/icons/blur_filter.svg"></img>
+  <div id="popup_window" class="invisible_object"></div>
 	
   </body>
 </html>
