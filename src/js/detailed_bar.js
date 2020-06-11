@@ -2,7 +2,7 @@
 function try_acquire_lock(id)
 { // id for infected
     slideOpenRightBar();
-    detailedXML = loadXMLDoc("./example_xmls/detailed_infected.xml"); // TODO
+    detailedXML = loadXMLDoc("./example_xmls/detailed_infected.xml");// ("api.sac19.jatsqi.com/infected/"+id);
     setDetailedView(detailedXML);
 }
 

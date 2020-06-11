@@ -6,7 +6,7 @@ function getXSLT(filename)
     if (!xsl_doc)
     {
         console.log("Loading XSL-File: "+filename);
-        xsl_doc = loadXMLDoc(filename);
+        xsl_doc = loadXMLDoc(filename, "text/xsl");
         xslt_files[filename] = xsl_doc;
     }
     return xsl_doc;
@@ -14,7 +14,7 @@ function getXSLT(filename)
 
 // this code was taken from https://www.w3schools.com/xml/xsl_client.asp
 // Some aspects were changed, the rest, however, is not programmed by ourselves.
-function loadXMLDoc(filename)
+function loadXMLDoc(filename, mimeType="application/xml")
 {
     if (window.ActiveXObject)
     {
@@ -25,6 +25,7 @@ function loadXMLDoc(filename)
         xhttp = new XMLHttpRequest();
     }
     xhttp.open("GET", filename, false);
+    xhttp.setRequestHeader("Accept",mimeType);
     try {xhttp.responseType = "msxml-document"} catch(err) {} // Helping IE11
     xhttp.send("");
     return xhttp.responseXML;

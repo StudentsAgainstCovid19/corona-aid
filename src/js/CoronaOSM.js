@@ -226,7 +226,7 @@ function createPieChart(size, amountDone, amountCalled)
         image: new ol.style.Icon({
             opacity: 1,
             src: "data:image/svg+xml;utf8,"+serializer.serializeToString(chart),
-            scale: 0.4
+            scale: parseFloat(config_hash_table["pieChartScale"])
         })
     })
 }
