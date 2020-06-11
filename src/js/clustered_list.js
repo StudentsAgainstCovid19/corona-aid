@@ -31,7 +31,7 @@ function displayClusteredMap(id_array)
     var xmlDoc = xmlParser.parseFromString(xml_string, "application/xml");
 
 
-    var clusteredListXSL = loadXMLDoc("./xslt_scripts/xslt_clustered_list.xsl");
-    runXSLTDisplayHtml([clusteredListXSL], xmlDoc, "infected_detailed_view_right");
+    var clusteredListXSL = getXSLT("./xslt_scripts/xslt_clustered_list.xsl");
+    runXSLT([clusteredListXSL], xmlDoc, "infected_detailed_view_right");
 }
 
