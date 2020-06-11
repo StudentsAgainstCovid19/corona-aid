@@ -1,0 +1,27 @@
+
+#global_overlay {
+    position: absolute;
+    width: 100%;
+    -webkit-filter: blur(5px); /* TODO use filter that can be used for all browsers*/
+    filter: blur(5px);
+    backdrop-filter: blur(6px);
+    height: 100%;
+    z-index: 6;
+}
+
+#popup_window
+{
+    position: absolute;
+    width: 20%;
+    height: 25%;
+    z-index: 7;
+    top: 30%;
+    left: 40%;
+    background-color: white;
+    border-radius: 20px;
+}
+
+.invisible_object
+{
+    display: none;
+}

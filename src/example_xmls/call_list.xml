@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <people>
     <person>
+        <id>1</id>
         <firstnames>Abraham</firstnames>
         <lastname>Lincoln</lastname>
         <age>69</age>
@@ -10,8 +11,12 @@
         <subjectiveWellbeing>3</subjectiveWellbeing>
         <sumPreExIllnes>2</sumPreExIllnes>
         <sumSymptoms>5</sumSymptoms>
+        <lon>8.0</lon>
+        <lat>49.0</lat>
+        <done>0</done>
     </person>
     <person>
+        <id>2</id>
         <firstnames>Abraham</firstnames>
         <lastname>Lincoln</lastname>
         <age>69</age>
@@ -21,8 +26,12 @@
         <subjectiveWellbeing>2</subjectiveWellbeing>
         <sumPreExIllnes>2</sumPreExIllnes>
         <sumSymptoms>5</sumSymptoms>
+        <lat>49.1</lat>
+        <lon>8.0</lon>
+        <done>0</done>
     </person>
     <person>
+        <id>3</id>
         <firstnames>Fast</firstnames>
         <lastname>Tot</lastname>
         <age>88</age>
@@ -32,8 +41,12 @@
         <subjectiveWellbeing>1</subjectiveWellbeing>
         <sumPreExIllnes>10</sumPreExIllnes>
         <sumSymptoms>5</sumSymptoms>
+        <lat>49.1</lat>
+        <lon>8.1</lon>
+        <done>1</done>
     </person>
     <person>
+        <id>4</id>
         <firstnames>Abraham</firstnames>
         <lastname>Lincoln</lastname>
         <age>12</age>
@@ -43,31 +56,43 @@
         <subjectiveWellbeing>5</subjectiveWellbeing>
         <sumPreExIllnes>0</sumPreExIllnes>
         <sumSymptoms>0</sumSymptoms>
+        <lat>49.1</lat>
+        <lon>8.2</lon>
+        <done>1</done>
     </person>
     <person>
+        <id>5</id>
         <firstnames>Abraham</firstnames>
         <lastname>Lincoln</lastname>
         <age>69</age>
-        <calledbool>false</calledbool>
+        <calledbool>true</calledbool>
         <lastcall>000</lastcall>
         <phone>0721 373446</phone>
         <subjectiveWellbeing>5</subjectiveWellbeing>
         <sumPreExIllnes>2</sumPreExIllnes>
         <sumSymptoms>5</sumSymptoms>
+        <lat>49.2</lat>
+        <lon>8.2</lon>
+        <done>0</done>
     </person>
 
     <person>
+        <id>6</id>
         <firstnames>Julien</firstnames>
         <lastname>Meier</lastname>
         <age>19</age>
-        <calledbool>true</calledbool>
+        <calledbool>false</calledbool>
         <lastcall>10:42</lastcall>
         <phone>0721 2112354</phone>
         <subjectiveWellbeing>5</subjectiveWellbeing>
         <sumPreExIllnes>1</sumPreExIllnes>
         <sumSymptoms>2</sumSymptoms>
+        <lat>49.0</lat>
+        <lon>8.3</lon>
+        <done>1</done>
     </person>
     <person>
+        <id>7</id>
         <firstnames>JoJo</firstnames>
         <lastname>Quast</lastname>
         <age>28</age>
@@ -77,8 +102,12 @@
         <subjectiveWellbeing>4</subjectiveWellbeing>
         <sumPreExIllnes>5</sumPreExIllnes>
         <sumSymptoms>3</sumSymptoms>
+        <lat>49.1</lat>
+        <lon>8.3</lon>
+        <done>1</done>
     </person>
     <person>
+        <id>8</id>
         <firstnames>Marc</firstnames>
         <lastname>Auberer</lastname>
         <age>48</age>
@@ -88,5 +117,8 @@
         <subjectiveWellbeing>2</subjectiveWellbeing>
         <sumPreExIllnes>5</sumPreExIllnes>
         <sumSymptoms>3</sumSymptoms>
+        <lat>49.2</lat>
+        <lon>8.3</lon>
+        <done>1</done>
     </person>
 </people>

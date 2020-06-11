@@ -1,0 +1,7 @@
+
+<svg xmlns="http://www.w3.org/2000/svg" width="1" height="1">
+    <filter id="blur">
+        <feGaussianBlur stdDeviation="0.5"/>
+    </filter>
+    <rect filter="url(#blur)" fill="grey" width="100%" height="100%"></rect>
+</svg>

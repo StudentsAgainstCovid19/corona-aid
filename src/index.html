@@ -8,14 +8,18 @@
     <link rel="stylesheet" href="./css/detailed_view.css" type="text/css">
     <link rel="stylesheet" href="./css/map_style.css" type="text/css">
     <link rel="stylesheet" href="./css/interaction_props.css" type="text/css">
+    <link rel="stylesheet" href="./css/popup_style.css" type="text/css">
+    <link rel="stylesheet" href="./css/clustered_list.css" type="text/css">
 
 
     <script src="https://cdn.jsdelivr.net/gh/openlayers/openlayers.github.io@master/en/v6.3.1/build/ol.js"></script>
     <script src="./js/load_xslt.js"></script>
+    <script src="./js/clustered_list.js"></script>
     <script src="./js/detailed_bar.js"></script>
 	<script src="./js/CoronaOSM.js"></script>
     <script src="./js/call_list.js"></script>
     <script src="./js/slide_animations_listeners.js"></script>
+    <script src="./js/search_call_list.js"></script>
 
 
   </head>
@@ -33,19 +37,21 @@
   <div id="search_bar" class="floating_object">
     <div class="flex_div">
       <button id="open_list_button" onclick="toggle_call_list();"><img src="./assets/icons/list_button.svg" id="open_list_svg"></img></button>
-      <form>
-        <input type="text" placeholder="Suche..." id="search_input">
-        <button id="search_button"><div id="search_div"><img src="./assets/icons/search_magnifier.svg"></img><p>Suche</p></div></button>
-      </form>
+      <input type="text" placeholder="Suche..." id="search_input">
+      <button id="search_button" onclick="search_call_list();"><div id="search_div"><img src="./assets/icons/search_magnifier.svg"></img><p>Suche</p></div></button>
+
     </div>
   </div>
 
   <div id="zoom_buttons" class="floating_object">
     <div class="flex_div">
-      <button id="zoom_in_button" class="zoom_button">+</button>
-      <button id="zoom_out_button" class="zoom_button">-</button>
+      <button id="zoom_in_button" class="zoom_button" onclick="zoom_in();">+</button>
+      <button id="zoom_out_button" class="zoom_button" onclick="zoom_out();">-</button>
     </div>
   </div>
+
+  <img id="global_overlay" class="invisible_object" src="./assets/icons/blur_filter.svg"></img>
+  <div id="popup_window" class="invisible_object"></div>
 	
   </body>
 </html>

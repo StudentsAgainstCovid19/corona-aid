@@ -1,0 +1,19 @@
+#clustered_list
+{
+    padding: 5px;
+    overflow: auto;
+}
+
+.list_div
+{
+    padding: 5px;
+
+}
+
+.list_div:hover
+{
+    background-color: darkblue;
+    border-radius: 5px;
+    border-width: 10px;
+
+}
