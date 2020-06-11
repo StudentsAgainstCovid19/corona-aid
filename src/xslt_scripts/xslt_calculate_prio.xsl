@@ -10,37 +10,37 @@
 
                 <person>
                     <id>
-                        <xsl:value-of select="id"></xsl:value-of>
+                        <xsl:value-of select="id"/>
                     </id>
                     <firstnames>
-                        <xsl:value-of select="firstnames"></xsl:value-of>
+                        <xsl:value-of select="firstnames"/>
                     </firstnames>
                     <lastname>
-                        <xsl:value-of select="lastname"></xsl:value-of>
+                        <xsl:value-of select="lastname"/>
                     </lastname>
                     <age>
-                        <xsl:value-of select="age"></xsl:value-of>
+                        <xsl:value-of select="age"/>
                     </age>
                     <calledbool>
-                        <xsl:value-of select="calledbool"></xsl:value-of>
+                        <xsl:value-of select="calledbool"/>
                     </calledbool>
                     <lastcall>
-                        <xsl:value-of select="lastcall"></xsl:value-of>
+                        <xsl:value-of select="lastcall"/>
                     </lastcall>
                     <phone>
-                        <xsl:value-of select="phone"></xsl:value-of>
+                        <xsl:value-of select="phone"/>
                     </phone>
                     <subjectiveWellbeing>
-                        <xsl:value-of select="subjectiveWellbeing"></xsl:value-of>
+                        <xsl:value-of select="subjectiveWellbeing"/>
                     </subjectiveWellbeing>
                     <lat>
-                        <xsl:value-of select="lat"></xsl:value-of>
+                        <xsl:value-of select="lat"/>
                     </lat>
                     <lon>
-                        <xsl:value-of select="lon"></xsl:value-of>
+                        <xsl:value-of select="lon"/>
                     </lon>
                     <done>
-                        <xsl:value-of select="done"></xsl:value-of>
+                        <xsl:value-of select="done"/>
                     </done>
 
 
@@ -48,10 +48,10 @@
 
                     <priority>
                         <xsl:call-template name="prio_calculation">
-                            <xsl:with-param name="age" select="age"></xsl:with-param>
-                            <xsl:with-param name="subjectiveWellbeing" select="subjectiveWellbeing"></xsl:with-param>
-                            <xsl:with-param name="preExIllnesses" select="sumPreExIllnes"></xsl:with-param>
-                            <xsl:with-param name="sumSymptoms" select="sumSymptoms"></xsl:with-param>
+                            <xsl:with-param name="age" select="age"/>
+                            <xsl:with-param name="subjectiveWellbeing" select="subjectiveWellbeing"/>
+                            <xsl:with-param name="preExIllnesses" select="sumPreExIllnes"/>
+                            <xsl:with-param name="sumSymptoms" select="sumSymptoms"/>
                         </xsl:call-template>
                     </priority>
                 </person>

@@ -4,9 +4,9 @@
     <xsl:template match="/">
         <div id="clustered_list">
             <xsl:for-each select="infected/person">
-                <xsl:sort select="priority" order="descending"></xsl:sort>
+                <xsl:sort select="priority" order="descending"/>
                 <div class="list_div">
-                    <xsl:attribute name="onclick">try_acquire_lock(<xsl:value-of select="id"></xsl:value-of>)</xsl:attribute>
+                    <xsl:attribute name="onclick">try_acquire_lock(<xsl:value-of select="id"/>)</xsl:attribute>
                     <p>
                         <span>
                             <xsl:attribute name="class">wellbeing_imagespan</xsl:attribute>
@@ -14,7 +14,7 @@
                                 <xsl:attribute name="class">wellbeing_indicator lowprio</xsl:attribute>
                                 <xsl:attribute name="src">./assets/markers/high_prio.svg</xsl:attribute>
                             </img>
-                        </span> <xsl:value-of select="lastname"></xsl:value-of>, <xsl:value-of select="firstnames"></xsl:value-of>
+                        </span> <xsl:value-of select="lastname"/>, <xsl:value-of select="firstnames"/>
                     </p>
                 </div>
 

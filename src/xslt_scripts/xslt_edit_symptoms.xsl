@@ -2,15 +2,15 @@
 <xsl:stylesheet version="1.0" xmlns:xsl="http://www.w3.org/1999/XSL/Transform">
 
     <xsl:template match="infected">
-        <p>Symptome von <xsl:value-of select="lastname"></xsl:value-of>, <xsl:value-of select="firstnames"></xsl:value-of></p>
+        <p>Symptome von <xsl:value-of select="lastname"/>, <xsl:value-of select="firstnames"/></p>
         <div>
             <xsl:for-each select="symptoms/symptom">
-                <xsl:sort select="proba" order="descending"></xsl:sort>
+                <xsl:sort select="proba" order="descending"/>
                 <p>
                     <input type="checkbox">
                         
                     </input>
-                    <label><xsl:value-of select="name"></xsl:value-of></label>
+                    <label><xsl:value-of select="name"/></label>
                 </p>
             </xsl:for-each>
         </div>

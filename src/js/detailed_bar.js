@@ -2,7 +2,6 @@
 function try_acquire_lock(id)
 { // id for infected
     slideOpenRightBar();
-    console.log(id);
     detailedXML = loadXMLDoc("./example_xmls/detailed_infected.xml"); // TODO
     setDetailedView(detailedXML);
 }
@@ -51,8 +50,7 @@ function showPreExistingIllnesses()
 {
     if (!detailedXML) return;
     var illnessXSL = loadXMLDoc("./xslt_scripts/xslt_show_illnesses.xsl");
-    console.log(illnessXSL)
-    console.log(detailedXML)
+
     runXSLTDisplayHtml([illnessXSL], detailedXML, "popup_window");
     displayPopUp();
 }

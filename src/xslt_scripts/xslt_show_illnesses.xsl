@@ -2,11 +2,11 @@
 <xsl:stylesheet version="1.0" xmlns:xsl="http://www.w3.org/1999/XSL/Transform">
 
     <xsl:template match="infected">
-        <p>Vorerkrankungen von <xsl:value-of select="lastname"></xsl:value-of>, <xsl:value-of select="firstnames"></xsl:value-of></p>
+        <p>Vorerkrankungen von <xsl:value-of select="lastname"/>, <xsl:value-of select="firstnames"/></p>
         <div>
             <xsl:for-each select="preExIllnesses/illness">
-                <xsl:sort select="degreeOfDanger" order="descending"></xsl:sort>
-                <p><xsl:value-of select="name"></xsl:value-of></p>
+                <xsl:sort select="degreeOfDanger" order="descending"/>
+                <p><xsl:value-of select="name"/></p>
             </xsl:for-each>
         </div>
         <button id="close_illnesses_button" onclick="hidePopUp();">Schließen</button>
