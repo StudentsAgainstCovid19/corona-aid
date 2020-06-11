@@ -43,7 +43,7 @@
         <sumSymptoms>5</sumSymptoms>
         <lat>49.1</lat>
         <lon>8.1</lon>
-        <done>0</done>
+        <done>1</done>
     </person>
     <person>
         <id>4</id>
@@ -58,14 +58,14 @@
         <sumSymptoms>0</sumSymptoms>
         <lat>49.1</lat>
         <lon>8.2</lon>
-        <done>0</done>
+        <done>1</done>
     </person>
     <person>
         <id>5</id>
         <firstnames>Abraham</firstnames>
         <lastname>Lincoln</lastname>
         <age>69</age>
-        <calledbool>false</calledbool>
+        <calledbool>true</calledbool>
         <lastcall>000</lastcall>
         <phone>0721 373446</phone>
         <subjectiveWellbeing>5</subjectiveWellbeing>
@@ -81,7 +81,7 @@
         <firstnames>Julien</firstnames>
         <lastname>Meier</lastname>
         <age>19</age>
-        <calledbool>true</calledbool>
+        <calledbool>false</calledbool>
         <lastcall>10:42</lastcall>
         <phone>0721 2112354</phone>
         <subjectiveWellbeing>5</subjectiveWellbeing>
@@ -89,7 +89,7 @@
         <sumSymptoms>2</sumSymptoms>
         <lat>49.0</lat>
         <lon>8.3</lon>
-        <done>0</done>
+        <done>1</done>
     </person>
     <person>
         <id>7</id>
@@ -104,7 +104,7 @@
         <sumSymptoms>3</sumSymptoms>
         <lat>49.1</lat>
         <lon>8.3</lon>
-        <done>0</done>
+        <done>1</done>
     </person>
     <person>
         <id>8</id>
@@ -119,6 +119,6 @@
         <sumSymptoms>3</sumSymptoms>
         <lat>49.2</lat>
         <lon>8.3</lon>
-        <done>0</done>
+        <done>1</done>
     </person>
 </people>

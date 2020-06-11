@@ -2,6 +2,7 @@
 var map;
 var detailedXML;
 var prioList;
+var piechart_cache = {};
 
 function initMap() {
     var lonlat=[8.40631,49.01175];
@@ -34,7 +35,7 @@ function readExt(feature, extensionsNode)
     feature.set("id", parseInt(parseExtensions("id")));
     feature.set("priority", parseFloat(parseExtensions("priority")));
     feature.set("type", parseExtensions("type"));
-    feature.set("called", parseExtensions("called")==="1");
+    feature.set("called", parseExtensions("called")==="true");
     feature.set("done", parseExtensions("done")==="1");
 }
 
@@ -62,7 +63,6 @@ async function setMarkers()
         })
     });
 
-    var piechart_cache = {};
     var clusters = new ol.layer.Vector({
         source: clusterSource,
         style: function(feature) {
@@ -97,7 +97,7 @@ async function setMarkers()
                 var amountCalled = getAmountCalled(feature.get('features'));
                 sytle = piechart_cache[[size,amountDone,amountCalled]]
                 if (!style)
-                {
+                { // TODO: currently, eventhough caching should be possible, style is still undefined
                     style = createPieChart(size, amountDone, amountCalled);
                     piechart_cache[[size,amountDone,amountCalled]] = style;
                 }
@@ -119,7 +119,7 @@ async function setMarkers()
         childFeatures.forEach(function (child){
             clicked_ids.push(child.get('id'))
         });
-        console.log(clicked_ids);
+
         if (clicked_ids.length === 1)
         {
             try_acquire_lock(clicked_ids[0]);
@@ -138,7 +138,7 @@ function getAmountDone(array)
     var amount=0;
     for (var i=0; i<array.length; i++)
     {
-        if (array[i].get('cmt'))
+        if (array[i].get('done'))
         {
             amount+=1;
         }
@@ -178,7 +178,7 @@ function getStyles()
 
 function getType(person)
 {
-    if (person.getElementsByTagName("called")[0].childNodes[0].nodeValue==="1")
+    if (person.getElementsByTagName("called")[0].childNodes[0].nodeValue)
     {
         return "calledAlready";
     }
@@ -191,14 +191,49 @@ function getType(person)
 }
 
 function createPieChart(size, amountDone, amountCalled)
-{ // TODO: generate pie chart
+{
+    if (size===0)
+    {
+        console.log("Error occurred while creating pie chart.");
+        return;
+    }
+    colors = ['green', 'purple'];
+    angles = [0, amountDone/parseFloat(size)*360, (amountDone+amountCalled)/parseFloat(size)*360];
+    xml_string = "<chart><amountRemaining>"+(size-amountDone)+"</amountRemaining><arcs>";
+
+    for ( var i = 0; i<colors.length; i++)
+    {
+        var coordinates = calculateCirclePoint(angles[i+1]);
+
+        xml_string += "<arc>" +
+                            "<x>"+coordinates[0]+"</x>" +
+                            "<y>"+coordinates[1]+"</y>" +
+                            "<color>"+colors[i]+"</color>" +
+                            "<angle>"+(angles[i+1]-angles[i])+"</angle>" +
+                      "</arc>";
+
+    }
+    xml_string += "</arcs></chart>";
+    var xmlParser = new DOMParser();
+    var xmlDoc = xmlParser.parseFromString(xml_string, "application/xml");
+    var pieChartXSL = loadXMLDoc("./xslt_scripts/xslt_pie_chart_gen.xsl");
+    var chart = runXSLT([pieChartXSL], xmlDoc);
+
+    var serializer = new XMLSerializer();
+
     return new ol.style.Style({
         image: new ol.style.Icon({
             opacity: 1,
-            src: "./assets/markers/example_pie_chart.svg",
+            src: "data:image/svg+xml;utf8,"+serializer.serializeToString(chart),
             scale: 0.4
         })
     })
+}
+
+function calculateCirclePoint(angle)
+{
+    var angleRadians = (angle-90) * Math.PI / 180.0;
+    return [50 + 50*Math.cos(angleRadians), 50 + 50*Math.sin(angleRadians)];
 }
 
 // button listeners for zooming

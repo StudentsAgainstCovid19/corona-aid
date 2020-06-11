@@ -1,7 +1,9 @@
 <svg xmlns="http://www.w3.org/2000/svg" width="100px" height="100px">
     <circle cx="50" cy="50" r="50" fill="yellow"></circle>
-    <path d="M50 0 A 50 50, 0, 0, 1, 90.9576022144496, 78.67882181755232 L50 50 Z" fill="green"></path>
-    <text text-anchor="middle" font-size="30">
-        <tspan y="60" x="50">90</tspan>
+    <path d="M 50 0 A 50 50 0 0 1 84.73291852294986 85.96699001693256 L 50 50" fill="green"></path>
+    <path d="M84.73291852294986 85.96699001693256 A 50 50 0 0 1 32.89899283371656 96.98463103929542 L50 50" fill="purple"></path>
+
+    <text text-anchor="middle" font-size="40">
+        <tspan y="66" x="50">90</tspan>
     </text>
 </svg>
