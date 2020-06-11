@@ -1,7 +1,8 @@
 
 function displayClusteredMap(id_array)
 {
-    if (!prioList || id_array.length === 0) return;
+    if (!prioList || id_array.length === 0 || detail_bar == 2) return;
+    detail_bar = 1;
     slideOpenRightBar();
     var right_bar = document.getElementById("infected_detailed_view_right");
     right_bar.innerHTML = "";

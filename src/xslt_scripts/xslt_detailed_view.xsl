@@ -120,7 +120,11 @@
             </xsl:if>
         </label>
 
-        <p><xsl:attribute name="class"><xsl:choose>
+        <p id="prescribe_test">
+            <xsl:if test="test/prescribed = 0">
+                <xsl:attribute name="onclick">prescribeTest(<xsl:value-of select="id"/>);</xsl:attribute>
+            </xsl:if>
+            <xsl:attribute name="class"><xsl:choose>
             <xsl:when test="test/prescribed = 1">alreadyPrescribed</xsl:when>
             <xsl:otherwise>notPrescribed</xsl:otherwise>
         </xsl:choose></xsl:attribute>Test anordnen</p>
@@ -167,7 +171,17 @@
             </input>
         </p>
 
-        <button id="cancel_detail_button" class="dialogButton">Abbrechen<i class="fa fa-search"/></button>
-        <button id="submit_detail_button" class="dialogButton">Senden</button>
+        <button class="dialogButton cancel_button">
+            <xsl:attribute name="onclick">closeDetailedView(<xsl:value-of select="id"/>);</xsl:attribute>
+            Abbrechen
+        </button>
+        <button class="dialogButton submit_button">
+            <xsl:attribute name="onclick">submitDetailView(<xsl:value-of select="id"/>);</xsl:attribute>
+            Senden
+        </button>
+        <button>
+            <xsl:attribute name="onclick">failedCall(<xsl:value-of select="id"/>);</xsl:attribute>
+            Nicht angenommen
+        </button>
     </xsl:template>
 </xsl:stylesheet>

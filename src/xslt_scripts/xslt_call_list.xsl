@@ -6,6 +6,7 @@
         <p>Meine Anrufsliste</p>
         <table>
             <xsl:for-each select="infected/person">
+                <xsl:sort select="done" data-type="number"/>
                 <xsl:sort select="priority" order="descending" data-type="number"/>
 
                 <xsl:variable name="div_classtag">
@@ -30,7 +31,13 @@
                 <tr>
                     <td>
                         <div>
-                            <xsl:attribute name="class"><xsl:value-of select="$div_classtag"/> call_box</xsl:attribute>
+                            <xsl:attribute name="class">
+                                <xsl:choose>
+                                    <xsl:when test="done = 1">done_call_box</xsl:when>
+                                    <xsl:otherwise><xsl:value-of select="$div_classtag"/></xsl:otherwise>
+                                </xsl:choose> call_box</xsl:attribute>
+
+
                             <xsl:attribute name="onclick">try_acquire_lock(<xsl:value-of select="id"/>)</xsl:attribute>
 
                             <p><xsl:value-of select="lastname"/>, <xsl:value-of select="firstnames"/></p>

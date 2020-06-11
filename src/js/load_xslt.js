@@ -1,5 +1,4 @@
 
-var xslt_files = {}; // hash table to prevent reloading of xsl-files
 function getXSLT(filename)
 {
     var xsl_doc = xslt_files[filename];
@@ -58,4 +57,14 @@ function runXSLT(xsl_list, xml, id=null)
             return xsltProcessor.transformToDocument(xml);
         }
     }
+}
+
+function postRequest(url, content)
+{
+    var parser = new DOMParser();
+    var request = new XMLHttpRequest();
+    request.open("POST", "https://api.sac19.jatsqi.com/"+url, true);
+    request.setRequestHeader("Content-type", "application/xml");
+
+    request.send(parser.parseFromString(content,"application/xml"));
 }

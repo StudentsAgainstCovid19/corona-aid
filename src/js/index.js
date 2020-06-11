@@ -1,4 +1,3 @@
-var config_hash_table = {};
 
 function parseNodeValueFromXML(xml_obj, tagName)
 {
@@ -9,7 +8,7 @@ function init()
 {
     // init configs
     var configXML = loadXMLDoc("https://api.sac19.jatsqi.com/config");
-    console.log("Hey");
+
     var items = configXML.getElementsByTagName("item");
     for (var i=0; i<items.length; i++)
     {

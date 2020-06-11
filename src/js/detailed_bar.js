@@ -1,6 +1,8 @@
 
 function try_acquire_lock(id)
 { // id for infected
+    if (detail_bar === 2) return;
+
     slideOpenRightBar();
     detailedXML = loadXMLDoc("./example_xmls/detailed_infected.xml");// ("api.sac19.jatsqi.com/infected/"+id);
     setDetailedView(detailedXML);
@@ -11,6 +13,7 @@ function setDetailedView(xml_doc)
 {
     if (xml_doc != null)
     {
+        detail_bar = 2;
         var detailed_view = document.getElementById("infected_detailed_view_right");
         detailed_view.innerHTML = "";
         var stringHelpersXSL = getXSLT("./xslt_scripts/xslt_string_helpers.xsl");
@@ -66,6 +69,78 @@ function slideOpenRightBar()
 }
 
 function closeRightBar()
+{
+
+}
+
+function prescribeTest(id)
+{
+    makeConfirmPopup("Wollen Sie einen Test anordnen?",
+        function(id) {
+            if (detailedXML === null) return;
+            // TODO: check whether prescribed, change xml, reload detail view
+            console.log(id);
+
+            const xml_string = "<Test><id>"+id+"</id><result>0</result><timestamp>"+parseInt(Date.now()/1000.0)+"</timestamp></Test>";
+            postRequest("test", xml_string);
+        }, function (id) { }, id );
+}
+
+var confirmConfig = [null, null, null];
+function makeConfirmPopup(text, onSubmitCallback, onCancelCallback, parameters)
+{
+    confirmConfig = [onSubmitCallback, onCancelCallback, parameters];
+
+    const overlay = document.getElementById("transparent_overlay");
+    const textP = document.getElementById("confirm_text");
+    textP.innerText = text;
+    overlay.className = "";
+}
+
+function onSubmitPopup()
+{
+
+    const overlay = document.getElementById("transparent_overlay");
+    overlay.className = "invisible_object";
+    if (confirmConfig[0] != null)
+    {
+        confirmConfig[0](confirmConfig[2]);
+    }
+    confirmConfig = [null, null, null];
+}
+
+function onCancelPopup()
+{
+    const overlay = document.getElementById("transparent_overlay");
+    overlay.className = "invisible_object";
+    if (confirmConfig[0] != null)
+    {
+        confirmConfig[1](confirmConfig[2]);
+    }
+    confirmConfig = [null, null, null];
+}
+
+function failedCall(id)
+{
+    const xml_string = "<History>" +
+                "<infectedId>"+id+"</infectedId>"+
+                "<notes></notes>"+
+                "<personalFeeling>0</personalFeeling>"+
+                "<status>0</status>"+
+                "<symptom><symptom>0</symptom></symptom>"+
+                "<timestamp>" + Date.now() + "</timestamp>" +
+                "</History>";
+
+
+    postRequest("history", xml_string);
+}
+
+function closeDetailedView(id)
+{
+
+}
+
+function submitDetailView(id)
 {
 
 }

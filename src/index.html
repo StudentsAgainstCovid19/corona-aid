@@ -1,6 +1,7 @@
 <!DOCTYPE HTML>
-<html>
+<html lang="de">
   <head>
+    <meta charset="utf-8"/>
     <title>Corona Aid v1.0</title>
 
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/openlayers/openlayers.github.io@master/en/v6.3.1/css/ol.css" type="text/css">
@@ -11,7 +12,7 @@
     <link rel="stylesheet" href="./css/popup_style.css" type="text/css">
     <link rel="stylesheet" href="./css/clustered_list.css" type="text/css">
 
-
+    <script src="./js/shared_variables.js"></script>
     <script src="https://cdn.jsdelivr.net/gh/openlayers/openlayers.github.io@master/en/v6.3.1/build/ol.js"></script>
     <script src="./js/load_xslt.js"></script>
     <script src="./js/clustered_list.js"></script>
@@ -36,10 +37,16 @@
 
   <div id="search_bar" class="floating_object">
     <div class="flex_div">
-      <button id="open_list_button" onclick="toggle_call_list();"><img src="./assets/icons/list_button.svg" id="open_list_svg"></img></button>
+      <button id="open_list_button" onclick="toggle_call_list();">
+          <img src="./assets/icons/list_button.svg" id="open_list_svg"/>
+      </button>
       <input type="text" placeholder="Suche..." id="search_input">
-      <button id="search_button" onclick="search_call_list();"><div id="search_div"><img src="./assets/icons/search_magnifier.svg"></img><p>Suche</p></div></button>
 
+      <button id="search_button" onclick="search_call_list();">
+          <div id="search_div">
+              <img src="./assets/icons/search_magnifier.svg"/><p>Suche</p>
+          </div>
+      </button>
     </div>
   </div>
 
@@ -50,8 +57,16 @@
     </div>
   </div>
 
-  <img id="global_overlay" class="invisible_object" src="./assets/icons/blur_filter.svg"></img>
+  <img id="global_overlay" class="invisible_object" src="./assets/icons/blur_filter.svg"/>
   <div id="popup_window" class="invisible_object"></div>
-	
+
+  <div id="transparent_overlay" class="invisible_object">
+      <div id="confirm_popup">
+        <p id="confirm_text"></p>
+        <button class="dialogButton submit_button" onclick="onSubmitPopup();">Bestätigen</button>
+        <button class="dialogButton cancel_button" onclick="onCancelPopup();">Abbrechen</button>
+      </div>
+  </div>
+
   </body>
 </html>

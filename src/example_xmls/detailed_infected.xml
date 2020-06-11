@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <infected>
+    <id>1</id>
     <firstnames>Roy</firstnames>
     <lastname>Mustang</lastname>
     <amountInApartment>1</amountInApartment>

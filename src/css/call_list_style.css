@@ -81,3 +81,14 @@
 .calledAlready {
     border-color: purple;
 }
+
+.done_call_box
+{
+    background-color: lightgrey;
+    filter: grayscale(100%);
+}
+
+#prescribe_test:hover
+{
+    color: white;
+}

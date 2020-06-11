@@ -1,9 +1,4 @@
 
-var map;
-var detailedXML;
-var prioList;
-var piechart_cache = {};
-
 function initMap() {
     // OpenLayers takes lon as first argument and then lat
     var lonlat=[parseFloat(config_hash_table["standardLon"]),
