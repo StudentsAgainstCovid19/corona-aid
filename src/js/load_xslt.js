@@ -24,7 +24,7 @@ function loadXMLDoc(filename, mimeType="application/xml")
         xhttp = new XMLHttpRequest();
     }
     xhttp.open("GET", filename, false);
-    xhttp.setRequestHeader("Accept",mimeType);
+    xhttp.setRequestHeader("Accept", mimeType);
     try {xhttp.responseType = "msxml-document"} catch(err) {} // Helping IE11
     xhttp.send("");
     return xhttp.responseXML;

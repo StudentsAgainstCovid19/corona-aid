@@ -58,6 +58,7 @@ function showPreExistingIllnesses()
     displayPopUp();
 }
 
+// TODO
 function submitSymptoms()
 {
 
@@ -133,14 +134,45 @@ function failedCall(id)
 
 
     postRequest("history", xml_string);
+    clearRightBar();
 }
 
 function closeDetailedView(id)
 {
-
+    // TODO: unlock entry
+    clearRightBar();
 }
 
 function submitDetailView(id)
 {
+    var xml_string = "<History>" +
+        "<infectedId>"+id+"</infectedId>"+
+        "<notes>"+document.getElementById("notes_area").value+"</notes>"+
+        "<personalFeeling>"+(document.getElementById("wellbeing_slider").value)+"</personalFeeling>"+
+        "<status>0</status><symptom>";// TODO
+    symptoms = document.getElementsByClassName("symptom_checkbox");
 
+    for (var i=0; i<symptoms.length; i++)
+    {
+        console.log(symptoms[i].checked)
+        if (symptoms[i].checked)
+        {
+            console.log(symptoms[i].id)
+            xml_string += "<symptom_id>"+parseInt(symptoms[i].id)+"</symptom_id>";
+        }
+    }
+    xml_string +=
+        "</symptom>"+ // TODO
+        "<timestamp>" + Date.now() + "</timestamp>" +
+        "</History>";
+    console.log(xml_string);
+    postRequest("history", xml_string);
+    clearRightBar();
+}
+
+function clearRightBar()
+{
+    detail_bar = 0;
+    document.getElementById("infected_detailed_view_right").innerHTML = "";
+    closeRightBar();
 }

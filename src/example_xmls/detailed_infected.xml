@@ -20,12 +20,14 @@
 
     <symptoms>
         <symptom>
+            <id>1</id>
             <sinceDays>4</sinceDays>
             <name>Fieber</name>
             <degreeOfDanger>2</degreeOfDanger>
             <proba>5</proba>
         </symptom>
         <symptom>
+            <id>2</id>
             <sinceDays>2</sinceDays>
             <name>Durchfall</name>
             <degreeOfDanger>3</degreeOfDanger>

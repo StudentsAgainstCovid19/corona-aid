@@ -136,6 +136,7 @@
 
         <div id="symptomsDiv">
             <xsl:for-each select="symptoms/symptom">
+                <xsl:sort select="degreeOfDanger" order="descending"/>
                 <xsl:variable name="sinceDaysText">
                     <xsl:call-template name="dayFormatting">
                         <xsl:with-param name="days" select="sinceDays"/>
@@ -144,6 +145,7 @@
                 <p>
                     <input type="checkbox" class="symptom_checkbox" name="test_result">
                         <xsl:attribute name="checked"><xsl:value-of select="test/result"/></xsl:attribute>
+                        <xsl:attribute name="id"><xsl:value-of select="id"/></xsl:attribute>
                     </input>
                     <label><xsl:value-of select="name"/>
                         <span class="sinceDays"> seit <xsl:value-of select="$sinceDaysText"/>
@@ -181,7 +183,9 @@
         </button>
         <button>
             <xsl:attribute name="onclick">failedCall(<xsl:value-of select="id"/>);</xsl:attribute>
-            Nicht angenommen
+            Nicht abgenommen
         </button>
+
+        <textarea id="notes_area" rows="10" cols="30"/>
     </xsl:template>
 </xsl:stylesheet>
