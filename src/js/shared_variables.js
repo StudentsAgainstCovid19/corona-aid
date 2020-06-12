@@ -13,3 +13,10 @@ var piechart_cache = {};
 var config_hash_table = {};
 
 var xslt_files = {}; // hash table to prevent reloading of xsl-files
+
+var symptomsXML;
+
+var symptomsList = [];
+var editSymptomsList = [];
+
+var confirmConfig = [null, null, null];

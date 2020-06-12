@@ -50,6 +50,7 @@ function runXSLT(xsl_list, xml, id=null)
         if (id != null)
         {
             resultDocument = xsltProcessor.transformToFragment(xml, document);
+            document.getElementById(id).innerHTML = "";
             document.getElementById(id).appendChild(resultDocument);
         }
         else

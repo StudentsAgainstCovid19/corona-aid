@@ -134,28 +134,7 @@
         <p>Symptome</p>
         <button id="addSymptomButton" onclick="showSymptoms();">+</button>
 
-        <div id="symptomsDiv">
-            <xsl:for-each select="symptoms/symptom">
-                <xsl:sort select="degreeOfDanger" order="descending"/>
-                <xsl:variable name="sinceDaysText">
-                    <xsl:call-template name="dayFormatting">
-                        <xsl:with-param name="days" select="sinceDays"/>
-                    </xsl:call-template>
-                </xsl:variable>
-                <p>
-                    <input type="checkbox" class="symptom_checkbox" name="test_result">
-                        <xsl:attribute name="checked"><xsl:value-of select="test/result"/></xsl:attribute>
-                        <xsl:attribute name="id"><xsl:value-of select="id"/></xsl:attribute>
-                    </input>
-                    <label><xsl:value-of select="name"/>
-                        <span class="sinceDays"> seit <xsl:value-of select="$sinceDaysText"/>
-                        </span>
-                    </label>
-
-                </p>
-
-            </xsl:for-each>
-        </div>
+        <div id="symptomsDiv"></div>
 
         <p> Verlauf (subj.) <xsl:apply-templates select="subjectiveWellbeings"/></p>
         <xsl:variable name="lastWellbeing">2</xsl:variable>

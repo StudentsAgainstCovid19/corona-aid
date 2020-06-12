@@ -18,22 +18,22 @@
         <prescribed>0</prescribed>
     </test>
 
-    <symptoms>
-        <symptom>
+    <List>
+        <item>
             <id>1</id>
             <sinceDays>4</sinceDays>
             <name>Fieber</name>
             <degreeOfDanger>2</degreeOfDanger>
-            <proba>5</proba>
-        </symptom>
-        <symptom>
+            <probability>5</probability>
+        </item>
+        <item>
             <id>2</id>
             <sinceDays>2</sinceDays>
             <name>Durchfall</name>
             <degreeOfDanger>3</degreeOfDanger>
-            <proba>2</proba>
-        </symptom>
-    </symptoms>
+            <probability>2</probability>
+        </item>
+    </List>
 
     <subjectiveWellbeings>
         <subjectiveWellBeing>

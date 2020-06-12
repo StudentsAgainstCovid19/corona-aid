@@ -26,7 +26,7 @@ function displayClusteredMap(id_array)
         // TODO: handle error!
         console.log("Error occurred. Not all ids in cluster are in priority list. Inconsistency...");
     }
-    xml_string+="</infected>";
+    xml_string += "</infected>";
 
     var xmlParser = new DOMParser();
     var xmlDoc = xmlParser.parseFromString(xml_string, "application/xml");
