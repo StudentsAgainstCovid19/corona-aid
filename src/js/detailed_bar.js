@@ -119,7 +119,7 @@ function submitSymptoms()
 {
 
     symptomsList = editSymptomsList;
-    symptomsList.sort();
+    symptomsList.sort((a, b) => a - b);
     editSymptomsList = [];
 
     var serializer = new XMLSerializer();
@@ -169,7 +169,6 @@ function prescribeTest(id)
         function(id) {
             if (detailedXML === null) return;
             // TODO: check whether prescribed, change xml, reload detail view
-            console.log(id);
 
             const xml_string = "<Test><id>"+id+"</id><result>0</result><timestamp>"+parseInt(Date.now()/1000.0)+"</timestamp></Test>";
             postRequest("test", xml_string);

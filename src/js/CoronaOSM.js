@@ -93,7 +93,7 @@ async function setMarkers()
                 var amountCalled = getAmountCalled(feature.get('features'));
                 sytle = piechart_cache[[size,amountDone,amountCalled]]
                 if (!style)
-                { // TODO: currently, eventhough caching should be possible, style is still undefined
+                { // TODO: currently, even though caching should be possible, style is still undefined
                     style = createPieChart(size, amountDone, amountCalled);
                     piechart_cache[[size,amountDone,amountCalled]] = style;
                 }
@@ -107,14 +107,16 @@ async function setMarkers()
         var clickedFeatures = []
         map.forEachFeatureAtPixel(
             evt.pixel,
-            function(ft, layer){clickedFeatures.push(ft)}
+            function(ft, layer){clickedFeatures.push(ft);}
         )
         if (clickedFeatures.length === 0) return;
-        var clicked_ids = []
-        var childFeatures = clickedFeatures[0].get('features')
-        childFeatures.forEach(function (child){
-            clicked_ids.push(child.get('id'))
-        });
+
+        var clicked_ids = parseFeatureTree(clickedFeatures[0]);
+        var v=clicked_ids[0];
+        for (var i = 0; i < clicked_ids.length; i++)
+        {
+            v+=clicked_ids[i];
+        }
 
         if (clicked_ids.length === 1)
         {
@@ -126,6 +128,22 @@ async function setMarkers()
             displayClusteredMap(clicked_ids);
         }
     })
+}
+
+function parseFeatureTree(ft)
+{
+
+    var id_list = [];
+    var id = ft.get('id');
+    if (id) id_list = [parseInt(id)];
+
+    var children = ft.get("features");
+    if ( !children || children.length === 0 ) return id_list;
+    children.forEach(function (child){
+        var ids = parseFeatureTree(child);
+        id_list = id_list.concat(ids);
+    });
+    return id_list;
 }
 
 
