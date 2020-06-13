@@ -1,3 +1,5 @@
+![Corona Aid Logo](https://user-images.githubusercontent.com/37160523/84581280-fc464f80-addf-11ea-93a9-fb5daec67018.jpg)
+
 # Corona Aid
 ![GitHub Workflow Status](https://img.shields.io/github/workflow/status/StudentsAgainstCovid19/corona-aid/Docker%20Image%20CI?label=Docker%20build)
 
