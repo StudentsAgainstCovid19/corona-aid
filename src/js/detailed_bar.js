@@ -21,11 +21,11 @@ function setDetailedView(xml_doc)
         var prioHelperXSL = getXSLT("./xslt_scripts/xslt_calculate_prio.xsl");
         var displayDetailed = getXSLT("./xslt_scripts/xslt_detailed_view.xsl");
 
-        runXSLT([stringHelpersXSL, prioHelperXSL, displayDetailed], xml_doc, "infected_detailed_view_right");
+        runXSLT([displayDetailed], xml_doc, "infected_detailed_view_right");
 
         var symptomsXSL = getXSLT("./xslt_scripts/xslt_symptom_div.xsl");
         var symptoms = xml_doc.getElementsByTagName("List")[0];
-        console.log(symptoms);
+
         runXSLT([symptomsXSL], symptoms, "symptomsDiv");
 
         var symp_checkboxes = document.getElementById("symptomsDiv").getElementsByClassName("symptom_checkbox");
@@ -76,13 +76,11 @@ function symptomInteraction(id)
 {
     var checkbox = document.getElementById("symptom_"+id);
     editSymptomsList = changeSymptom(checkbox, editSymptomsList, id);
-    console.log(id +"   "+ editSymptomsList);
 }
 
 function symptomsChanged(id)
 {
     var checkbox = document.getElementById("symp_"+id);
-    console.log(id +"   "+ symptomsList);
     symptomsList = changeSymptom(checkbox, symptomsList, id);
 }
 
@@ -119,7 +117,6 @@ function showPreExistingIllnesses()
 
 function submitSymptoms()
 {
-    console.log( editSymptomsList );
 
     symptomsList = editSymptomsList;
     symptomsList.sort();
@@ -141,7 +138,6 @@ function submitSymptoms()
             var id = parseInt(items[item_index].getElementsByTagName("id")[0].childNodes[0].nodeValue);
             if ( id === symptomsList[i] )
             {
-
                 xml_string += serializer.serializeToString(items[item_index]);
                 break;
             }
@@ -188,6 +184,12 @@ function makeConfirmPopup(text, onSubmitCallback, onCancelCallback, parameters)
     const textP = document.getElementById("confirm_text");
     textP.innerText = text;
     overlay.className = "";
+    setFocus("submit_confirm_button");
+}
+
+function setFocus(id)
+{
+    document.getElementById(id).focus();
 }
 
 function onSubmitPopup()
@@ -224,7 +226,6 @@ function failedCall(id)
                 "<timestamp>" + Date.now() + "</timestamp>" +
                 "</History>";
 
-    console.log(xml_string);
     postRequest("history", xml_string);
     clearRightBar();
 }
@@ -247,14 +248,12 @@ function submitDetailView(id)
 
     for (var i=0; i<symptomsList.length; i++)
     {
-        console.log(symptomsList[i]);
         xml_string += "<symptom>"+parseInt(symptomsList[i])+"</symptom>";
     }
     xml_string +=
-        "</symptoms>"+
+        "</symptoms>" +
         "<timestamp>" + Date.now() + "</timestamp>" +
         "</History>";
-    console.log(xml_string);
     postRequest("history", xml_string);
     clearRightBar();
 }
