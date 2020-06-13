@@ -17,8 +17,6 @@ function setDetailedView(xml_doc)
         symptomsList = [];
         var detailed_view = document.getElementById("infected_detailed_view_right");
         detailed_view.innerHTML = "";
-        var stringHelpersXSL = getXSLT("./xslt_scripts/xslt_string_helpers.xsl");
-        var prioHelperXSL = getXSLT("./xslt_scripts/xslt_calculate_prio.xsl");
         var displayDetailed = getXSLT("./xslt_scripts/xslt_detailed_view.xsl");
 
         runXSLT([displayDetailed], xml_doc, "infected_detailed_view_right");
