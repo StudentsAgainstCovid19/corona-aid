@@ -1,11 +1,9 @@
 
-var map;
-var detailedXML;
-var prioList;
-var piechart_cache = {};
-
 function initMap() {
-    var lonlat=[8.40631,49.01175];
+    // OpenLayers takes lon as first argument and then lat
+    var lonlat=[parseFloat(config_hash_table["standardLon"]),
+        parseFloat(config_hash_table["standardLat"])];
+
     map = new ol.Map({
         target: 'map_div',
         layers: [
@@ -16,7 +14,7 @@ function initMap() {
         view: new ol.View({
             center: ol.proj.fromLonLat(lonlat),
             projection: "EPSG:3857",
-            zoom: 13
+            zoom: parseInt(config_hash_table["standardZoom"])
         })
     });
 }
@@ -42,10 +40,8 @@ function readExt(feature, extensionsNode)
 // asynchronous to prevent extreme slowdowns
 async function setMarkers()
 {
-    var gpxXSL = loadXMLDoc("./xslt_scripts/xslt_prio_gpx.xsl");
+    var gpxXSL = getXSLT("./xslt_scripts/xslt_prio_gpx.xsl");
     var gpxData = runXSLT([gpxXSL], prioList);
-
-    var clusterDistance = 25;
 
     var styles = getStyles();
 
@@ -57,7 +53,7 @@ async function setMarkers()
     });
 
     var clusterSource = new ol.source.Cluster({
-        distance: clusterDistance,
+        distance: parseInt(config_hash_table["clusteredDistance"]),
         source: new ol.source.Vector({
             features: gpxFeatures
         })
@@ -169,7 +165,7 @@ function getStyles()
             image: new ol.style.Icon({
                 opacity: 1,
                 src: "./assets/markers/" + icons[i],
-                scale: 0.2
+                scale: parseFloat(config_hash_table["markerScale"])
             })
         }));
     }
@@ -216,7 +212,7 @@ function createPieChart(size, amountDone, amountCalled)
     xml_string += "</arcs></chart>";
     var xmlParser = new DOMParser();
     var xmlDoc = xmlParser.parseFromString(xml_string, "application/xml");
-    var pieChartXSL = loadXMLDoc("./xslt_scripts/xslt_pie_chart_gen.xsl");
+    var pieChartXSL = getXSLT("./xslt_scripts/xslt_pie_chart_gen.xsl");
     var chart = runXSLT([pieChartXSL], xmlDoc);
 
     var serializer = new XMLSerializer();
@@ -225,7 +221,7 @@ function createPieChart(size, amountDone, amountCalled)
         image: new ol.style.Icon({
             opacity: 1,
             src: "data:image/svg+xml;utf8,"+serializer.serializeToString(chart),
-            scale: 0.4
+            scale: parseFloat(config_hash_table["pieChartScale"])
         })
     })
 }
@@ -239,10 +235,10 @@ function calculateCirclePoint(angle)
 // button listeners for zooming
 function zoom_in()
 {
-    map.getView().setZoom(map.getView().getZoom()+1/3.0);
+    map.getView().setZoom(map.getView().getZoom()+parseFloat(config_hash_table["zoomChange"]));
 }
 
 function zoom_out()
 {
-    map.getView().setZoom(map.getView().getZoom()-1/3.0);
+    map.getView().setZoom(map.getView().getZoom()-parseFloat(config_hash_table["zoomChange"]));
 }

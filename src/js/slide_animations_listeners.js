@@ -1,6 +1,4 @@
 
-var element = document.getElementById("watchme");
-
 function toggle_call_list()
 {
     var call_list = document.getElementById("call_list_div");

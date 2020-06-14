@@ -1,46 +1,54 @@
 <!DOCTYPE HTML>
-<html>
-  <head>
-    <title>Corona Aid v1.0</title>
-    <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico">
+<html lang="de">
 
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/openlayers/openlayers.github.io@master/en/v6.3.1/css/ol.css" type="text/css">
-    <link rel="stylesheet" href="./css/call_list_style.css" type="text/css">
-    <link rel="stylesheet" href="./css/detailed_view.css" type="text/css">
-    <link rel="stylesheet" href="./css/map_style.css" type="text/css">
-    <link rel="stylesheet" href="./css/interaction_props.css" type="text/css">
-    <link rel="stylesheet" href="./css/popup_style.css" type="text/css">
-    <link rel="stylesheet" href="./css/clustered_list.css" type="text/css">
+<head>
+  <meta charset="utf-8" />
+  <meta name="description" content="StudentsAgsinstCovid19 - Overcoming bureaucratic hurdles">
+  <title>Corona Aid v1.0</title>
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico">
+  
+  <!-- OpenLayers -->
+  <link rel="stylesheet" type="text/css"
+    href="https://cdn.jsdelivr.net/gh/openlayers/openlayers.github.io@master/en/v6.3.1/css/ol.css" />
+  <script src="https://cdn.jsdelivr.net/gh/openlayers/openlayers.github.io@master/en/v6.3.1/build/ol.js"></script>
+  <!-- CSS -->
+  <link rel="stylesheet" href="./css/interaction_props.css" type="text/css" />
+  <link rel="stylesheet" href="./css/call_list_style.css" type="text/css" />
+  <link rel="stylesheet" href="./css/detailed_view.css" type="text/css" />
+  <link rel="stylesheet" href="./css/map_style.css" type="text/css" />
+  <link rel="stylesheet" href="./css/clustered_list.css" type="text/css" />
+  <link rel="stylesheet" href="./css/popup_style.css" type="text/css" />
+  <!-- JS -->
+  <script src="./js/index.js"></script>
+  <script src="./js/shared_variables.js"></script>
+  <script src="./js/clustered_list.js"></script>
+  <script src="./js/detailed_bar.js"></script>
+  <script src="./js/CoronaOSM.js"></script>
+  <script src="./js/call_list.js"></script>
+  <script src="./js/slide_animations_listeners.js"></script>
+  <script src="./js/search_call_list.js"></script>
+  <!-- Embed XSLT -->
+  <script src="./js/load_xslt.js"></script>
+</head>
 
-
-    <script src="https://cdn.jsdelivr.net/gh/openlayers/openlayers.github.io@master/en/v6.3.1/build/ol.js"></script>
-    <script src="./js/load_xslt.js"></script>
-    <script src="./js/clustered_list.js"></script>
-    <script src="./js/detailed_bar.js"></script>
-	<script src="./js/CoronaOSM.js"></script>
-    <script src="./js/call_list.js"></script>
-    <script src="./js/slide_animations_listeners.js"></script>
-    <script src="./js/search_call_list.js"></script>
-
-
-  </head>
-  <body onload="initMap();initCallList();">
+<body onload="init();">
   <div id="call_list_div" class="floating_object"></div>
-
   <div id="map_div"></div>
-
-
   <div id="infected_detailed_view_right" class="floating_object"></div>
-
   <div id="footer" class="floating_object"></div>
-
 
   <div id="search_bar" class="floating_object">
     <div class="flex_div">
-      <button id="open_list_button" onclick="toggle_call_list();"><img src="./assets/icons/list_button.svg" id="open_list_svg"></img></button>
+      <button id="open_list_button" onclick="toggle_call_list();">
+        <img src="./assets/icons/list_button.svg" id="open_list_svg" />
+      </button>
       <input type="text" placeholder="Suche..." id="search_input">
-      <button id="search_button" onclick="search_call_list();"><div id="search_div"><img src="./assets/icons/search_magnifier.svg"></img><p>Suche</p></div></button>
-
+      <button id="search_button" onclick="search_call_list();">
+        <div id="search_div">
+          <img src="./assets/icons/search_magnifier.svg" />
+          <p>Suche</p>
+        </div>
+      </button>
     </div>
   </div>
 
@@ -51,8 +59,16 @@
     </div>
   </div>
 
-  <img id="global_overlay" class="invisible_object" src="./assets/icons/blur_filter.svg"></img>
+  <img id="global_overlay" class="invisible_object" src="./assets/icons/blur_filter.svg" />
   <div id="popup_window" class="invisible_object"></div>
-	
-  </body>
+
+  <div id="transparent_overlay" class="invisible_object">
+    <div id="confirm_popup">
+      <p id="confirm_text"></p>
+      <button id="submit_confirm_button" class="dialogButton submit_button" onclick="onSubmitPopup();">Bestätigen</button>
+      <button class="dialogButton cancel_button" onclick="onCancelPopup();">Abbrechen</button>
+    </div>
+  </div>
+</body>
+
 </html>

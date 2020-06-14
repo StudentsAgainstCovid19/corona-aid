@@ -1,7 +1,8 @@
 
 function displayClusteredMap(id_array)
 {
-    if (!prioList || id_array.length === 0) return;
+    if (!prioList || id_array.length === 0 || detail_bar == 2) return;
+    detail_bar = 1;
     slideOpenRightBar();
     var right_bar = document.getElementById("infected_detailed_view_right");
     right_bar.innerHTML = "";
@@ -25,13 +26,13 @@ function displayClusteredMap(id_array)
         // TODO: handle error!
         console.log("Error occurred. Not all ids in cluster are in priority list. Inconsistency...");
     }
-    xml_string+="</infected>";
+    xml_string += "</infected>";
 
     var xmlParser = new DOMParser();
     var xmlDoc = xmlParser.parseFromString(xml_string, "application/xml");
 
 
-    var clusteredListXSL = loadXMLDoc("./xslt_scripts/xslt_clustered_list.xsl");
-    runXSLTDisplayHtml([clusteredListXSL], xmlDoc, "infected_detailed_view_right");
+    var clusteredListXSL = getXSLT("./xslt_scripts/xslt_clustered_list.xsl");
+    runXSLT([clusteredListXSL], xmlDoc, "infected_detailed_view_right");
 }
 

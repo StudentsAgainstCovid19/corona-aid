@@ -21,7 +21,27 @@
     border-radius: 20px;
 }
 
+#confirm_popup
+{
+    position: absolute;
+    width: 20%;
+    height: 25%;
+    top: 30%;
+    left: 40%;
+    background-color: white;
+    border-radius: 20px;
+    margin: 10px;
+}
+
 .invisible_object
 {
     display: none;
+}
+
+#transparent_overlay
+{
+    position: absolute;
+    z-index: 8;
+    width: 100%;
+    height: 100%;
 }

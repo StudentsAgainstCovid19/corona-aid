@@ -39,19 +39,19 @@
 #wellbeing_indicator_history {
 }
 
-#cancel_detail_button {
+.cancel_button {
     background-color: red;
 }
-#cancel_detail_button:hover {
+.cancel_button:hover {
     color: red;
     background-color: white;
     border-color: red;
 }
 
-#submit_detail_button {
+.submit_button {
     background-color: deepskyblue;
 }
-#submit_detail_button:hover {
+.submit_button:hover {
     color: deepskyblue;
     background-color: white;
     border-color: deepskyblue;

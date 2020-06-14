@@ -17,3 +17,17 @@
     border-width: 10px;
 
 }
+
+.done_div
+{
+    padding: 5px;
+    background-color: grey;
+    border-radius: 5px;
+    border-width: 10px;
+    filter: grayscale(100%);
+}
+
+.done_div:hover
+{
+    background-color: darkblue;
+}
