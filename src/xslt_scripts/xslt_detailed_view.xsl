@@ -1,7 +1,63 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <xsl:stylesheet version="1.0" xmlns:xsl="http://www.w3.org/1999/XSL/Transform">
-    <xsl:import href="./xslt_priority_helpers.xsl"></xsl:import>
-    <xsl:import href="./xslt_string_helpers.xsl"></xsl:import>
+    <xsl:template name="prio_calculation">
+        <xsl:param name="age"/>
+        <xsl:param name="preExIllnesses"/>
+        <xsl:param name="sumSymptoms"/>
+        <xsl:param name="subjectiveWellbeing"/>
+
+        <xsl:variable name="preIllnessWeight">
+            <xsl:choose>
+                <xsl:when test="($preExIllnesses * 0.25) > 1">1</xsl:when>
+                <xsl:otherwise><xsl:value-of select="$preExIllnesses * 0.25"/></xsl:otherwise>
+            </xsl:choose>
+        </xsl:variable>
+        <xsl:variable name="symptomsWeight">
+            <xsl:choose>
+                <xsl:when test="($sumSymptoms * 0.1) > 1">1</xsl:when>
+                <xsl:otherwise><xsl:value-of select="$sumSymptoms * 0.1"/></xsl:otherwise>
+            </xsl:choose>
+        </xsl:variable>
+
+        <xsl:variable name="subjectiveWellbeingFactor" select="(5-$subjectiveWellbeing)*0.2"/>
+        <xsl:variable name="age_value" select="$age div 100.0"/>
+
+        <xsl:value-of select="$subjectiveWellbeingFactor+$symptomsWeight+$preIllnessWeight+$age_value"/>
+    </xsl:template>
+
+    <xsl:template name="div_classtag_template">
+        <xsl:param name="prio"/>
+        <xsl:param name="called"/>
+        <xsl:choose>
+            <xsl:when test="$called = 'true'">calledAlready</xsl:when>
+            <xsl:when test="round($prio) = 1 or round($prio) = 0">lowprio</xsl:when>
+            <xsl:when test="round($prio) = 2">intermediateprio</xsl:when>
+            <xsl:when test="round($prio) = 3">highprio</xsl:when>
+            <xsl:otherwise>veryhighprio</xsl:otherwise>
+        </xsl:choose>
+    </xsl:template>
+
+    <xsl:template name="wellbeing_svg_template">
+        <xsl:param name="wellbeing"/>
+        <xsl:choose>
+            <xsl:when test="$wellbeing = 1">verybad</xsl:when>
+            <xsl:when test="$wellbeing = 2">bad</xsl:when>
+            <xsl:when test="$wellbeing = 3">intermediate</xsl:when>
+            <xsl:when test="$wellbeing = 4">good</xsl:when>
+            <xsl:otherwise>verygood</xsl:otherwise>
+        </xsl:choose>
+    </xsl:template>
+
+    <xsl:template name="wellbeing_desc">
+        <xsl:param name="wellbeing"/>
+        <xsl:choose>
+            <xsl:when test="$wellbeing = 1">Sehr schlecht</xsl:when>
+            <xsl:when test="$wellbeing = 2">Schlecht</xsl:when>
+            <xsl:when test="$wellbeing = 3">Mittelmäßig</xsl:when>
+            <xsl:when test="$wellbeing = 4">Gut</xsl:when>
+            <xsl:otherwise>Sehr gut</xsl:otherwise>
+        </xsl:choose>
+    </xsl:template>
     
     <xsl:template name="dayFormatting">
         <xsl:param name="days"/>
@@ -120,7 +176,11 @@
             </xsl:if>
         </label>
 
-        <p><xsl:attribute name="class"><xsl:choose>
+        <p id="prescribe_test">
+            <xsl:if test="test/prescribed = 0">
+                <xsl:attribute name="onclick">prescribeTest(<xsl:value-of select="id"/>);</xsl:attribute>
+            </xsl:if>
+            <xsl:attribute name="class"><xsl:choose>
             <xsl:when test="test/prescribed = 1">alreadyPrescribed</xsl:when>
             <xsl:otherwise>notPrescribed</xsl:otherwise>
         </xsl:choose></xsl:attribute>Test anordnen</p>
@@ -130,26 +190,7 @@
         <p>Symptome</p>
         <button id="addSymptomButton" onclick="showSymptoms();">+</button>
 
-        <div id="symptomsDiv">
-            <xsl:for-each select="symptoms/symptom">
-                <xsl:variable name="sinceDaysText">
-                    <xsl:call-template name="dayFormatting">
-                        <xsl:with-param name="days" select="sinceDays"/>
-                    </xsl:call-template>
-                </xsl:variable>
-                <p>
-                    <input type="checkbox" class="symptom_checkbox" name="test_result">
-                        <xsl:attribute name="checked"><xsl:value-of select="test/result"/></xsl:attribute>
-                    </input>
-                    <label><xsl:value-of select="name"/>
-                        <span class="sinceDays"> seit <xsl:value-of select="$sinceDaysText"/>
-                        </span>
-                    </label>
-
-                </p>
-
-            </xsl:for-each>
-        </div>
+        <div id="symptomsDiv"></div>
 
         <p> Verlauf (subj.) <xsl:apply-templates select="subjectiveWellbeings"/></p>
         <xsl:variable name="lastWellbeing">2</xsl:variable>
@@ -167,7 +208,19 @@
             </input>
         </p>
 
-        <button id="cancel_detail_button" class="dialogButton">Abbrechen<i class="fa fa-search"/></button>
-        <button id="submit_detail_button" class="dialogButton">Senden</button>
+        <button class="dialogButton cancel_button">
+            <xsl:attribute name="onclick">closeDetailedView(<xsl:value-of select="id"/>);</xsl:attribute>
+            Abbrechen
+        </button>
+        <button class="dialogButton submit_button">
+            <xsl:attribute name="onclick">submitDetailView(<xsl:value-of select="id"/>);</xsl:attribute>
+            Senden
+        </button>
+        <button>
+            <xsl:attribute name="onclick">failedCall(<xsl:value-of select="id"/>);</xsl:attribute>
+            Nicht abgenommen
+        </button>
+
+        <textarea id="notes_area" rows="10" cols="30"/>
     </xsl:template>
 </xsl:stylesheet>

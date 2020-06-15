@@ -1,5 +1,9 @@
-function search_call_list()
+async function search_call_list()
 {
+    window.location.hash = "";
+    var scrollToDiv = document.getElementById("scroll_to");
+    if ( scrollToDiv ) scrollToDiv.id = ""; // delete id
+
     var input_field = document.getElementById("search_input");
     var words = input_field.value.toLowerCase().split(" ");
     var call_list_items = document.getElementsByClassName("call_box")
@@ -17,10 +21,16 @@ function search_call_list()
         if (check_in(text, words))
         {
             hits.push(i);
-        }
+        } // TODO: potentially stop after first hit (if we decide against next buttons or sth)
 
-    } // TODO scroll to first div (and potentially stop loop at first hit)
-    console.log(hits);
+    }
+    if (hits.length > 0)
+    {
+        var foundDiv = call_list_items[hits[0]]
+        foundDiv.id = "scroll_to";
+    }
+    window.location.hash = "#scroll_to";
+    console.log(window.location.hash);
 }
 
 function check_in(str, words) {

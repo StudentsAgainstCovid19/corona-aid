@@ -1,11 +1,44 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <xsl:stylesheet version="1.0" xmlns:xsl="http://www.w3.org/1999/XSL/Transform">
-    <xsl:import href="./xslt_string_helpers.xsl"></xsl:import>
+    <xsl:template name="div_classtag_template">
+        <xsl:param name="prio"/>
+        <xsl:param name="called"/>
+        <xsl:choose>
+            <xsl:when test="$called = 'true'">calledAlready</xsl:when>
+            <xsl:when test="round($prio) = 1 or round($prio) = 0">lowprio</xsl:when>
+            <xsl:when test="round($prio) = 2">intermediateprio</xsl:when>
+            <xsl:when test="round($prio) = 3">highprio</xsl:when>
+            <xsl:otherwise>veryhighprio</xsl:otherwise>
+        </xsl:choose>
+    </xsl:template>
+
+    <xsl:template name="wellbeing_svg_template">
+        <xsl:param name="wellbeing"/>
+        <xsl:choose>
+            <xsl:when test="$wellbeing = 1">verybad</xsl:when>
+            <xsl:when test="$wellbeing = 2">bad</xsl:when>
+            <xsl:when test="$wellbeing = 3">intermediate</xsl:when>
+            <xsl:when test="$wellbeing = 4">good</xsl:when>
+            <xsl:otherwise>verygood</xsl:otherwise>
+        </xsl:choose>
+    </xsl:template>
+
+    <xsl:template name="wellbeing_desc">
+        <xsl:param name="wellbeing"/>
+        <xsl:choose>
+            <xsl:when test="$wellbeing = 1">Sehr schlecht</xsl:when>
+            <xsl:when test="$wellbeing = 2">Schlecht</xsl:when>
+            <xsl:when test="$wellbeing = 3">Mittelmäßig</xsl:when>
+            <xsl:when test="$wellbeing = 4">Gut</xsl:when>
+            <xsl:otherwise>Sehr gut</xsl:otherwise>
+        </xsl:choose>
+    </xsl:template>
 
     <xsl:template match="/">
         <p>Meine Anrufsliste</p>
         <table>
             <xsl:for-each select="infected/person">
+                <xsl:sort select="done" data-type="number"/>
                 <xsl:sort select="priority" order="descending" data-type="number"/>
 
                 <xsl:variable name="div_classtag">
@@ -30,7 +63,13 @@
                 <tr>
                     <td>
                         <div>
-                            <xsl:attribute name="class"><xsl:value-of select="$div_classtag"/> call_box</xsl:attribute>
+                            <xsl:attribute name="class">
+                                <xsl:choose>
+                                    <xsl:when test="done = 1">done_call_box</xsl:when>
+                                    <xsl:otherwise><xsl:value-of select="$div_classtag"/></xsl:otherwise>
+                                </xsl:choose> call_box</xsl:attribute>
+
+
                             <xsl:attribute name="onclick">try_acquire_lock(<xsl:value-of select="id"/>)</xsl:attribute>
 
                             <p><xsl:value-of select="lastname"/>, <xsl:value-of select="firstnames"/></p>
