@@ -55,7 +55,7 @@ function hidePopUp()
 function showSymptoms ()
 {
     if (!detailedXML) return;
-    symptomsXML = loadXMLDoc("https://api.sac19.jatsqi.com/symptom");
+    symptomsXML = loadXMLDoc("https://api-dev.sac19.jatsqi.com/symptom");
     var symptomsXSL = getXSLT("./xslt_scripts/xslt_edit_symptoms.xsl");
     runXSLT([symptomsXSL], symptomsXML, "popup_window");
 
@@ -229,8 +229,7 @@ function failedCall(id)
 
 function closeDetailedView(id)
 {
-    // TODO: unlock entry
-    // postRequest("unlock/"+id,"");
+    putRequest("infected/unlock/"+id);
     clearRightBar();
 }
 
