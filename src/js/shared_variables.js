@@ -23,3 +23,5 @@ var confirmConfig = [null, null, null]; // list for generic confirm popup.
                                         // onCancelCallback and third value are parameters for
                                         // those callbacks
 
+
+var apiUrl = "https://api-dev.sac19.jatsqi.com/";
