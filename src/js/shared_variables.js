@@ -22,3 +22,4 @@ var confirmConfig = [null, null, null]; // list for generic confirm popup.
                                         // first value is onSubmitCallback, second value is
                                         // onCancelCallback and third value are parameters for
                                         // those callbacks
+

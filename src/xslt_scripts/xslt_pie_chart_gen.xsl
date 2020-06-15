@@ -2,7 +2,7 @@
 <xsl:stylesheet version="1.0" xmlns:xsl="http://www.w3.org/1999/XSL/Transform">
     <xsl:template match="chart">
         <svg xmlns="http://www.w3.org/2000/svg" width="100px" height="100px">
-            <circle cx="50" cy="50" r="50" fill="yellow"/>
+            <circle cx="50" cy="50" r="50" fill="yellow"></circle>
             <xsl:variable name="remaining" select="amountRemaining"/>
             <xsl:for-each select="arcs/arc">
                 <xsl:variable name="lastX">

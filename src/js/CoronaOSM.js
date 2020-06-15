@@ -1,4 +1,3 @@
-var piechart_cache = {};
 
 function initMap() {
     // OpenLayers takes lon as first argument and then lat
@@ -37,6 +36,14 @@ function readExt(feature, extensionsNode)
     feature.set("called", parseExtensions("called")==="true");
     feature.set("done", parseExtensions("done")==="1");
 }
+
+
+
+// Solution to flickering was not implementing a cache for openlayer-styles but for
+// the underlying icons. See:
+// https://github.com/openlayers/openlayers/issues/3137
+// https://github.com/openlayers/openlayers/pull/1590
+var piechart_cache = {}; // map to cache openlayer-icons, to prevent flickering
 
 // asynchronous to prevent extreme slowdowns
 async function setMarkers()
@@ -90,18 +97,28 @@ async function setMarkers()
             }
             else {
                 // use a pie chart
-                var amountDone = getAmountDone(feature.get('features'));
-                var amountCalled = getAmountCalled(feature.get('features'));
-                var key = [size, amountDone, amountCalled];
-                styleSVG = piechart_cache[key];
-                if (!styleSVG)
-                { // caching did not work due to the fact that styles are disposed if a cluster is reloaded / disposed.
-                  // Now we cache the SVG output by the XSLTProcessor
-                    console.log("I love caching...");
-                    styleSVG = createPieChart(size, amountDone, amountCalled);
-                    piechart_cache[key] = styleSVG;
+                var amountDone, amountCalled;
+                var styleSVGIcon;
+                if (feature.get("amountDone") && feature.get("amountCalled"))
+                {
+                    amountDone = feature.get("amountDone");
+                    amountCalled = feature.get("amountCalled");
                 }
-                style = createClusterFromSVG(styleSVG);
+                else
+                {
+                    amountDone = getAmountDone(feature.get('features'));
+                    amountCalled = getAmountCalled(feature.get('features'));
+                }
+
+                var key = [size, amountDone, amountCalled];
+                styleSVGIcon = piechart_cache[key];
+                if (!styleSVGIcon)
+                { // caching did not work due to the fact that styles are disposed if a cluster is reloaded / disposed.
+                    // Now we cache the SVG output as openlayers icon by the XSLTProcessor
+                    styleSVGIcon = createPieChart(size, amountDone, amountCalled);
+                    piechart_cache[key] = styleSVGIcon;
+                }
+                style = createClusterFromSVG(styleSVGIcon);
             }
             return style;
         }
@@ -132,7 +149,7 @@ async function setMarkers()
             // open list with people with according ids
             displayClusteredMap(clicked_ids);
         }
-    })
+    });
 }
 
 function parseFeatureTree(ft)
@@ -236,17 +253,17 @@ function createPieChart(size, amountDone, amountCalled) {
     var chart = runXSLT([pieChartXSL], xmlDoc);
 
     var serializer = new XMLSerializer();
-    return serializer.serializeToString(chart);
+    return new ol.style.Icon({
+        opacity: 1,
+        src: "data:image/svg+xml;utf8," + serializer.serializeToString(chart),
+        scale: parseFloat(config_hash_table["pieChartScale"])
+    });
 }
 
-function createClusterFromSVG(pieChartSVG)
+function createClusterFromSVG(icon)
 {
     return new ol.style.Style({
-        image: new ol.style.Icon({
-            opacity: 1,
-            src: "data:image/svg+xml;utf8," + pieChartSVG,
-            scale: parseFloat(config_hash_table["pieChartScale"])
-        })
+        image: icon
     })
 }
 
