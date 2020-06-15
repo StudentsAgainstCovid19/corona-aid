@@ -17,8 +17,6 @@ function setDetailedView(xml_doc)
         symptomsList = [];
         var detailed_view = document.getElementById("infected_detailed_view_right");
         detailed_view.innerHTML = "";
-        var stringHelpersXSL = getXSLT("./xslt_scripts/xslt_string_helpers.xsl");
-        var prioHelperXSL = getXSLT("./xslt_scripts/xslt_calculate_prio.xsl");
         var displayDetailed = getXSLT("./xslt_scripts/xslt_detailed_view.xsl");
 
         runXSLT([displayDetailed], xml_doc, "infected_detailed_view_right");
@@ -119,7 +117,7 @@ function submitSymptoms()
 {
 
     symptomsList = editSymptomsList;
-    symptomsList.sort();
+    symptomsList.sort((a, b) => a - b);
     editSymptomsList = [];
 
     var serializer = new XMLSerializer();
@@ -169,7 +167,6 @@ function prescribeTest(id)
         function(id) {
             if (detailedXML === null) return;
             // TODO: check whether prescribed, change xml, reload detail view
-            console.log(id);
 
             const xml_string = "<Test><id>"+id+"</id><result>0</result><timestamp>"+parseInt(Date.now()/1000.0)+"</timestamp></Test>";
             postRequest("test", xml_string);

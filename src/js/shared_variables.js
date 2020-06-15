@@ -1,4 +1,3 @@
-
 var detail_bar = 0; // value that indicates what detailed bar shows:
 // 0: nothing
 // 1: clustered_list
@@ -6,17 +5,21 @@ var detail_bar = 0; // value that indicates what detailed bar shows:
 
 
 var map;
-var detailedXML;
-var prioList;
-var piechart_cache = {};
+var detailedXML; // contains the XML-Document of the current detailed view
+var prioList; // contains the XML-Document that is calculated in xslt_calculate_prio.xsl
 
-var config_hash_table = {};
+var config_hash_table = {}; // configs fetched from db at start up
 
 var xslt_files = {}; // hash table to prevent reloading of xsl-files
 
-var symptomsXML;
+var symptomsXML; // XML-file for all available symptoms
 
-var symptomsList = [];
-var editSymptomsList = [];
+var symptomsList = []; // indices of all symptoms in detailed view
+var editSymptomsList = []; // indices of all symptoms in the edit symptoms popup.
+                           // when popup is submitted, symptoms are loaded to symptomsList.
 
-var confirmConfig = [null, null, null];
+var confirmConfig = [null, null, null]; // list for generic confirm popup.
+                                        // first value is onSubmitCallback, second value is
+                                        // onCancelCallback and third value are parameters for
+                                        // those callbacks
+

@@ -2,12 +2,14 @@
 function displayClusteredMap(id_array)
 {
     if (!prioList || id_array.length === 0 || detail_bar == 2) return;
+
     detail_bar = 1;
     slideOpenRightBar();
     var right_bar = document.getElementById("infected_detailed_view_right");
     right_bar.innerHTML = "";
 
-    id_array.sort();
+    id_array.sort((a, b) => a - b);
+
     var infected_people = prioList.getElementsByTagName("person");
     xml_string = "<infected>"
     var XMLserializer = new XMLSerializer();
