@@ -1,3 +1,4 @@
+var piechart_cache = {};
 
 function initMap() {
     // OpenLayers takes lon as first argument and then lat
@@ -91,12 +92,16 @@ async function setMarkers()
                 // use a pie chart
                 var amountDone = getAmountDone(feature.get('features'));
                 var amountCalled = getAmountCalled(feature.get('features'));
-                sytle = piechart_cache[[size,amountDone,amountCalled]]
-                if (!style)
-                { // TODO: currently, even though caching should be possible, style is still undefined
-                    style = createPieChart(size, amountDone, amountCalled);
-                    piechart_cache[[size,amountDone,amountCalled]] = style;
+                var key = [size, amountDone, amountCalled];
+                styleSVG = piechart_cache[key];
+                if (!styleSVG)
+                { // caching did not work due to the fact that styles are disposed if a cluster is reloaded / disposed.
+                  // Now we cache the SVG output by the XSLTProcessor
+                    console.log("I love caching...");
+                    styleSVG = createPieChart(size, amountDone, amountCalled);
+                    piechart_cache[key] = styleSVG;
                 }
+                style = createClusterFromSVG(styleSVG);
             }
             return style;
         }
@@ -204,27 +209,24 @@ function getType(person)
     return "low";
 }
 
-function createPieChart(size, amountDone, amountCalled)
-{
-    if (size===0)
-    {
+function createPieChart(size, amountDone, amountCalled) {
+    if (size === 0) {
         console.log("Error occurred while creating pie chart.");
         return;
     }
     colors = ['green', 'purple'];
-    angles = [0, amountDone/parseFloat(size)*360, (amountDone+amountCalled)/parseFloat(size)*360];
-    xml_string = "<chart><amountRemaining>"+(size-amountDone)+"</amountRemaining><arcs>";
+    angles = [0, amountDone / parseFloat(size) * 360, (amountDone + amountCalled) / parseFloat(size) * 360];
+    xml_string = "<chart><amountRemaining>" + (size - amountDone) + "</amountRemaining><arcs>";
 
-    for ( var i = 0; i<colors.length; i++)
-    {
-        var coordinates = calculateCirclePoint(angles[i+1]);
+    for (var i = 0; i < colors.length; i++) {
+        var coordinates = calculateCirclePoint(angles[i + 1]);
 
         xml_string += "<arc>" +
-                            "<x>"+coordinates[0]+"</x>" +
-                            "<y>"+coordinates[1]+"</y>" +
-                            "<color>"+colors[i]+"</color>" +
-                            "<angle>"+(angles[i+1]-angles[i])+"</angle>" +
-                      "</arc>";
+            "<x>" + coordinates[0] + "</x>" +
+            "<y>" + coordinates[1] + "</y>" +
+            "<color>" + colors[i] + "</color>" +
+            "<angle>" + (angles[i + 1] - angles[i]) + "</angle>" +
+            "</arc>";
 
     }
     xml_string += "</arcs></chart>";
@@ -234,11 +236,15 @@ function createPieChart(size, amountDone, amountCalled)
     var chart = runXSLT([pieChartXSL], xmlDoc);
 
     var serializer = new XMLSerializer();
+    return serializer.serializeToString(chart);
+}
 
+function createClusterFromSVG(pieChartSVG)
+{
     return new ol.style.Style({
         image: new ol.style.Icon({
             opacity: 1,
-            src: "data:image/svg+xml;utf8,"+serializer.serializeToString(chart),
+            src: "data:image/svg+xml;utf8," + pieChartSVG,
             scale: parseFloat(config_hash_table["pieChartScale"])
         })
     })
