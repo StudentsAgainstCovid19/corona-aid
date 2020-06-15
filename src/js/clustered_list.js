@@ -1,5 +1,5 @@
 
-function displayClusteredMap(id_array)
+async function displayClusteredMap(id_array)
 {
     if (!prioList || id_array.length === 0 || detail_bar == 2) return;
 

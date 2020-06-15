@@ -60,23 +60,21 @@ function runXSLT(xsl_list, xml, id=null)
     }
 }
 
-var api_url = "https://api-dev.sac19.jatsqi.com/";
-
-function postRequest(url, content)
+function postRequest(res, content)
 {
     var parser = new DOMParser();
     var request = new XMLHttpRequest();
-    request.open("POST", api_url+url, true);
+    request.open("POST", apiUrl+res, true);
     request.setRequestHeader("Content-type", "application/xml");
 
     request.send(parser.parseFromString(content,"application/xml"));
 }
 
-function putRequest(url)
+function putRequest(res)
 {
     console.log("PUT-Request");
     var parser = new DOMParser();
     var request = new XMLHttpRequest();
-    request.open("PUT", api_url+url, true);
+    request.open("PUT", apiUrl+res, true);
     request.send(null);
 }
