@@ -1,8 +1,8 @@
 .floating_object {
     position: absolute;
-    background-color: #4488ff;
+    background-color: white;
     z-index: 5;
-    color: white;
+    color: black;
 }
 
 #zoom_buttons {
