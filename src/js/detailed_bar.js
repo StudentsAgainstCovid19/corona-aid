@@ -17,8 +17,6 @@ function setDetailedView(xml_doc)
         symptomsList = [];
         var detailed_view = document.getElementById("infected_detailed_view_right");
         detailed_view.innerHTML = "";
-        var stringHelpersXSL = getXSLT("./xslt_scripts/xslt_string_helpers.xsl");
-        var prioHelperXSL = getXSLT("./xslt_scripts/xslt_calculate_prio.xsl");
         var displayDetailed = getXSLT("./xslt_scripts/xslt_detailed_view.xsl");
 
         runXSLT([displayDetailed], xml_doc, "infected_detailed_view_right");
@@ -57,7 +55,7 @@ function hidePopUp()
 function showSymptoms ()
 {
     if (!detailedXML) return;
-    symptomsXML = loadXMLDoc("https://api.sac19.jatsqi.com/symptom");
+    symptomsXML = loadXMLDoc(apiUrl+"symptom");
     var symptomsXSL = getXSLT("./xslt_scripts/xslt_edit_symptoms.xsl");
     runXSLT([symptomsXSL], symptomsXML, "popup_window");
 
@@ -119,7 +117,7 @@ function submitSymptoms()
 {
 
     symptomsList = editSymptomsList;
-    symptomsList.sort();
+    symptomsList.sort((a, b) => a - b);
     editSymptomsList = [];
 
     var serializer = new XMLSerializer();
@@ -169,9 +167,10 @@ function prescribeTest(id)
         function(id) {
             if (detailedXML === null) return;
             // TODO: check whether prescribed, change xml, reload detail view
-            console.log(id);
+            // var availableTests = detailedXML.getElementsByTagName("test");
+            // console.log(availableTests.lastChild);
 
-            const xml_string = "<Test><id>"+id+"</id><result>0</result><timestamp>"+parseInt(Date.now()/1000.0)+"</timestamp></Test>";
+            const xml_string = "<Test><infected_id>"+id+"</infected_id><result>0</result><timestamp>"+parseInt(Date.now()/1000.0)+"</timestamp></Test>";
             postRequest("test", xml_string);
         }, function (id) { }, id );
 }
@@ -232,8 +231,7 @@ function failedCall(id)
 
 function closeDetailedView(id)
 {
-    // TODO: unlock entry
-    // postRequest("unlock/"+id,"");
+    putRequest("infected/unlock/"+id);
     clearRightBar();
 }
 
@@ -243,7 +241,7 @@ function submitDetailView(id)
         "<infectedId>"+id+"</infectedId>"+
         "<notes>"+document.getElementById("notes_area").value+"</notes>"+
         "<personalFeeling>"+(document.getElementById("wellbeing_slider").value)+"</personalFeeling>"+
-        "<status>0</status><symptoms>";// TODO
+        "<status>1</status><symptoms>";
     symptoms = document.getElementsByClassName("symptom_checkbox");
 
     for (var i=0; i<symptomsList.length; i++)
