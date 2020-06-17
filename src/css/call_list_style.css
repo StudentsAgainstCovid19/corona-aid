@@ -2,7 +2,7 @@
 {
     position: fixed;
     overflow: auto;
-    background-color: #4488ff;
+    background-color: white;
     width: 12%;
     z-index: 5;
     height: 100%;
@@ -53,15 +53,18 @@
     width: 20px;
 }
 
-.call_box {
+.call_box  {
     color: black;
     border-style: solid;
-    background-color: white;
-    border-width: 3px;
-    border-radius: 10px;
+    background-color: #f2f2f2;
+    border-width: 0 0 0 5px;
     margin: 2px;
     padding: 5px;
 }
+#call_list_div td :hover {
+    background-color: #e6e6e6;
+}
+
 .lowprio {
     border-color: green;
 }

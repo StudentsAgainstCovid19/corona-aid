@@ -1,8 +1,10 @@
 .floating_object {
     position: absolute;
-    background-color: #4488ff;
+    background-color: white;
     z-index: 5;
-    color: white;
+    color: black;
+    font-family: Arial;
+
 }
 
 #zoom_buttons {
@@ -25,7 +27,7 @@
     width: 90px;
     height: 90px;
     border-radius: 50%;
-    background-color: #4488ff;
+    background-color: white;
     border: 0;
     position: relative;
     color: white;
@@ -54,20 +56,20 @@
 }
 
 #search_bar {
-    padding: 10px 10px 5px 5px;
+    padding: 4px;
     top: 3%;
     left: 15%;
     border-radius: 10px;
-    height: 3%;
+    height: auto;
     outline: none;
 }
 
 #search_input {
-    margin: 10px 10px 0 10px;
-    height: 6%;
-    border-width: 0;
-    border-top-left-radius: 5px;
-    border-bottom-left-radius: 5px;
+    height: 1.5em;
+    border-width: 1px;
+    border-radius: 5px;
+    margin: auto;
+
 }
 
 #search_div {
@@ -85,19 +87,23 @@
     outline: none;
     border-radius: 50%;
     border-width: 0;
+    margin-bottom: -4px;
+    margin-right: 3px;
+    color: black;
 }
 
 #open_list_svg {
-    width: 15%;
-    height: 15%;
+    width: 100%;
+    height: 100%;
 }
 
 #search_button {
-    background-color: transparent;
-    border-top-right-radius: 5px;
-    border-bottom-right-radius: 5px;
+    background-color: slategray;
+    border-radius: 5px;
     border-color: white;
     outline: none;
+    height: 28px;
+    margin-left: 2px;
 
 }
 
