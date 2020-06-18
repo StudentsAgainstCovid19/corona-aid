@@ -3,9 +3,35 @@
     position: fixed;
     overflow: auto;
     background-color: white;
-    width: 12%;
+    width: 13%;
     z-index: 5;
     height: 100%;
+}
+
+.call_list_header
+{
+    margin: 5px 10px 5px 10px;
+    justify-content: center;
+    border-bottom: 1px black;
+}
+
+.call_list_content{
+    flex-direction: column;
+    margin-top: 10px;
+}
+
+h1{
+    font-size:medium;
+}
+h2{
+    font-size: small;
+    margin-bottom: -0.1px;
+    margin-top: 8px;
+}
+
+.seperator{
+    background-color: black;
+    height: 1px;
 }
 
 .call_list_slide {
@@ -16,6 +42,7 @@
     animation-name: slideout_call_div;
     animation-duration: 1s;
 }
+
 
 @keyframes slidein_call_div {
     from {
@@ -59,9 +86,15 @@
     background-color: #f2f2f2;
     border-width: 0 0 0 5px;
     margin: 2px;
-    padding: 5px;
+    padding: 5px 5px 8px 5px;
 }
-#call_list_div td :hover {
+
+.call_list_element{
+    border-top: 1px black;
+    margin: 5px 0 5px 0;
+}
+
+.call_list_element :hover {
     background-color: #e6e6e6;
 }
 
