@@ -23,6 +23,7 @@
 h1{
     font-size:medium;
 }
+
 h2{
     font-size: small;
     margin-bottom: -0.1px;
@@ -35,25 +36,22 @@ h2{
 }
 
 .call_list_slide {
-    animation-name: slidein_call_div;
-    animation-duration: 1s;
+    animation: slidein_call_div .7s ease-in-out forwards;
 }
 .call_list_slideout {
-    animation-name: slideout_call_div;
-    animation-duration: 1s;
+    animation: slideout_call_div .7s ease-in-out forwards;
 }
 
 
 @keyframes slidein_call_div {
     from {
-        left: -12%;
+        left: -13%;
     }
 
     to {
         left: 0;
     }
 }
-
 
 @keyframes slideout_call_div {
     from {
@@ -61,11 +59,9 @@ h2{
     }
 
     to {
-        left: -12%;
+        left: -13%;
     }
 }
-
-
 
 .wellbeing_imagespan {
     position: relative;
