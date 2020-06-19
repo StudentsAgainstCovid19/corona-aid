@@ -1,5 +1,6 @@
 async function search_call_list()
 {
+    openCallList();
     window.location.hash = "";
     var scrollToDiv = document.getElementById("scroll_to");
     if ( scrollToDiv ) scrollToDiv.id = ""; // delete id
@@ -33,6 +34,12 @@ async function search_call_list()
         setTimeout(function () {
             childDiv.className += " found_call_items";
         }, 100);
+    } else {
+        let searchbar = document.getElementById("search_bar");
+        searchbar.className = searchbar.className.replace(" no_call_items_found","");
+        setTimeout(function(){
+            searchbar.className += " no_call_items_found";
+        }, 100);
     }
     window.location.hash = "#scroll_to";
     console.log(window.location.hash);
@@ -48,4 +55,15 @@ function check_in(str, words) {
         }
     }
     return true;
+}
+
+function addSearchBarListener()
+{
+    let searchBar = document.getElementById("search_bar");
+    searchBar.addEventListener("keyup", function (event){
+        if ( event.key === "Enter" )
+        {
+            search_call_list();
+        }
+    })
 }

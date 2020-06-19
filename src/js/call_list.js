@@ -8,6 +8,8 @@ async function initCallList()
     prioList = runXSLT([prioCalcXSL], callListsXML);
     var displayCallXSL = getXSLT("./xslt_scripts/xslt_call_list.xsl");
     runXSLT([displayCallXSL], prioList, "call_list_div");
+    openCallList();
+    addSearchBarListener();
     setMarkers();
 
 }

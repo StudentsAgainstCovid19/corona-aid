@@ -6,6 +6,7 @@
     width: 13%;
     z-index: 5;
     height: 100%;
+    left: -13%;
 }
 
 .call_list_header
@@ -35,7 +36,7 @@ h2{
     height: 1px;
 }
 
-.call_list_slide {
+.call_list_slidein {
     animation: slidein_call_div .7s ease-in-out forwards;
 }
 .call_list_slideout {
@@ -139,4 +140,29 @@ h2{
         background-color: inherit;
         filter: grayscale(100%);
     }
+}
+
+.no_call_items_found {
+    animation: no_call_items_found_frames 0.2s;
+    animation-iteration-count: 4;
+}
+
+@keyframes no_call_items_found_frames {
+    from {
+        background-color: red;
+        left: 16%;
+    }
+
+    25% {
+        left: 15.7%;
+    }
+
+    75% {
+        left: 16.3%
+    }
+
+    to {
+        left: 16%;
+    }
+
 }
