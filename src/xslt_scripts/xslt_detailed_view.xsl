@@ -153,14 +153,17 @@
 
         <xsl:variable name="prio_desc">Sehr gut</xsl:variable>
 
+     <!--   <p id="risk" class="text">Risikoeinschätzung:</p>
+        <div id="riskEvaluationImageDiv">
+            <img><xsl:attribute name="src">./assets/wellbeing_indicators/wellbeing_<xsl:value-of select="$prio_svg"/>.svg</xsl:attribute></img></div>
+        <div id="riskEvaluationTextDiv"><xsl:value-of select="$prio_desc"/></div>
+        <button id="preexisting_illness_button" onclick="showPreExistingIllnesses();" class="dialogButton btn-gray" >Vorerkrankungen</button> -->
         <p id="risk" class="text">Risikoeinschätzung:
-            <div id="riskEvaluationImageDiv"><img><xsl:attribute name="src">./assets/wellbeing_indicators/wellbeing_<xsl:value-of select="$prio_svg"/>.svg</xsl:attribute></img></div>
-            <div id="riskEvaluationTextDiv"><xsl:value-of select="$prio_desc"/></div>
-            <button id="preexisting_illness_button" onclick="showPreExistingIllnesses();" class="dialogButton btn-gray" >Vorerkrankungen</button>
-        </p>
+            <span id="riskEvaluationImageDiv1"><img><xsl:attribute name="src">./assets/wellbeing_indicators/wellbeing_<xsl:value-of select="$prio_svg"/>.svg</xsl:attribute></img></span>
+            <span id="riskEvaluationTextDiv1"><xsl:value-of select="$prio_desc"/></span></p>
+        <button id="preexisting_illness_button" onclick="showPreExistingIllnesses();" class="dialogButton btn-gray" >Vorerkrankungen</button>
 
-
-        <p class="text">Krankheitsverlauf</p>
+        <p id="courseOfDiseaseHeader" class="text">Krankheitsverlauf</p>
 
         <input type="checkbox" id="test_result_checkbox" name="test_result">
             <xsl:attribute name="checked"><xsl:value-of select="test/result"/></xsl:attribute>
@@ -193,7 +196,7 @@
         <button id="addSymptomButton" onclick="showSymptoms();">+</button>
 
 
-        <p class="text"> Verlauf (subj.) <xsl:apply-templates select="subjectiveWellbeings"/></p>
+        <p class="text"> Verlauf (subj.) <span><xsl:apply-templates select="subjectiveWellbeings"/></span></p>
         <xsl:variable name="lastWellbeing">2</xsl:variable>
 
         <xsl:variable name="pronoun">
@@ -209,20 +212,28 @@
             </input>
         </p>
 
-        <button class="dialogButton cancel_button">
+        <p class="text">Weitere Hinweise</p>
+        <textarea id="notes_area" rows="10" cols="30"/>
+
+
+
+        <div id="endButtonsDiv">
+            <button class="dialogButton cancel_button">
             <xsl:attribute name="onclick">closeDetailedView(<xsl:value-of select="id"/>);</xsl:attribute>
             Abbrechen
-        </button>
-        <button class="dialogButton submit_button">
-            <xsl:attribute name="onclick">submitDetailView(<xsl:value-of select="id"/>);</xsl:attribute>
-            Senden
-        </button>
-        <button class="dialogButton btn-gray">
-            <xsl:attribute name="onclick">failedCall(<xsl:value-of select="id"/>);</xsl:attribute>
-            Nicht abgenommen
-        </button>
+             </button>
+            <button class="dialogButton submit_button">
+                <xsl:attribute name="onclick">submitDetailView(<xsl:value-of select="id"/>);</xsl:attribute>
+                Senden
+            </button>
+            <button class="dialogButton btn-gray">
+                <xsl:attribute name="onclick">failedCall(<xsl:value-of select="id"/>);</xsl:attribute>
+                Nicht abgenommen
+            </button>
+        </div>
 
 
-        <textarea id="notes_area" rows="10" cols="30"/>
+
+
     </xsl:template>
 </xsl:stylesheet>

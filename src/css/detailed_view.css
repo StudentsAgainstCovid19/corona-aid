@@ -51,7 +51,11 @@
     background-color: white;
     color: black;
     box-shadow: black;
+    margin-left: 1em;
+}
 
+#addSymptomButton:hover{
+    box-shadow: 2px 2px gray;
 }
 
 .text{
@@ -61,15 +65,28 @@
     font-weight: 300;
 }
 
+#notes_area{
+    margin-left: 1em;
+    font-family: "HelveticaNeue-Light", "Helvetica Neue Light", "Helvetica Neue", Helvetica, Arial, "Lucida Grande", sans-serif;
+}
+
 #textInformationen{
     margin-top: 20px;
 }
 #test_result_checkbox{
     margin-left: 20px;;
+    position: relative;
+    top: -1em;
 }
 #test_result_label{
     font-family: "HelveticaNeue-Light", "Helvetica Neue Light", "Helvetica Neue", Helvetica, Arial, "Lucida Grande", sans-serif;
     font-weight: 300;
+    position:relative;
+    top: -1em;
+}
+#prescribe_test{
+    position: relative;
+    top: -1em;
 }
 
 
@@ -117,8 +134,7 @@
 }
 
 #preexisting_illness_button {
-    position: relative;
-    top: -7em;
+
 }
 
 .dialogButton {
@@ -126,7 +142,7 @@
     cursor: pointer;
     padding: 20px 20px;
     display: inline-block;
-    margin: 15px 30px;
+    margin: 1em 1em;
     text-transform: uppercase;
     letter-spacing: 1px;
     outline: none;
@@ -162,13 +178,18 @@
 }
 
 #symptomHeader{
-    margin-top: 40px;
     font-size: 1.5em;
+}
+#courseOfDiseaseHeader{
+    font-size: 1.5em;
+    margin-top: 2em;
 }
 
 #risk{
     font-family: "HelveticaNeue-Light", "Helvetica Neue Light", "Helvetica Neue", Helvetica, Arial, "Lucida Grande", sans-serif;
     font-weight: 300;
+    position:relative;
+    top: -2em;
 }
 #riskEvaluationImageDiv{
     font-family: "HelveticaNeue-Light", "Helvetica Neue Light", "Helvetica Neue", Helvetica, Arial, "Lucida Grande", sans-serif;
@@ -179,8 +200,22 @@
 }
 #riskEvaluationTextDiv{
     position: relative;
-    top: -8.5em;
-    right: -20em;
+    top: -5em;
+    right: -10em;
     font-family: "HelveticaNeue-Light", "Helvetica Neue Light", "Helvetica Neue", Helvetica, Arial, "Lucida Grande", sans-serif;
     font-weight: 300;
+}
+
+#riskEvaluationImageDiv1{
+    position: relative;
+    top: 2.5em;
+    right: -1em;
+}
+#riskEvaluationTextDiv1{
+    position: relative;
+    right: -2em;
+}
+
+#endButtonsDiv{
+    width: 120%;
 }
