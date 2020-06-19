@@ -42,7 +42,6 @@ async function search_call_list()
         }, 100);
     }
     window.location.hash = "#scroll_to";
-    console.log(window.location.hash);
 
 }
 

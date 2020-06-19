@@ -153,9 +153,7 @@ function submitSymptoms()
 
 function slideOpenRightBar()
 {
-    console.log("Hi");
     let detailedView = document.getElementById("infected_detailed_view_right");
-    console.log(detailedView.className);
     if (detailedView.className.indexOf("detailed_slideout") > -1 || detailedView.className === "floating_object") {
         detailedView.className = "floating_object detailed_slidein";
     }
@@ -163,9 +161,7 @@ function slideOpenRightBar()
 
 function closeRightBar()
 {
-    console.log("Out");
     let detailedView = document.getElementById("infected_detailed_view_right");
-    console.log(detailedView.className);
     if (detailedView.className.indexOf("detailed_slidein") > -1) {
         detailedView.className = "floating_object detailed_slideout";
     }
