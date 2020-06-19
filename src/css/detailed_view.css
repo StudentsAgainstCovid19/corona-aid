@@ -2,7 +2,7 @@
 #infected_detailed_view_right {
     width: 30%;
     height: 100%;
-    right: 0;
+    right: -30%;
     position: fixed;
     border-left-style: solid;
     border-left-width: 0.5em;
@@ -218,4 +218,33 @@
 
 #endButtonsDiv{
     width: 120%;
+}
+
+
+.detailed_slidein {
+    animation: slidein_detailed_div .7s ease-in-out forwards;
+}
+.detailed_slideout {
+    animation: slideout_detailed_div .7s ease-in-out forwards;
+}
+
+
+@keyframes slidein_detailed_div {
+    from {
+        right: -30%;
+    }
+
+    to {
+        right: 0;
+    }
+}
+
+@keyframes slideout_detailed_div {
+    from {
+        right: 0;
+    }
+
+    to {
+        right: -30%;
+    }
 }

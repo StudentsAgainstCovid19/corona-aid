@@ -17,4 +17,12 @@ function init()
     }
     initMap();
     initCallList();
+    connectWebSocket();
+}
+
+function connectWebSocket() {
+    realtimeWebSocket = new WebSocket(apiWebSocketUrl+"realtime/infected");
+    realtimeWebSocket.onmessage = function(data) {
+        console.log(data.data);
+    }
 }

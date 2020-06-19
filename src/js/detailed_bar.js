@@ -153,12 +153,22 @@ function submitSymptoms()
 
 function slideOpenRightBar()
 {
-
+    console.log("Hi");
+    let detailedView = document.getElementById("infected_detailed_view_right");
+    console.log(detailedView.className);
+    if (detailedView.className.indexOf("detailed_slideout") > -1 || detailedView.className === "floating_object") {
+        detailedView.className = "floating_object detailed_slidein";
+    }
 }
 
 function closeRightBar()
 {
-
+    console.log("Out");
+    let detailedView = document.getElementById("infected_detailed_view_right");
+    console.log(detailedView.className);
+    if (detailedView.className.indexOf("detailed_slidein") > -1) {
+        detailedView.className = "floating_object detailed_slideout";
+    }
 }
 
 function prescribeTest(id)
@@ -259,6 +269,6 @@ function submitDetailView(id)
 function clearRightBar()
 {
     detail_bar = 0;
-    document.getElementById("infected_detailed_view_right").innerHTML = "";
     closeRightBar();
+    document.getElementById("infected_detailed_view_right").innerHTML = "";
 }

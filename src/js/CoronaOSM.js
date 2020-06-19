@@ -6,6 +6,7 @@ function initMap() {
 
     map = new ol.Map({
         target: 'map_div',
+        controls: [],
         layers: [
             new ol.layer.Tile({
                 source: new ol.source.OSM()

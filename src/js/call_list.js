@@ -1,6 +1,7 @@
 
 async function initCallList()
 {
+    console.log(loadXMLDoc(apiUrl+"/infected?compress=true"));
     var callListsXML = loadXMLDoc("./example_xmls/call_list.xml");//(apiUrl+"/infected?compress=true");
     var prioCalcXSL = getXSLT("./xslt_scripts/xslt_calculate_prio.xsl");
 
