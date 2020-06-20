@@ -30,7 +30,7 @@
         <xsl:param name="value"/>
 
         <xsl:choose>
-            <xsl:when test="not($value)"><xsl:value-of select="$value"/></xsl:when>
+            <xsl:when test="not($value = '')"><xsl:value-of select="$value"/></xsl:when>
             <xsl:otherwise><xsl:value-of select="$default"/></xsl:otherwise>
         </xsl:choose>
     </xsl:template>
@@ -57,7 +57,7 @@
                         <xsl:value-of select="id"/>
                     </id>
                     <firstnames>
-                        <xsl:value-of select="forename"/><xsl:value-of select="$wellBeingNotNull"></xsl:value-of>
+                        <xsl:value-of select="forename"/>
                     </firstnames>
                     <lastname>
                         <xsl:value-of select="surname"/>
@@ -67,7 +67,7 @@
                     </age>
                     <calledbool>
                         <xsl:choose>
-                            <xsl:when test="lastUnsuccessfulCallToday and done = 'false'">1</xsl:when>
+                            <xsl:when test="not(lastUnsuccessfulCallToday = '')  and done = 'false'">1</xsl:when>
                             <xsl:otherwise>0</xsl:otherwise>
                         </xsl:choose>
                     </calledbool>
