@@ -88,7 +88,7 @@
         <xsl:variable name="width">
             <xsl:choose>
                 <xsl:when test="$amountValues = 0">0</xsl:when>
-                <xsl:otherwise><xsl:value-of select="$amountValues * 120 - 20"/></xsl:otherwise>
+                <xsl:otherwise><xsl:value-of select="$amountValues * 70 - 20"/></xsl:otherwise>
             </xsl:choose>
         </xsl:variable>
         <xsl:if test="$amountValues > 0">
@@ -101,6 +101,7 @@
 
             vor <xsl:value-of select="$daysBeforeText"/>
         </xsl:if>
+        <span>
         <svg id="wellbeing_indicator_history" height="100">
             <xsl:attribute name="width"><xsl:value-of select="$width"/></xsl:attribute>
 
@@ -111,34 +112,38 @@
                         <xsl:with-param name="wellbeing" select="wellbeing"/>
                     </xsl:call-template>
                 </xsl:variable>
-                <xsl:variable name="circle_x_pos" select="position()*120 - 70"/>
-                <circle cy="50" r="49" stroke-width="2px" stroke="black">
+                <xsl:variable name="circle_x_pos" select="position()*70 - 45"/>
+                <circle cy="50" r="20" stroke-width="2px" stroke="black">
                     <xsl:attribute name="fill"><xsl:value-of select="$color"/></xsl:attribute>
                     <xsl:attribute name="cx"><xsl:value-of select="$circle_x_pos"/></xsl:attribute>
                 </circle>
                 <xsl:if test="not(position() = $amountValues)">
-                    <xsl:variable name="line_x1_pos" select="position()*120 - 21"/>
-                    <xsl:variable name="line_x2_pos" select="position()*120 + 1"/>
+                    <xsl:variable name="line_x1_pos" select="position()*70 - 21"/>
+                    <xsl:variable name="line_x2_pos" select="position()*70 + 1"/>
 
-                    <line y1="50" y2="50" stroke="black" stroke-width="15">
+                    <line y1="50" y2="50" stroke="black" stroke-width="5">
                         <xsl:attribute name="x1"><xsl:value-of select="$line_x1_pos"/></xsl:attribute>
                         <xsl:attribute name="x2"><xsl:value-of select="$line_x2_pos"/></xsl:attribute>
                     </line>
                 </xsl:if>
             </xsl:for-each>
         </svg>
-
+        </span>
         <xsl:if test="$amountValues > 0">
-            gestern
+            <span>gestern</span>
         </xsl:if>
     </xsl:template>
 
 
     <xsl:template match="infected">
+
+        <div id="overallDiv">
+        <div id="informationDiv">
         <p id="textInformationen" class="text">Informationen zu <xsl:value-of select="lastname"/>, <xsl:value-of select="firstnames"/></p>
         <p class="text">Alter: <xsl:value-of select="age"/> Jahre</p>
         <p class="text">Tel.: <xsl:value-of select="phone"/></p>
         <p class="text"><xsl:value-of select="street"/><xsl:text> </xsl:text><xsl:value-of select="housenumber"/></p>
+        </div>
 
         <xsl:variable name="priority_value">
             <xsl:call-template name="prio_calculation">
@@ -153,22 +158,18 @@
 
         <xsl:variable name="prio_desc">Sehr gut</xsl:variable>
 
-     <!--   <p id="risk" class="text">Risikoeinschätzung:</p>
-        <div id="riskEvaluationImageDiv">
-            <img><xsl:attribute name="src">./assets/wellbeing_indicators/wellbeing_<xsl:value-of select="$prio_svg"/>.svg</xsl:attribute></img></div>
-        <div id="riskEvaluationTextDiv"><xsl:value-of select="$prio_desc"/></div>
-        <button id="preexisting_illness_button" onclick="showPreExistingIllnesses();" class="dialogButton btn-gray" >Vorerkrankungen</button> -->
-        <p id="risk" class="text">Risikoeinschätzung:
-            <span id="riskEvaluationImageDiv1"><img><xsl:attribute name="src">./assets/wellbeing_indicators/wellbeing_<xsl:value-of select="$prio_svg"/>.svg</xsl:attribute></img></span>
-            <span id="riskEvaluationTextDiv1"><xsl:value-of select="$prio_desc"/></span></p>
-        <button id="preexisting_illness_button" onclick="showPreExistingIllnesses();" class="dialogButton btn-gray" >Vorerkrankungen</button>
+        <div id="riskDiv">
+            <p id="riskParagraph">Risikoeinschätzung:
+                <span id="wellbeingImageSpan"><img id="wellbeingImage"><xsl:attribute name="src">./assets/wellbeing_indicators/wellbeing_<xsl:value-of select="$prio_svg"/>.svg</xsl:attribute></img></span>
+                <span id="riskEvaluationTextSpan"><xsl:value-of select="$prio_desc"/></span>
+                <span id="preexistingIllnessButtonSpan"><button id="preexisting_illness_button" onclick="showPreExistingIllnesses();" class="dialogButton btn-gray" >Vorerkrankungen</button></span>
+           </p>
+        </div>
+
 
         <p id="courseOfDiseaseHeader" class="text">Krankheitsverlauf</p>
-
-        <input type="checkbox" id="test_result_checkbox" name="test_result">
-            <xsl:attribute name="checked"><xsl:value-of select="test/result"/></xsl:attribute>
-        </input>
-
+            <div id="prescribeTestBorderdiv">
+        <div id="prescribeTestDiv" class="flex-container-testresult">
         <xsl:variable name="testDaysText">
             <xsl:call-template name="dayFormatting">
                 <xsl:with-param name="days" select="test/timeDue"/>
@@ -176,11 +177,16 @@
         </xsl:variable>
 
 
-        <label for="test_result" id="test_result_label">
-            Test <xsl:if test="test/result = 'true'">
-                positiv (vor <xsl:value-of select="$testDaysText"/>)
-            </xsl:if>
-        </label>
+            <input type="checkbox" id="test_result_checkbox" name="test_result" class="chk">
+                <xsl:attribute name="checked"><xsl:value-of select="test/result"/></xsl:attribute>
+            </input>
+
+            <label  id="test_result_label" for="test_result">
+                Test <xsl:if test="test/result = 'true'">
+                    positiv (vor <xsl:value-of select="$testDaysText"/>)
+                </xsl:if>
+            </label>
+
         <button id="prescribe_test" class="dialogButton btn-gray">
             <xsl:if test="test/prescribed = 0">
                 <xsl:attribute name="onclick">prescribeTest(<xsl:value-of select="id"/>);</xsl:attribute>
@@ -189,14 +195,15 @@
                 <xsl:attribute name="disabled">disabled;</xsl:attribute>
             </xsl:if>
             Test anordnen</button>
+        </div>
+            </div>
 
-
-        <p id="symptomHeader" class="text">Symptome</p>
+        <p id="symptomHeader" class="text">Symptome<button id="addSymptomButton" onclick="showSymptoms();">+</button></p>
         <div id="symptomsDiv" ></div>
-        <button id="addSymptomButton" onclick="showSymptoms();">+</button>
 
 
-        <p class="text"> Verlauf (subj.) <span><xsl:apply-templates select="subjectiveWellbeings"/></span></p>
+
+        <p id="wellbeingHistoryParagraph" class="text"> Verlauf (subj.) <div id="wellbeingHistoryDiv"><xsl:apply-templates select="subjectiveWellbeings"/></div></p>
         <xsl:variable name="lastWellbeing">2</xsl:variable>
 
         <xsl:variable name="pronoun">
@@ -206,32 +213,33 @@
             </xsl:choose>
         </xsl:variable>
 
+        <div id="wellbeingContentDiv" >
         <p class="text">Wie geht's <xsl:value-of select="$pronoun"/> heute?
             <input type="range" min="1" max="5" step="1" id="wellbeing_slider">
                 <xsl:attribute name="value"><xsl:value-of select="$lastWellbeing"/></xsl:attribute>
             </input>
         </p>
-
-        <p class="text">Weitere Hinweise</p>
+        </div>
+        <p class="text">Weitere Hinweise:</p>
         <textarea id="notes_area" rows="10" cols="30"/>
 
 
 
-        <div id="endButtonsDiv">
+        <div id="endButtonsDiv" class="flex-container-endbuttons">
             <button class="dialogButton cancel_button">
             <xsl:attribute name="onclick">closeDetailedView(<xsl:value-of select="id"/>);</xsl:attribute>
             Abbrechen
              </button>
-            <button class="dialogButton submit_button">
+            <button id="submitButton" class="dialogButton submit_button">
                 <xsl:attribute name="onclick">submitDetailView(<xsl:value-of select="id"/>);</xsl:attribute>
                 Senden
             </button>
-            <button class="dialogButton btn-gray">
+            <button id="notCalledButton" class="dialogButton btn-gray">
                 <xsl:attribute name="onclick">failedCall(<xsl:value-of select="id"/>);</xsl:attribute>
                 Nicht abgenommen
             </button>
         </div>
-
+        </div>
 
 
 
