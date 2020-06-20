@@ -1,7 +1,7 @@
-<svg xmlns="http://www.w3.org/2000/svg" width="130" height="10">
-    <line x1="0" y1="5" x2="26" y2="5" stroke="darkred" stroke-width="10"></line>
-    <line x1="26" y1="5" x2="52" y2="5" stroke="red" stroke-width="10"></line>
-    <line x1="52" y1="5" x2="78" y2="5" stroke="orange" stroke-width="10"></line>
-    <line x1="78" y1="5" x2="104" y2="5" stroke="lightgreen" stroke-width="10"></line>
-    <line x1="104" y1="5" x2="130" y2="5" stroke="darkgreen" stroke-width="10"></line>
+<svg xmlns="http://www.w3.org/2000/svg" width="240" height="10">
+    <line x1="0" y1="6" x2="46" y2="6" stroke="darkred" stroke-width="20"></line>
+    <line x1="46" y1="6" x2="92" y2="6" stroke="red" stroke-width="20"></line>
+    <line x1="92" y1="6" x2="148" y2="6" stroke="orange" stroke-width="20"></line>
+    <line x1="148" y1="6" x2="194" y2="6" stroke="lightgreen" stroke-width="20"></line>
+    <line x1="194" y1="6" x2="240" y2="6" stroke="darkgreen" stroke-width="20"></line>
 </svg>

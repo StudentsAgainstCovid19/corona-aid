@@ -26,12 +26,16 @@
                 </xsl:choose>
             </xsl:variable>
             <p>
-                <input type="checkbox" class="symptom_checkbox">
-                    <xsl:attribute name="checked"><xsl:value-of select="true"/></xsl:attribute>
-                    <xsl:attribute name="id">symp_<xsl:value-of select="id"/></xsl:attribute>
-                    <xsl:attribute name="onclick">symptomsChanged(<xsl:value-of select="id"/>);</xsl:attribute>
-                </input>
-                <label><xsl:value-of select="name"/>
+
+                <label>
+                    <input type="checkbox" class="symptom_checkbox">
+                        <xsl:attribute name="checked"><xsl:value-of select="true"/></xsl:attribute>
+                        <xsl:attribute name="id">symp_<xsl:value-of select="id"/></xsl:attribute>
+                        <xsl:attribute name="onclick">symptomsChanged(<xsl:value-of select="id"/>);</xsl:attribute>
+                    </input>
+                    <xsl:value-of select="name"/>
+                </label>
+                <label>
                     <span class="sinceDays"><xsl:value-of select="$sinceDaysText"/></span>
                 </label>
             </p>
