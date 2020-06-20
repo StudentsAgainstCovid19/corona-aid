@@ -16,13 +16,31 @@ function init()
             parseNodeValueFromXML(items[i], "configValue");
     }
     initMap();
-    initCallList();
+    calculatePriorities();
     connectWebSocket();
 }
 
 function connectWebSocket() {
     realtimeWebSocket = new WebSocket(apiWebSocketUrl+"realtime/infected");
-    realtimeWebSocket.onmessage = function(data) {
-        console.log(data.data);
+    realtimeWebSocket.onmessage = function(updateData) {
+        realtimeUpdate( updateData );
     }
+}
+
+function realtimeUpdate( updateData )
+{
+    console.log(updateData);
+
+    let serializer = new XMLSerializer();
+    let parser = new DOMParser();
+    let xmlDoc = parser.parseFromString("<Container></Container>", "application/xml");
+    xmlDoc.children[0].innerHTML = serializer.serializeToString(updateData) +
+                                    serializer.serializeToString(prioList);
+
+    let updateXSL = getXSLT("./xslt_scripts/xslt_realtime_update.xsl");
+
+    prioList = runXSLT(updateXSL, xmlDoc);
+    // TODO: prevent reloading of whole map but instead update just one marker
+    initCallList(false);
+
 }

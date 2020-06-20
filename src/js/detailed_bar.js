@@ -19,12 +19,12 @@ function setDetailedView(xml_doc)
         detailed_view.innerHTML = "";
         var displayDetailed = getXSLT("./xslt_scripts/xslt_detailed_view.xsl");
 
-        runXSLT([displayDetailed], xml_doc, "infected_detailed_view_right");
+        runXSLT(displayDetailed, xml_doc, "infected_detailed_view_right");
 
         var symptomsXSL = getXSLT("./xslt_scripts/xslt_symptom_div.xsl");
         var symptoms = xml_doc.getElementsByTagName("List")[0];
 
-        runXSLT([symptomsXSL], symptoms, "symptomsDiv");
+        runXSLT(symptomsXSL, symptoms, "symptomsDiv");
 
         var symp_checkboxes = document.getElementById("symptomsDiv").getElementsByClassName("symptom_checkbox");
         for ( var i = 0; i < symp_checkboxes.length; i++)
@@ -57,7 +57,7 @@ function showSymptoms ()
     if (!detailedXML) return;
     symptomsXML = loadXMLDoc(apiUrl+"symptom");
     var symptomsXSL = getXSLT("./xslt_scripts/xslt_edit_symptoms.xsl");
-    runXSLT([symptomsXSL], symptomsXML, "popup_window");
+    runXSLT(symptomsXSL, symptomsXML, "popup_window");
 
     editSymptomsList = symptomsList;
 
@@ -109,7 +109,7 @@ function showPreExistingIllnesses()
     if (!detailedXML) return;
     var illnessXSL = getXSLT("./xslt_scripts/xslt_show_illnesses.xsl");
 
-    runXSLT([illnessXSL], detailedXML, "popup_window");
+    runXSLT(illnessXSL, detailedXML, "popup_window");
     displayPopUp();
 }
 
@@ -146,7 +146,7 @@ function submitSymptoms()
 
     // reload symptoms_div, then close popup
     var symptomXSL = getXSLT("./xslt_scripts/xslt_symptom_div.xsl");
-    runXSLT([symptomXSL], parser.parseFromString(xml_string, "application/xml"), "symptomsDiv");
+    runXSLT(symptomXSL, parser.parseFromString(xml_string, "application/xml"), "symptomsDiv");
 
     hidePopUp();
 }

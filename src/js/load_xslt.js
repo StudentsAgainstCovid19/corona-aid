@@ -32,7 +32,7 @@ function loadXMLDoc(filename, mimeType="application/xml")
 
 
 // run an xslt script using an xml and set result as content of dom object with id
-function runXSLT(xsl_list, xml, id=null)
+function runXSLT(xsl_file, xml, id=null)
 {
     // code for IE
     if (window.ActiveXObject || xhttp.responseType == "msxml-document")
@@ -44,9 +44,7 @@ function runXSLT(xsl_list, xml, id=null)
     else if (document.implementation && document.implementation.createDocument)
     {
         xsltProcessor = new XSLTProcessor();
-        xsl_list.forEach(function (xsl) {
-            xsltProcessor.importStylesheet(xsl);
-        });
+        xsltProcessor.importStylesheet(xsl_file);
         if (id != null)
         {
             resultDocument = xsltProcessor.transformToFragment(xml, document);
