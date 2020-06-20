@@ -34,6 +34,7 @@ async function search_call_list()
         setTimeout(function () {
             childDiv.className += " found_call_items";
         }, 100);
+        window.location.hash = "#scroll_to";
     } else {
         let searchbar = document.getElementById("search_bar");
         searchbar.className = searchbar.className.replace(" no_call_items_found","");
@@ -41,7 +42,6 @@ async function search_call_list()
             searchbar.className += " no_call_items_found";
         }, 100);
     }
-    window.location.hash = "#scroll_to";
 
 }
 

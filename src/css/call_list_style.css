@@ -6,7 +6,7 @@
     width: 13%;
     z-index: 5;
     height: 100%;
-    left: -13%;
+    left: 0;
 }
 
 .call_list_header
@@ -46,21 +46,21 @@ h2{
 
 @keyframes slidein_call_div {
     from {
-        left: -13%;
+        transform: translate(-100%, 0);
     }
 
     to {
-        left: 0;
+        transform: translate(0%, 0);
     }
 }
 
 @keyframes slideout_call_div {
     from {
-        left: 0;
+        transform: translate(0%, 0);
     }
 
     to {
-        left: -13%;
+        transform: translate(-100%, 0);
     }
 }
 
@@ -144,7 +144,7 @@ h2{
 
 .no_call_items_found {
     animation: no_call_items_found_frames 0.2s;
-    animation-iteration-count: 4;
+    animation-iteration-count: 5;
 }
 
 @keyframes no_call_items_found_frames {
@@ -154,15 +154,15 @@ h2{
     }
 
     25% {
-        left: 15.7%;
+        transform: translate(-0.5%, 0);
     }
 
     75% {
-        left: 16.3%
+        transform: translate(1%, 0);
     }
 
     to {
-        left: 16%;
+        transform: translate(-0.5%, 0);
     }
 
 }

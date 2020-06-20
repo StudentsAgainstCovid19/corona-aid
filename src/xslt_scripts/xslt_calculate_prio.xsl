@@ -30,7 +30,7 @@
         <xsl:param name="value"/>
 
         <xsl:choose>
-            <xsl:when test="$value"><xsl:value-of select="$value"/></xsl:when>
+            <xsl:when test="not($value)"><xsl:value-of select="$value"/></xsl:when>
             <xsl:otherwise><xsl:value-of select="$default"/></xsl:otherwise>
         </xsl:choose>
     </xsl:template>
@@ -47,7 +47,7 @@
                 <xsl:variable name="wellBeingNotNull">
                     <xsl:call-template name="handleNullability">
                         <xsl:with-param name="value" select="personalFeeling"/>
-                        <xsl:with-param name="default" select="4"/>
+                        <xsl:with-param name="default" select="1"/>
                     </xsl:call-template>
                 </xsl:variable>
 
@@ -57,22 +57,22 @@
                         <xsl:value-of select="id"/>
                     </id>
                     <firstnames>
-                        <xsl:value-of select="forename"/>
+                        <xsl:value-of select="forename"/><xsl:value-of select="$wellBeingNotNull"></xsl:value-of>
                     </firstnames>
                     <lastname>
                         <xsl:value-of select="surname"/>
                     </lastname>
                     <age>
-                        <xsl:value-of select="5"/>
+                        <xsl:value-of select="age"/>
                     </age>
                     <calledbool>
                         <xsl:choose>
-                            <xsl:when test="sumSymptoms">false</xsl:when>
-                            <xsl:otherwise>true</xsl:otherwise>
+                            <xsl:when test="lastUnsuccessfulCallToday and done = 'false'">1</xsl:when>
+                            <xsl:otherwise>0</xsl:otherwise>
                         </xsl:choose>
                     </calledbool>
                     <lastcall>
-                        <xsl:value-of select="timestampCallToday"/>
+                        <xsl:value-of select="lastUnsuccessfulCallTodayString"/>
                     </lastcall>
                     <phone>
                         <xsl:value-of select="phone"/>
@@ -87,7 +87,10 @@
                         <xsl:value-of select="lon"/>
                     </lon>
                     <done>
-                        <xsl:value-of select="0"/>
+                        <xsl:choose>
+                            <xsl:when test="done = 'true'">1</xsl:when>
+                            <xsl:otherwise>0</xsl:otherwise>
+                        </xsl:choose>
                     </done>
 
 
@@ -95,7 +98,7 @@
 
                     <priority>
                         <xsl:call-template name="prio_calculation">
-                            <xsl:with-param name="age" select="5"/>
+                            <xsl:with-param name="age" select="age"/>
                             <xsl:with-param name="subjectiveWellbeing" select="$wellBeingNotNull"/>
                             <xsl:with-param name="preExIllnesses" select="sumInitialDiseases"/>
                             <xsl:with-param name="sumSymptoms" select="$sumSymptomsNotNull"/>
