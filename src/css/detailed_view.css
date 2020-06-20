@@ -1,46 +1,138 @@
 
 #infected_detailed_view_right {
-    width: 20%;
+    width: 30%;
     height: 100%;
     right: 0;
     position: fixed;
+    border-left-style: solid;
+    border-left-width: 0.5em;
+    border-left-color: darkgray;
+    overflow:auto;
 }
 
+#overallDiv{
+    width: 100%
+}
+
+.checkbox{
+    width: 22px;
+    height: 18px;
+    background-color: #eee;
+}
+
+
+
 .alreadyPrescribed {
-    color: grey;
+    margin-left: 20px;
+    color: black;
+    font-family: "HelveticaNeue-Light", "Helvetica Neue Light", "Helvetica Neue", Helvetica, Arial, "Lucida Grande", sans-serif;
+    font-weight: 300;
+
+}
+
+.notPrescribed:hover {
+    background: darkgray;
 }
 
 .notPrescribed {
-    color: green;
+    font-size: inherit;
+    background: gray;
+    cursor: pointer;
+    padding: 20px 20px;
+    display: inline-block;
+    margin: 15px 30px;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    outline: none;
+    position: relative;
+    -webkit-transition: all 0.3s;
+    -moz-transition: all 0.3s;
+    transition: all 0.3s;
+    border-radius: 50px;
+    border: 3px solid #fff;
+    color: #fff;
+    overflow: hidden;
+    font-family: "HelveticaNeue-Light", "Helvetica Neue Light", "Helvetica Neue", Helvetica, Arial, "Lucida Grande", sans-serif;
+    font-weight: 300;
 }
 
 #addSymptomButton {
+    position: relative;
+    width: 30px;
+    height: 30px;
+    top: -2px;
     border-radius: 50%;
-    outline: none;
+    border-style: solid;
+    border-color: slategray;
+    background-color: slategray;
+    color: white;
+    box-shadow: 2px 2px black;
+    margin-left: 1em;
+    font-family: "HelveticaNeue-Light", "Helvetica Neue Light", "Helvetica Neue", Helvetica, Arial, "Lucida Grande", sans-serif;
+    font-size: 15px;
+}
+
+#addSymptomButton:hover{
+    box-shadow: 4px 4px gray;
     background-color: white;
+    border-color: slategray;
+    color: slategray;
+}
+
+.text{
+    margin-left: 1em;
     color: black;
-    box-shadow: black;
-
+    font-family: "HelveticaNeue-Light", "Helvetica Neue Light", "Helvetica Neue", Helvetica, Arial, "Lucida Grande", sans-serif;
+    font-weight: 300;
 }
 
-.symptom_checkbox {
+#notes_area{
+    margin-left: 1em;
+    font-family: "HelveticaNeue-Light", "Helvetica Neue Light", "Helvetica Neue", Helvetica, Arial, "Lucida Grande", sans-serif;
+}
+
+#textInformationen{
+    margin-top: 20px;
+}
+#test_result_checkbox{
+}
+#test_result_label1{
+    font-family: "HelveticaNeue-Light", "Helvetica Neue Light", "Helvetica Neue", Helvetica, Arial, "Lucida Grande", sans-serif;
+    font-weight: 300;
+
 
 }
+#prescribe_test{
+    position: relative;
+    right: -1em;
+}
+
+
 
 .sinceDays {
-    color: #4488ff;
+    color: #737373;
 }
 
 #symptomsDiv {
-    background-color: white;
+    background-color: lightgrey;
     color: black;
+    font-family: "HelveticaNeue-Light", "Helvetica Neue Light", "Helvetica Neue", Helvetica, Arial, "Lucida Grande", sans-serif;
+    font-weight: 300;
+    padding-left: 1em;
+
 }
 
 #wellbeing_indicator_history {
+
+}
+
+#wellbeingHistoryDiv{
+    margin-left: 1em;
 }
 
 .cancel_button {
     background-color: red;
+    border-color: black;
 }
 .cancel_button:hover {
     color: red;
@@ -49,39 +141,224 @@
 }
 
 .submit_button {
-    background-color: deepskyblue;
+    background-color: #00cc00;
+    border-color: black;
 }
 .submit_button:hover {
-    color: deepskyblue;
+    color: #00cc00;
     background-color: white;
-    border-color: deepskyblue;
+    border-color: #00cc00;
 }
 
-#preexisting_illness_button {
 
+
+#preexistingIllnessButtonSpan{
+    position: relative;
+    right: -1em;
 }
 
 .dialogButton {
-    border-radius: 5px;
-    border-color: white;
-    color: white;
+    font-size: inherit;
+    cursor: pointer;
+    padding: 20px 20px;
+    display: inline;
+    margin: 1em 1em;
+    text-transform: uppercase;
+    letter-spacing: 1px;
     outline: none;
+    position: relative;
+    -webkit-transition: all 0.3s;
+    -moz-transition: all 0.3s;
+    transition: all 0.3s;
+    border-radius: 50px;
+    color: #fff;
+    overflow: hidden;
+    font-family: "HelveticaNeue-Light", "Helvetica Neue Light", "Helvetica Neue", Helvetica, Arial, "Lucida Grande", sans-serif;
+    font-weight: 300;
 }
 
-.dialogButton :hover {
+.btn-gray:hover{
+    background: darkgray;
 }
 
-
-
-#wellbeing_slider:focus {
-    outline: none;
+.btn-gray{
+    border: 3px solid gray;
+    background: gray;
 }
 
+#wellbeing_slider{
+    width: 240px;
+}
 #wellbeing_slider::-webkit-slider-runnable-track {
-    width: 200px;
+    width: 100%;
     height: 8.4px;
     cursor: pointer;
     box-shadow: 1px 1px 1px #000000, 0px 0px 1px #0d0d0d;
     background: url('../assets/icons/wellbeing_slider.svg');
 
 }
+#wellbeing_slider::-moz-range-track {
+    width: 100%;
+    height: 8.4px;
+    cursor: pointer;
+    box-shadow: 1px 1px 1px #000000, 0px 0px 1px #0d0d0d;
+    background: url('../assets/icons/wellbeing_slider.svg');
+
+}
+
+#wellbeing_slider::-moz-range-thumb{
+    -webkit-appearance: none;
+    border: 1px solid #000000;
+    height: 36px;
+    width: 16px;
+    border-radius: 3px;
+    background: #ffffff;
+    cursor: pointer;
+    margin-top: -14px; /* You need to specify a margin in Chrome, but in Firefox and IE it is automatic */
+    box-shadow: 1px 1px 1px #000000, 0px 0px 1px #0d0d0d; /* Add cool effects to your sliders! */
+}
+
+#wellbeing_slider::-webkit-slider-thumb{
+    w-webkit-appearance: none;
+    border: 1px solid #000000;
+    height: 36px;
+    width: 16px;
+    border-radius: 3px;
+    background: #ffffff;
+    cursor: pointer;
+    margin-top: -14px; /* You need to specify a margin in Chrome, but in Firefox and IE it is automatic */
+    box-shadow: 1px 1px 1px #000000, 0px 0px 1px #0d0d0d; /* Add cool effects to your sliders! */
+}
+
+#wellbeing_slider::-moz-range-thumb:hover{
+
+}
+
+#wellbeing_slider::-webkit-slider-thumb:hover{
+
+}
+
+
+#symptomHeader{
+    font-size: 1.5em;
+}
+#courseOfDiseaseHeader{
+    font-size: 1.5em;
+}
+
+#riskParagraph{
+    font-family: "HelveticaNeue-Light", "Helvetica Neue Light", "Helvetica Neue", Helvetica, Arial, "Lucida Grande", sans-serif;
+    font-weight: 300;
+    position:relative;
+    padding-left: 1em;
+
+}
+
+#riskDiv{
+    border-bottom-style: solid;
+    border-bottom-color: lightgray;
+
+}
+
+#riskEvaluationTextSpan{
+    position: relative;
+    right: -1em;
+}
+
+
+
+#informationDiv{
+    border-bottom-style: solid;
+    border-bottom-color: lightgray;
+}
+
+#prescribeTestDiv{
+
+}
+
+#wellbeingContentDiv{
+    width:100%;
+    border-bottom-style: solid;
+    border-bottom-color: lightgray;
+}
+
+#wellbeingImageSpan{
+    position: relative;
+    top: 1.3em;
+    right: -0.5em;
+}
+
+#wellbeingImage{
+    hidth: 3em;
+    width: 3em;
+}
+
+#wellbeingHistoryParagraph{
+    position: relative;
+    top: 1em;
+}
+
+#submitButton{
+    margin-left: 0;
+}
+
+#notCalledButton{
+    margin-left: 0;
+    margin-right: 0;
+}
+
+.flex-container-testresult{
+    display: flex;
+    width: 100%;
+    flex-direction: row;
+    padding-left: 2em;
+    justify-content: start;
+    align-items: center;
+}
+
+.flex-container-endbuttons{
+    display: flex;
+    width: 100%;
+    flex-direction: row;
+    justify-content: space-around;
+    align-items: center;
+}
+
+
+#prescribeTestBorderdiv{
+    border-bottom-style: solid;
+    border-bottom-color: lightgray;
+}
+
+input[type=range] {
+    -webkit-appearance: none; /* Hides the slider so that custom slider can be made */
+    width: 100%; /* Specific width is required for Firefox. */
+    background: transparent; /* Otherwise white in Chrome */
+}
+
+input[type=range]::-webkit-slider-thumb {
+    -webkit-appearance: none;
+}
+
+input[type=range]:focus {
+    outline: none; /* Removes the blue border. You should probably do some kind of focus styling for accessibility reasons though. */
+}
+
+input[type=range]::-ms-track {
+    width: 100%;
+    cursor: pointer;
+
+    /* Hides the slider so custom styles can be added */
+    background: transparent;
+    border-color: transparent;
+    color: transparent;
+}
+
+
+
+
+
+
+
+
+

@@ -2,31 +2,56 @@
 {
     position: fixed;
     overflow: auto;
-    background-color: #4488ff;
-    width: 12%;
+    background-color: white;
+    width: 13%;
     z-index: 5;
     height: 100%;
 }
 
+.call_list_header
+{
+    margin: 5px 10px 5px 10px;
+    justify-content: center;
+    border-bottom: 1px black;
+}
+
+.call_list_content{
+    flex-direction: column;
+    margin-top: 10px;
+}
+
+h1{
+    font-size:medium;
+}
+
+h2{
+    font-size: small;
+    margin-bottom: -0.1px;
+    margin-top: 8px;
+}
+
+.seperator{
+    background-color: black;
+    height: 1px;
+}
+
 .call_list_slide {
-    animation-name: slidein_call_div;
-    animation-duration: 1s;
+    animation: slidein_call_div .7s ease-in-out forwards;
 }
 .call_list_slideout {
-    animation-name: slideout_call_div;
-    animation-duration: 1s;
+    animation: slideout_call_div .7s ease-in-out forwards;
 }
+
 
 @keyframes slidein_call_div {
     from {
-        left: -12%;
+        left: -13%;
     }
 
     to {
         left: 0;
     }
 }
-
 
 @keyframes slideout_call_div {
     from {
@@ -34,11 +59,9 @@
     }
 
     to {
-        left: -12%;
+        left: -13%;
     }
 }
-
-
 
 .wellbeing_imagespan {
     position: relative;
@@ -53,15 +76,24 @@
     width: 20px;
 }
 
-.call_box {
+.call_box  {
     color: black;
     border-style: solid;
-    background-color: white;
-    border-width: 3px;
-    border-radius: 10px;
+    background-color: #f2f2f2;
+    border-width: 0 0 0 5px;
     margin: 2px;
-    padding: 5px;
+    padding: 5px 5px 8px 5px;
 }
+
+.call_list_element{
+    border-top: 1px black;
+    margin: 5px 0 5px 0;
+}
+
+.call_list_element :hover {
+    background-color: #e6e6e6;
+}
+
 .lowprio {
     border-color: green;
 }
@@ -88,7 +120,3 @@
     filter: grayscale(100%);
 }
 
-#prescribe_test:hover
-{
-    color: white;
-}
