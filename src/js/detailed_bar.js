@@ -19,12 +19,12 @@ function setDetailedView(xml_doc)
         detailed_view.innerHTML = "";
         var displayDetailed = getXSLT("./xslt_scripts/xslt_detailed_view.xsl");
 
-        runXSLT([displayDetailed], xml_doc, "infected_detailed_view_right");
+        runXSLT(displayDetailed, xml_doc, "infected_detailed_view_right");
 
         var symptomsXSL = getXSLT("./xslt_scripts/xslt_symptom_div.xsl");
         var symptoms = xml_doc.getElementsByTagName("List")[0];
 
-        runXSLT([symptomsXSL], symptoms, "symptomsDiv");
+        runXSLT(symptomsXSL, symptoms, "symptomsDiv");
 
         var symp_checkboxes = document.getElementById("symptomsDiv").getElementsByClassName("symptom_checkbox");
         for ( var i = 0; i < symp_checkboxes.length; i++)
@@ -57,7 +57,7 @@ function showSymptoms ()
     if (!detailedXML) return;
     symptomsXML = loadXMLDoc(apiUrl+"symptom");
     var symptomsXSL = getXSLT("./xslt_scripts/xslt_edit_symptoms.xsl");
-    runXSLT([symptomsXSL], symptomsXML, "popup_window");
+    runXSLT(symptomsXSL, symptomsXML, "popup_window");
 
     editSymptomsList = symptomsList;
 
@@ -109,7 +109,7 @@ function showPreExistingIllnesses()
     if (!detailedXML) return;
     var illnessXSL = getXSLT("./xslt_scripts/xslt_show_illnesses.xsl");
 
-    runXSLT([illnessXSL], detailedXML, "popup_window");
+    runXSLT(illnessXSL, detailedXML, "popup_window");
     displayPopUp();
 }
 
@@ -146,19 +146,25 @@ function submitSymptoms()
 
     // reload symptoms_div, then close popup
     var symptomXSL = getXSLT("./xslt_scripts/xslt_symptom_div.xsl");
-    runXSLT([symptomXSL], parser.parseFromString(xml_string, "application/xml"), "symptomsDiv");
+    runXSLT(symptomXSL, parser.parseFromString(xml_string, "application/xml"), "symptomsDiv");
 
     hidePopUp();
 }
 
 function slideOpenRightBar()
 {
-
+    let detailedView = document.getElementById("infected_detailed_view_right");
+    if (detailedView.className.indexOf("detailed_slideout") > -1 || detailedView.className === "floating_object") {
+        detailedView.className = "floating_object detailed_slidein";
+    }
 }
 
 function closeRightBar()
 {
-
+    let detailedView = document.getElementById("infected_detailed_view_right");
+    if (detailedView.className.indexOf("detailed_slidein") > -1) {
+        detailedView.className = "floating_object detailed_slideout";
+    }
 }
 
 function prescribeTest(id)
@@ -259,6 +265,6 @@ function submitDetailView(id)
 function clearRightBar()
 {
     detail_bar = 0;
-    document.getElementById("infected_detailed_view_right").innerHTML = "";
     closeRightBar();
+    document.getElementById("infected_detailed_view_right").innerHTML = "";
 }

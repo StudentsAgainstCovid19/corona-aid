@@ -24,4 +24,7 @@ var confirmConfig = [null, null, null]; // list for generic confirm popup.
                                         // those callbacks
 
 
+var realtimeWebSocket;
+
 var apiUrl = "https://dev.api.sac19.jatsqi.com/";
+var apiWebSocketUrl = "wss://dev.api.sac19.jatsqi.com/";

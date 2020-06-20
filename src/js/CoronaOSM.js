@@ -6,6 +6,7 @@ function initMap() {
 
     map = new ol.Map({
         target: 'map_div',
+        controls: [],
         layers: [
             new ol.layer.Tile({
                 source: new ol.source.OSM()
@@ -49,7 +50,7 @@ var piechart_cache = {}; // map to cache openlayer-icons, to prevent flickering
 async function setMarkers()
 {
     var gpxXSL = getXSLT("./xslt_scripts/xslt_prio_gpx.xsl");
-    var gpxData = runXSLT([gpxXSL], prioList);
+    var gpxData = runXSLT(gpxXSL, prioList);
 
     var styles = getStyles();
 
@@ -250,7 +251,7 @@ function createPieChart(size, amountDone, amountCalled) {
     var xmlParser = new DOMParser();
     var xmlDoc = xmlParser.parseFromString(xml_string, "application/xml");
     var pieChartXSL = getXSLT("./xslt_scripts/xslt_pie_chart_gen.xsl");
-    var chart = runXSLT([pieChartXSL], xmlDoc);
+    var chart = runXSLT(pieChartXSL, xmlDoc);
 
     var serializer = new XMLSerializer();
     return new ol.style.Icon({

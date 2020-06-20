@@ -6,6 +6,7 @@
     width: 13%;
     z-index: 5;
     height: 100%;
+    left: 0;
 }
 
 .call_list_header
@@ -35,7 +36,7 @@ h2{
     height: 1px;
 }
 
-.call_list_slide {
+.call_list_slidein {
     animation: slidein_call_div .7s ease-in-out forwards;
 }
 .call_list_slideout {
@@ -45,21 +46,21 @@ h2{
 
 @keyframes slidein_call_div {
     from {
-        left: -13%;
+        transform: translate(-100%, 0);
     }
 
     to {
-        left: 0;
+        transform: translate(0%, 0);
     }
 }
 
 @keyframes slideout_call_div {
     from {
-        left: 0;
+        transform: translate(0%, 0);
     }
 
     to {
-        left: -13%;
+        transform: translate(-100%, 0);
     }
 }
 
@@ -120,3 +121,48 @@ h2{
     filter: grayscale(100%);
 }
 
+.found_call_items {
+    animation: found_call_item_frames 1.5s;
+}
+
+@keyframes found_call_item_frames {
+    from {
+        background-color: inherit;
+        filter: grayscale(100%);
+    }
+
+    50% {
+        background-color: lightgreen;
+        filter: grayscale(0);
+    }
+
+    to {
+        background-color: inherit;
+        filter: grayscale(100%);
+    }
+}
+
+.no_call_items_found {
+    animation: no_call_items_found_frames 0.2s;
+    animation-iteration-count: 5;
+}
+
+@keyframes no_call_items_found_frames {
+    from {
+        background-color: red;
+        left: 16%;
+    }
+
+    25% {
+        transform: translate(-0.5%, 0);
+    }
+
+    75% {
+        transform: translate(1%, 0);
+    }
+
+    to {
+        transform: translate(-0.5%, 0);
+    }
+
+}

@@ -2,7 +2,7 @@
 #infected_detailed_view_right {
     width: 30%;
     height: 100%;
-    right: 0;
+    left: 100%;
     position: fixed;
     border-left-style: solid;
     border-left-width: 0.5em;
@@ -302,6 +302,39 @@
     margin-left: 0;
 }
 
+#endButtonsDiv{
+    width: 120%;
+}
+
+
+.detailed_slidein {
+    animation: slidein_detailed_div .7s ease-in-out forwards;
+}
+.detailed_slideout {
+    animation: slideout_detailed_div .7s ease-in-out forwards;
+}
+
+
+@keyframes slidein_detailed_div {
+    from {
+        transform: translate(0, 0);
+    }
+
+    to {
+        transform: translate(-100%, 0);
+    }
+}
+
+@keyframes slideout_detailed_div {
+    from {
+        transform: translate(-100%, 0);
+    }
+
+    to {
+        transform: translate(0, 0);
+    }
+}
+
 #notCalledButton{
     margin-left: 0;
     margin-right: 0;
@@ -353,12 +386,3 @@ input[type=range]::-ms-track {
     border-color: transparent;
     color: transparent;
 }
-
-
-
-
-
-
-
-
-
