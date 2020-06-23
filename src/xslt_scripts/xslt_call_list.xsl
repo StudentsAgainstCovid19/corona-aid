@@ -87,12 +87,10 @@
                             </span>
                             <h2>Tel.:</h2>
                             <span><xsl:value-of select="phone"/></span>
-                            <xsl:choose>
-                                <xsl:when test="$div_classtag = 'calledAlready'">
-                                    <h2>Letzter Versuch: </h2>
-                                    <span>Heute, <xsl:value-of select="lastcall"/> Uhr</span>
-                                </xsl:when>
-                            </xsl:choose>
+                            <xsl:if test="$div_classtag = 'calledAlready'">
+                                <h2>Letzter Versuch: </h2>
+                                <span>Heute, <xsl:value-of select="lastcall"/> Uhr</span>
+                            </xsl:if>
                         </div>
                 </div>
 
