@@ -275,14 +275,14 @@
         </xsl:variable>
 
 
-            <input type="checkbox" id="test_result_checkbox" name="test_result" class="chk">
+            <input type="checkbox" id="test_result_checkbox" name="test_result_checkbox" class="chk">
                 <xsl:attribute name="disabled"/>
                 <xsl:if test="/InfectedDto/tests/tests[$lastTestDoneIndex]/result = 'true'">
                     <xsl:attribute name="checked"/>
                 </xsl:if>
             </input>
 
-            <label  id="test_result_label" for="test_result">
+            <label  id="test_result_label" for="test_result_checkbox">
                 Test <xsl:choose>
                 <xsl:when test="$lastTestDoneIndex = -1">noch nicht stattgefunden</xsl:when>
                 <xsl:when test="/InfectedDto/tests/tests[$lastTestDoneIndex]/result = 'true'">

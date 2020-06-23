@@ -25,13 +25,15 @@
                     <xsl:otherwise> seit heute</xsl:otherwise>
                 </xsl:choose>
             </xsl:variable>
-            <p>
-                <label>
+            <p id="symptomsTable">
                     <input type="checkbox" class="symptom_checkbox">
                         <xsl:attribute name="checked">true</xsl:attribute>
+
                         <xsl:attribute name="id">symp_<xsl:value-of select="id"/></xsl:attribute>
                         <xsl:attribute name="onclick">symptomsChanged(<xsl:value-of select="id"/>);</xsl:attribute>
                     </input>
+                <label>
+                    <xsl:attribute name="for">symp_<xsl:value-of select="id"/></xsl:attribute>
                     <xsl:value-of select="name"/>
                 </label>
                 <label>

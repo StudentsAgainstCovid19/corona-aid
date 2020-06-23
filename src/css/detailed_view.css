@@ -7,7 +7,7 @@
     border-left-style: solid;
     border-left-width: 0.5em;
     border-left-color: darkgray;
-    overflow:auto;
+    overflow: hidden;
 }
 
 #overallDiv{
@@ -95,9 +95,8 @@
 #textInformationen{
     margin-top: 20px;
 }
-#test_result_checkbox{
-}
-#test_result_label1{
+
+#test_result_label{
     font-family: "HelveticaNeue-Light", "Helvetica Neue Light", "Helvetica Neue", Helvetica, Arial, "Lucida Grande", sans-serif;
     font-weight: 300;
 
@@ -106,6 +105,7 @@
 #prescribe_test{
     position: relative;
     right: -1em;
+    top: -3px;
 }
 
 
@@ -132,12 +132,15 @@
 
 }
 
-#wellbeing_indicator_history {
 
-}
 
 #wellbeingHistoryDiv{
     margin-left: 1em;
+    display: flex;
+    width: 100%;
+    flex-direction: row;
+    justify-content: start;
+    align-items: center;
 }
 
 .cancel_button {
@@ -170,13 +173,15 @@
 .dialogButton {
     font-size: inherit;
     cursor: pointer;
-    padding: 20px 20px;
+    padding: 10px 10px;
     display: inline;
     margin: 1em 1em;
     text-transform: uppercase;
     letter-spacing: 1px;
     outline: none;
     position: relative;
+    height: auto;
+    width: auto;
     -webkit-transition: all 0.3s;
     -moz-transition: all 0.3s;
     transition: all 0.3s;
@@ -184,7 +189,10 @@
     color: #fff;
     overflow: hidden;
     font-family: "HelveticaNeue-Light", "Helvetica Neue Light", "Helvetica Neue", Helvetica, Arial, "Lucida Grande", sans-serif;
-    font-weight: 300;
+    font-weight: 100;
+    font-size: 0.8em;
+    width: auto;
+    height: auto;
 }
 
 .btn-gray:hover{
@@ -313,7 +321,7 @@
 }
 
 #endButtonsDiv{
-    width: 120%;
+    width: 100%;
 }
 
 
@@ -363,7 +371,7 @@
     display: flex;
     width: 100%;
     flex-direction: row;
-    justify-content: space-around;
+    justify-content: space-evenly;
     align-items: center;
 }
 
@@ -395,6 +403,39 @@ input[type=range]::-ms-track {
     background: transparent;
     border-color: transparent;
     color: transparent;
+}
+
+input[type="checkbox"] + label::before {
+    content: '\a0'; /* nicht umbrechendes Leerzeichen */
+    position: relative;
+    display: inline-block;
+    width: 22px;
+    height: 22px;
+    background: white;
+    border: 3px solid #27ae60;
+    border-radius: 50%;
+    transform: scale(1) rotateZ(180deg);
+    top: -3px;
+    margin-right: 5px;
+}
+
+input[type="checkbox"]:checked + label::before {
+    content: '\a0';
+    display: inline-block;
+    background-position: center;
+    background-image: url('../assets/icons/check-circle.svg');
+    transition: all 0.4s cubic-bezier(0.54, 0.01, 0, 1.49);
+    transform: scale(1) rotateZ(0deg);
+}
+
+
+input[type="checkbox"] {
+    display:none;
+}
+
+
+#symptomsTable{
+    padding-top: 0.5em;
 }
 
 .symptom_checkbox
