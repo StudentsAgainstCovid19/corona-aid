@@ -9,16 +9,23 @@ function try_acquire_lock(id) { // id for infected
     }
 
     detailedXML = loadXMLDoc(apiUrl + "infected/" + id, "application/xml", handleErrorsDetailRequest);
-    console.log(detailedXML.getElementsByTagName("done")[0].children[0]);
-    // if ( detailedXML.getElementsByTagName("done")[])
-    // makeConfirmPopup("Dieser Patient wurde heute bereits bearbeitet.\nFortfahren mit dem Editieren?",
-    //     function (infectedId) {
-    //         continueLockingProcess(infectedId);
-    //     }, null, id);
+    console.log(detailedXML.getElementsByTagName("done")[0].innerHTML);
+
     if ( detailedXML )
     {
-        slideOpenRightBar();
-        setDetailedView(detailedXML);
+        if ( detailedXML.getElementsByTagName("done")[0].innerHTML === "true") {
+            makeConfirmPopup("Dieser Patient wurde heute bereits bearbeitet.\nFortfahren mit dem Editieren?",
+                function (infectedId) {
+                    slideOpenRightBar();
+                    setDetailedView(detailedXML);
+                }, null, id);
+        }
+        else
+        {
+            slideOpenRightBar();
+            setDetailedView(detailedXML);
+        }
+
     }
     console.log(detailedXML);
 }
