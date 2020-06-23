@@ -25,7 +25,7 @@
                     <xsl:otherwise></xsl:otherwise>
                 </xsl:choose>
             </xsl:variable>
-            <p>
+            <p id="symptomsTable">
 
 
                     <input type="checkbox">

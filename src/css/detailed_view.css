@@ -94,9 +94,8 @@
 #textInformationen{
     margin-top: 20px;
 }
-#test_result_checkbox{
-}
-#test_result_label1{
+
+#test_result_label{
     font-family: "HelveticaNeue-Light", "Helvetica Neue Light", "Helvetica Neue", Helvetica, Arial, "Lucida Grande", sans-serif;
     font-weight: 300;
 
@@ -105,6 +104,7 @@
 #prescribe_test{
     position: relative;
     right: -1em;
+    top: -3px;
 }
 
 
@@ -398,12 +398,14 @@ input[type="checkbox"] + label::before {
     content: '\a0'; /* nicht umbrechendes Leerzeichen */
     position: relative;
     display: inline-block;
-    width: 23px;
-    height: 23px;
+    width: 22px;
+    height: 22px;
     background: white;
     border: 3px solid #27ae60;
     border-radius: 50%;
     transform: scale(1) rotateZ(180deg);
+    top: -3px;
+    margin-right: 5px;
 }
 
 input[type="checkbox"]:checked + label::before {
@@ -418,4 +420,9 @@ input[type="checkbox"]:checked + label::before {
 
 input[type="checkbox"] {
     display:none;
+}
+
+
+#symptomsTable{
+    padding-top: 0.5em;
 }
