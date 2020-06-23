@@ -6,6 +6,7 @@ function initMap() {
 
     map = new ol.Map({
         target: 'map_div',
+        controls: [],
         layers: [
             new ol.layer.Tile({
                 source: new ol.source.OSM()
@@ -49,7 +50,7 @@ var piechart_cache = {}; // map to cache openlayer-icons, to prevent flickering
 async function setMarkers()
 {
     var gpxXSL = getXSLT("./xslt_scripts/xslt_prio_gpx.xsl");
-    var gpxData = runXSLT([gpxXSL], prioList);
+    var gpxData = runXSLT(gpxXSL, prioList);
 
     var styles = getStyles();
 
@@ -250,7 +251,7 @@ function createPieChart(size, amountDone, amountCalled) {
     var xmlParser = new DOMParser();
     var xmlDoc = xmlParser.parseFromString(xml_string, "application/xml");
     var pieChartXSL = getXSLT("./xslt_scripts/xslt_pie_chart_gen.xsl");
-    var chart = runXSLT([pieChartXSL], xmlDoc);
+    var chart = runXSLT(pieChartXSL, xmlDoc);
 
     var serializer = new XMLSerializer();
     return new ol.style.Icon({
@@ -276,10 +277,12 @@ function calculateCirclePoint(angle)
 // button listeners for zooming
 function zoom_in()
 {
-    map.getView().setZoom(map.getView().getZoom()+parseFloat(config_hash_table["zoomChange"]));
+    map.getView().animate({zoom: map.getView().getZoom() + parseFloat(config_hash_table["zoomChange"]),
+                    duration: parseInt(config_hash_table["animationDuration"])});
 }
 
 function zoom_out()
 {
-    map.getView().setZoom(map.getView().getZoom()-parseFloat(config_hash_table["zoomChange"]));
+    map.getView().animate({zoom: map.getView().getZoom() - parseFloat(config_hash_table["zoomChange"]),
+                    duration: parseInt(config_hash_table["animationDuration"])});
 }

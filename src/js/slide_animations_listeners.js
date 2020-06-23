@@ -1,13 +1,24 @@
 
 function toggle_call_list()
 {
-    var call_list = document.getElementById("call_list_div");
-    if (call_list.className === "call_list_slideout")
-    {
-
-        call_list.className = "call_list_slide";
-    }
-    else {
+    let call_list = document.getElementById("call_list_div");
+    let search_bar = document.getElementById("search_bar");
+    if (call_list.className === "call_list_slideout") {
+        call_list.className = "call_list_slidein";
+        search_bar.className =  search_bar.className.replace("search_bar_slideout", "") + " search_bar_slidein";
+    } else {
         call_list.className = "call_list_slideout";
+        search_bar.className =  search_bar.className.replace("search_bar_slidein", "") + " search_bar_slideout";
+    }
+}
+
+function openCallList()
+{
+    let call_list = document.getElementById("call_list_div");
+    let search_bar = document.getElementById("search_bar");
+    if (call_list.className.indexOf("call_list_slidein") === -1)
+    {
+        search_bar.className =  search_bar.className.replace("search_bar_slideout", "") + " search_bar_slidein";
+        call_list.className = "call_list_slidein";
     }
 }

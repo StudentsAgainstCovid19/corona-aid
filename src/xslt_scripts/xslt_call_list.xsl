@@ -35,8 +35,11 @@
     </xsl:template>
 
     <xsl:template match="/">
-        <p>Meine Anrufsliste</p>
-        <table>
+        <div class="call_list_header">
+            <h1>Anrufsliste</h1>
+        </div>
+        <div class="seperator"></div>
+        <div class = "call_list_content">
             <xsl:for-each select="infected/person">
                 <xsl:sort select="done" data-type="number"/>
                 <xsl:sort select="priority" order="descending" data-type="number"/>
@@ -59,10 +62,9 @@
                         <xsl:with-param name="wellbeing" select="subjectiveWellbeing"/>
                     </xsl:call-template>
                 </xsl:variable>
+                <div class ="call_list_element">
+                        <div tabindex="0">
 
-                <tr>
-                    <td>
-                        <div>
                             <xsl:attribute name="class">
                                 <xsl:choose>
                                     <xsl:when test="done = 1">done_call_box</xsl:when>
@@ -72,28 +74,28 @@
 
                             <xsl:attribute name="onclick">try_acquire_lock(<xsl:value-of select="id"/>)</xsl:attribute>
 
-                            <p><xsl:value-of select="lastname"/>, <xsl:value-of select="firstnames"/></p>
-                            <p>Zustand:
+                            <h2>Name: </h2>
+                            <span><xsl:value-of select="lastname"/>, <xsl:value-of select="firstnames"/></span>
+                            <h2>Zustand:  </h2>
+                            <span>
                                 <span class="wellbeing_imagespan">
                                     <img class="wellbeing_indicator">
                                         <xsl:attribute name="src">./assets/wellbeing_indicators/wellbeing_<xsl:value-of select="$wellbeing_svg"/>.svg</xsl:attribute>
                                     </img>
                                 </span>
                                 <xsl:value-of select="$wellbeing_desc"/>
-                            </p>
-                            <p>Tel.: <xsl:value-of select="phone"/></p>
-                            <xsl:choose>
-                                <xsl:when test="$div_classtag = 'calledAlready'">
-                                    <p>Letzter Versuch:</p>
-                                    <p>Heute, <xsl:value-of select="lastcall"/> Uhr</p>
-                                </xsl:when>
-                            </xsl:choose>
+                            </span>
+                            <h2>Tel.:</h2>
+                            <span><xsl:value-of select="phone"/></span>
+                            <xsl:if test="$div_classtag = 'calledAlready'">
+                                <h2>Letzter Versuch: </h2>
+                                <span>Heute, <xsl:value-of select="lastcall"/> Uhr</span>
+                            </xsl:if>
                         </div>
-                    </td>
-                </tr>
+                </div>
 
             </xsl:for-each>
-        </table>
+        </div>
 
     </xsl:template>
 </xsl:stylesheet>

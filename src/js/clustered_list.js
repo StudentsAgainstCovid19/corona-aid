@@ -35,6 +35,6 @@ async function displayClusteredMap(id_array)
 
 
     var clusteredListXSL = getXSLT("./xslt_scripts/xslt_clustered_list.xsl");
-    runXSLT([clusteredListXSL], xmlDoc, "infected_detailed_view_right");
+    runXSLT(clusteredListXSL, xmlDoc, "infected_detailed_view_right");
 }
 
