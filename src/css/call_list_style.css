@@ -195,3 +195,7 @@ h2{
     }
 
 }
+
+.hidden_box{
+    display: none;
+}

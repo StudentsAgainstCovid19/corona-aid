@@ -31,3 +31,9 @@ var apiWebSocketUrl = "wss://dev.api.sac19.jatsqi.com/";
 
 
 var initialSymptoms = null;
+
+
+var foundIndices;
+var currentlySearched = false;
+var currentFoundIndex;
+var currentCallBoxes = [];

@@ -93,6 +93,10 @@
                         </xsl:choose>
                     </done>
 
+                    <locked>
+                        <xsl:value-of select="locked"/>
+                    </locked>
+
 
 
 

@@ -60,6 +60,7 @@
 #search_bar {
     top: 3%;
     left: 3%;
+    width: 22%;
     height: auto;
     outline: none;
     background-color: transparent;
@@ -118,4 +119,30 @@
 
 #submit_edit_symptoms_button {
 
+}
+
+#continue_search_buttons{
+    display: flex;
+    flex-direction: column;
+    top: 3%;
+    left: 39%;
+    border-radius: 10px;
+    box-shadow: 2px 2px blue;
+}
+
+.continue_search_btn {
+    padding: 3px;
+    border-radius: 50%;
+    margin: 2px;
+    background-color: white;
+    outline: none;
+    border-width: 0;
+}
+
+.continue_search_btn:hover {
+    background-color: lightgrey;
+}
+
+.disabled_button {
+    background-color: darkgrey;
 }
