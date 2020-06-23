@@ -4,7 +4,8 @@ function try_acquire_lock(id)
     if (detail_bar === 2) return;
 
     slideOpenRightBar();
-    detailedXML = loadXMLDoc("./example_xmls/detailed_infected.xml");// ("api.sac19.jatsqi.com/infected/"+id);
+    detailedXML = loadXMLDoc(apiUrl + "infected/" + id);
+    console.log(detailedXML);
     setDetailedView(detailedXML);
 }
 
@@ -15,8 +16,7 @@ function setDetailedView(xml_doc)
     {
         detail_bar = 2;
         symptomsList = [];
-        var detailed_view = document.getElementById("infected_detailed_view_right");
-        detailed_view.innerHTML = "";
+
         var displayDetailed = getXSLT("./xslt_scripts/xslt_detailed_view.xsl");
 
         runXSLT(displayDetailed, xml_doc, "infected_detailed_view_right");
@@ -176,7 +176,7 @@ function prescribeTest(id)
             // var availableTests = detailedXML.getElementsByTagName("test");
             // console.log(availableTests.lastChild);
 
-            const xml_string = "<Test><infected_id>"+id+"</infected_id><result>0</result><timestamp>"+parseInt(Date.now()/1000.0)+"</timestamp></Test>";
+            const xml_string = "<Test><infectedId>"+id+"</infectedId><result>0</result><timestamp>"+parseInt(Date.now()/1000.0)+"</timestamp></Test>";
             postRequest("test", xml_string);
         }, function (id) { }, id );
 }
