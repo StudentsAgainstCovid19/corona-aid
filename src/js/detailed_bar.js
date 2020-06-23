@@ -17,56 +17,67 @@ function setDetailedView(xml_doc)
         detail_bar = 2;
         symptomsList = [];
 
-        var displayDetailed = getXSLT("./xslt_scripts/xslt_detailed_view.xsl");
+        let displayDetailed = getXSLT("./xslt_scripts/xslt_detailed_view.xsl");
 
         runXSLT(displayDetailed, xml_doc, "infected_detailed_view_right");
 
-        var symptomsXSL = getXSLT("./xslt_scripts/xslt_symptom_div.xsl");
-        var symptoms = xml_doc.getElementsByTagName("List")[0];
+        let parseSymptomsXSL = getXSLT("./xslt_scripts/xslt_parse_symptoms.xsl");
+        initialSymptoms = runXSLT(parseSymptomsXSL, xml_doc);
 
-        runXSLT(symptomsXSL, symptoms, "symptomsDiv");
+        console.log(initialSymptoms);
 
-        var symp_checkboxes = document.getElementById("symptomsDiv").getElementsByClassName("symptom_checkbox");
-        for ( var i = 0; i < symp_checkboxes.length; i++)
+        let symptomsXSL = getXSLT("./xslt_scripts/xslt_symptom_div.xsl");
+
+        runXSLT(symptomsXSL, initialSymptoms, "symptomsDiv");
+
+        let symp_checkboxes = document.getElementById("symptomsDiv").getElementsByClassName("symptom_checkbox");
+        for ( let i = 0; i < symp_checkboxes.length; i++)
         {
-            var id = parseInt(symp_checkboxes[i].id.replace("symp_",""));
+            let id = parseInt(symp_checkboxes[i].id.replace("symp_",""));
             symptomsList.push(id);
         }
+        console.log(symptomsList);
     }
 }
 
 function displayPopUp()
 {
-    var filter_overlay = document.getElementById("global_overlay");
-    var popup_window = document.getElementById("popup_window");
+    let filter_overlay = document.getElementById("global_overlay");
+    let popup_window = document.getElementById("popup_window");
     filter_overlay.className = "";
     popup_window.className = "";
 }
 
 function hidePopUp()
 {
-    var filter_overlay = document.getElementById("global_overlay");
-    var popup_window = document.getElementById("popup_window");
+    let filter_overlay = document.getElementById("global_overlay");
+    let popup_window = document.getElementById("popup_window");
     filter_overlay.className = "invisible_object";
     popup_window.className = "invisible_object";
     popup_window.innerHTML = "";
 }
 
+function deepCopyXML(node)
+{
+    let parser = new DOMParser();
+    let serializer = new XMLSerializer();
+    return parser.parseFromString(serializer.serializeToString(node), "application/xml");
+}
+
 function showSymptoms ()
 {
     if (!detailedXML) return;
-    symptomsXML = loadXMLDoc(apiUrl+"symptom");
+    if ( !symptomsXML ) symptomsXML = loadXMLDoc(apiUrl+"symptom");
+    // construct xml document for popup
+    let parser = new DOMParser();
+    let xmlDocument = constructSymptomPopupXML();
+
+    console.log(xmlDocument);
     var symptomsXSL = getXSLT("./xslt_scripts/xslt_edit_symptoms.xsl");
-    runXSLT(symptomsXSL, symptomsXML, "popup_window");
+    runXSLT(symptomsXSL, xmlDocument, "popup_window");
 
     editSymptomsList = symptomsList;
 
-    var checkbox;
-    for (var i = 0; i < symptomsList.length; i++)
-    {
-        checkbox = document.getElementById("symptom_"+symptomsList[i]);
-        if (checkbox) checkbox.checked = true;
-    }
     displayPopUp();
 }
 
@@ -115,40 +126,46 @@ function showPreExistingIllnesses()
 
 function submitSymptoms()
 {
+    if ( !symptomsXML ) symptomsXML = loadXMLDoc(apiUrl+"symptom");
 
     symptomsList = editSymptomsList;
     symptomsList.sort((a, b) => a - b);
-    editSymptomsList = [];
 
-    var serializer = new XMLSerializer();
-    var parser = new DOMParser();
-    var items = symptomsXML.getElementsByTagName("item");
+    let xmlDoc = constructSymptomPopupXML();
+    console.log(xmlDoc);
 
-    xml_string = "<List>";
-    var item_index = 0;
 
-    for ( var i = 0; i < symptomsList.length; i++ )
-    {
 
-        for ( ; item_index < items.length; item_index++ )
-        {
-
-            var id = parseInt(items[item_index].getElementsByTagName("id")[0].childNodes[0].nodeValue);
-            if ( id === symptomsList[i] )
-            {
-                xml_string += serializer.serializeToString(items[item_index]);
-                break;
-            }
-        }
-    }
-
-    xml_string += "</List>";
+    let mergeSymptomsXSL = getXSLT("./xslt_scripts/xslt_merge_symptoms.xsl");
+    let mergedXML = runXSLT(mergeSymptomsXSL, xmlDoc);
+    console.log(mergedXML);
 
     // reload symptoms_div, then close popup
-    var symptomXSL = getXSLT("./xslt_scripts/xslt_symptom_div.xsl");
-    runXSLT(symptomXSL, parser.parseFromString(xml_string, "application/xml"), "symptomsDiv");
+    let symptomXSL = getXSLT("./xslt_scripts/xslt_symptom_div.xsl");
+    runXSLT(symptomXSL, mergedXML, "symptomsDiv");
 
     hidePopUp();
+}
+
+function constructSymptomPopupXML()
+{
+    let parser = new DOMParser();
+    let xmlDoc = parser.parseFromString("<symptomPopupXML></symptomPopupXML>", "application/xml");
+    xmlDoc.children[0].appendChild(deepCopyXML(initialSymptoms).children[0]);
+    xmlDoc.children[0].appendChild(deepCopyXML(symptomsXML).children[0]);
+    xmlDoc.children[0].appendChild(constructIdList().children[0]);
+    return xmlDoc;
+}
+
+function constructIdList()
+{
+    let parser = new DOMParser();
+    let temp_id_string = "<symptomIdList>";
+    for (let i = 0; i < symptomsList.length; i++)
+    {
+        temp_id_string += "<symp_id>"+symptomsList[i]+"</symp_id>";
+    }
+    return parser.parseFromString(temp_id_string + "</symptomIdList>", "application/xml");
 }
 
 function slideOpenRightBar()

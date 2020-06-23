@@ -13,8 +13,8 @@
         <xsl:value-of select="$days"/><xsl:text> </xsl:text><xsl:value-of select="$dayText"/>
     </xsl:template>
 
-    <xsl:template match="/">
-        <xsl:for-each select="List/item">
+    <xsl:template match="symptomXML">
+        <xsl:for-each select="symptoms/symptom">
             <xsl:sort select="degreeOfDanger" order="descending"/>
             <xsl:variable name="sinceDaysText">
                 <xsl:choose>
@@ -22,14 +22,13 @@
                             <xsl:with-param name="days" select="sinceDays"/>
                         </xsl:call-template>
                     </xsl:when>
-                    <xsl:otherwise></xsl:otherwise>
+                    <xsl:otherwise> seit heute</xsl:otherwise>
                 </xsl:choose>
             </xsl:variable>
             <p>
-
                 <label>
                     <input type="checkbox" class="symptom_checkbox">
-                        <xsl:attribute name="checked"><xsl:value-of select="true"/></xsl:attribute>
+                        <xsl:attribute name="checked">true</xsl:attribute>
                         <xsl:attribute name="id">symp_<xsl:value-of select="id"/></xsl:attribute>
                         <xsl:attribute name="onclick">symptomsChanged(<xsl:value-of select="id"/>);</xsl:attribute>
                     </input>

@@ -80,7 +80,7 @@
     </xsl:template>
 
     <xsl:template match="historyItems">
-        <xsl:variable name="rawAmount" select="count(/InfectedDto/historyItems/historyItems[not(status = 0)])"/>
+        <xsl:variable name="rawAmount" select="count(/InfectedDto/historyItems/historyItem[not(status = 0)])"/>
         <xsl:variable name="amountValues">
             <xsl:choose>
                 <xsl:when test="$rawAmount > 7">7</xsl:when>
@@ -108,7 +108,7 @@
         <svg id="wellbeing_indicator_history" height="100">
             <xsl:attribute name="width"><xsl:value-of select="$width"/></xsl:attribute>
 
-            <xsl:for-each select="/InfectedDto/historyItems/historyItems[not(status = 0)][position() > ($rawAmount - $amountValues)]">
+            <xsl:for-each select="/InfectedDto/historyItems/historyItem[not(status = 0)][position() > ($rawAmount - $amountValues)]">
                 <xsl:sort select="timestamp" data-type="number"/>
                 <xsl:variable name="color">
                     <xsl:call-template name="getWellbeingColor">
@@ -138,11 +138,11 @@
     </xsl:template>
 
     <xsl:template name="historyItemNotNull">
-        <xsl:variable name="amountFound" select="count(/InfectedDto/historyItems/historyItems[not(status = 0)])"/>
+        <xsl:variable name="amountFound" select="count(/InfectedDto/historyItems/historyItem[not(status = 0)])"/>
         <xsl:choose>
             <xsl:when test="$amountFound = 0">-1</xsl:when>
             <xsl:otherwise>
-                <xsl:variable name="indexLegit" select="count(/InfectedDto/historyItems/historyItems[not(status = 0)][$amountFound]/preceding-sibling::*)+1"/>
+                <xsl:variable name="indexLegit" select="count(/InfectedDto/historyItems/historyItem[not(status = 0)][$amountFound]/preceding-sibling::*)+1"/>
                 <xsl:value-of select="$indexLegit"/>
             </xsl:otherwise>
         </xsl:choose>
@@ -158,7 +158,7 @@
                         0
                     </xsl:when>
                     <xsl:otherwise>
-                        <xsl:value-of select="sum(/InfectedDto/historyItems/historyItems[$indexOfHistoryItem]/degreeOfDanger)"/>
+                        <xsl:value-of select="sum(/InfectedDto/historyItems/historyItem[$indexOfHistoryItem]/degreeOfDanger)"/>
                     </xsl:otherwise>
                 </xsl:choose>
             </xsl:otherwise>
@@ -177,7 +177,7 @@
         <xsl:choose>
             <xsl:when test="$indexLastHistoryItem = -1">1</xsl:when>
             <xsl:otherwise>
-                <xsl:value-of select="/InfectedDto/historyItems/historyItems[$indexLastHistoryItem]/personalFeeling"/>
+                <xsl:value-of select="/InfectedDto/historyItems/historyItem[$indexLastHistoryItem]/personalFeeling"/>
             </xsl:otherwise>
         </xsl:choose>
     </xsl:template>
@@ -202,11 +202,11 @@
         <p id="textInformationen" class="text">Informationen zu <xsl:value-of select="surname"/>, <xsl:value-of select="forename"/></p>
         <p class="text">Alter: <xsl:value-of select="age"/> Jahre</p>
         <p class="text">Tel.: <xsl:choose>
-            <xsl:when test="count(/InfectedDto/contactData/contactData[contactKey = 'phone']) > 0">
-                <xsl:value-of select="/InfectedDto/contactData/contactData[contactKey = 'phone']/contactValue"/>
+            <xsl:when test="count(/InfectedDto/contactData/contactItem[contactKey = 'phone']) > 0">
+                <xsl:value-of select="/InfectedDto/contactData/contactItem[contactKey = 'phone']/contactValue"/>
             </xsl:when>
-            <xsl:when test="count(/InfectedDto/contactData/contactData[contactKey = 'mobile']) > 0">
-                <xsl:value-of select="/InfectedDto/contactData/contactData[contactKey = 'mobile']/contactValue"/>
+            <xsl:when test="count(/InfectedDto/contactData/contactItem[contactKey = 'mobile']) > 0">
+                <xsl:value-of select="/InfectedDto/contactData/contactItem[contactKey = 'mobile']/contactValue"/>
             </xsl:when>
             <xsl:otherwise>nicht vorhanden. Fehler!</xsl:otherwise>
         </xsl:choose></p>
