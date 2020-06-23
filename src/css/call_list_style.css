@@ -7,6 +7,7 @@
     z-index: 5;
     height: 100%;
     left: 0;
+    font-family: "HelveticaNeue-Light", "Helvetica Neue Light", "Helvetica Neue", Helvetica, Arial, "Lucida Grande", sans-serif;
 }
 
 .call_list_header
@@ -64,6 +65,34 @@ h2{
     }
 }
 
+
+.search_bar_slidein{
+    animation: slidein_search_bar .7s ease-in-out forwards;
+}
+
+.search_bar_slideout{
+    animation: slideout_search_bar .7s ease-in-out forwards;
+}
+@keyframes slidein_search_bar {
+    from {
+        left: 3%;
+    }
+
+    to {
+        left: 16%;
+    }
+}
+
+@keyframes slideout_search_bar {
+    from {
+        left: 16%;
+    }
+
+    to {
+        left: 3%;
+    }
+}
+
 .wellbeing_imagespan {
     position: relative;
     top: 4px;
@@ -89,6 +118,7 @@ h2{
 .call_list_element{
     border-top: 1px black;
     margin: 5px 0 5px 0;
+    cursor: pointer;
 }
 
 .call_list_element :hover {
@@ -150,7 +180,6 @@ h2{
 @keyframes no_call_items_found_frames {
     from {
         background-color: red;
-        left: 16%;
     }
 
     25% {

@@ -26,5 +26,8 @@ var confirmConfig = [null, null, null]; // list for generic confirm popup.
 
 var realtimeWebSocket;
 
-var apiUrl = "https://dev.api.sac19.jatsqi.com/";
+var apiUrl = "https://dev.api.corona-aid-ka.de/";
 var apiWebSocketUrl = "wss://dev.api.sac19.jatsqi.com/";
+
+
+var initialSymptoms = null;

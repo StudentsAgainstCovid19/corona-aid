@@ -13,8 +13,8 @@
         <xsl:value-of select="$days"/><xsl:text> </xsl:text><xsl:value-of select="$dayText"/>
     </xsl:template>
 
-    <xsl:template match="/">
-        <xsl:for-each select="List/item">
+    <xsl:template match="symptomXML">
+        <xsl:for-each select="symptoms/symptom">
             <xsl:sort select="degreeOfDanger" order="descending"/>
             <xsl:variable name="sinceDaysText">
                 <xsl:choose>
@@ -22,21 +22,19 @@
                             <xsl:with-param name="days" select="sinceDays"/>
                         </xsl:call-template>
                     </xsl:when>
-                    <xsl:otherwise></xsl:otherwise>
+                    <xsl:otherwise> seit heute</xsl:otherwise>
                 </xsl:choose>
             </xsl:variable>
-            <p>
+            <p id="symptomsTable">
+                <input type="checkbox" class="symptom_checkbox">
+                    <xsl:attribute name="checked">true</xsl:attribute>
 
+                    <xsl:attribute name="id">symp_<xsl:value-of select="id"/></xsl:attribute>
+                    <xsl:attribute name="onclick">symptomsChanged(<xsl:value-of select="id"/>);</xsl:attribute>
+                </input>
                 <label>
-                    <input type="checkbox" class="symptom_checkbox">
-                        <xsl:attribute name="checked"><xsl:value-of select="true"/></xsl:attribute>
-                        <xsl:attribute name="id">symp_<xsl:value-of select="id"/></xsl:attribute>
-                        <xsl:attribute name="onclick">symptomsChanged(<xsl:value-of select="id"/>);</xsl:attribute>
-                    </input>
-                    <xsl:value-of select="name"/>
-                </label>
-                <label>
-                    <span class="sinceDays"><xsl:value-of select="$sinceDaysText"/></span>
+                    <xsl:attribute name="for">symp_<xsl:value-of select="id"/></xsl:attribute>
+                    <xsl:value-of select="name"/><span class="sinceDays"><xsl:value-of select="$sinceDaysText"/></span>
                 </label>
             </p>
         </xsl:for-each>
