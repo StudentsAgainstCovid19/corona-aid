@@ -177,11 +177,11 @@
         </xsl:variable>
 
 
-            <input type="checkbox" id="test_result_checkbox" name="test_result" class="chk">
+            <input type="checkbox" id="test_result_checkbox" name="test_result_checkbox" class="chk">
                 <xsl:attribute name="checked"><xsl:value-of select="test/result"/></xsl:attribute>
             </input>
 
-            <label  id="test_result_label" for="test_result">
+            <label  id="test_result_label" for="test_result_checkbox">
                 Test <xsl:if test="test/result = 'true'">
                     positiv (vor <xsl:value-of select="$testDaysText"/>)
                 </xsl:if>

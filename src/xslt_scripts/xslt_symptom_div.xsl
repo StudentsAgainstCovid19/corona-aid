@@ -27,12 +27,14 @@
             </xsl:variable>
             <p>
 
-                <label>
-                    <input type="checkbox" class="symptom_checkbox">
+
+                    <input type="checkbox">
                         <xsl:attribute name="checked"><xsl:value-of select="true"/></xsl:attribute>
                         <xsl:attribute name="id">symp_<xsl:value-of select="id"/></xsl:attribute>
                         <xsl:attribute name="onclick">symptomsChanged(<xsl:value-of select="id"/>);</xsl:attribute>
                     </input>
+                <label>
+                    <xsl:attribute name="for">symp_<xsl:value-of select="id"/></xsl:attribute>
                     <xsl:value-of select="name"/>
                 </label>
                 <label>
