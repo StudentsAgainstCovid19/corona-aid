@@ -2,12 +2,6 @@
 function try_acquire_lock(id) { // id for infected
     if (detail_bar === 2) return;
 
-    // check whether done
-    if (true) // TODO: add done request
-    {
-
-    }
-
     detailedXML = loadXMLDoc(apiUrl + "infected/" + id, "application/xml", handleErrorsDetailRequest);
     console.log(detailedXML.getElementsByTagName("done")[0].innerHTML);
 

@@ -142,7 +142,7 @@
         <xsl:choose>
             <xsl:when test="$amountFound = 0">-1</xsl:when>
             <xsl:otherwise>
-                <xsl:variable name="indexLegit" select="count(/InfectedDto/historyItems/historyItem[not(status = 0)][$amountFound]/preceding-sibling::*)+1"/>
+                <xsl:variable name="indexLegit" select="count(/InfectedDto/historyItems/historyItem[not(status = 0)][last()]/preceding-sibling::*)+1"/>
                 <xsl:value-of select="$indexLegit"/>
             </xsl:otherwise>
         </xsl:choose>
