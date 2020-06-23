@@ -122,12 +122,15 @@
 
 }
 
-#wellbeing_indicator_history {
 
-}
 
 #wellbeingHistoryDiv{
     margin-left: 1em;
+    display: flex;
+    width: 100%;
+    flex-direction: row;
+    justify-content: start;
+    align-items: center;
 }
 
 .cancel_button {
@@ -294,7 +297,6 @@
 }
 
 #wellbeingImage{
-    hidth: 3em;
     width: 3em;
 }
 
@@ -308,7 +310,7 @@
 }
 
 #endButtonsDiv{
-    width: 120%;
+    width: 100%;
 }
 
 
@@ -358,7 +360,7 @@
     display: flex;
     width: 100%;
     flex-direction: row;
-    justify-content: start;
+    justify-content: space-evenly;
     align-items: center;
 }
 
