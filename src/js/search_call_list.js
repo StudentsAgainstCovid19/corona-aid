@@ -35,6 +35,8 @@ async function search_call_list()
             childDiv.className += " found_call_items";
         }, 100);
         window.location.hash = "#scroll_to";
+        addKeyClickListenerToChild("scroll_to");
+
     } else {
         let searchbar = document.getElementById("search_bar");
         searchbar.className = searchbar.className.replace(" no_call_items_found","");
@@ -64,5 +66,18 @@ function addSearchBarListener()
         {
             search_call_list();
         }
-    })
+    });
+}
+
+function addKeyClickListenerToChild(elemId)
+{
+    let box = document.getElementById(elemId).children[0];
+    box.addEventListener("keyup", function (event) {
+        console.log(event);
+        if ( event.key === "Enter" )
+        {
+            box.click();
+        }
+    });
+    box.focus();
 }

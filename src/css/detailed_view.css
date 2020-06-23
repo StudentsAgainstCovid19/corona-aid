@@ -87,6 +87,7 @@
 }
 
 #notes_area{
+    resize: none;
     margin-left: 1em;
     font-family: "HelveticaNeue-Light", "Helvetica Neue Light", "Helvetica Neue", Helvetica, Arial, "Lucida Grande", sans-serif;
 }
@@ -114,11 +115,20 @@
 }
 
 #symptomsDiv {
-    background-color: lightgrey;
-    color: black;
+    color: white;
     font-family: "HelveticaNeue-Light", "Helvetica Neue Light", "Helvetica Neue", Helvetica, Arial, "Lucida Grande", sans-serif;
     font-weight: 300;
     padding-left: 1em;
+    overflow: auto;
+    margin-left: 1em;
+    margin-right: 1em;
+    height: 100px;
+    width: 80%;
+    border-radius: 10px;
+    border-width: 20px;
+    background-color: black;
+    border-color: green;
+
 
 }
 
@@ -297,6 +307,7 @@
 }
 
 #wellbeingImage{
+    height: 3em;
     width: 3em;
 }
 
@@ -394,8 +405,6 @@ input[type=range]::-ms-track {
     color: transparent;
 }
 
-
-
 input[type="checkbox"] + label::before {
     content: '\a0'; /* nicht umbrechendes Leerzeichen */
     position: relative;
@@ -427,4 +436,14 @@ input[type="checkbox"] {
 
 #symptomsTable{
     padding-top: 0.5em;
+}
+
+.symptom_checkbox
+{
+
+}
+
+.bold_text
+{
+    font-weight: bold;
 }

@@ -6,15 +6,7 @@ function parseNodeValueFromXML(xml_obj, tagName)
 
 function init()
 {
-    // init configs
-    var configXML = loadXMLDoc(apiUrl+"config");
-
-    var items = configXML.getElementsByTagName("item");
-    for (var i=0; i<items.length; i++)
-    {
-        config_hash_table[parseNodeValueFromXML(items[i], "configKey")] =
-            parseNodeValueFromXML(items[i], "configValue");
-    }
+    loadConfig();
     initMap();
     calculatePriorities();
     connectWebSocket();
@@ -24,6 +16,32 @@ function connectWebSocket() {
     realtimeWebSocket = new WebSocket(apiWebSocketUrl+"realtime/infected");
     realtimeWebSocket.onmessage = function(updateData) {
         realtimeUpdate( updateData );
+    }
+}
+
+function loadConfig()
+{
+    // init configs
+    let configXML = loadXMLDoc(apiUrl+"config", "application/xml", configLoadErrorFn);
+
+    if ( !configXML ) return;
+    let items = configXML.getElementsByTagName("item");
+    for (let i=0; i<items.length; i++)
+    {
+        config_hash_table[parseNodeValueFromXML(items[i], "configKey")] =
+            parseNodeValueFromXML(items[i], "configValue");
+    }
+}
+
+function configLoadErrorFn(statusCode) {
+    if (statusCode === 404)
+    {
+        makeConfirmPopup("Die Konfigurationen konnten nicht geladen werden.\n" +
+            "Es werden standardkonfigurationen ausgewählt.\n" +
+            "Die Website wird vermutlich nicht funktionieren.",
+            null, null, true, "Schließen");
+        config_hash_table = {"standardLat":"49.013868","standardLon":"8.404346", "clusteredDistance":"200",
+                "pieChartScale":"0.6","markerScale":"0.3","standardZoom":"13","zoomChange":"0.5"};
     }
 }
 
