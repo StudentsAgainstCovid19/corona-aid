@@ -38,16 +38,18 @@
   <div id="footer" class="floating_object"></div>
 
   <div id="search_bar" class="floating_object">
-    <div class="flex_div">
-      <button id="open_list_button" onclick="toggle_call_list();">
-        <img src="./assets/icons/list_button.svg" id="open_list_svg" />
-      </button>
-      <input type="text" placeholder="Suche..." id="search_input">
-      <button id="search_button" onclick="search_call_list();">
-        <div id="search_div">
-          <img src="./assets/icons/search_magnifier.svg" style = "height:1.2em"/>
-        </div>
-      </button>
+    <div id="search_container">
+      <div class="flex_div">
+        <button id="open_list_button" onclick="toggle_call_list();">
+          <img src="./assets/icons/list_button.svg" id="open_list_svg" />
+        </button>
+        <input type="text" placeholder="Suche..." id="search_input">
+        <button id="search_button" onclick="search_call_list();">
+          <div id="search_div">
+            <img src="./assets/icons/search_magnifier.svg" style = "height:1.2em"/>
+          </div>
+        </button>
+      </div>
     </div>
   </div>
 

@@ -58,12 +58,17 @@
 }
 
 #search_bar {
-    padding: 4px;
     top: 3%;
-    left: 16%;
-    border-radius: 10px;
+    left: 3%;
     height: auto;
     outline: none;
+    background-color: transparent;
+}
+
+#search_container {
+    background-color: white;
+    padding: 4px;
+    border-radius: 10px;
 }
 
 #search_input {

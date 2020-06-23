@@ -7,7 +7,7 @@
     border-left-style: solid;
     border-left-width: 0.5em;
     border-left-color: darkgray;
-    overflow: hidden;
+    overflow-x: hidden;
 }
 
 #overallDiv{

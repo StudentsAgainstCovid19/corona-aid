@@ -277,10 +277,12 @@ function calculateCirclePoint(angle)
 // button listeners for zooming
 function zoom_in()
 {
-    map.getView().setZoom(map.getView().getZoom()+parseFloat(config_hash_table["zoomChange"]));
+    map.getView().animate({zoom: map.getView().getZoom() + parseFloat(config_hash_table["zoomChange"]),
+                    duration: parseInt(config_hash_table["animationDuration"])});
 }
 
 function zoom_out()
 {
-    map.getView().setZoom(map.getView().getZoom()-parseFloat(config_hash_table["zoomChange"]));
+    map.getView().animate({zoom: map.getView().getZoom() - parseFloat(config_hash_table["zoomChange"]),
+                    duration: parseInt(config_hash_table["animationDuration"])});
 }

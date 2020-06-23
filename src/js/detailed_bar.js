@@ -5,20 +5,16 @@ function try_acquire_lock(id) { // id for infected
     // check whether done
     if (true) // TODO: add done request
     {
-        makeConfirmPopup("Dieser Patient wurde heute bereits bearbeitet.\nFortfahren mit dem Editieren?",
-            function (infectedId) {
-                continueLockingProcess(infectedId);
-            }, null, id);
-    }
-    else
-    {
-        continueLockingProcess(id)
-    }
-}
-function continueLockingProcess( id )
-{
-    detailedXML = loadXMLDoc(apiUrl + "infected/" + id, "application/xml", handleErrorsDetailRequest);
 
+    }
+
+    detailedXML = loadXMLDoc(apiUrl + "infected/" + id, "application/xml", handleErrorsDetailRequest);
+    console.log(detailedXML.getElementsByTagName("done")[0].children[0]);
+    // if ( detailedXML.getElementsByTagName("done")[])
+    // makeConfirmPopup("Dieser Patient wurde heute bereits bearbeitet.\nFortfahren mit dem Editieren?",
+    //     function (infectedId) {
+    //         continueLockingProcess(infectedId);
+    //     }, null, id);
     if ( detailedXML )
     {
         slideOpenRightBar();
@@ -34,10 +30,12 @@ function handleErrorsDetailRequest( statusCode )
         case 200:
             return;
         case 423:
-            displayText = "Der Patient ist gerade in Bearbeitung.\nWählen Sie einen anderen Patienten aus.";
+            displayText = "Der Patient ist gerade in Bearbeitung.\n" +
+                "Wählen Sie einen anderen Patienten aus.";
             break;
         case 404:
-            displayText = "Es ist ein Fehler aufgetreten.\nFehlermeldung: 404 - Infected not found.";
+            displayText = "Es ist ein Fehler aufgetreten.\n" +
+                "Fehlermeldung: 404 - Infected not found.";
             break;
         default:
             return;
@@ -63,6 +61,7 @@ function setDetailedView(xml_doc)
 
 
         let symptomsXSL = getXSLT("./xslt_scripts/xslt_symptom_div.xsl");
+        console.log(initialSymptoms);
 
         runXSLT(symptomsXSL, initialSymptoms, "symptomsDiv");
 
@@ -236,7 +235,7 @@ function makeConfirmPopup(text, onSubmitCallback, onCancelCallback, parameters, 
 
     const overlay = document.getElementById("transparent_overlay");
     const textP = document.getElementById("confirm_text");
-    textP.innerText = text;
+    textP.innerHTML = text;
     overlay.className = "";
     let submitButton = document.getElementById("submit_confirm_button");
     if (hideSubmitButton)

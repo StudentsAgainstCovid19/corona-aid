@@ -13,19 +13,24 @@ function getXSLT(filename)
 
 function loadXMLDoc(filename, mimeType="application/xml", errorHandlingFn = null)
 {
-    request = new XMLHttpRequest();
-    request.open("GET", filename, false);
-    if ( errorHandlingFn )
-    {
-        request.onreadystatechange = function(oEvent)
+    try {
+        request = new XMLHttpRequest();
+        request.open("GET", filename, false);
+        if ( errorHandlingFn )
         {
-            errorHandlingFn(request.status);
-        };
-    }
-    request.setRequestHeader("Accept", mimeType);
-    request.send("");
+            request.onreadystatechange = function(oEvent)
+            {
+                errorHandlingFn(request.status);
+            };
+        }
+        request.setRequestHeader("Accept", mimeType);
+        request.send("");
 
-    return request.responseXML;
+        return request.responseXML;
+    }catch (e) {
+        serviceUnavailableError();
+    }
+
 }
 
 

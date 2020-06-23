@@ -6,7 +6,7 @@
         <div>
             <xsl:for-each select="initialDiseases/initialDisease">
                 <xsl:sort select="degreeOfDanger" order="descending"/>
-                <p>Vorerkrankungsname fehlt noch, deshalb id: <xsl:value-of select="id"/></p>
+                <p><xsl:value-of select="name"/></p>
             </xsl:for-each>
         </div>
         <button id="close_illnesses_button" class="dialogButton cancel_button" onclick="hidePopUp();">Schließen</button>
