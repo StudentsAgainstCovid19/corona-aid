@@ -4,7 +4,6 @@
     z-index: 5;
     color: black;
     font-family: "HelveticaNeue-Light", "Helvetica Neue Light", "Helvetica Neue", Helvetica, Arial, "Lucida Grande", sans-serif;
-
 }
 
 #zoom_buttons {
@@ -22,7 +21,6 @@
 }
 
 #zoom_out_button {
-
     height: 50px;
     width: 50px;
     left: 0;
@@ -73,7 +71,6 @@
     border-width: 1px;
     border-radius: 5px;
     margin: auto;
-
 }
 
 #search_div {
@@ -108,15 +105,12 @@
     outline: none;
     height: 28px;
     margin-left: 2px;
+}
+
+#close_edit_symptoms_button {
 
 }
 
-#close_edit_symptoms_button
-{
-
-}
-
-#submit_edit_symptoms_button
-{
+#submit_edit_symptoms_button {
 
 }
