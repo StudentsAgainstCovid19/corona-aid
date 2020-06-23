@@ -87,6 +87,7 @@
 }
 
 #notes_area{
+    resize: none;
     margin-left: 1em;
     font-family: "HelveticaNeue-Light", "Helvetica Neue Light", "Helvetica Neue", Helvetica, Arial, "Lucida Grande", sans-serif;
 }
@@ -298,7 +299,7 @@
 }
 
 #wellbeingImage{
-    hidth: 3em;
+    height: 3em;
     width: 3em;
 }
 
@@ -399,4 +400,9 @@ input[type=range]::-ms-track {
 .symptom_checkbox
 {
 
+}
+
+.bold_text
+{
+    font-weight: bold;
 }

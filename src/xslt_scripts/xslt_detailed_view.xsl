@@ -199,9 +199,9 @@
 
         <div id="overallDiv">
         <div id="informationDiv">
-        <p id="textInformationen" class="text">Informationen zu <xsl:value-of select="surname"/>, <xsl:value-of select="forename"/></p>
+        <p id="textInformationen" class="text bold_text">Informationen zu <xsl:value-of select="surname"/>, <xsl:value-of select="forename"/></p>
         <p class="text">Alter: <xsl:value-of select="age"/> Jahre</p>
-        <p class="text">Tel.: <xsl:choose>
+        <p class="text">Tel.: <span class="bold_text"><xsl:choose>
             <xsl:when test="count(/InfectedDto/contactData/contactItem[contactKey = 'phone']) > 0">
                 <xsl:value-of select="/InfectedDto/contactData/contactItem[contactKey = 'phone']/contactValue"/>
             </xsl:when>
@@ -209,7 +209,7 @@
                 <xsl:value-of select="/InfectedDto/contactData/contactItem[contactKey = 'mobile']/contactValue"/>
             </xsl:when>
             <xsl:otherwise>nicht vorhanden. Fehler!</xsl:otherwise>
-        </xsl:choose></p>
+        </xsl:choose></span></p>
         <p class="text"><xsl:value-of select="street"/><xsl:text> </xsl:text><xsl:value-of select="houseNumber"/></p>
         </div>
 
@@ -276,7 +276,10 @@
 
 
             <input type="checkbox" id="test_result_checkbox" name="test_result" class="chk">
-                <xsl:attribute name="checked"><xsl:value-of select="/InfectedDto/tests/tests[$lastTestDoneIndex]/result"/></xsl:attribute>
+                <xsl:attribute name="disabled"/>
+                <xsl:if test="/InfectedDto/tests/tests[$lastTestDoneIndex]/result = 'true'">
+                    <xsl:attribute name="checked"/>
+                </xsl:if>
             </input>
 
             <label  id="test_result_label" for="test_result">
@@ -315,7 +318,7 @@
         </p>
         </div>
         <p class="text">Weitere Hinweise:</p>
-        <textarea id="notes_area" rows="10" cols="30"/>
+        <textarea id="notes_area" rows="10" cols="30" maxlength="100"/>
 
 
 

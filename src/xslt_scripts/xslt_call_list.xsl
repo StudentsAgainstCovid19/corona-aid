@@ -63,7 +63,7 @@
                     </xsl:call-template>
                 </xsl:variable>
                 <div class ="call_list_element">
-                        <div>
+                        <div tabindex="0">
 
                             <xsl:attribute name="class">
                                 <xsl:choose>

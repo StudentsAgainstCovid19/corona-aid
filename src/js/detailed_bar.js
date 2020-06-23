@@ -1,12 +1,49 @@
 
-function try_acquire_lock(id)
-{ // id for infected
+function try_acquire_lock(id) { // id for infected
     if (detail_bar === 2) return;
 
-    slideOpenRightBar();
-    detailedXML = loadXMLDoc(apiUrl + "infected/" + id);
+    // check whether done
+    if (true) // TODO: add done request
+    {
+        makeConfirmPopup("Dieser Patient wurde heute bereits bearbeitet.\nFortfahren mit dem Editieren?",
+            function (infectedId) {
+                continueLockingProcess(infectedId);
+            }, null, id);
+    }
+    else
+    {
+        continueLockingProcess(id)
+    }
+}
+function continueLockingProcess( id )
+{
+    detailedXML = loadXMLDoc(apiUrl + "infected/" + id, "application/xml", handleErrorsDetailRequest);
+
+    if ( detailedXML )
+    {
+        slideOpenRightBar();
+        setDetailedView(detailedXML);
+    }
     console.log(detailedXML);
-    setDetailedView(detailedXML);
+}
+
+function handleErrorsDetailRequest( statusCode )
+{
+    let displayText;
+    switch (statusCode) {
+        case 200:
+            return;
+        case 423:
+            displayText = "Der Patient ist gerade in Bearbeitung.\nWählen Sie einen anderen Patienten aus.";
+            break;
+        case 404:
+            displayText = "Es ist ein Fehler aufgetreten.\nFehlermeldung: 404 - Infected not found.";
+            break;
+        default:
+            return;
+
+    }
+    makeConfirmPopup(displayText, null, null, null, true, "Schließen");
 }
 
 // set the detailed view with a given xml file for all specific data
@@ -24,7 +61,6 @@ function setDetailedView(xml_doc)
         let parseSymptomsXSL = getXSLT("./xslt_scripts/xslt_parse_symptoms.xsl");
         initialSymptoms = runXSLT(parseSymptomsXSL, xml_doc);
 
-        console.log(initialSymptoms);
 
         let symptomsXSL = getXSLT("./xslt_scripts/xslt_symptom_div.xsl");
 
@@ -36,7 +72,6 @@ function setDetailedView(xml_doc)
             let id = parseInt(symp_checkboxes[i].id.replace("symp_",""));
             symptomsList.push(id);
         }
-        console.log(symptomsList);
     }
 }
 
@@ -72,7 +107,6 @@ function showSymptoms ()
     let parser = new DOMParser();
     let xmlDocument = constructSymptomPopupXML();
 
-    console.log(xmlDocument);
     var symptomsXSL = getXSLT("./xslt_scripts/xslt_edit_symptoms.xsl");
     runXSLT(symptomsXSL, xmlDocument, "popup_window");
 
@@ -132,13 +166,11 @@ function submitSymptoms()
     symptomsList.sort((a, b) => a - b);
 
     let xmlDoc = constructSymptomPopupXML();
-    console.log(xmlDoc);
 
 
 
     let mergeSymptomsXSL = getXSLT("./xslt_scripts/xslt_merge_symptoms.xsl");
     let mergedXML = runXSLT(mergeSymptomsXSL, xmlDoc);
-    console.log(mergedXML);
 
     // reload symptoms_div, then close popup
     let symptomXSL = getXSLT("./xslt_scripts/xslt_symptom_div.xsl");
@@ -198,7 +230,7 @@ function prescribeTest(id)
         }, function (id) { }, id );
 }
 
-function makeConfirmPopup(text, onSubmitCallback, onCancelCallback, parameters)
+function makeConfirmPopup(text, onSubmitCallback, onCancelCallback, parameters, hideSubmitButton = false, cancelButtonText="Abbrechen")
 {
     confirmConfig = [onSubmitCallback, onCancelCallback, parameters];
 
@@ -206,7 +238,20 @@ function makeConfirmPopup(text, onSubmitCallback, onCancelCallback, parameters)
     const textP = document.getElementById("confirm_text");
     textP.innerText = text;
     overlay.className = "";
-    setFocus("submit_confirm_button");
+    let submitButton = document.getElementById("submit_confirm_button");
+    if (hideSubmitButton)
+    {
+        if ( submitButton.className.indexOf("invisible_object") === -1 ) submitButton.className += " invisible_object";
+        setFocus("cancel_confirm_button");
+    }
+    else
+    {
+        submitButton.className = submitButton.className.replace("invisible_object", "");
+        setFocus("submit_confirm_button");
+    }
+
+    let cancelButton = document.getElementById("cancel_confirm_button");
+    cancelButton.innerText = cancelButtonText;
 }
 
 function setFocus(id)
@@ -230,7 +275,7 @@ function onCancelPopup()
 {
     const overlay = document.getElementById("transparent_overlay");
     overlay.className = "invisible_object";
-    if (confirmConfig[0] != null)
+    if (confirmConfig[1] != null)
     {
         confirmConfig[1](confirmConfig[2]);
     }
@@ -260,14 +305,14 @@ function closeDetailedView(id)
 
 function submitDetailView(id)
 {
-    var xml_string = "<History>" +
+    let xml_string = "<History>" +
         "<infectedId>"+id+"</infectedId>"+
         "<notes>"+document.getElementById("notes_area").value+"</notes>"+
         "<personalFeeling>"+(document.getElementById("wellbeing_slider").value)+"</personalFeeling>"+
         "<status>1</status><symptoms>";
     symptoms = document.getElementsByClassName("symptom_checkbox");
 
-    for (var i=0; i<symptomsList.length; i++)
+    for (let i=0; i<symptomsList.length; i++)
     {
         xml_string += "<symptom>"+parseInt(symptomsList[i])+"</symptom>";
     }
