@@ -118,6 +118,7 @@ h2{
 .call_list_element{
     border-top: 1px black;
     margin: 5px 0 5px 0;
+    cursor: pointer;
 }
 
 .call_list_element :hover {
