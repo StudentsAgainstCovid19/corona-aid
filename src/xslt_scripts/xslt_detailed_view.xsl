@@ -183,10 +183,16 @@
     </xsl:template>
 
     <xsl:template name="lastTestIndex">
-        <xsl:param name="statusValue"/> <!-- TODO -->
-        <xsl:variable name="index" select="count(/InfectedDto/tests/tests[status = $statusValue][last()]/preceding-sibling::*)+1"/>
+        <xsl:param name="prescribed"/>
+        <xsl:variable name="index">
+            <xsl:choose>
+                <xsl:when test="$prescribed = 0"><xsl:value-of  select="/InfectedDto/tests/test[not(result = 0)][last()]/id"/></xsl:when>
+                <xsl:otherwise><xsl:value-of  select="/InfectedDto/tests/test[result = 0][last()]/id"/></xsl:otherwise>
+            </xsl:choose>
+        </xsl:variable>
+
         <xsl:choose>
-            <xsl:when test="/InfectedDto/tests/tests[$index]/status = $statusValue"><xsl:value-of select="$index"/></xsl:when>
+            <xsl:when test="not(/InfectedDto/tests/test[id = $index]/result = '')"><xsl:value-of select="$index"/></xsl:when>
             <xsl:otherwise>-1</xsl:otherwise>
         </xsl:choose>
     </xsl:template>
@@ -252,14 +258,14 @@
            </p>
         </div>
 
-        <xsl:variable name="lastTestDoneIndex">
+        <xsl:variable name="lastTestDoneId">
             <xsl:call-template name="lastTestIndex">
-                <xsl:with-param name="statusValue">1</xsl:with-param>
+                <xsl:with-param name="prescribed">0</xsl:with-param>
             </xsl:call-template>
         </xsl:variable>
          <xsl:variable name="lastTestPrescribedIndex">
              <xsl:call-template name="lastTestIndex">
-                 <xsl:with-param name="statusValue">0</xsl:with-param>
+                 <xsl:with-param name="prescribed">1</xsl:with-param>
              </xsl:call-template>
          </xsl:variable>
 
@@ -270,34 +276,31 @@
         <div id="prescribeTestDiv" class="flex-container-testresult">
         <xsl:variable name="testDaysText">
             <xsl:call-template name="dayFormatting">
-                <xsl:with-param name="days" select="/InfectedDto/tests/tests[$lastTestDoneIndex]/timeDue"/>
+                <xsl:with-param name="days" select="/InfectedDto/tests/test[id = $lastTestDoneId]/timestamp"/>
             </xsl:call-template>
         </xsl:variable>
-
-
             <input type="checkbox" id="test_result_checkbox" name="test_result_checkbox" class="chk">
                 <xsl:attribute name="disabled"/>
-                <xsl:if test="/InfectedDto/tests/tests[$lastTestDoneIndex]/result = 'true'">
+                <xsl:if test="/InfectedDto/tests/test[id = $lastTestDoneId]/result = 1">
                     <xsl:attribute name="checked"/>
                 </xsl:if>
             </input>
 
             <label  id="test_result_label" for="test_result_checkbox">
                 Test <xsl:choose>
-                <xsl:when test="$lastTestDoneIndex = -1">noch nicht stattgefunden</xsl:when>
-                <xsl:when test="/InfectedDto/tests/tests[$lastTestDoneIndex]/result = 'true'">
+                <xsl:when test="$lastTestDoneId = -1">noch nicht stattgefunden</xsl:when>
+                <xsl:when test="/InfectedDto/tests/test[$lastTestDoneId]/result = 1">
                     positiv (vor <xsl:value-of select="$testDaysText"/>)
                 </xsl:when>
                 <xsl:otherwise>negativ (vor <xsl:value-of select="$testDaysText"/>)</xsl:otherwise>
             </xsl:choose>
 
             </label>
-
         <button id="prescribe_test" class="dialogButton btn-gray">
-            <xsl:if test="$lastTestDoneIndex = -1">
+            <xsl:if test="$lastTestDoneId = -1">
                 <xsl:attribute name="onclick">prescribeTest(<xsl:value-of select="id"/>);</xsl:attribute>
             </xsl:if>
-            <xsl:if test="/InfectedDto/tests/tests[$lastTestDoneIndex]/status = 0">
+            <xsl:if test="/InfectedDto/tests/test[id = $lastTestDoneId]/result = 1">
                 <xsl:attribute name="disabled">disabled;</xsl:attribute>
             </xsl:if>
             Test anordnen</button>
