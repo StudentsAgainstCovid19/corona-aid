@@ -3,7 +3,7 @@
 
     <xsl:template match="symptomPopupXML">
 
-        <div id="symptomsPopupDiv"></div>
+
         <p id="symptomsPopupHeader">Symptome von <xsl:value-of select="symptomXML/surname"/>, <xsl:value-of select="symptomXML/forename"/></p>
         <div id="listOfPossibleSymptoms">
             <xsl:for-each select="Set/item">
@@ -28,5 +28,6 @@
             <button id="close_edit_symptoms_button" onclick="hidePopUp();" class="dialogButton cancel_button">Schließen</button>
             <button id="submit_edit_symptoms_button" onclick="submitSymptoms();" class="dialogButton submit_button">Bestätigen</button>
          </div>
+
     </xsl:template>
 </xsl:stylesheet>

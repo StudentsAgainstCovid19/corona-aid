@@ -12,43 +12,42 @@
 #popup_window
 {
     position: absolute;
-    width: 20%;
-    height: 40%;
+    width: 30%;
+    height: auto;
+    max-height: 60%;
     z-index: 7;
-    top: 30%;
-    left: 40%;
+    top: 20%;
+    left: 35%;
     background-color: white;
     border-radius: 20px;
     font-family: "HelveticaNeue-Light", "Helvetica Neue Light", "Helvetica Neue", Helvetica, Arial, "Lucida Grande", sans-serif;
+    display: flex;
+    flex-direction: column;
+    align-content: space-evenly;
+
 }
+
 
 #symptomsPopupHeader{
-    font-weight: bold;
-    flex-direction: row;
-    justify-content: center;
-    align-content: center;
     margin: 1em;
+    font-weight: bold;
 }
-
 #listOfPossibleSymptoms{
-    height: 60%;
+    height: auto;
+    max-height: 70%;
     padding-left: 1em;
     overflow: auto;
     border-radius: 10px;
     border: solid 3px black;
-    margin: 1em;
+    margin-right: 1em;
+    margin-left: 1em;
 }
-
-#symptomsPopupDiv{
-    flex-direction: column;
-    justify-content: center;
-    align-content: space-between;
-}
-
 #symptomsPopupEnd{
+    display:flex;
     flex-direction: row;
-    justify-content: space-evenly;
+    justify-content: space-around;
     align-content: center;
+    margin: 1em;
 }
 
 
@@ -56,13 +55,34 @@
 {
     position: absolute;
     width: 20%;
-    height: 25%;
+    height: auto;
     top: 30%;
     left: 40%;
     background-color: white;
     border-radius: 20px;
     margin: 10px;
+    font-family: "HelveticaNeue-Light", "Helvetica Neue Light", "Helvetica Neue", Helvetica, Arial, "Lucida Grande", sans-serif;
+    flex-direction: column;
+    align-content: space-between;
 }
+#showIllnessesPopupHeader{
+    margin: 1em;
+    font-weight: bold;
+}
+
+#listOfIllnesses{
+    margin-left: 1em;
+    margin-right: 1em;
+    overflow: auto;
+    height: auto;
+    max-height: 70%;
+}
+
+#close_illnesses_button{
+    margin: 1em;
+    width: 30%;
+}
+
 
 .invisible_object
 {
