@@ -64,9 +64,10 @@
                 </xsl:variable>
                 <div>
                         <xsl:attribute name="class">
-                            call_list_element <xsl:if test="locked = 'true'">
-                            hidden_box
-                        </xsl:if>
+                            call_list_element
+                            <xsl:if test="locked = 'true'">
+                                hidden_box
+                            </xsl:if>
                         </xsl:attribute>
                         <div tabindex="0">
 
@@ -80,8 +81,7 @@
                             <xsl:attribute name="onclick">try_acquire_lock(<xsl:value-of select="id"/>)</xsl:attribute>
 
                             <h2>Name: </h2>
-                            <span><xsl:value-of select="lastname"/>, <xsl:value-of select="firstnames"/> <xsl:value-of
-                                    select="calledbool"/></span>
+                            <span><xsl:value-of select="lastname"/>, <xsl:value-of select="firstnames"/></span>
                             <h2>Zustand:  </h2>
                             <span>
                                 <span class="wellbeing_imagespan">

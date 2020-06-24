@@ -105,32 +105,32 @@
             vor <xsl:value-of select="$daysBeforeText"/>
         </xsl:if>
         <span>
-        <svg id="wellbeing_indicator_history" height="100">
-            <xsl:attribute name="width"><xsl:value-of select="$width"/></xsl:attribute>
+            <svg id="wellbeing_indicator_history" height="100"   xmlns="http://www.w3.org/2000/svg">
+                <xsl:attribute name="width"><xsl:value-of select="$width"/></xsl:attribute>
 
-            <xsl:for-each select="/InfectedDto/historyItems/historyItem[not(status = 0)][position() > ($rawAmount - $amountValues)]">
-                <xsl:sort select="timestamp" data-type="number"/>
-                <xsl:variable name="color">
-                    <xsl:call-template name="getWellbeingColor">
-                        <xsl:with-param name="wellbeing" select="personalFeeling"/>
-                    </xsl:call-template>
-                </xsl:variable>
-                <xsl:variable name="circle_x_pos" select="position()*70 - 45"/>
-                <circle cy="50" r="20" stroke-width="2px" stroke="black">
-                    <xsl:attribute name="fill"><xsl:value-of select="$color"/></xsl:attribute>
-                    <xsl:attribute name="cx"><xsl:value-of select="$circle_x_pos"/></xsl:attribute>
-                </circle>
-                <xsl:if test="not(position() = $amountValues)">
-                    <xsl:variable name="line_x1_pos" select="position()*70 - 21"/>
-                    <xsl:variable name="line_x2_pos" select="position()*70 + 1"/>
+                <xsl:for-each select="/InfectedDto/historyItems/historyItem[not(status = 0)][position() > ($rawAmount - $amountValues)]">
+                    <xsl:sort select="timestamp" data-type="number"/>
+                    <xsl:variable name="color">
+                        <xsl:call-template name="getWellbeingColor">
+                            <xsl:with-param name="wellbeing" select="personalFeeling"/>
+                        </xsl:call-template>
+                    </xsl:variable>
+                    <xsl:variable name="circle_x_pos" select="position()*70 - 45"/>
+                    <circle cy="50" r="20" stroke-width="2px" stroke="black">
+                        <xsl:attribute name="fill"><xsl:value-of select="$color"/></xsl:attribute>
+                        <xsl:attribute name="cx"><xsl:value-of select="$circle_x_pos"/></xsl:attribute>
+                    </circle>
+                    <xsl:if test="not(position() = $amountValues)">
+                        <xsl:variable name="line_x1_pos" select="position()*70 - 21"/>
+                        <xsl:variable name="line_x2_pos" select="position()*70 + 1"/>
 
-                    <line y1="50" y2="50" stroke="black" stroke-width="5">
-                        <xsl:attribute name="x1"><xsl:value-of select="$line_x1_pos"/></xsl:attribute>
-                        <xsl:attribute name="x2"><xsl:value-of select="$line_x2_pos"/></xsl:attribute>
-                    </line>
-                </xsl:if>
-            </xsl:for-each>
-        </svg>
+                        <line y1="50" y2="50" stroke="black" stroke-width="5">
+                            <xsl:attribute name="x1"><xsl:value-of select="$line_x1_pos"/></xsl:attribute>
+                            <xsl:attribute name="x2"><xsl:value-of select="$line_x2_pos"/></xsl:attribute>
+                        </line>
+                    </xsl:if>
+                </xsl:for-each>
+            </svg>
         </span>
         <xsl:if test="$amountValues > 0">
             <span>gestern</span>

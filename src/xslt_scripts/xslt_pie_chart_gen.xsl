@@ -39,10 +39,18 @@
                 </xsl:choose>
             </xsl:for-each>
 
-
+            <circle cx="50" cy="50" fill="white" fill-opacity="0.6">
+                <xsl:attribute name="r">
+                    <xsl:choose>
+                        <xsl:when test="string-length($remaining) &gt; 2">50</xsl:when>
+                        <xsl:otherwise>
+                            <xsl:value-of select="10 + 10 * string-length($remaining)"/>
+                        </xsl:otherwise>
+                    </xsl:choose>
+                </xsl:attribute>
+            </circle>
             <text text-anchor="middle" font-size="40">
-                <tspan x="50">
-                    <xsl:attribute name="y">66</xsl:attribute>
+                <tspan x="50" y="65">
                     <xsl:value-of select="$remaining"/>
                 </tspan>
             </text>
