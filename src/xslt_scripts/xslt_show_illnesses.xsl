@@ -9,6 +9,8 @@
                 <p><xsl:value-of select="name"/></p>
             </xsl:for-each>
         </div>
+        <div id="close_illnesses_button_div">
         <button id="close_illnesses_button" class="dialogButton cancel_button" onclick="hidePopUp();">Schließen</button>
+        </div>
     </xsl:template>
 </xsl:stylesheet>
