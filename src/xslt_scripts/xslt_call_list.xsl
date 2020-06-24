@@ -80,7 +80,8 @@
                             <xsl:attribute name="onclick">try_acquire_lock(<xsl:value-of select="id"/>)</xsl:attribute>
 
                             <h2>Name: </h2>
-                            <span><xsl:value-of select="lastname"/>, <xsl:value-of select="firstnames"/></span>
+                            <span><xsl:value-of select="lastname"/>, <xsl:value-of select="firstnames"/> <xsl:value-of
+                                    select="calledbool"/></span>
                             <h2>Zustand:  </h2>
                             <span>
                                 <span class="wellbeing_imagespan">
