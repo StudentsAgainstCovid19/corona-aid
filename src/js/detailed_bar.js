@@ -1,5 +1,6 @@
 
 function try_acquire_lock(id) { // id for infected
+    close_continue_search();
     if (detail_bar === 2) return;
 
     detailedXML = loadXMLDoc(apiUrl + "infected/" + id, "application/xml", handleErrorsDetailRequest);
@@ -12,7 +13,11 @@ function try_acquire_lock(id) { // id for infected
                 function (infectedId) {
                     slideOpenRightBar();
                     setDetailedView(detailedXML);
-                }, null, id);
+                },
+                function(infectedId)
+                {
+                    putRequest("infected/unlock/"+infectedId);
+                }, id);
         }
         else
         {
@@ -225,7 +230,7 @@ function prescribeTest(id)
             // var availableTests = detailedXML.getElementsByTagName("test");
             // console.log(availableTests.lastChild);
 
-            const xml_string = "<Test><infectedId>"+id+"</infectedId><result>0</result><timestamp>"+parseInt(Date.now()/1000.0)+"</timestamp></Test>";
+            const xml_string = "<TestInsertDto><infectedId>"+id+"</infectedId><result>0</result><timestamp>"+parseInt(Date.now()/1000.0)+"</timestamp></TestInsertDto>";
             postRequest("test", xml_string);
         }, function (id) { }, id );
 }

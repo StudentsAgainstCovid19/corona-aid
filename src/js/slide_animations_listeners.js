@@ -10,6 +10,7 @@ function toggle_call_list()
         call_list.className = "call_list_slideout";
         search_bar.className =  search_bar.className.replace("search_bar_slidein", "") + " search_bar_slideout";
     }
+    close_continue_search();
 }
 
 function openCallList()
