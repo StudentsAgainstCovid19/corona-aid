@@ -1,5 +1,6 @@
 
 function try_acquire_lock(id) { // id for infected
+    close_continue_search();
     if (detail_bar === 2) return;
 
     detailedXML = loadXMLDoc(apiUrl + "infected/" + id, "application/xml", handleErrorsDetailRequest);
