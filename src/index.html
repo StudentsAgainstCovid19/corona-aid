@@ -1,76 +1,74 @@
 <!DOCTYPE HTML>
 <html lang="de">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="description" content="StudentsAgsinstCovid19 - Overcoming bureaucratic hurdles">
+    <title>Corona Aid v1.0</title>
+    <link rel="shortcut icon" type="image/x-icon" href="./favicon.ico">
 
-<head>
-  <meta charset="utf-8" />
-  <meta name="description" content="StudentsAgsinstCovid19 - Overcoming bureaucratic hurdles">
-  <title>Corona Aid v1.0</title>
-  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico">
-  
-  <!-- OpenLayers -->
-  <link rel="stylesheet" type="text/css"
-    href="https://cdn.jsdelivr.net/gh/openlayers/openlayers.github.io@master/en/v6.3.1/css/ol.css" />
-  <script src="https://cdn.jsdelivr.net/gh/openlayers/openlayers.github.io@master/en/v6.3.1/build/ol.js"></script>
-  <!-- CSS -->
-  <link rel="stylesheet" href="./css/interaction_props.css" type="text/css" />
-  <link rel="stylesheet" href="./css/call_list_style.css" type="text/css" />
-  <link rel="stylesheet" href="./css/detailed_view.css" type="text/css" />
-  <link rel="stylesheet" href="./css/map_style.css" type="text/css" />
-  <link rel="stylesheet" href="./css/clustered_list.css" type="text/css" />
-  <link rel="stylesheet" href="./css/popup_style.css" type="text/css" />
-  <link rel="stylesheet" href="./css/scrollbars.css" type="text/css" />
-  <!-- JS -->
-  <script src="./js/index.js"></script>
-  <script src="./js/shared_variables.js"></script>
-  <script src="./js/clustered_list.js"></script>
-  <script src="./js/detailed_bar.js"></script>
-  <script src="./js/CoronaOSM.js"></script>
-  <script src="./js/call_list.js"></script>
-  <script src="./js/slide_animations_listeners.js"></script>
-  <script src="./js/search_call_list.js"></script>
-  <!-- Embed XSLT -->
-  <script src="./js/load_xslt.js"></script>
-</head>
+    <!-- OpenLayers -->
+    <link rel="stylesheet" type="text/css"
+      href="https://cdn.jsdelivr.net/gh/openlayers/openlayers.github.io@master/en/v6.3.1/css/ol.css" />
+    <script src="https://cdn.jsdelivr.net/gh/openlayers/openlayers.github.io@master/en/v6.3.1/build/ol.js"></script>
+    <!-- CSS -->
+    <link rel="stylesheet" href="./css/interaction_props.css" type="text/css" />
+    <link rel="stylesheet" href="./css/call_list_style.css" type="text/css" />
+    <link rel="stylesheet" href="./css/detailed_view.css" type="text/css" />
+    <link rel="stylesheet" href="./css/map_style.css" type="text/css" />
+    <link rel="stylesheet" href="./css/clustered_list.css" type="text/css" />
+    <link rel="stylesheet" href="./css/popup_style.css" type="text/css" />
+    <link rel="stylesheet" href="./css/scrollbars.css" type="text/css" />
+    <!-- JS -->
+    <script src="./js/index.js"></script>
+    <script src="./js/shared_variables.js"></script>
+    <script src="./js/clustered_list.js"></script>
+    <script src="./js/detailed_bar.js"></script>
+    <script src="./js/CoronaOSM.js"></script>
+    <script src="./js/call_list.js"></script>
+    <script src="./js/slide_animations_listeners.js"></script>
+    <script src="./js/search_call_list.js"></script>
+    <!-- Embed XSLT -->
+    <script src="./js/load_xslt.js"></script>
+  </head>
 
-<body onload="init();">
-  <div id="call_list_div" class="floating_object"></div>
-  <div id="map_div"></div>
-  <div id="infected_detailed_view_right" class="floating_object"></div>
-  <div id="footer" class="floating_object"></div>
+  <body onload="init();">
+    <div id="call_list_div" class="floating_object"></div>
+    <div id="map_div"></div>
+    <div id="infected_detailed_view_right" class="floating_object"></div>
+    <div id="footer" class="floating_object"></div>
 
-  <div id="search_bar" class="floating_object">
-    <div id="search_container">
-      <div class="flex_div">
-        <button id="open_list_button" onclick="toggle_call_list();">
-          <img src="./assets/icons/list_button.svg" id="open_list_svg" />
-        </button>
-        <input type="text" placeholder="Suche..." id="search_input">
-        <button id="search_button" onclick="search_call_list();">
-          <div id="search_div">
-            <img src="./assets/icons/search_magnifier.svg" style = "height:1.2em"/>
-          </div>
-        </button>
+    <div id="search_bar" class="floating_object">
+      <div id="search_container">
+        <div class="flex_div">
+          <button id="open_list_button" onclick="toggle_call_list();">
+            <img src="./assets/icons/list_button.svg" id="open_list_svg" alt="menu button" />
+          </button>
+          <input type="text" placeholder="Suche..." id="search_input">
+          <button id="search_button" onclick="search_call_list();">
+            <div id="search_div">
+              <img src="./assets/icons/search_magnifier.svg" style = "height:1.2em" alt="search magnifier"/>
+            </div>
+          </button>
+        </div>
       </div>
     </div>
-  </div>
 
-  <div id="zoom_buttons" class="floating_object">
-    <div class="flex_div">
-      <button id="zoom_in_button" class="zoom_button" onclick="zoom_in();">+</button>
-      <button id="zoom_out_button" class="zoom_button" onclick="zoom_out();">-</button>
+    <div id="zoom_buttons" class="floating_object">
+      <div class="flex_div">
+        <button id="zoom_in_button" class="zoom_button" onclick="zoom_in();">+</button>
+        <button id="zoom_out_button" class="zoom_button" onclick="zoom_out();">-</button>
+      </div>
     </div>
-  </div>
 
-  <img id="global_overlay" class="invisible_object" src="./assets/icons/blur_filter.svg" />
-  <div id="popup_window" class="invisible_object"></div>
+    <img id="global_overlay" class="invisible_object" src="./assets/icons/blur_filter.svg" alt="blur overlay" />
+    <div id="popup_window" class="invisible_object"></div>
 
-  <div id="transparent_overlay" class="invisible_object">
-    <div id="confirm_popup">
-      <p id="confirm_text"></p>
-      <button id="submit_confirm_button" class="dialogButton submit_button" onclick="onSubmitPopup();">Bestätigen</button>
-      <button id="cancel_confirm_button" class="dialogButton cancel_button" onclick="onCancelPopup();">Abbrechen</button>
+    <div id="transparent_overlay" class="invisible_object">
+      <div id="confirm_popup">
+        <p id="confirm_text"></p>
+        <button id="submit_confirm_button" class="dialogButton submit_button" onclick="onSubmitPopup();">Bestätigen</button>
+        <button id="cancel_confirm_button" class="dialogButton cancel_button" onclick="onCancelPopup();">Abbrechen</button>
+      </div>
     </div>
-  </div>
-</body>
-
+  </body>
 </html>
