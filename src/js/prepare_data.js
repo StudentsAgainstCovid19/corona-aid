@@ -9,7 +9,6 @@
 
 function parseInfectedIds()
 {
-    console.log(prioList);
 
     let people_ids = [];
 
@@ -23,7 +22,6 @@ function parseInfectedIds()
         }
     }
 
-    console.log(people_ids);
     return people_ids;
 }
 
@@ -78,7 +76,7 @@ function addHistoryItem(successProbability, infected_id, symptom_list)
             "<timestamp>" + Date.now() + "</timestamp>" +
             "</History>";
     }
-    else{
+    else{ // status = 1
         xml_string = "<History>" +
             "<infectedId>"+infected_id+"</infectedId>"+
             "<notes></notes>"+
@@ -96,7 +94,7 @@ function addHistoryItem(successProbability, infected_id, symptom_list)
 function prescribeTest(infected_id)
 {
     let xml_str = "<TestInsertDto><infectedId>"+infected_id+"</infectedId><result>0</result><timestamp>"+parseInt(Date.now()/1000.0)+"</timestamp></TestInsertDto>";
-    postRequest("test", xml_string);
+    postRequest("test/", xml_string);
 }
 
 function buildSymptomString(symptom_list)
