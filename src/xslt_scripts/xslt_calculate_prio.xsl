@@ -67,8 +67,8 @@
                     </age>
                     <calledbool>
                         <xsl:choose>
-                            <xsl:when test="not(lastUnsuccessfulCallToday = '')  and done = 'false'">1</xsl:when>
-                            <xsl:otherwise>0</xsl:otherwise>
+                            <xsl:when test="not(lastUnsuccessfulCallToday = '')  and done = 'false'">true</xsl:when>
+                            <xsl:otherwise>false</xsl:otherwise>
                         </xsl:choose>
                     </calledbool>
                     <lastcall>
@@ -92,6 +92,10 @@
                             <xsl:otherwise>0</xsl:otherwise>
                         </xsl:choose>
                     </done>
+
+                    <locked>
+                        <xsl:value-of select="locked"/>
+                    </locked>
 
 
 

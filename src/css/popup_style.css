@@ -120,7 +120,7 @@
 
 .invisible_object
 {
-    display: none;
+    display: none !important;
 }
 
 #transparent_overlay

@@ -139,10 +139,10 @@
 
     <xsl:template name="historyItemNotNull">
         <xsl:variable name="amountFound" select="count(/InfectedDto/historyItems/historyItem[not(status = 0)])"/>
-        <xsl:choose>
+        <xsl:choose> <!-- TODO -->
             <xsl:when test="$amountFound = 0">-1</xsl:when>
             <xsl:otherwise>
-                <xsl:variable name="indexLegit" select="count(/InfectedDto/historyItems/historyItem[not(status = 0)][last()]/preceding-sibling::*)+1"/>
+                <xsl:variable name="indexLegit" select="count(/InfectedDto/historyItems/historyItem[not(status = 0)][last()]/preceding-sibling::*)"/>
                 <xsl:value-of select="$indexLegit"/>
             </xsl:otherwise>
         </xsl:choose>
@@ -176,14 +176,14 @@
 
         <xsl:choose>
             <xsl:when test="$indexLastHistoryItem = -1">1</xsl:when>
-            <xsl:otherwise>
-                <xsl:value-of select="/InfectedDto/historyItems/historyItem[$indexLastHistoryItem]/personalFeeling"/>
+            <xsl:otherwise> <!-- TODO -->
+                <xsl:value-of select="/InfectedDto/historyItems/historyItem[not(status = 0)][last()]/personalFeeling"/>
             </xsl:otherwise>
         </xsl:choose>
     </xsl:template>
 
     <xsl:template name="lastTestIndex">
-        <xsl:param name="statusValue"/>
+        <xsl:param name="statusValue"/> <!-- TODO -->
         <xsl:variable name="index" select="count(/InfectedDto/tests/tests[status = $statusValue][last()]/preceding-sibling::*)+1"/>
         <xsl:choose>
             <xsl:when test="/InfectedDto/tests/tests[$index]/status = $statusValue"><xsl:value-of select="$index"/></xsl:when>
@@ -311,11 +311,11 @@
         <p id="wellbeingHistoryParagraph" class="text"> Verlauf (subj.) <div id="wellbeingHistoryDiv"><xsl:apply-templates select="historyItems"/></div></p>
 
         <div id="wellbeingContentDiv" >
-        <p class="text">Wie geht es der Person heute?
-            <input type="range" min="1" max="5" step="1" id="wellbeing_slider">
-                <xsl:attribute name="value"><xsl:value-of select="$lastWellbeing"/></xsl:attribute>
-            </input>
-        </p>
+            <p class="text">Wie geht es der Person heute?
+                <input type="range" min="1" max="5" step="1" id="wellbeing_slider">
+                    <xsl:attribute name="value"><xsl:value-of select="$lastWellbeing"/></xsl:attribute>
+                </input>
+            </p>
         </div>
         <p class="text">Weitere Hinweise:</p>
         <textarea id="notes_area" rows="10" cols="30" maxlength="100"/>
