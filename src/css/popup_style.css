@@ -62,9 +62,24 @@
     border-radius: 20px;
     margin: 10px;
     font-family: "HelveticaNeue-Light", "Helvetica Neue Light", "Helvetica Neue", Helvetica, Arial, "Lucida Grande", sans-serif;
+    display:flex;
     flex-direction: column;
     align-content: space-between;
+    padding: 1em;
+    border: darkgray solid 3px;
 }
+#confirm_popup_buttons{
+    display:flex;
+    align-content: center;
+    justify-content: space-evenly;
+}
+#confirm_text{
+    font-weight: bold;
+    display:flex;
+    justify-content: center;
+    align-content: center;
+}
+
 #showIllnessesPopupHeader{
     margin: 1em;
     font-weight: bold;
