@@ -39,7 +39,11 @@ async function search_call_list()
 function deleteScrollId()
 {
     let scrollToDiv = document.getElementById("scroll_to");
-    if ( scrollToDiv ) scrollToDiv.id = ""; // delete id
+    if ( scrollToDiv ) {
+        scrollToDiv.children[0].removeEventListener("keyup", function(e){});
+        scrollToDiv.children[0].removeEventListener("keydown", function(e){});
+        scrollToDiv.id = ""; // delete id
+    }
 }
 
 function scrollToIndex(index)
@@ -61,6 +65,7 @@ function scrollToIndex(index)
 
 function getAllNotHiddenCallBoxes() {
     let call_list_items = document.getElementsByClassName("call_list_element");
+
     for (let index = call_list_items.length - 1; index >= 0; index--)
     {
         if ( call_list_items[index].className.indexOf("hidden_box") !== -1 )
@@ -103,33 +108,58 @@ function addSearchBarListener()
     });
 }
 
+
 function addKeyClickListenerToChild(elemId)
 {
     let box = document.getElementById(elemId).children[0];
+    var keyDDown = false; // to prevent multiple triggers when pressing once
+    var keySDown = false;
+
     box.addEventListener("keyup", function (event) {
+
+        setTimeout(function(){calledLast = false;}, 200);
+        setTimeout(function(){calledNext = false;}, 200);
         if ( event.key === "Enter" )
         {
             box.click();
+        }
+        else if (event.key === "s")
+        {
+            if ( !calledLast )
+            {
+                findLast();
+                calledLast = true;
+            }
+        }
+        else if (event.key === "d")
+        {
+            if ( !calledNext )
+            {
+                findNext();
+                calledNext = true;
+            }
         }
     });
     box.focus();
 }
 
-// TODO: add auto close after a minute and supress updates
 function close_continue_search() {
     document.getElementById("continue_search_buttons").className += " invisible_object";
 }
 
+// TODO: supress updates
 function show_continue_search() {
+    updateButtonStates();
     let continue_search_bar = document.getElementById("continue_search_buttons");
     continue_search_bar.className = continue_search_bar.className.replace(" invisible_object", "");
+    setTimeout(function (){ close_continue_search(); }, parseInt(config_hash_table["closeContinueSearchTime"]));
 }
 
 function findNext() {
     if (currentFoundIndex < (foundIndices.length - 1))
     {
         currentFoundIndex++;
-        scrollToIndex(currentFoundIndex);
+        scrollToIndex(foundIndices[currentFoundIndex]);
     }
     updateButtonStates();
 }
@@ -137,8 +167,8 @@ function findNext() {
 function findLast() {
     if (currentFoundIndex > 0)
     {
-        currentFoundIndex++;
-        scrollToIndex(currentFoundIndex);
+        currentFoundIndex--;
+        scrollToIndex(foundIndices[currentFoundIndex]);
     }
     updateButtonStates();
 }

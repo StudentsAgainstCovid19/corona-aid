@@ -52,6 +52,21 @@
         </button>
       </div>
     </div>
+
+    <span id="continue_search_span">
+      <div id="continue_search_buttons" class="floating_object invisible_object">
+        <button class="continue_search_btn" onclick="close_continue_search();">
+          <img src="./assets/icons/close_button.svg" class="close_search_icons"/>
+        </button>
+        <button id="lastSearchButton" class="continue_search_btn" onclick="findLast();">
+          <img src="./assets/icons/last_button.svg" class="close_search_icons"/>
+        </button>
+        <button id="nextSearchButton" class="continue_search_btn" onclick="findNext();">
+          <img src="./assets/icons/next_button.svg" class="close_search_icons"/>
+        </button>
+      </div>
+    </span>
+
   </div>
 
   <div id="zoom_buttons" class="floating_object">
@@ -72,17 +87,7 @@
     </div>
   </div>
 
-  <div id="continue_search_buttons" class="floating_object invisible_object">
-    <button class="continue_search_btn" onclick="close_continue_search();">
-      <img src="./assets/icons/close_button.svg" class="close_search_icons"/>
-    </button>
-    <button id="lastSearchButton" class="continue_search_btn" onclick="findLast();">
-      <img src="./assets/icons/last_button.svg" class="close_search_icons"/>
-    </button>
-    <button id="nextSearchButton" class="continue_search_btn" onclick="findNext();">
-      <img src="./assets/icons/next_button.svg" class="close_search_icons"/>
-    </button>
-  </div>
+
 </body>
 
 </html>

@@ -60,10 +60,10 @@
 #search_bar {
     top: 3%;
     left: 3%;
-    width: 22%;
     height: auto;
     outline: none;
     background-color: transparent;
+    display: flex;
 }
 
 #search_container {
@@ -119,6 +119,11 @@
 
 #submit_edit_symptoms_button {
 
+}
+
+#continue_search_span {
+    position: relative;
+    right: -5%;
 }
 
 #continue_search_buttons{

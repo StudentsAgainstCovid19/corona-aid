@@ -37,3 +37,5 @@ var foundIndices;
 var currentlySearched = false;
 var currentFoundIndex;
 var currentCallBoxes = [];
+var calledLast = false;
+var calledNext = false;
