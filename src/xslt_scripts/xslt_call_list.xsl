@@ -63,9 +63,7 @@
                     </xsl:call-template>
                 </xsl:variable>
                 <div>
-                        <xsl:attribute name="class">
-                            call_list_element
-                            <xsl:if test="locked = 'true'">
+                        <xsl:attribute name="class">call_list_element<xsl:if test="locked = 'true'">
                                 hidden_box
                             </xsl:if>
                         </xsl:attribute>
