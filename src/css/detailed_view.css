@@ -433,6 +433,12 @@ input[type="checkbox"]:checked + label::before {
     transform: scale(1) rotateZ(0deg);
 }
 
+/* TODO: get checkbox to work with this icon */
+#test_result_checkbox {
+    background-position: center;
+    background-image: url('../assets/icons/checkbox_not_set.svg');
+    border-color: red !important;
+}
 
 input[type="checkbox"] {
     display:none;
