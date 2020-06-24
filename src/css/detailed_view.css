@@ -115,19 +115,18 @@
 }
 
 #symptomsDiv {
-    color: white;
+    color: black;
     font-family: "HelveticaNeue-Light", "Helvetica Neue Light", "Helvetica Neue", Helvetica, Arial, "Lucida Grande", sans-serif;
     font-weight: 300;
     padding-left: 1em;
     overflow: auto;
     margin-left: 1em;
     margin-right: 1em;
-    height: 100px;
+    height: 150px;
     width: 80%;
     border-radius: 10px;
-    border-width: 20px;
-    background-color: black;
-    border-color: green;
+    background-color: white;
+    border: solid black 3px;
 
 
 }

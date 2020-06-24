@@ -13,13 +13,44 @@
 {
     position: absolute;
     width: 20%;
-    height: 25%;
+    height: 40%;
     z-index: 7;
     top: 30%;
     left: 40%;
     background-color: white;
     border-radius: 20px;
+    font-family: "HelveticaNeue-Light", "Helvetica Neue Light", "Helvetica Neue", Helvetica, Arial, "Lucida Grande", sans-serif;
 }
+
+#symptomsPopupHeader{
+    font-weight: bold;
+    flex-direction: row;
+    justify-content: center;
+    align-content: center;
+    margin: 1em;
+}
+
+#listOfPossibleSymptoms{
+    height: 60%;
+    padding-left: 1em;
+    overflow: auto;
+    border-radius: 10px;
+    border: solid 3px black;
+    margin: 1em;
+}
+
+#symptomsPopupDiv{
+    flex-direction: column;
+    justify-content: center;
+    align-content: space-between;
+}
+
+#symptomsPopupEnd{
+    flex-direction: row;
+    justify-content: space-evenly;
+    align-content: center;
+}
+
 
 #confirm_popup
 {
