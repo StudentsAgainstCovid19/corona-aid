@@ -2,8 +2,10 @@
 <xsl:stylesheet version="1.0" xmlns:xsl="http://www.w3.org/1999/XSL/Transform">
 
     <xsl:template match="symptomPopupXML">
-        <p>Symptome von <xsl:value-of select="symptomXML/surname"/>, <xsl:value-of select="symptomXML/forename"/></p>
-        <div>
+
+
+        <p id="symptomsPopupHeader">Symptome von <xsl:value-of select="symptomXML/surname"/>, <xsl:value-of select="symptomXML/forename"/></p>
+        <div id="listOfPossibleSymptoms">
             <xsl:for-each select="Set/item">
                 <xsl:sort select="probability" order="descending" data-type="number"/>
                 <xsl:variable name="id" select="id"/>
@@ -22,7 +24,10 @@
                 </p>
             </xsl:for-each>
         </div>
-        <button id="close_edit_symptoms_button" onclick="hidePopUp();" class="dialogButton cancel_button">Schließen</button>
-        <button id="submit_edit_symptoms_button" onclick="submitSymptoms();" class="dialogButton submit_button">Bestätigen</button>
+        <div id="symptomsPopupEnd">
+            <button id="close_edit_symptoms_button" onclick="hidePopUp();" class="dialogButton cancel_button">Schließen</button>
+            <button id="submit_edit_symptoms_button" onclick="submitSymptoms();" class="dialogButton submit_button">Bestätigen</button>
+         </div>
+
     </xsl:template>
 </xsl:stylesheet>

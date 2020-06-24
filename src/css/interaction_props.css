@@ -36,6 +36,7 @@
     box-shadow: 2px 2px black;
     outline: none;
     margin: 0 2px 0 2px;
+    cursor: pointer;
 
     -moz-user-select: none;
     -webkit-user-select: none;
@@ -97,6 +98,7 @@
     margin-bottom: -4px;
     margin-right: 3px;
     color: black;
+    cursor: pointer;
 }
 
 #open_list_svg {
@@ -111,6 +113,7 @@
     outline: none;
     height: 28px;
     margin-left: 2px;
+    cursor: pointer;
 }
 
 #close_edit_symptoms_button {
