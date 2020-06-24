@@ -13,7 +13,11 @@ function try_acquire_lock(id) { // id for infected
                 function (infectedId) {
                     slideOpenRightBar();
                     setDetailedView(detailedXML);
-                }, null, id);
+                },
+                function(infectedId)
+                {
+                    putRequest("infected/unlock/"+infectedId);
+                }, id);
         }
         else
         {

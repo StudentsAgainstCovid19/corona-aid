@@ -65,7 +65,7 @@ function scrollToIndex(index)
 
 function getAllNotHiddenCallBoxes() {
     let call_list_items = document.getElementsByClassName("call_list_element");
-
+    if ( call_list_items.toString().indexOf("HTMLCollection") !== -1 ) call_list_items = Array.prototype.slice.call( call_list_items );
     for (let index = call_list_items.length - 1; index >= 0; index--)
     {
         if ( call_list_items[index].className.indexOf("hidden_box") !== -1 )
