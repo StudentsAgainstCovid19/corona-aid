@@ -82,12 +82,12 @@
                             <span><xsl:value-of select="lastname"/>, <xsl:value-of select="firstnames"/></span>
                             <h2>Zustand:  </h2>
                             <span>
+                                <xsl:value-of select="$wellbeing_desc"/>
                                 <span class="wellbeing_imagespan">
                                     <img class="wellbeing_indicator">
                                         <xsl:attribute name="src">./assets/wellbeing_indicators/wellbeing_<xsl:value-of select="$wellbeing_svg"/>.svg</xsl:attribute>
                                     </img>
                                 </span>
-                                <xsl:value-of select="$wellbeing_desc"/>
                             </span>
                             <h2>Tel.:</h2>
                             <span><xsl:value-of select="phone"/></span>

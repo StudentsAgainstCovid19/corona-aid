@@ -112,8 +112,7 @@ function addSearchBarListener()
 function addKeyClickListenerToChild(elemId)
 {
     let box = document.getElementById(elemId).children[0];
-    var keyDDown = false; // to prevent multiple triggers when pressing once
-    var keySDown = false;
+    onEnter = false;
 
     box.addEventListener("keyup", function (event) {
 
@@ -121,7 +120,9 @@ function addKeyClickListenerToChild(elemId)
         setTimeout(function(){calledNext = false;}, 200);
         if ( event.key === "Enter" )
         {
+            if( onEnter ) return;
             box.click();
+            onEnter = true;
         }
         else if (event.key === "s")
         {

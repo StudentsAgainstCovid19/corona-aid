@@ -2,9 +2,8 @@
 function try_acquire_lock(id) { // id for infected
     close_continue_search();
     if (detail_bar === 2) return;
-
+    console.log("Trying to load infected: "+id);
     detailedXML = loadXMLDoc(apiUrl + "infected/" + id, "application/xml", handleErrorsDetailRequest);
-    console.log(detailedXML.getElementsByTagName("done")[0].innerHTML);
 
     if ( detailedXML )
     {
@@ -83,7 +82,6 @@ function setDetailedView(xml_doc)
 
 
         let symptomsXSL = getXSLT("./xslt_scripts/xslt_symptom_div.xsl");
-        console.log(initialSymptoms);
 
         runXSLT(symptomsXSL, initialSymptoms, "symptomsDiv");
 

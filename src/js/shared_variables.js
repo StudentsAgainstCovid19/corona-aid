@@ -42,3 +42,4 @@ var currentFoundIndex;
 var currentCallBoxes = [];
 var calledLast = false;
 var calledNext = false;
+var onEnter = false;
