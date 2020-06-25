@@ -9,7 +9,11 @@ function init()
     loadConfig();
     initMap();
     calculatePriorities();
+    makeAsyncUpdateProcess();
     connectWebSocket();
+    window.onbeforeunload = function(){
+        cleanUp();
+    }
 }
 
 function connectWebSocket() {
@@ -83,6 +87,7 @@ function realtimeUpdate( updateXML )
 
 function runUpdate()
 {
+    if (updateXMLStr === "" || suppressUpdates) return;
     let serializer = new XMLSerializer();
     let parser = new DOMParser();
     let xmlDoc = parser.parseFromString("<root></root>", "application/xml");
@@ -91,11 +96,29 @@ function runUpdate()
 
     let updateXSL = getXSLT("./xslt_scripts/xslt_realtime_update.xsl");
 
-    console.log(xmlDoc)
-    console.log(updateXMLStr)
     prioList = runXSLT(updateXSL, xmlDoc);
-    console.log("Updated");
-    console.log(prioList)
     // TODO: prevent reloading of whole map but instead update just one marker
     initCallList(false);
+}
+
+function makeAsyncUpdateProcess()
+{
+    updatePromise = setInterval(runUpdate(), config_hash_table["frontendRefreshIntervall"]);
+}
+
+function enforceUpdate()
+{
+    if ( !updatePromise ) clearInterval(updatePromise);
+
+    runUpdate();
+    makeAsyncUpdateProcess();
+}
+
+function cleanUp()
+{
+    if ( detail_bar === 2)
+    {
+        // unlock infected
+        postRequest("infected/unlock/"+currentInfectedId);
+    }
 }

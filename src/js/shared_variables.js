@@ -2,6 +2,7 @@ var detail_bar = 0; // value that indicates what detailed bar shows:
 // 0: nothing
 // 1: clustered_list
 // 2: details
+var currentInfectedId;
 
 
 var map;
@@ -30,8 +31,9 @@ var apiUrl = "https://dev.api.corona-aid-ka.de/";
 var apiWebSocketUrl = "wss://dev.api.sac19.jatsqi.com/";
 
 var updateXMLStr = "";
-
+var suppressUpdates = false;
 var initialSymptoms = null;
+var updatePromise = null;
 
 
 var foundIndices;

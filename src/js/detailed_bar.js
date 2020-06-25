@@ -50,12 +50,28 @@ function handleErrorsDetailRequest( statusCode )
     makeConfirmPopup(displayText, null, null, null, true, "Schließen");
 }
 
+function parseInfectedID(xmlDocument)
+{
+    let children = xmlDocument.children[0].children;
+    let id;
+    for (let index = 0; index < children.length; index++)
+    {
+        if (children[index].nodeName === "id")
+        {
+            id = parseInt(children[index].innerHTML);
+            break;
+        }
+    }
+    return id;
+}
+
 // set the detailed view with a given xml file for all specific data
 function setDetailedView(xml_doc)
 {
     if (xml_doc != null)
     {
         detail_bar = 2;
+        currentInfectedId = parseInfectedID(xml_doc);
         symptomsList = [];
 
         let displayDetailed = getXSLT("./xslt_scripts/xslt_detailed_view.xsl");
@@ -219,6 +235,7 @@ function closeRightBar()
     if (detailedView.className.indexOf("detailed_slidein") > -1) {
         detailedView.className = "floating_object detailed_slideout";
     }
+    currentInfectedId = null;
 }
 
 function prescribeTest(id)
