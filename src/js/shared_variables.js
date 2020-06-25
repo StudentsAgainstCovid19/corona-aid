@@ -29,6 +29,7 @@ var realtimeWebSocket;
 var apiUrl = "https://dev.api.corona-aid-ka.de/";
 var apiWebSocketUrl = "wss://dev.api.sac19.jatsqi.com/";
 
+var updateXMLStr = "";
 
 var initialSymptoms = null;
 

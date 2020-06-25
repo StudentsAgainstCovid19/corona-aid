@@ -15,6 +15,5 @@ async function initCallList(openCallListBool = true)
     runXSLT(displayCallXSL, prioList, "call_list_div");
     if (openCallListBool) openCallList();
     addSearchBarListener();
-    setMarkers();
-
+    if (openCallListBool) setMarkers();
 }

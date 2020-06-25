@@ -13,11 +13,18 @@ function init()
 }
 
 function connectWebSocket() {
-    realtimeWebSocket = new WebSocket(apiWebSocketUrl+"realtime/infected");
+    var evtSource = new EventSource(apiUrl + "realtime/sse");
 
-    realtimeWebSocket.onmessage = function(updateData) {
-        realtimeUpdate( updateData );
+
+    evtSource.onmessage = function(e) {
+        let parser = new DOMParser();
+        let xmlDocument = parser.parseFromString(e.data, "application/xml");
+        if (xmlDocument.children[0].nodeName !== "EmptySet")
+        {
+            realtimeUpdate(xmlDocument);
+        }
     }
+
 }
 
 function loadConfig()
@@ -61,20 +68,34 @@ function serviceUnavailableError() {
     document.getElementById("zoom_buttons").className += " invisible_object";
 }
 
-function realtimeUpdate( updateData )
+function realtimeUpdate( updateXML )
 {
-    console.log(updateData);
+    let serializer = new XMLSerializer();
+    let xml_str = "";
+    let items = updateXML.children[0].getElementsByTagName("item");
+    for (let index = 0; index < items.length; index++)
+    {
+        xml_str += serializer.serializeToString(items[index]);
+    }
+    updateXMLStr += xml_str;
+    runUpdate();
+}
 
+function runUpdate()
+{
     let serializer = new XMLSerializer();
     let parser = new DOMParser();
-    let xmlDoc = parser.parseFromString("<Container></Container>", "application/xml");
-    xmlDoc.children[0].innerHTML = serializer.serializeToString(updateData) +
-                                    serializer.serializeToString(prioList);
+    let xmlDoc = parser.parseFromString("<root></root>", "application/xml");
+    xmlDoc.children[0].innerHTML = "<updateList>" + updateXMLStr + "</updateList>";
+    xmlDoc.children[0].innerHTML += serializer.serializeToString(prioList, "application/xml");
 
     let updateXSL = getXSLT("./xslt_scripts/xslt_realtime_update.xsl");
 
+    console.log(xmlDoc)
+    console.log(updateXMLStr)
     prioList = runXSLT(updateXSL, xmlDoc);
+    console.log("Updated");
+    console.log(prioList)
     // TODO: prevent reloading of whole map but instead update just one marker
     initCallList(false);
-
 }

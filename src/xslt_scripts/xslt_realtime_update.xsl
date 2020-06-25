@@ -1,16 +1,12 @@
 <xsl:stylesheet version="1.0" xmlns:xsl="http://www.w3.org/1999/XSL/Transform">
     <xsl:template match="root">
         <infected>
-            <xsl:for-each select="Set/item">
+            <xsl:for-each select="infected/person">
                 <person>
                     <xsl:variable name="id" select="id"/>
                     <xsl:choose>
-                        <xsl:when test="count(/root/ArrayList/item[infectedId = $id]) > 0">
-                            <xsl:variable name="lastNode" select="/root/ArrayList/item[infectedId = $id][last()]"/>
-                            <locked><xsl:value-of select="lastNode/locked"/></locked>
-                            <done><xsl:value-of select="lastNode/done"/></done>
-                            <lastcall><xsl:value-of select="lastNode/lastUnsuccessfulCallTodayString"/></lastcall>
-                            <calledbool><xsl:value-of select="lastNode/called"/></calledbool>
+                        <xsl:when test="count(/root/updateList/item[infectedId = $id]) &gt; 0">
+                            <xsl:apply-templates select="/root/updateList/item[infectedId = $id][last()]"/>
                         </xsl:when>
                         <xsl:otherwise>
                             <locked><xsl:value-of select="locked"/></locked>
@@ -30,5 +26,21 @@
                 </person>
             </xsl:for-each>
         </infected>
+    </xsl:template>
+
+    <xsl:template match="item">
+        <locked><xsl:value-of select="locked"/></locked>
+        <done>
+            <xsl:choose>
+                <xsl:when test="done = 'true'">
+                    1
+                </xsl:when>
+                <xsl:otherwise>
+                    0
+                </xsl:otherwise>
+            </xsl:choose>
+        </done>
+        <lastcall><xsl:value-of select="lastUnsuccessfulCallTodayString"/></lastcall>
+        <calledbool><xsl:value-of select="called"/></calledbool>
     </xsl:template>
 </xsl:stylesheet>
