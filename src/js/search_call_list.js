@@ -145,10 +145,12 @@ function addKeyClickListenerToChild(elemId)
 
 function close_continue_search() {
     document.getElementById("continue_search_buttons").className += " invisible_object";
+    suppressUpdates = false;
+    enforceUpdate();
 }
 
-// TODO: supress updates
 function show_continue_search() {
+    suppressUpdates = true;
     updateButtonStates();
     let continue_search_bar = document.getElementById("continue_search_buttons");
     continue_search_bar.className = continue_search_bar.className.replace(" invisible_object", "");

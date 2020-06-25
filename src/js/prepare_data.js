@@ -88,7 +88,7 @@ function addHistoryItem(successProbability, infected_id, symptom_list)
 
 
     }
-    //postRequest("history", xml_string);
+    postRequest("history", xml_string);
 }
 
 function prescribeTest(infected_id)
