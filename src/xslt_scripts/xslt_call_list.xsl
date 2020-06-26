@@ -12,17 +12,6 @@
         </xsl:choose>
     </xsl:template>
 
-    <xsl:template name="wellbeing_svg_template">
-        <xsl:param name="wellbeing"/>
-        <xsl:choose>
-            <xsl:when test="$wellbeing = 1">verybad</xsl:when>
-            <xsl:when test="$wellbeing = 2">bad</xsl:when>
-            <xsl:when test="$wellbeing = 3">intermediate</xsl:when>
-            <xsl:when test="$wellbeing = 4">good</xsl:when>
-            <xsl:otherwise>verygood</xsl:otherwise>
-        </xsl:choose>
-    </xsl:template>
-
     <xsl:template name="wellbeing_desc">
         <xsl:param name="wellbeing"/>
         <xsl:choose>
@@ -51,11 +40,6 @@
                     </xsl:call-template>
                 </xsl:variable>
 
-                <xsl:variable name="wellbeing_svg">
-                    <xsl:call-template name="wellbeing_svg_template">
-                        <xsl:with-param name="wellbeing" select="subjectiveWellbeing"/>
-                    </xsl:call-template>
-                </xsl:variable>
 
                 <xsl:variable name="wellbeing_desc">
                     <xsl:call-template name="wellbeing_desc">
@@ -82,11 +66,6 @@
                             <span><xsl:value-of select="lastname"/>, <xsl:value-of select="firstnames"/></span>
                             <h2>Zustand:  </h2>
                             <span>
-                                <span class="wellbeing_imagespan">
-                                    <img class="wellbeing_indicator">
-                                        <xsl:attribute name="src">./assets/wellbeing_indicators/wellbeing_<xsl:value-of select="$wellbeing_svg"/>.svg</xsl:attribute>
-                                    </img>
-                                </span>
                                 <xsl:value-of select="$wellbeing_desc"/>
                             </span>
                             <h2>Tel.:</h2>

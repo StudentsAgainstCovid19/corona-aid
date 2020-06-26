@@ -5,7 +5,6 @@ async function calculatePriorities()
     var prioCalcXSL = getXSLT("./xslt_scripts/xslt_calculate_prio.xsl");
 
     prioList = runXSLT(prioCalcXSL, callListsXML);
-    console.log(prioList);
     initCallList();
 }
 

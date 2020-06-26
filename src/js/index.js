@@ -49,7 +49,7 @@ function configLoadErrorFn(statusCode) {
     switch (statusCode) {
         case 404:
             makeConfirmPopup("Die Konfigurationen konnten nicht geladen werden.\n" +
-                "Es werden standardkonfigurationen ausgewählt.\n" +
+                "Es werden Standardkonfigurationen ausgewählt.\n" +
                 "Die Website wird vermutlich nicht funktionieren.",
                 null, null, true, "Schließen");
             config_hash_table = {"standardLat":"49.013868","standardLon":"8.404346", "clusteredDistance": "200",

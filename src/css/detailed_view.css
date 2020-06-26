@@ -71,6 +71,7 @@
     font-family: "HelveticaNeue-Light", "Helvetica Neue Light", "Helvetica Neue", Helvetica, Arial, "Lucida Grande", sans-serif;
     font-size: 15px;
     cursor: pointer;
+    outline: none;
 }
 
 #addSymptomButton:hover{
@@ -87,10 +88,19 @@
     font-weight: 300;
 }
 
-#notes_area{
+.notes_field {
     resize: none;
     margin-left: 1em;
     font-family: "HelveticaNeue-Light", "Helvetica Neue Light", "Helvetica Neue", Helvetica, Arial, "Lucida Grande", sans-serif;
+}
+
+.notesDiv{
+    overflow: auto;
+    margin: 1em;
+    border: solid black 3px;
+    border-radius: 10px;
+    padding-left: 1em;
+    padding-right: 1em;
 }
 
 #textInformationen{

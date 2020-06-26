@@ -59,13 +59,19 @@
     <xsl:template name="dayFormatting">
         <xsl:param name="days"/>
 
-        <xsl:variable name="dayText">
-            <xsl:choose>
-                <xsl:when test="$days = 1">Tag</xsl:when>
-                <xsl:otherwise>Tagen</xsl:otherwise>
-            </xsl:choose>
-        </xsl:variable>
-        <xsl:value-of select="$days"/><xsl:text> </xsl:text><xsl:value-of select="$dayText"/>
+        <xsl:choose>
+            <xsl:when test="$days = 1">gestern</xsl:when>
+            <xsl:otherwise><xsl:value-of select="$days"/><xsl:text> </xsl:text>Tagen</xsl:otherwise>
+        </xsl:choose>
+    </xsl:template>
+
+    <xsl:template name="callStrFormatting">
+        <xsl:param name="calls"/>
+
+        <xsl:choose>
+            <xsl:when test="$calls = 1">dem letzten Anruf</xsl:when>
+            <xsl:otherwise><xsl:value-of select="$calls"/><xsl:text> </xsl:text>Anrufen</xsl:otherwise>
+        </xsl:choose>
     </xsl:template>
 
     <xsl:template name="getWellbeingColor">
@@ -76,6 +82,7 @@
             <xsl:when test="$wellbeing = 3">orange</xsl:when>
             <xsl:when test="$wellbeing = 4">lightgreen</xsl:when>
             <xsl:when test="$wellbeing = 5">darkgreen</xsl:when>
+            <xsl:otherwise>white</xsl:otherwise>
         </xsl:choose>
     </xsl:template>
 
@@ -97,8 +104,8 @@
         <xsl:if test="$amountValues > 0">
 
             <xsl:variable name="daysBeforeText">
-                <xsl:call-template name="dayFormatting">
-                    <xsl:with-param name="days" select="$amountValues"/>
+                <xsl:call-template name="callStrFormatting">
+                    <xsl:with-param name="calls" select="$amountValues"/>
                 </xsl:call-template>
             </xsl:variable>
 
@@ -263,7 +270,7 @@
                 <xsl:with-param name="prescribed">0</xsl:with-param>
             </xsl:call-template>
         </xsl:variable>
-         <xsl:variable name="lastTestPrescribedIndex">
+         <xsl:variable name="lastTestPrescribedId">
              <xsl:call-template name="lastTestIndex">
                  <xsl:with-param name="prescribed">1</xsl:with-param>
              </xsl:call-template>
@@ -288,8 +295,8 @@
 
             <label  id="test_result_label" for="test_result_checkbox">
                 Test <xsl:choose>
-                <xsl:when test="$lastTestDoneId = -1">noch nicht stattgefunden</xsl:when>
-                <xsl:when test="/InfectedDto/tests/test[$lastTestDoneId]/result = 1">
+                <xsl:when test="$lastTestDoneId = ''">noch nicht stattgefunden</xsl:when>
+                <xsl:when test="/InfectedDto/tests/test[id = $lastTestDoneId]/result = 1">
                     positiv (vor <xsl:value-of select="$testDaysText"/>)
                 </xsl:when>
                 <xsl:otherwise>negativ (vor <xsl:value-of select="$testDaysText"/>)</xsl:otherwise>
@@ -297,13 +304,17 @@
 
             </label>
         <button id="prescribe_test" class="dialogButton btn-gray">
-            <xsl:if test="$lastTestDoneId = -1">
-                <xsl:attribute name="onclick">prescribeTest(<xsl:value-of select="id"/>);</xsl:attribute>
-            </xsl:if>
-            <xsl:if test="/InfectedDto/tests/test[id = $lastTestDoneId]/result = 1">
-                <xsl:attribute name="disabled">disabled;</xsl:attribute>
-            </xsl:if>
-            Test anordnen</button>
+            <xsl:choose>
+                <xsl:when test="not(/InfectedDto/tests/test[id = $lastTestPrescribedId]/result = 0)">
+                    <xsl:attribute name="onclick">prescribeTest(<xsl:value-of select="id"/>);</xsl:attribute>
+                    Test anordnen
+                </xsl:when>
+                <xsl:otherwise>
+                    <xsl:attribute name="disabled">disabled;</xsl:attribute>
+                    Test wurde angeordnet
+                </xsl:otherwise>
+            </xsl:choose>
+        </button>
         </div>
             </div>
 
@@ -321,7 +332,22 @@
             </p>
         </div>
         <p class="text">Weitere Hinweise:</p>
-        <textarea id="notes_area" rows="10" cols="30" maxlength="100"/>
+        <div>
+            <textarea id="notes_area" class="notes_field" rows="10" cols="30" maxlength="100"/>
+            <button class="dialogButton btn-gray">
+                <xsl:choose>
+                    <xsl:when test="count(/InfectedDto/historyItems/historyItem[(notes = '')]) > 0">
+                        <xsl:attribute name="onclick">showNotes();</xsl:attribute>
+                        Notizen anzeigen
+                    </xsl:when>
+                    <xsl:otherwise>
+                        <xsl:attribute name="disabled"/>
+                        Keine Notizen vorhanden
+                    </xsl:otherwise>
+                </xsl:choose>
+            </button>
+        </div>
+
 
 
 

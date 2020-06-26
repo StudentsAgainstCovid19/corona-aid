@@ -17,14 +17,14 @@ async function search_call_list()
     for (let i = 0; i<call_list_items.length; i++)
     {
         nameText = call_list_items[i].getElementsByTagName("span")[0].innerText;
-        phoneText = call_list_items[i].getElementsByTagName("span")[3].innerText;
+        phoneText = call_list_items[i].getElementsByTagName("span")[2].innerText;
         text = (nameText+" "+phoneText.replace("Tel.: ","")).replace(",", "").toLowerCase();
         if (check_in(text, words))
         {
             hits.push(i);
         }
-
     }
+
     foundIndices = hits;
     currentFoundIndex = 0;
     if (hits.length > 0)
@@ -112,8 +112,7 @@ function addSearchBarListener()
 function addKeyClickListenerToChild(elemId)
 {
     let box = document.getElementById(elemId).children[0];
-    var keyDDown = false; // to prevent multiple triggers when pressing once
-    var keySDown = false;
+    onEnter = false;
 
     box.addEventListener("keyup", function (event) {
 
@@ -121,7 +120,9 @@ function addKeyClickListenerToChild(elemId)
         setTimeout(function(){calledNext = false;}, 200);
         if ( event.key === "Enter" )
         {
+            if( onEnter ) return;
             box.click();
+            onEnter = true;
         }
         else if (event.key === "s")
         {
@@ -145,6 +146,7 @@ function addKeyClickListenerToChild(elemId)
 
 function close_continue_search() {
     document.getElementById("continue_search_buttons").className += " invisible_object";
+    console.log(); // without, hiding of continue search box is very laggy
     suppressUpdates = false;
     enforceUpdate();
 }

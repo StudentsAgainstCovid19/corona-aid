@@ -2,9 +2,8 @@
 function try_acquire_lock(id) { // id for infected
     close_continue_search();
     if (detail_bar === 2) return;
-
+    console.log("Trying to load infected: "+id);
     detailedXML = loadXMLDoc(apiUrl + "infected/" + id, "application/xml", handleErrorsDetailRequest);
-    console.log(detailedXML.getElementsByTagName("done")[0].innerHTML);
 
     if ( detailedXML )
     {
@@ -24,7 +23,6 @@ function try_acquire_lock(id) { // id for infected
             slideOpenRightBar();
             setDetailedView(detailedXML);
         }
-
     }
     console.log(detailedXML);
 }
@@ -83,7 +81,6 @@ function setDetailedView(xml_doc)
 
 
         let symptomsXSL = getXSLT("./xslt_scripts/xslt_symptom_div.xsl");
-        console.log(initialSymptoms);
 
         runXSLT(symptomsXSL, initialSymptoms, "symptomsDiv");
 
@@ -94,6 +91,22 @@ function setDetailedView(xml_doc)
             symptomsList.push(id);
         }
     }
+}
+
+function showNotes()
+{
+    if (!detailedXML) return;
+
+    var notesXSL = getXSLT("./xslt_scripts/xslt_notes_popup.xsl");
+    runXSLT(notesXSL, detailedXML, "popup_window");
+    let notesDiv = document.getElementById("notesHistoryDiv");
+    console.log(notesDiv);
+    console.log(notesDiv.scrollHeight);
+    if (notesDiv)
+    {
+        setTimeout(function(){notesDiv.scrollTop = notesDiv.scrollHeight;}, 50);
+    }
+    displayPopUp();
 }
 
 function displayPopUp()

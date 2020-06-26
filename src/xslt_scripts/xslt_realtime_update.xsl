@@ -13,6 +13,7 @@
                             <done><xsl:value-of select="done"/></done>
                             <lastcall><xsl:value-of select="lastcall"/></lastcall>
                             <calledbool><xsl:value-of select="calledbool"/></calledbool>
+<!--                            <subjectiveWellbeing><xsl:value-of select="subjectiveWellbeing"/></subjectiveWellbeing>-->
                         </xsl:otherwise>
                     </xsl:choose>
                     <id><xsl:value-of select="id"/></id>
@@ -23,6 +24,7 @@
                     <lat><xsl:value-of select="lat"/></lat>
                     <lon><xsl:value-of select="lon"/></lon>
                     <subjectiveWellbeing><xsl:value-of select="subjectiveWellbeing"/></subjectiveWellbeing>
+                    <priority><xsl:value-of select="priority"/></priority>
                 </person>
             </xsl:for-each>
         </infected>
@@ -42,5 +44,6 @@
         </done>
         <lastcall><xsl:value-of select="lastUnsuccessfulCallTodayString"/></lastcall>
         <calledbool><xsl:value-of select="called"/></calledbool>
+<!--        <subjectiveWellbeing><xsl:value-of select="subjectiveWellbeing"/></subjectiveWellbeing>-->
     </xsl:template>
 </xsl:stylesheet>
