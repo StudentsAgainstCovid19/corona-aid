@@ -115,7 +115,6 @@ async function setClusterLayer() {
                 }
 
                 const key = [size, amountDone, amountCalled];
-                console.log(key);
                 styleSVGIcon = piechart_cache[key];
                 if (!styleSVGIcon)
                 { // caching did not work due to the fact that styles are disposed if a cluster is reloaded / disposed.
@@ -260,10 +259,12 @@ function createPieChart(size, amountDone, amountCalled) {
     let chart = runXSLT(pieChartXSL, xmlDoc);
 
     let serializer = new XMLSerializer();
+
     return new ol.style.Icon({
         opacity: 1,
         src: "data:image/svg+xml;utf8," + serializer.serializeToString(chart),
-        scale: parseFloat(config_hash_table["pieChartScale"])
+        scale: parseFloat(config_hash_table["pieChartScaleConstant"])
+            + (size-amountDone) * parseFloat(config_hash_table["pieChartScaleLinear"])
     });
 }
 

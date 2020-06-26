@@ -93,8 +93,6 @@ async function runUpdate()
     let xmlDoc = parser.parseFromString("<root></root>", "application/xml");
     xmlDoc.children[0].innerHTML = "<updateList>" + updateXMLStr + "</updateList>";
     xmlDoc.children[0].innerHTML += serializer.serializeToString(prioList, "application/xml");
-    console.log("Updated");
-    console.log(prioList);
 
     let updateXSL = getXSLT("./xslt_scripts/xslt_realtime_update.xsl");
 
