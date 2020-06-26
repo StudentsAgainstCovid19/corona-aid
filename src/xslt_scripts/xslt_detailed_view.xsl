@@ -331,21 +331,23 @@
                 </input>
             </p>
         </div>
-        <p class="text">Weitere Hinweise:</p>
-        <div>
+        <div id="notesDiv">
+            <div id="notesHeaderDiv">
+                <p id="notesHeaderText" class="text">Weitere Hinweise:</p>
+                <button  class="dialogButton btn-gray">
+                    <xsl:choose>
+                        <xsl:when test="count(/InfectedDto/historyItems/historyItem[(notes != '')]) > 0">
+                            <xsl:attribute name="onclick">showNotes();</xsl:attribute>
+                            Notizen anzeigen
+                        </xsl:when>
+                        <xsl:otherwise>
+                            <xsl:attribute name="disabled"/>
+                            Keine Notizen vorhanden
+                        </xsl:otherwise>
+                    </xsl:choose>
+                </button>
+            </div>
             <textarea id="notes_area" class="notes_field" rows="10" cols="30" maxlength="100"/>
-            <button class="dialogButton btn-gray">
-                <xsl:choose>
-                    <xsl:when test="count(/InfectedDto/historyItems/historyItem[(notes = '')]) > 0">
-                        <xsl:attribute name="onclick">showNotes();</xsl:attribute>
-                        Notizen anzeigen
-                    </xsl:when>
-                    <xsl:otherwise>
-                        <xsl:attribute name="disabled"/>
-                        Keine Notizen vorhanden
-                    </xsl:otherwise>
-                </xsl:choose>
-            </button>
         </div>
 
 

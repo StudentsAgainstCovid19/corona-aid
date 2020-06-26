@@ -8,16 +8,14 @@
         <div id="notesHistoryDiv" class="notesDiv">
             <xsl:apply-templates select="historyItems/historyItem[not(notes = '')]"/>
         </div>
-        <button onclick="hidePopUp();" class="dialogButton cancel_button">Schließen</button>
+        <div id="hideNotesButtonDiv">
+        <button id="hideNotesButton" onclick="hidePopUp();" class="dialogButton cancel_button">Schließen</button>
+        </div>
     </xsl:template>
 
     <xsl:template match="historyItem">
-        <div>
-            <p>Vom <xsl:value-of select="timestamp"/>:</p>
-            <textarea class="notes_field">
-                <xsl:attribute name="readonly"/>
-                <xsl:value-of select="notes"/>
-            </textarea>
+        <div id="notesItem">
+            <p class="bold_text">Vom <xsl:value-of select="timestamp"/>: <span id="notesText"><xsl:value-of select="notes"/></span></p>
         </div>
     </xsl:template>
 </xsl:stylesheet>
