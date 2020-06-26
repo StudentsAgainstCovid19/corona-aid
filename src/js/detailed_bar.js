@@ -23,7 +23,6 @@ function try_acquire_lock(id) { // id for infected
             slideOpenRightBar();
             setDetailedView(detailedXML);
         }
-
     }
     console.log(detailedXML);
 }
@@ -92,6 +91,22 @@ function setDetailedView(xml_doc)
             symptomsList.push(id);
         }
     }
+}
+
+function showNotes()
+{
+    if (!detailedXML) return;
+
+    var notesXSL = getXSLT("./xslt_scripts/xslt_notes_popup.xsl");
+    runXSLT(notesXSL, detailedXML, "popup_window");
+    let notesDiv = document.getElementById("notesHistoryDiv");
+    console.log(notesDiv);
+    console.log(notesDiv.scrollHeight);
+    if (notesDiv)
+    {
+        setTimeout(function(){notesDiv.scrollTop = notesDiv.scrollHeight;}, 50);
+    }
+    displayPopUp();
 }
 
 function displayPopUp()
