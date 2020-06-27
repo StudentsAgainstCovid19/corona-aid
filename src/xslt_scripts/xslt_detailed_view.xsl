@@ -212,18 +212,20 @@
 
         <div id="overallDiv">
         <div id="informationDiv">
-        <p id="textInformationen" class="text bold_text">Informationen zu <xsl:value-of select="surname"/>, <xsl:value-of select="forename"/></p>
-        <p class="text">Alter: <xsl:value-of select="age"/> Jahre</p>
-        <p class="text">Tel.: <span class="bold_text"><xsl:choose>
-            <xsl:when test="count(/InfectedDto/contactData/contactItem[contactKey = 'phone']) > 0">
-                <xsl:value-of select="/InfectedDto/contactData/contactItem[contactKey = 'phone']/contactValue"/>
-            </xsl:when>
-            <xsl:when test="count(/InfectedDto/contactData/contactItem[contactKey = 'mobile']) > 0">
-                <xsl:value-of select="/InfectedDto/contactData/contactItem[contactKey = 'mobile']/contactValue"/>
-            </xsl:when>
-            <xsl:otherwise>nicht vorhanden. Fehler!</xsl:otherwise>
-        </xsl:choose></span></p>
-        <p class="text"><xsl:value-of select="street"/><xsl:text> </xsl:text><xsl:value-of select="houseNumber"/></p>
+            <p id="textInformationen" class="text bold_text">Informationen zu <xsl:value-of select="surname"/>, <xsl:value-of select="forename"/></p>
+            <p class="text">Alter: <xsl:value-of select="age"/> Jahre</p>
+            <p class="text">Tel.: <span class="bold_text"><xsl:choose>
+                <xsl:when test="count(/InfectedDto/contactData/contactItem[contactKey = 'phone']) > 0">
+                    <xsl:value-of select="/InfectedDto/contactData/contactItem[contactKey = 'phone']/contactValue"/>
+                </xsl:when>
+                <xsl:when test="count(/InfectedDto/contactData/contactItem[contactKey = 'mobile']) > 0">
+                    <xsl:value-of select="/InfectedDto/contactData/contactItem[contactKey = 'mobile']/contactValue"/>
+                </xsl:when>
+                <xsl:otherwise>nicht vorhanden. Fehler!</xsl:otherwise>
+            </xsl:choose></span></p>
+            <p class="text"><xsl:value-of select="street"/><xsl:text> </xsl:text><xsl:value-of select="houseNumber"/></p>
+            <p class="text"><xsl:value-of select="postalCode"/><xsl:text> </xsl:text><xsl:value-of select="city"/></p>
+            <p class="text">Versicherungsnummer: <xsl:value-of select="healthInsuranceNumber"/></p>
         </div>
 
         <xsl:variable name="lastWellbeing">

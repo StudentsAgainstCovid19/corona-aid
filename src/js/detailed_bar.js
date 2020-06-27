@@ -334,8 +334,14 @@ function failedCall(id)
 
 function closeDetailedView(id)
 {
-    putRequest("infected/unlock/"+id);
-    clearRightBar();
+    makeConfirmPopup(   "Sind Sie sich sicher, dass Sie die Patientenansicht schließen wollen?\n" +
+                            "Ein Datenverlust wird die Folge sein. Falls der Patient nicht abgenommen\n" +
+                            "hat, wählen Sie den Button \"nicht abgenommen\"!\n\n" +
+                            "                   Trotzdem fortfahren?                                ",
+        function(infectedId){
+            putRequest("infected/unlock/"+id);
+            clearRightBar();
+        }, function(notUsed){}, id);
 }
 
 function submitDetailView(id)
