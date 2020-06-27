@@ -19,13 +19,13 @@
     <link rel="stylesheet" href="./css/popup_style.css" type="text/css" />
     <link rel="stylesheet" href="./css/scrollbars.css" type="text/css" />
     <!-- JS -->
+    <script src="./js/slide_animations_listeners.js"></script>
     <script src="./js/index.js"></script>
     <script src="./js/shared_variables.js"></script>
     <script src="./js/clustered_list.js"></script>
     <script src="./js/detailed_bar.js"></script>
     <script src="./js/CoronaOSM.js"></script>
     <script src="./js/call_list.js"></script>
-    <script src="./js/slide_animations_listeners.js"></script>
     <script src="./js/search_call_list.js"></script>
     <script src="./js/prepare_data.js"></script>
     <!-- Embed XSLT -->
@@ -35,8 +35,10 @@
   <body onload="init();">
     <div id="call_list_div" class="floating_object"></div>
     <div id="map_div"></div>
-    <div id="infected_detailed_view_right" class="floating_object"></div>
-    <div id="footer" class="floating_object"></div>
+    <div id="right_bar" class="floating_object">
+      <span id="progressBarSpan"><div id="progressBarDiv" class="floating_object"></div></span>
+      <div id="infected_detailed_view_right"></div>
+    </div>
 
     <div id="search_bar" class="floating_object">
       <div id="search_container">
@@ -52,6 +54,7 @@
           </button>
         </div>
       </div>
+
       <span id="continue_search_span">
         <div id="continue_search_buttons" class="floating_object invisible_object">
           <button class="continue_search_btn" onclick="close_continue_search();">

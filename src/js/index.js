@@ -121,3 +121,9 @@ function cleanUp()
         postRequest("infected/unlock/"+currentInfectedId);
     }
 }
+
+function showProgressBar()
+{
+    let progressXSL = getXSLT("./xslt_scripts/xslt_progressbar.xsl");
+    runXSLT(progressXSL, prioList, "progressBarDiv");
+}

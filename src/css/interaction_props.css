@@ -154,3 +154,16 @@
 .disabled_button {
     background-color: darkgrey;
 }
+
+#progressBarSpan {
+    position: relative;
+    bottom: 5%;
+    left: -50%;
+}
+
+#progressBarDiv {
+    width: 100px;
+    height: 10px;
+    background-color: white;
+    display: flex;
+}

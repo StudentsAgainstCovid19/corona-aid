@@ -7,6 +7,7 @@ function try_acquire_lock(id) { // id for infected
 
     if ( detailedXML )
     {
+        addLockingTimer(id);
         if ( detailedXML.getElementsByTagName("done")[0].innerHTML === "true") {
             makeConfirmPopup("Dieser Patient wurde heute bereits bearbeitet.\nFortfahren mit dem Editieren?",
                 function (infectedId) {
@@ -25,6 +26,36 @@ function try_acquire_lock(id) { // id for infected
         }
     }
     console.log(detailedXML);
+}
+
+function addLockingTimer(infectedId)
+{
+    if ( autoWarningLocking ) clearTimeout( autoWarningLocking );
+    addAutoUnlockTimeout(infectedId);
+    autoWarningLocking = setTimeout(function(){
+        makeConfirmPopup("Ihre Session läuft ab.\n Wollen Sie weiterhin den Patienten bearbeiten?",
+            function(){
+                postRequest("infected/lock/" + infectedId);
+                addLockingTimer(infectedId);
+            }, function(){
+                if ( autoUnlockTimeout ) clearTimeout(autoUnlockTimeout);
+                putRequest("infected/unlock/" + infectedId);
+                clearRightBar();
+            }, infectedId);
+    }, parseInt(config_hash_table["autoResetOffset"])*0.8*1000);
+
+
+}
+
+function addAutoUnlockTimeout(infectedId)
+{
+    if ( autoUnlockTimeout ) clearTimeout(autoUnlockTimeout);
+    autoUnlockTimeout = setTimeout(function(){
+        onCancelPopup();
+        putRequest("infected/unlock/"+infectedId);
+        clearRightBar();
+    }, parseInt(config_hash_table["autoResetOffset"])*1000);
+
 }
 
 function handleErrorsDetailRequest( statusCode )
@@ -234,22 +265,6 @@ function constructIdList()
     return parser.parseFromString(temp_id_string + "</symptomIdList>", "application/xml");
 }
 
-function slideOpenRightBar()
-{
-    let detailedView = document.getElementById("infected_detailed_view_right");
-    if (detailedView.className.indexOf("detailed_slideout") > -1 || detailedView.className === "floating_object") {
-        detailedView.className = "floating_object detailed_slidein";
-    }
-}
-
-function closeRightBar()
-{
-    let detailedView = document.getElementById("infected_detailed_view_right");
-    if (detailedView.className.indexOf("detailed_slidein") > -1) {
-        detailedView.className = "floating_object detailed_slideout";
-    }
-    currentInfectedId = null;
-}
 
 function prescribeTest(id)
 {

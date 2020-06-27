@@ -23,3 +23,21 @@ function openCallList()
         call_list.className = "call_list_slidein";
     }
 }
+
+
+function slideOpenRightBar()
+{
+    let detailedView = document.getElementById("right_bar");
+    if (detailedView.className.indexOf("detailed_slideout") > -1 || detailedView.className === "floating_object") {
+        detailedView.className = "floating_object detailed_slidein";
+    }
+}
+
+function closeRightBar()
+{
+    let detailedView = document.getElementById("right_bar");
+    if (detailedView.className.indexOf("detailed_slidein") > -1) {
+        detailedView.className = "floating_object detailed_slideout";
+    }
+    currentInfectedId = null;
+}

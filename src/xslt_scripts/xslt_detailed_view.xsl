@@ -114,7 +114,7 @@
         <span>
             <svg id="wellbeing_indicator_history" height="100"   xmlns="http://www.w3.org/2000/svg">
                 <xsl:attribute name="width"><xsl:value-of select="$width"/></xsl:attribute>
-
+            <!-- TODO: improve code quality, no foreach -->
                 <xsl:for-each select="/InfectedDto/historyItems/historyItem[not(status = 0)][position() > ($rawAmount - $amountValues)]">
                     <xsl:sort select="timestamp" data-type="number"/>
                     <xsl:variable name="color">
@@ -146,7 +146,7 @@
 
     <xsl:template name="historyItemNotNull">
         <xsl:variable name="amountFound" select="count(/InfectedDto/historyItems/historyItem[not(status = 0)])"/>
-        <xsl:choose> <!-- TODO -->
+        <xsl:choose>
             <xsl:when test="$amountFound = 0">-1</xsl:when>
             <xsl:otherwise>
                 <xsl:variable name="indexLegit" select="count(/InfectedDto/historyItems/historyItem[not(status = 0)][last()]/preceding-sibling::*)"/>
@@ -183,7 +183,7 @@
 
         <xsl:choose>
             <xsl:when test="$indexLastHistoryItem = -1">1</xsl:when>
-            <xsl:otherwise> <!-- TODO -->
+            <xsl:otherwise>
                 <xsl:value-of select="/InfectedDto/historyItems/historyItem[not(status = 0)][last()]/personalFeeling"/>
             </xsl:otherwise>
         </xsl:choose>
