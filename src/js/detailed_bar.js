@@ -1,12 +1,13 @@
 
 function try_acquire_lock(id) { // id for infected
     close_continue_search();
-    if (detail_bar === 2) return;
+    if (detail_bar === 2) return showSnackbar("Die Patientenansicht ist noch geöffnet.\nBitte kümmern Sie sich erst um den derzeitigen Patienten.");
     console.log("Trying to load infected: "+id);
     detailedXML = loadXMLDoc(apiUrl + "infected/" + id, "application/xml", handleErrorsDetailRequest);
 
     if ( detailedXML )
     {
+        addLockingTimer(id);
         if ( detailedXML.getElementsByTagName("done")[0].innerHTML === "true") {
             makeConfirmPopup("Dieser Patient wurde heute bereits bearbeitet.\nFortfahren mit dem Editieren?",
                 function (infectedId) {
@@ -25,6 +26,42 @@ function try_acquire_lock(id) { // id for infected
         }
     }
     console.log(detailedXML);
+}
+
+function addLockingTimer(infectedId)
+{
+    if ( autoWarningLocking ) clearTimeout( autoWarningLocking );
+    addAutoUnlockTimeout(infectedId);
+    autoWarningLocking = setTimeout(function(){
+        makeConfirmPopup("Ihre Session läuft ab.\n Wollen Sie weiterhin den Patienten bearbeiten?",
+            function(){
+                postRequest("infected/lock/" + infectedId);
+                addLockingTimer(infectedId);
+            }, function(){
+                if ( autoUnlockTimeout ) clearTimeout(autoUnlockTimeout);
+                putRequest("infected/unlock/" + infectedId);
+                clearRightBar();
+            }, infectedId);
+    }, parseInt(config_hash_table["autoResetOffset"])*0.8*1000);
+
+
+}
+
+function addAutoUnlockTimeout(infectedId)
+{
+    if ( autoUnlockTimeout ) clearTimeout(autoUnlockTimeout);
+    autoUnlockTimeout = setTimeout(function(){
+        onCancelPopup();
+        putRequest("infected/unlock/"+infectedId);
+        clearRightBar();
+    }, parseInt(config_hash_table["autoResetOffset"])*1000);
+
+}
+
+function deleteTimeouts()
+{
+    if ( autoUnlockTimeout ) clearTimeout(autoUnlockTimeout);
+    if ( autoWarningLocking ) clearTimeout(autoWarningLocking);
 }
 
 function handleErrorsDetailRequest( statusCode )
@@ -100,8 +137,7 @@ function showNotes()
     var notesXSL = getXSLT("./xslt_scripts/xslt_notes_popup.xsl");
     runXSLT(notesXSL, detailedXML, "popup_window");
     let notesDiv = document.getElementById("notesHistoryDiv");
-    console.log(notesDiv);
-    console.log(notesDiv.scrollHeight);
+
     if (notesDiv)
     {
         setTimeout(function(){notesDiv.scrollTop = notesDiv.scrollHeight;}, 50);
@@ -234,22 +270,6 @@ function constructIdList()
     return parser.parseFromString(temp_id_string + "</symptomIdList>", "application/xml");
 }
 
-function slideOpenRightBar()
-{
-    let detailedView = document.getElementById("infected_detailed_view_right");
-    if (detailedView.className.indexOf("detailed_slideout") > -1 || detailedView.className === "floating_object") {
-        detailedView.className = "floating_object detailed_slidein";
-    }
-}
-
-function closeRightBar()
-{
-    let detailedView = document.getElementById("infected_detailed_view_right");
-    if (detailedView.className.indexOf("detailed_slidein") > -1) {
-        detailedView.className = "floating_object detailed_slideout";
-    }
-    currentInfectedId = null;
-}
 
 function prescribeTest(id)
 {
@@ -334,8 +354,15 @@ function failedCall(id)
 
 function closeDetailedView(id)
 {
-    putRequest("infected/unlock/"+id);
-    clearRightBar();
+    makeConfirmPopup(   "Sind Sie sich sicher, dass Sie die Patientenansicht schließen wollen?\n" +
+                            "Ein Datenverlust wird die Folge sein. Falls der Patient nicht abgenommen\n" +
+                            "hat, wählen Sie den Button \"nicht abgenommen\"!\n\n" +
+                            "                   Trotzdem fortfahren?                                ",
+        function(infectedId){
+            deleteTimeouts();
+            putRequest("infected/unlock/"+id);
+            clearRightBar();
+        }, function(notUsed){}, id);
 }
 
 function submitDetailView(id)
@@ -364,4 +391,16 @@ function clearRightBar()
     detail_bar = 0;
     closeRightBar();
     document.getElementById("infected_detailed_view_right").innerHTML = "";
+}
+
+function showSnackbar(message)
+{
+    let snackbar = document.getElementById("snackbar");
+    let snackbarText = document.getElementById("centeredSnackbarText");
+    snackbarText.innerText = message;
+    snackbar.className = snackbar.className.replace(" showSnackbarAnimation", "");
+    setTimeout(function(){snackbar.className += " showSnackbarAnimation"}, 50);
+
+    let detailedView = document.getElementById("infected_detailed_view_right");
+    detailedView.scrollTop = detailedView.scrollHeight;
 }

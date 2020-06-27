@@ -87,7 +87,7 @@
     </xsl:template>
 
     <xsl:template match="historyItems">
-        <xsl:variable name="rawAmount" select="count(/InfectedDto/historyItems/historyItem[not(status = 0)])"/>
+        <xsl:variable name="rawAmount" select="count(historyItems/historyItem[not(status = 0)])"/>
         <xsl:variable name="amountValues">
             <xsl:choose>
                 <xsl:when test="$rawAmount > 7">7</xsl:when>
@@ -114,8 +114,8 @@
         <span>
             <svg id="wellbeing_indicator_history" height="100"   xmlns="http://www.w3.org/2000/svg">
                 <xsl:attribute name="width"><xsl:value-of select="$width"/></xsl:attribute>
-
-                <xsl:for-each select="/InfectedDto/historyItems/historyItem[not(status = 0)][position() > ($rawAmount - $amountValues)]">
+            <!-- TODO: improve code quality, no foreach -->
+                <xsl:for-each select="historyItems/historyItem[not(status = 0)][position() > ($rawAmount - $amountValues)]">
                     <xsl:sort select="timestamp" data-type="number"/>
                     <xsl:variable name="color">
                         <xsl:call-template name="getWellbeingColor">
@@ -145,11 +145,11 @@
     </xsl:template>
 
     <xsl:template name="historyItemNotNull">
-        <xsl:variable name="amountFound" select="count(/InfectedDto/historyItems/historyItem[not(status = 0)])"/>
-        <xsl:choose> <!-- TODO -->
+        <xsl:variable name="amountFound" select="count(historyItems/historyItem[not(status = 0)])"/>
+        <xsl:choose>
             <xsl:when test="$amountFound = 0">-1</xsl:when>
             <xsl:otherwise>
-                <xsl:variable name="indexLegit" select="count(/InfectedDto/historyItems/historyItem[not(status = 0)][last()]/preceding-sibling::*)"/>
+                <xsl:variable name="indexLegit" select="count(historyItems/historyItem[not(status = 0)][last()]/preceding-sibling::*)"/>
                 <xsl:value-of select="$indexLegit"/>
             </xsl:otherwise>
         </xsl:choose>
@@ -157,7 +157,7 @@
 
     <xsl:template name="sumSymptomsTemplate">
         <xsl:choose>
-            <xsl:when test="/InfectedDto/historyItems = ''">0</xsl:when>
+            <xsl:when test="historyItems = ''">0</xsl:when>
             <xsl:otherwise>
                 <xsl:variable name="indexOfHistoryItem"><xsl:call-template name="historyItemNotNull"/></xsl:variable>
                 <xsl:choose>
@@ -165,7 +165,7 @@
                         0
                     </xsl:when>
                     <xsl:otherwise>
-                        <xsl:value-of select="sum(/InfectedDto/historyItems/historyItem[$indexOfHistoryItem]/degreeOfDanger)"/>
+                        <xsl:value-of select="sum(historyItems/historyItem[$indexOfHistoryItem]/degreeOfDanger)"/>
                     </xsl:otherwise>
                 </xsl:choose>
             </xsl:otherwise>
@@ -173,7 +173,7 @@
     </xsl:template>
 
     <xsl:template name="sumInitialDiseases">
-        <xsl:value-of select="sum(/InfectedDto/initialDiseases/degreeOfDanger)"/>
+        <xsl:value-of select="sum(initialDiseases/degreeOfDanger)"/>
     </xsl:template>
 
     <xsl:template name="getLatestWellbeing">
@@ -183,8 +183,8 @@
 
         <xsl:choose>
             <xsl:when test="$indexLastHistoryItem = -1">1</xsl:when>
-            <xsl:otherwise> <!-- TODO -->
-                <xsl:value-of select="/InfectedDto/historyItems/historyItem[not(status = 0)][last()]/personalFeeling"/>
+            <xsl:otherwise>
+                <xsl:value-of select="historyItems/historyItem[not(status = 0)][last()]/personalFeeling"/>
             </xsl:otherwise>
         </xsl:choose>
     </xsl:template>
@@ -193,17 +193,16 @@
         <xsl:param name="prescribed"/>
         <xsl:variable name="index">
             <xsl:choose>
-                <xsl:when test="$prescribed = 0"><xsl:value-of  select="/InfectedDto/tests/test[not(result = 0)][last()]/id"/></xsl:when>
-                <xsl:otherwise><xsl:value-of  select="/InfectedDto/tests/test[result = 0][last()]/id"/></xsl:otherwise>
+                <xsl:when test="$prescribed = 0"><xsl:value-of  select="tests/test[not(result = 0)][last()]/id"/></xsl:when>
+                <xsl:otherwise><xsl:value-of  select="tests/test[result = 0][last()]/id"/></xsl:otherwise>
             </xsl:choose>
         </xsl:variable>
 
         <xsl:choose>
-            <xsl:when test="not(/InfectedDto/tests/test[id = $index]/result = '')"><xsl:value-of select="$index"/></xsl:when>
+            <xsl:when test="not(tests/test[id = $index]/result = '')"><xsl:value-of select="$index"/></xsl:when>
             <xsl:otherwise>-1</xsl:otherwise>
         </xsl:choose>
     </xsl:template>
-
 
 
 
@@ -212,18 +211,20 @@
 
         <div id="overallDiv">
         <div id="informationDiv">
-        <p id="textInformationen" class="text bold_text">Informationen zu <xsl:value-of select="surname"/>, <xsl:value-of select="forename"/></p>
-        <p class="text">Alter: <xsl:value-of select="age"/> Jahre</p>
-        <p class="text">Tel.: <span class="bold_text"><xsl:choose>
-            <xsl:when test="count(/InfectedDto/contactData/contactItem[contactKey = 'phone']) > 0">
-                <xsl:value-of select="/InfectedDto/contactData/contactItem[contactKey = 'phone']/contactValue"/>
-            </xsl:when>
-            <xsl:when test="count(/InfectedDto/contactData/contactItem[contactKey = 'mobile']) > 0">
-                <xsl:value-of select="/InfectedDto/contactData/contactItem[contactKey = 'mobile']/contactValue"/>
-            </xsl:when>
-            <xsl:otherwise>nicht vorhanden. Fehler!</xsl:otherwise>
-        </xsl:choose></span></p>
-        <p class="text"><xsl:value-of select="street"/><xsl:text> </xsl:text><xsl:value-of select="houseNumber"/></p>
+            <p id="textInformationen" class="text bold_text">Informationen zu <xsl:value-of select="surname"/>, <xsl:value-of select="forename"/></p>
+            <p class="text">Alter: <xsl:value-of select="age"/> Jahre</p>
+            <p class="text">Tel.: <span class="bold_text"><xsl:choose>
+                <xsl:when test="count(contactData/contactItem[contactKey = 'phone']) > 0">
+                    <xsl:value-of select="contactData/contactItem[contactKey = 'phone']/contactValue"/>
+                </xsl:when>
+                <xsl:when test="count(contactData/contactItem[contactKey = 'mobile']) > 0">
+                    <xsl:value-of select="contactData/contactItem[contactKey = 'mobile']/contactValue"/>
+                </xsl:when>
+                <xsl:otherwise>nicht vorhanden. Fehler!</xsl:otherwise>
+            </xsl:choose></span></p>
+            <p class="text"><xsl:value-of select="street"/><xsl:text> </xsl:text><xsl:value-of select="houseNumber"/></p>
+            <p class="text"><xsl:value-of select="postalCode"/><xsl:text> </xsl:text><xsl:value-of select="city"/></p>
+            <p class="text">Versicherungsnummer: <xsl:value-of select="healthInsuranceNumber"/></p>
         </div>
 
         <xsl:variable name="lastWellbeing">
@@ -283,12 +284,12 @@
         <div id="prescribeTestDiv" class="flex-container-testresult">
         <xsl:variable name="testDaysText">
             <xsl:call-template name="dayFormatting">
-                <xsl:with-param name="days" select="/InfectedDto/tests/test[id = $lastTestDoneId]/timestamp"/>
+                <xsl:with-param name="days" select="tests/test[id = $lastTestDoneId]/timestamp"/>
             </xsl:call-template>
         </xsl:variable>
             <input type="checkbox" id="test_result_checkbox" name="test_result_checkbox" class="chk">
                 <xsl:attribute name="disabled"/>
-                <xsl:if test="/InfectedDto/tests/test[id = $lastTestDoneId]/result = 1">
+                <xsl:if test="tests/test[id = $lastTestDoneId]/result = 1">
                     <xsl:attribute name="checked"/>
                 </xsl:if>
             </input>
@@ -296,7 +297,7 @@
             <label  id="test_result_label" for="test_result_checkbox">
                 Test <xsl:choose>
                 <xsl:when test="$lastTestDoneId = ''">noch nicht stattgefunden</xsl:when>
-                <xsl:when test="/InfectedDto/tests/test[id = $lastTestDoneId]/result = 1">
+                <xsl:when test="tests/test[id = $lastTestDoneId]/result = 1">
                     positiv (vor <xsl:value-of select="$testDaysText"/>)
                 </xsl:when>
                 <xsl:otherwise>negativ (vor <xsl:value-of select="$testDaysText"/>)</xsl:otherwise>
@@ -305,7 +306,7 @@
             </label>
         <button id="prescribe_test" class="dialogButton btn-gray">
             <xsl:choose>
-                <xsl:when test="not(/InfectedDto/tests/test[id = $lastTestPrescribedId]/result = 0)">
+                <xsl:when test="not(tests/test[id = $lastTestPrescribedId]/result = 0)">
                     <xsl:attribute name="onclick">prescribeTest(<xsl:value-of select="id"/>);</xsl:attribute>
                     Test anordnen
                 </xsl:when>
@@ -336,7 +337,7 @@
                 <p id="notesHeaderText" class="text">Weitere Hinweise:</p>
                 <button  class="dialogButton btn-gray">
                     <xsl:choose>
-                        <xsl:when test="count(/InfectedDto/historyItems/historyItem[(notes != '')]) > 0">
+                        <xsl:when test="count(historyItems/historyItem[(notes != '')]) > 0">
                             <xsl:attribute name="onclick">showNotes();</xsl:attribute>
                             Notizen anzeigen
                         </xsl:when>

@@ -34,6 +34,8 @@ var updateXMLStr = "";
 var suppressUpdates = false;
 var initialSymptoms = null;
 var updatePromise = null;
+var autoWarningLocking = null;
+var autoUnlockTimeout = null;
 
 
 var foundIndices;

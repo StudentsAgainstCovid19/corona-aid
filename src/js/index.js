@@ -91,8 +91,8 @@ async function runUpdate()
     let serializer = new XMLSerializer();
     let parser = new DOMParser();
     let xmlDoc = parser.parseFromString("<root></root>", "application/xml");
-    xmlDoc.children[0].innerHTML = "<updateList>" + updateXMLStr + "</updateList>";
-    xmlDoc.children[0].innerHTML += serializer.serializeToString(prioList, "application/xml");
+    xmlDoc.children[0].appendChild(parser.parseFromString("<updateList>" + updateXMLStr + "</updateList>", "application/xml").children[0]);
+    xmlDoc.children[0].appendChild(deepCopyXML(prioList).children[0]);
 
     let updateXSL = getXSLT("./xslt_scripts/xslt_realtime_update.xsl");
 
@@ -102,7 +102,7 @@ async function runUpdate()
 
 function makeAsyncUpdateProcess()
 {
-    updatePromise = setInterval(runUpdate(), config_hash_table["frontendRefreshIntervall"]);
+    updatePromise = setInterval(function(){runUpdate();}, config_hash_table["frontendRefreshIntervall"]);
 }
 
 function enforceUpdate()
@@ -120,4 +120,10 @@ function cleanUp()
         // unlock infected
         postRequest("infected/unlock/"+currentInfectedId);
     }
+}
+
+function showProgressBar()
+{
+    let progressXSL = getXSLT("./xslt_scripts/xslt_progressbar.xsl");
+    runXSLT(progressXSL, prioList, "progressBarDiv");
 }

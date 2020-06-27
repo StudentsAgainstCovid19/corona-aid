@@ -1,24 +1,29 @@
 
 function initMap() {
     // OpenLayers takes lon as first argument and then lat
-    var lonlat=[parseFloat(config_hash_table["standardLon"]),
-        parseFloat(config_hash_table["standardLat"])];
-
     map = new ol.Map({
         target: 'map_div',
         controls: [],
+        loadTilesWhileAnimating: true,
+        loadTilesWhileInteracting: true,
         layers: [
             new ol.layer.Tile({
                 source: new ol.source.OSM()
             })
         ],
         view: new ol.View({
-            center: ol.proj.fromLonLat(lonlat),
+            center: getStandardCenter(),
             projection: "EPSG:3857",
             zoom: parseInt(config_hash_table["standardZoom"])
         })
     });
     setClusterLayer();
+}
+
+function getStandardCenter()
+{
+    return ol.proj.fromLonLat([ parseFloat(config_hash_table["standardLon"]),
+                                parseFloat(config_hash_table["standardLat"])]);
 }
 
 function readExt(feature, extensionsNode)
@@ -282,14 +287,20 @@ function calculateCirclePoint(angle)
 }
 
 // button listeners for zooming
-function zoom_in()
+function zoomIn()
 {
     map.getView().animate({zoom: map.getView().getZoom() + parseFloat(config_hash_table["zoomChange"]),
                     duration: parseInt(config_hash_table["animationDuration"])});
 }
 
-function zoom_out()
+function zoomOut()
 {
     map.getView().animate({zoom: map.getView().getZoom() - parseFloat(config_hash_table["zoomChange"]),
                     duration: parseInt(config_hash_table["animationDuration"])});
+}
+
+function standardZoom()
+{
+    map.getView().animate({zoom: config_hash_table["standardZoom"],
+                                    center: getStandardCenter()});
 }
