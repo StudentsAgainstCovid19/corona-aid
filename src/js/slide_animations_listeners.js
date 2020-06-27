@@ -1,7 +1,7 @@
 
 function toggle_call_list()
 {
-    let call_list = document.getElementById("call_list_div");
+    let call_list = document.getElementById("left_bar");
     let search_bar = document.getElementById("search_bar");
     if (call_list.className === "call_list_slideout") {
         call_list.className = "call_list_slidein";
@@ -15,7 +15,7 @@ function toggle_call_list()
 
 function openCallList()
 {
-    let call_list = document.getElementById("call_list_div");
+    let call_list = document.getElementById("left_bar");
     let search_bar = document.getElementById("search_bar");
     if (call_list.className.indexOf("call_list_slidein") === -1)
     {

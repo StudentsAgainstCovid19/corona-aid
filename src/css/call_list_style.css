@@ -1,13 +1,21 @@
-#call_list_div
-{
+#left_bar{
+    display:flex;
     position: fixed;
-    overflow: auto;
-    background-color: white;
+    overflow: hidden;
     width: 13%;
     z-index: 5;
     height: 100%;
     left: 0;
     font-family: "HelveticaNeue-Light", "Helvetica Neue Light", "Helvetica Neue", Helvetica, Arial, "Lucida Grande", sans-serif;
+    outline: none;
+}
+
+#call_list_div
+{
+    overflow: auto;
+    height: 100%;
+    width: 100%;
+    background-color: white;
 }
 
 .call_list_header

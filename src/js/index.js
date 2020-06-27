@@ -127,3 +127,8 @@ function showProgressBar()
     let progressXSL = getXSLT("./xslt_scripts/xslt_progressbar.xsl");
     runXSLT(progressXSL, prioList, "progressBarDiv");
 }
+
+function showHelp()
+{
+    console.log("Hier hast du dein Hilfemenü...");
+}

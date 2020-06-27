@@ -8,6 +8,7 @@
     border-left-width: 0.5em;
     border-left-color: darkgray;
     overflow: hidden;
+    display: flex;
 }
 
 #infected_detailed_view_right {
