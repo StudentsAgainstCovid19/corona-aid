@@ -58,6 +58,12 @@ function addAutoUnlockTimeout(infectedId)
 
 }
 
+function deleteTimeouts()
+{
+    if ( autoUnlockTimeout ) clearTimeout(autoUnlockTimeout);
+    if ( autoWarningLocking ) clearTimeout(autoWarningLocking);
+}
+
 function handleErrorsDetailRequest( statusCode )
 {
     let displayText;
@@ -354,6 +360,7 @@ function closeDetailedView(id)
                             "hat, wählen Sie den Button \"nicht abgenommen\"!\n\n" +
                             "                   Trotzdem fortfahren?                                ",
         function(infectedId){
+            deleteTimeouts();
             putRequest("infected/unlock/"+id);
             clearRightBar();
         }, function(notUsed){}, id);
