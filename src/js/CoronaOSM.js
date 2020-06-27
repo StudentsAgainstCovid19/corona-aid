@@ -18,6 +18,7 @@ function initMap() {
             zoom: parseInt(config_hash_table["standardZoom"])
         })
     });
+    setClusterLayer();
 }
 
 function readExt(feature, extensionsNode)
@@ -35,7 +36,7 @@ function readExt(feature, extensionsNode)
     feature.set("priority", parseFloat(parseExtensions("priority")));
     feature.set("type", parseExtensions("type"));
     feature.set("called", parseExtensions("called")==="true");
-    feature.set("done", parseExtensions("done")==="1");
+    feature.set("done", parseInt(parseExtensions("done"))===1);
 }
 
 
@@ -47,29 +48,31 @@ function readExt(feature, extensionsNode)
 var piechart_cache = {}; // map to cache openlayer-icons, to prevent flickering
 
 // asynchronous to prevent extreme slowdowns
-async function setMarkers()
-{
-    var gpxXSL = getXSLT("./xslt_scripts/xslt_prio_gpx.xsl");
-    var gpxData = runXSLT(gpxXSL, prioList);
+async function setMarkers() {
+    let gpxXSL = getXSLT("./xslt_scripts/xslt_prio_gpx.xsl");
+    let gpxData = runXSLT(gpxXSL, prioList);
 
-    var styles = getStyles();
 
-    var xmlSerializer = new XMLSerializer();
+    let xmlSerializer = new XMLSerializer();
     // read features in gpx
-    var gpx = new ol.format.GPX({readExtensions: readExt});
-    var gpxFeatures = gpx.readFeatures(xmlSerializer.serializeToString(gpxData), {
+    let gpx = new ol.format.GPX({readExtensions: readExt});
+    let gpxFeatures = gpx.readFeatures(xmlSerializer.serializeToString(gpxData), {
         featureProjection: 'EPSG:3857'
     });
 
-    var clusterSource = new ol.source.Cluster({
+    let clusterSource = new ol.source.Cluster({
         distance: parseInt(config_hash_table["clusteredDistance"]),
         source: new ol.source.Vector({
             features: gpxFeatures
         })
     });
+    clusteredLayer.setSource(clusterSource);
+    clusterSource.refresh();
+}
 
-    var clusters = new ol.layer.Vector({
-        source: clusterSource,
+async function setClusterLayer() {
+    let styles = getStyles();
+    clusteredLayer = new ol.layer.Vector({
         style: function(feature) {
             var size = feature.get('features').length;
             var style;
@@ -98,8 +101,8 @@ async function setMarkers()
             }
             else {
                 // use a pie chart
-                var amountDone, amountCalled;
-                var styleSVGIcon;
+                let amountDone, amountCalled;
+                let styleSVGIcon;
                 if (feature.get("amountDone") && feature.get("amountCalled"))
                 {
                     amountDone = feature.get("amountDone");
@@ -111,7 +114,7 @@ async function setMarkers()
                     amountCalled = getAmountCalled(feature.get('features'));
                 }
 
-                var key = [size, amountDone, amountCalled];
+                const key = [size, amountDone, amountCalled];
                 styleSVGIcon = piechart_cache[key];
                 if (!styleSVGIcon)
                 { // caching did not work due to the fact that styles are disposed if a cluster is reloaded / disposed.
@@ -124,19 +127,21 @@ async function setMarkers()
             return style;
         }
     });
-    map.addLayer(clusters);
+
+    map.addLayer(clusteredLayer);
+
 
     map.on('click', function(evt){
-        var clickedFeatures = []
+        let clickedFeatures = []
         map.forEachFeatureAtPixel(
             evt.pixel,
             function(ft, layer){clickedFeatures.push(ft);}
         )
         if (clickedFeatures.length === 0) return;
 
-        var clicked_ids = parseFeatureTree(clickedFeatures[0]);
-        var v=clicked_ids[0];
-        for (var i = 0; i < clicked_ids.length; i++)
+        let clicked_ids = parseFeatureTree(clickedFeatures[0]);
+        let v=clicked_ids[0];
+        for (let i = 0; i < clicked_ids.length; i++)
         {
             v+=clicked_ids[i];
         }
@@ -156,14 +161,14 @@ async function setMarkers()
 function parseFeatureTree(ft)
 {
 
-    var id_list = [];
-    var id = ft.get('id');
+    let id_list = [];
+    let id = ft.get('id');
     if (id) id_list = [parseInt(id)];
 
-    var children = ft.get("features");
+    let children = ft.get("features");
     if ( !children || children.length === 0 ) return id_list;
     children.forEach(function (child){
-        var ids = parseFeatureTree(child);
+        let ids = parseFeatureTree(child);
         id_list = id_list.concat(ids);
     });
     return id_list;
@@ -172,8 +177,8 @@ function parseFeatureTree(ft)
 
 function getAmountDone(array)
 {
-    var amount=0;
-    for (var i=0; i<array.length; i++)
+    let amount=0;
+    for (let i=0; i<array.length; i++)
     {
         if (array[i].get('done'))
         {
@@ -185,8 +190,8 @@ function getAmountDone(array)
 
 function getAmountCalled(array)
 {
-    var amount=0;
-    for (var i=0; i<array.length; i++)
+    let amount=0;
+    for (let i=0; i<array.length; i++)
     {
         if (array[i].get('called') && !array[i].get('done'))
         {
@@ -198,9 +203,9 @@ function getAmountCalled(array)
 
 function getStyles()
 {
-    var icons = ['tried_call.svg', 'lower_prio.svg', 'intermed_prio.svg', 'high_prio.svg', 'veryhigh_prio.svg'];
-    var styles = [];
-    for (var i=0; i<icons.length;i++)
+    let icons = ['tried_call.svg', 'lower_prio.svg', 'intermed_prio.svg', 'high_prio.svg', 'veryhigh_prio.svg'];
+    let styles = [];
+    for (let i=0; i<icons.length;i++)
     {
         styles.push(new ol.style.Style({
             image: new ol.style.Icon({
@@ -221,7 +226,7 @@ function getType(person)
     }
     else
     {
-        var prioMapping = ["low", "low", "intermediate", "high", "veryhigh"];
+        let prioMapping = ["low", "low", "intermediate", "high", "veryhigh"];
         return prioMapping[parseInt(person.getElementsByTagName("priority")[0].childNodes[0].nodeValue)];
     }
     return "low";
@@ -234,10 +239,10 @@ function createPieChart(size, amountDone, amountCalled) {
     }
     colors = ['green', 'purple'];
     angles = [0, amountDone / parseFloat(size) * 360, (amountDone + amountCalled) / parseFloat(size) * 360];
-    xml_string = "<chart><amountRemaining>" + (size - amountDone) + "</amountRemaining><arcs>";
+    let xml_string = "<chart><amountRemaining>" + (size - amountDone) + "</amountRemaining><arcs>";
 
-    for (var i = 0; i < colors.length; i++) {
-        var coordinates = calculateCirclePoint(angles[i + 1]);
+    for (let i = 0; i < colors.length; i++) {
+        let coordinates = calculateCirclePoint(angles[i + 1]);
 
         xml_string += "<arc>" +
             "<x>" + coordinates[0] + "</x>" +
@@ -248,16 +253,18 @@ function createPieChart(size, amountDone, amountCalled) {
 
     }
     xml_string += "</arcs></chart>";
-    var xmlParser = new DOMParser();
-    var xmlDoc = xmlParser.parseFromString(xml_string, "application/xml");
-    var pieChartXSL = getXSLT("./xslt_scripts/xslt_pie_chart_gen.xsl");
-    var chart = runXSLT(pieChartXSL, xmlDoc);
+    let xmlParser = new DOMParser();
+    let xmlDoc = xmlParser.parseFromString(xml_string, "application/xml");
+    let pieChartXSL = getXSLT("./xslt_scripts/xslt_pie_chart_gen.xsl");
+    let chart = runXSLT(pieChartXSL, xmlDoc);
 
-    var serializer = new XMLSerializer();
+    let serializer = new XMLSerializer();
+
     return new ol.style.Icon({
         opacity: 1,
         src: "data:image/svg+xml;utf8," + serializer.serializeToString(chart),
-        scale: parseFloat(config_hash_table["pieChartScale"])
+        scale: parseFloat(config_hash_table["pieChartScaleConstant"])
+            + (size-amountDone) * parseFloat(config_hash_table["pieChartScaleLinear"])
     });
 }
 
@@ -270,7 +277,7 @@ function createClusterFromSVG(icon)
 
 function calculateCirclePoint(angle)
 {
-    var angleRadians = (angle-90) * Math.PI / 180.0;
+    let angleRadians = (angle-90) * Math.PI / 180.0;
     return [50 + 50*Math.cos(angleRadians), 50 + 50*Math.sin(angleRadians)];
 }
 

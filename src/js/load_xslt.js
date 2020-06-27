@@ -56,6 +56,7 @@ function postRequest(res, content)
     var request = new XMLHttpRequest();
     request.open("POST", apiUrl+res, true);
     request.setRequestHeader("Content-type", "application/xml");
+    request.setRequestHeader("Accept", "application/xml");
 
     request.send(parser.parseFromString(content,"application/xml"));
 }

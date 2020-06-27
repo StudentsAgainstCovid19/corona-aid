@@ -6,6 +6,7 @@ var currentInfectedId;
 
 
 var map;
+var clusteredLayer;
 var detailedXML; // contains the XML-Document of the current detailed view
 var prioList; // contains the XML-Document that is calculated in xslt_calculate_prio.xsl
 
@@ -28,7 +29,6 @@ var confirmConfig = [null, null, null]; // list for generic confirm popup.
 var realtimeWebSocket;
 
 var apiUrl = "https://dev.api.corona-aid-ka.de/";
-var apiWebSocketUrl = "wss://dev.api.sac19.jatsqi.com/";
 
 var updateXMLStr = "";
 var suppressUpdates = false;

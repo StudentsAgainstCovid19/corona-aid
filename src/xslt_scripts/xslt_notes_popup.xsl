@@ -4,7 +4,7 @@
     <xsl:template match="InfectedDto">
 
 
-        <p id="symptomsPopupHeader">Anmerkungen zu <xsl:value-of select="surname"/>, <xsl:value-of select="forename"/></p>
+        <p class="popupHeader">Anmerkungen zu <xsl:value-of select="surname"/>, <xsl:value-of select="forename"/></p>
         <div id="notesHistoryDiv" class="notesDiv">
             <xsl:apply-templates select="historyItems/historyItem[not(notes = '')]"/>
         </div>

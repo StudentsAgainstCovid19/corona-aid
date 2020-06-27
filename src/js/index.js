@@ -85,7 +85,7 @@ function realtimeUpdate( updateXML )
     runUpdate();
 }
 
-function runUpdate()
+async function runUpdate()
 {
     if (updateXMLStr === "" || suppressUpdates) return;
     let serializer = new XMLSerializer();
@@ -97,7 +97,6 @@ function runUpdate()
     let updateXSL = getXSLT("./xslt_scripts/xslt_realtime_update.xsl");
 
     prioList = runXSLT(updateXSL, xmlDoc);
-    // TODO: prevent reloading of whole map but instead update just one marker
     initCallList(false);
 }
 

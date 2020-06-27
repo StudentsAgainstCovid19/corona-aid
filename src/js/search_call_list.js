@@ -147,8 +147,9 @@ function addKeyClickListenerToChild(elemId)
 function close_continue_search() {
     document.getElementById("continue_search_buttons").className += " invisible_object";
     console.log(); // without, hiding of continue search box is very laggy
+
+    if ( suppressUpdates ) enforceUpdate();
     suppressUpdates = false;
-    enforceUpdate();
 }
 
 function show_continue_search() {

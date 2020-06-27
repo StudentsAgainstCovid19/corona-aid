@@ -80,7 +80,7 @@ function addHistoryItem(successProbability, infected_id, symptom_list)
         xml_string = "<History>" +
             "<infectedId>"+infected_id+"</infectedId>"+
             "<notes></notes>"+
-            "<personalFeeling>"+Math.round(Math.random()*5+1)+"</personalFeeling>"+
+            "<personalFeeling>"+parseInt(Math.random()*5+1)+"</personalFeeling>"+
             "<status>1</status><symptoms>"+
             buildSymptomString(symptom_list) +
             "</symptoms>" + "<timestamp>" + Date.now() + "</timestamp>" +
@@ -94,7 +94,7 @@ function addHistoryItem(successProbability, infected_id, symptom_list)
 function prescribeTest(infected_id)
 {
     let xml_str = "<TestInsertDto><infectedId>"+infected_id+"</infectedId><result>0</result><timestamp>"+parseInt(Date.now()/1000.0)+"</timestamp></TestInsertDto>";
-    postRequest("test/", xml_string);
+    postRequest("test/", xml_str);
 }
 
 function buildSymptomString(symptom_list)

@@ -29,7 +29,7 @@
 }
 
 
-#symptomsPopupHeader{
+.popupHeader{
     display:flex;
     justify-content: center;
     align-content: start;
@@ -83,15 +83,6 @@
     display:flex;
     justify-content: center;
     align-content: center;
-}
-
-#showIllnessesPopupHeader{
-    margin: 1em;
-    font-weight: bold;
-    font-size: 1.3em;
-    display: flex;
-    align-items: center;
-    justify-content: center;
 }
 
 #listOfIllnesses{
