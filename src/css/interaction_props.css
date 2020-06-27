@@ -174,3 +174,45 @@
     bottom: 3%;
     background-color: white;
 }
+
+#snackbar {
+    background-color: white;
+    border-radius: 5px;
+    border-style: solid;
+    width: 15%;
+    visibility: hidden;
+    opacity: 0;
+    left: 42.5%;
+    top: 40%;
+    box-shadow: 10px 10px black;
+}
+
+.showSnackbarAnimation {
+    animation: showSnackbar 3s ease-in-out forwards;
+}
+
+
+@keyframes showSnackbar {
+    from {
+        visibility: hidden;
+        opacity: 0;
+    }
+
+    15% {
+        visibility: visible;
+        opacity: 1;
+    }
+    85% {
+        visibility: visible;
+        opacity: 1;
+    }
+
+    to {
+        visibility: hidden;
+        opacity: 0;
+    }
+}
+
+#centeredSnackbarText {
+    text-align: center;
+}
