@@ -36,6 +36,7 @@
     box-shadow: 2px 2px black;
     outline: none;
     margin: 0 2px 0 2px;
+    cursor: pointer;
 
     -moz-user-select: none;
     -webkit-user-select: none;
@@ -63,6 +64,7 @@
     height: auto;
     outline: none;
     background-color: transparent;
+    display: flex;
 }
 
 #search_container {
@@ -96,6 +98,7 @@
     margin-bottom: -4px;
     margin-right: 3px;
     color: black;
+    cursor: pointer;
 }
 
 #open_list_svg {
@@ -110,6 +113,7 @@
     outline: none;
     height: 28px;
     margin-left: 2px;
+    cursor: pointer;
 }
 
 #close_edit_symptoms_button {
@@ -118,4 +122,97 @@
 
 #submit_edit_symptoms_button {
 
+}
+
+#continue_search_span {
+    position: relative;
+    right: -5%;
+}
+
+#continue_search_buttons{
+    display: flex;
+    flex-direction: column;
+    top: 3%;
+    left: 39%;
+    border-radius: 10px;
+    box-shadow: 2px 2px blue;
+}
+
+.continue_search_btn {
+    padding: 3px;
+    border-radius: 50%;
+    margin: 2px;
+    background-color: white;
+    outline: none;
+    border-width: 0;
+}
+
+.continue_search_btn:hover {
+    background-color: lightgrey;
+}
+
+.disabled_button {
+    background-color: darkgrey;
+}
+
+#progressBarSpan {
+    position: relative;
+    bottom: 5%;
+    left: -50%;
+}
+
+#progressBarDiv {
+    width: 100px;
+    height: 10px;
+    background-color: white;
+    display: flex;
+}
+
+#action_bar {
+    position: absolute;
+    left: 20%;
+    bottom: 3%;
+    background-color: white;
+}
+
+#snackbar {
+    background-color: white;
+    border-radius: 5px;
+    border-style: solid;
+    width: 15%;
+    visibility: hidden;
+    opacity: 0;
+    left: 42.5%;
+    top: 40%;
+    box-shadow: 10px 10px black;
+}
+
+.showSnackbarAnimation {
+    animation: showSnackbar 3s ease-in-out forwards;
+}
+
+
+@keyframes showSnackbar {
+    from {
+        visibility: hidden;
+        opacity: 0;
+    }
+
+    15% {
+        visibility: visible;
+        opacity: 1;
+    }
+    85% {
+        visibility: visible;
+        opacity: 1;
+    }
+
+    to {
+        visibility: hidden;
+        opacity: 0;
+    }
+}
+
+#centeredSnackbarText {
+    text-align: center;
 }

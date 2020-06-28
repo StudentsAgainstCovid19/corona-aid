@@ -1,27 +1,67 @@
 
 function try_acquire_lock(id) { // id for infected
-    if (detail_bar === 2) return;
-
+    close_continue_search();
+    if (detail_bar === 2) return showSnackbar("Die Patientenansicht ist noch geöffnet.\nBitte kümmern Sie sich erst um den derzeitigen Patienten.");
+    console.log("Trying to load infected: "+id);
     detailedXML = loadXMLDoc(apiUrl + "infected/" + id, "application/xml", handleErrorsDetailRequest);
-    console.log(detailedXML.getElementsByTagName("done")[0].innerHTML);
 
     if ( detailedXML )
     {
+        addLockingTimer(id);
         if ( detailedXML.getElementsByTagName("done")[0].innerHTML === "true") {
             makeConfirmPopup("Dieser Patient wurde heute bereits bearbeitet.\nFortfahren mit dem Editieren?",
                 function (infectedId) {
                     slideOpenRightBar();
                     setDetailedView(detailedXML);
-                }, null, id);
+                },
+                function(infectedId)
+                {
+                    putRequest("infected/unlock/"+infectedId);
+                }, id);
         }
         else
         {
             slideOpenRightBar();
             setDetailedView(detailedXML);
         }
-
     }
     console.log(detailedXML);
+}
+
+function addLockingTimer(infectedId)
+{
+    if ( autoWarningLocking ) clearTimeout( autoWarningLocking );
+    addAutoUnlockTimeout(infectedId);
+    autoWarningLocking = setTimeout(function(){
+        makeConfirmPopup("Ihre Session läuft ab.\n Wollen Sie weiterhin den Patienten bearbeiten?",
+            function(){
+                postRequest("infected/lock/" + infectedId);
+                addLockingTimer(infectedId);
+            }, function(){
+                if ( autoUnlockTimeout ) clearTimeout(autoUnlockTimeout);
+                putRequest("infected/unlock/" + infectedId);
+                clearRightBar();
+            }, infectedId);
+    }, parseInt(config_hash_table["autoResetOffset"])*0.8*1000);
+
+
+}
+
+function addAutoUnlockTimeout(infectedId)
+{
+    if ( autoUnlockTimeout ) clearTimeout(autoUnlockTimeout);
+    autoUnlockTimeout = setTimeout(function(){
+        onCancelPopup();
+        putRequest("infected/unlock/"+infectedId);
+        clearRightBar();
+    }, parseInt(config_hash_table["autoResetOffset"])*1000);
+
+}
+
+function deleteTimeouts()
+{
+    if ( autoUnlockTimeout ) clearTimeout(autoUnlockTimeout);
+    if ( autoWarningLocking ) clearTimeout(autoWarningLocking);
 }
 
 function handleErrorsDetailRequest( statusCode )
@@ -45,12 +85,28 @@ function handleErrorsDetailRequest( statusCode )
     makeConfirmPopup(displayText, null, null, null, true, "Schließen");
 }
 
+function parseInfectedID(xmlDocument)
+{
+    let children = xmlDocument.children[0].children;
+    let id;
+    for (let index = 0; index < children.length; index++)
+    {
+        if (children[index].nodeName === "id")
+        {
+            id = parseInt(children[index].innerHTML);
+            break;
+        }
+    }
+    return id;
+}
+
 // set the detailed view with a given xml file for all specific data
 function setDetailedView(xml_doc)
 {
     if (xml_doc != null)
     {
         detail_bar = 2;
+        currentInfectedId = parseInfectedID(xml_doc);
         symptomsList = [];
 
         let displayDetailed = getXSLT("./xslt_scripts/xslt_detailed_view.xsl");
@@ -62,7 +118,6 @@ function setDetailedView(xml_doc)
 
 
         let symptomsXSL = getXSLT("./xslt_scripts/xslt_symptom_div.xsl");
-        console.log(initialSymptoms);
 
         runXSLT(symptomsXSL, initialSymptoms, "symptomsDiv");
 
@@ -73,6 +128,21 @@ function setDetailedView(xml_doc)
             symptomsList.push(id);
         }
     }
+}
+
+function showNotes()
+{
+    if (!detailedXML) return;
+
+    var notesXSL = getXSLT("./xslt_scripts/xslt_notes_popup.xsl");
+    runXSLT(notesXSL, detailedXML, "popup_window");
+    let notesDiv = document.getElementById("notesHistoryDiv");
+
+    if (notesDiv)
+    {
+        setTimeout(function(){notesDiv.scrollTop = notesDiv.scrollHeight;}, 50);
+    }
+    displayPopUp();
 }
 
 function displayPopUp()
@@ -200,21 +270,6 @@ function constructIdList()
     return parser.parseFromString(temp_id_string + "</symptomIdList>", "application/xml");
 }
 
-function slideOpenRightBar()
-{
-    let detailedView = document.getElementById("infected_detailed_view_right");
-    if (detailedView.className.indexOf("detailed_slideout") > -1 || detailedView.className === "floating_object") {
-        detailedView.className = "floating_object detailed_slidein";
-    }
-}
-
-function closeRightBar()
-{
-    let detailedView = document.getElementById("infected_detailed_view_right");
-    if (detailedView.className.indexOf("detailed_slidein") > -1) {
-        detailedView.className = "floating_object detailed_slideout";
-    }
-}
 
 function prescribeTest(id)
 {
@@ -225,7 +280,7 @@ function prescribeTest(id)
             // var availableTests = detailedXML.getElementsByTagName("test");
             // console.log(availableTests.lastChild);
 
-            const xml_string = "<Test><infectedId>"+id+"</infectedId><result>0</result><timestamp>"+parseInt(Date.now()/1000.0)+"</timestamp></Test>";
+            const xml_string = "<TestInsertDto><infectedId>"+id+"</infectedId><result>0</result><timestamp>"+parseInt(Date.now()/1000.0)+"</timestamp></TestInsertDto>";
             postRequest("test", xml_string);
         }, function (id) { }, id );
 }
@@ -299,8 +354,15 @@ function failedCall(id)
 
 function closeDetailedView(id)
 {
-    putRequest("infected/unlock/"+id);
-    clearRightBar();
+    makeConfirmPopup(   "Sind Sie sich sicher, dass Sie die Patientenansicht schließen wollen?\n" +
+                            "Ein Datenverlust wird die Folge sein. Falls der Patient nicht abgenommen\n" +
+                            "hat, wählen Sie den Button \"nicht abgenommen\"!\n\n" +
+                            "                   Trotzdem fortfahren?                                ",
+        function(infectedId){
+            deleteTimeouts();
+            putRequest("infected/unlock/"+id);
+            clearRightBar();
+        }, function(notUsed){}, id);
 }
 
 function submitDetailView(id)
@@ -329,4 +391,16 @@ function clearRightBar()
     detail_bar = 0;
     closeRightBar();
     document.getElementById("infected_detailed_view_right").innerHTML = "";
+}
+
+function showSnackbar(message)
+{
+    let snackbar = document.getElementById("snackbar");
+    let snackbarText = document.getElementById("centeredSnackbarText");
+    snackbarText.innerText = message;
+    snackbar.className = snackbar.className.replace(" showSnackbarAnimation", "");
+    setTimeout(function(){snackbar.className += " showSnackbarAnimation"}, 50);
+
+    let detailedView = document.getElementById("infected_detailed_view_right");
+    detailedView.scrollTop = detailedView.scrollHeight;
 }

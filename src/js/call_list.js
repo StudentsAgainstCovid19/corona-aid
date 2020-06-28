@@ -15,5 +15,5 @@ async function initCallList(openCallListBool = true)
     if (openCallListBool) openCallList();
     addSearchBarListener();
     setMarkers();
-
+    showProgressBar();
 }

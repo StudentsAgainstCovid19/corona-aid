@@ -4,13 +4,10 @@
     <xsl:template name="dayFormatting">
         <xsl:param name="days"/>
 
-        <xsl:variable name="dayText">
-            <xsl:choose>
-                <xsl:when test="$days = 1">Tag</xsl:when>
-                <xsl:otherwise>Tagen</xsl:otherwise>
-            </xsl:choose>
-        </xsl:variable>
-        <xsl:value-of select="$days"/><xsl:text> </xsl:text><xsl:value-of select="$dayText"/>
+        <xsl:choose>
+            <xsl:when test="$days = 1">dem letzten Anruf</xsl:when>
+            <xsl:otherwise><xsl:value-of select="$days"/><xsl:text> </xsl:text>Anrufen</xsl:otherwise>
+        </xsl:choose>
     </xsl:template>
 
     <xsl:template match="symptomXML">

@@ -9,15 +9,26 @@ function init()
     loadConfig();
     initMap();
     calculatePriorities();
+    makeAsyncUpdateProcess();
     connectWebSocket();
+    window.onbeforeunload = function(){
+        cleanUp();
+    }
 }
 
 function connectWebSocket() {
-    realtimeWebSocket = new WebSocket(apiWebSocketUrl+"realtime/infected");
+    var evtSource = new EventSource(apiUrl + "realtime/sse");
 
-    realtimeWebSocket.onmessage = function(updateData) {
-        realtimeUpdate( updateData );
+
+    evtSource.onmessage = function(e) {
+        let parser = new DOMParser();
+        let xmlDocument = parser.parseFromString(e.data, "application/xml");
+        if (xmlDocument.children[0].nodeName !== "EmptySet")
+        {
+            realtimeUpdate(xmlDocument);
+        }
     }
+
 }
 
 function loadConfig()
@@ -38,7 +49,7 @@ function configLoadErrorFn(statusCode) {
     switch (statusCode) {
         case 404:
             makeConfirmPopup("Die Konfigurationen konnten nicht geladen werden.\n" +
-                "Es werden standardkonfigurationen ausgewählt.\n" +
+                "Es werden Standardkonfigurationen ausgewählt.\n" +
                 "Die Website wird vermutlich nicht funktionieren.",
                 null, null, true, "Schließen");
             config_hash_table = {"standardLat":"49.013868","standardLon":"8.404346", "clusteredDistance": "200",
@@ -61,20 +72,58 @@ function serviceUnavailableError() {
     document.getElementById("zoom_buttons").className += " invisible_object";
 }
 
-function realtimeUpdate( updateData )
+function realtimeUpdate( updateXML )
 {
-    console.log(updateData);
+    let serializer = new XMLSerializer();
+    let xml_str = "";
+    let items = updateXML.children[0].getElementsByTagName("item");
+    for (let index = 0; index < items.length; index++)
+    {
+        xml_str += serializer.serializeToString(items[index]);
+    }
+    updateXMLStr += xml_str;
+    runUpdate();
+}
 
+async function runUpdate()
+{
+    if (updateXMLStr === "" || suppressUpdates) return;
     let serializer = new XMLSerializer();
     let parser = new DOMParser();
-    let xmlDoc = parser.parseFromString("<Container></Container>", "application/xml");
-    xmlDoc.children[0].innerHTML = serializer.serializeToString(updateData) +
-                                    serializer.serializeToString(prioList);
+    let xmlDoc = parser.parseFromString("<root></root>", "application/xml");
+    xmlDoc.children[0].appendChild(parser.parseFromString("<updateList>" + updateXMLStr + "</updateList>", "application/xml").children[0]);
+    xmlDoc.children[0].appendChild(deepCopyXML(prioList).children[0]);
 
     let updateXSL = getXSLT("./xslt_scripts/xslt_realtime_update.xsl");
 
     prioList = runXSLT(updateXSL, xmlDoc);
-    // TODO: prevent reloading of whole map but instead update just one marker
     initCallList(false);
+}
 
+function makeAsyncUpdateProcess()
+{
+    updatePromise = setInterval(function(){runUpdate();}, config_hash_table["frontendRefreshIntervall"]);
+}
+
+function enforceUpdate()
+{
+    if ( !updatePromise ) clearInterval(updatePromise);
+
+    runUpdate();
+    makeAsyncUpdateProcess();
+}
+
+function cleanUp()
+{
+    if ( detail_bar === 2)
+    {
+        // unlock infected
+        postRequest("infected/unlock/"+currentInfectedId);
+    }
+}
+
+function showProgressBar()
+{
+    let progressXSL = getXSLT("./xslt_scripts/xslt_progressbar.xsl");
+    runXSLT(progressXSL, prioList, "progressBarDiv");
 }
