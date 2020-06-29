@@ -185,7 +185,7 @@ function getAmountDone(array)
     let amount=0;
     for (let i=0; i<array.length; i++)
     {
-        if (array[i].get('done'))
+        if (array[parseInt(i)].get('done'))
         {
             amount+=1;
         }

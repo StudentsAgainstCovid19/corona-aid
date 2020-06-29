@@ -16,9 +16,9 @@ function parseInfectedIds()
 
     for (let index = 0; index < people.length; index++)
     {
-        if (parseInt(parseNodeValueFromXML(people[index], "done")) === 0)
+        if (parseInt(parseNodeValueFromXML(people[parseInt(index)], "done")) === 0)
         {
-            people_ids.push(parseInt(parseNodeValueFromXML(people[index], "id")));
+            people_ids.push(parseInt(parseNodeValueFromXML(people[parseInt(index)], "id")));
         }
     }
 
@@ -35,8 +35,8 @@ function parseSymptoms()
 
     for (let index = 0; index < items.length; index++)
     {
-        symptoms.push([parseInt(parseNodeValueFromXML(items[index], "id")),
-            parseFloat(parseNodeValueFromXML(items[index], "probability"))/100.0]);
+        symptoms.push([parseInt(parseNodeValueFromXML(items[parseInt(index)], "id")),
+            parseFloat(parseNodeValueFromXML(items[parseInt(index)], "probability"))/100.0]);
     }
     return symptoms;
 }
@@ -53,10 +53,10 @@ function prepareData()
     {
         if (Math.random() < relAmountCalls)
         {
-            addHistoryItem(successProbability, people[index], symptom_list);
+            addHistoryItem(successProbability, people[parseInt(index)], symptom_list);
             if (Math.random() < testProba)
             {
-                prescribeTest(people[index]);
+                prescribeTest(people[parseInt(index)]);
             }
         }
     }
@@ -102,9 +102,9 @@ function buildSymptomString(symptom_list)
     let xml_string = "";
     for ( let index = 0; index < symptom_list.length; index++ )
     {
-        if (Math.random() < symptom_list[index][1])
+        if (Math.random() < symptom_list[parseInt(index)][1])
         {
-            xml_string += "<symptom>"+symptom_list[index][0]+"</symptom>";
+            xml_string += "<symptom>"+symptom_list[parseInt(index)][0]+"</symptom>";
         }
     }
     return xml_string;
