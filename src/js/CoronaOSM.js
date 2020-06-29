@@ -50,7 +50,7 @@ function readExt(feature, extensionsNode)
 // the underlying icons. See:
 // https://github.com/openlayers/openlayers/issues/3137
 // https://github.com/openlayers/openlayers/pull/1590
-var piechart_cache = {}; // map to cache openlayer-icons, to prevent flickering
+var piechart_cache = new Map(); // map to cache openlayer-icons, to prevent flickering
 
 // asynchronous to prevent extreme slowdowns
 async function setMarkers() {
@@ -120,12 +120,12 @@ async function setClusterLayer() {
                 }
 
                 const key = [size, amountDone, amountCalled];
-                styleSVGIcon = piechart_cache[key];
+                styleSVGIcon = piechart_cache.get(key);
                 if (!styleSVGIcon)
                 { // caching did not work due to the fact that styles are disposed if a cluster is reloaded / disposed.
                     // Now we cache the SVG output as openlayers icon by the XSLTProcessor
                     styleSVGIcon = createPieChart(size, amountDone, amountCalled);
-                    piechart_cache[key] = styleSVGIcon;
+                    piechart_cache.set(key, styleSVGIcon);
                 }
                 style = createClusterFromSVG(styleSVGIcon);
             }
@@ -185,7 +185,7 @@ function getAmountDone(array)
     let amount=0;
     for (let i=0; i<array.length; i++)
     {
-        if (array[i].get('done'))
+        if (array[parseInt(i)].get('done'))
         {
             amount+=1;
         }
@@ -198,7 +198,7 @@ function getAmountCalled(array)
     let amount=0;
     for (let i=0; i<array.length; i++)
     {
-        if (array[i].get('called') && !array[i].get('done'))
+        if (array[parseInt(i)].get('called') && !array[parseInt(i)].get('done'))
         {
             amount+=1;
         }

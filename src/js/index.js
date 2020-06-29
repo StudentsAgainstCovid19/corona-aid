@@ -40,8 +40,8 @@ function loadConfig()
     let items = configXML.getElementsByTagName("item");
     for (let i=0; i<items.length; i++)
     {
-        config_hash_table[parseNodeValueFromXML(items[i], "configKey")] =
-            parseNodeValueFromXML(items[i], "configValue");
+        config_hash_table[parseNodeValueFromXML(items[parseInt(i)], "configKey")] =
+            parseNodeValueFromXML(items[parseInt(i)], "configValue");
     }
 }
 
@@ -79,7 +79,7 @@ function realtimeUpdate( updateXML )
     let items = updateXML.children[0].getElementsByTagName("item");
     for (let index = 0; index < items.length; index++)
     {
-        xml_str += serializer.serializeToString(items[index]);
+        xml_str += serializer.serializeToString(items[parseInt(index)]);
     }
     updateXMLStr += xml_str;
     runUpdate();

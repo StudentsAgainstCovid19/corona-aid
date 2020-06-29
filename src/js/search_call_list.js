@@ -16,8 +16,8 @@ async function search_call_list()
     let text, nameText, phoneText;
     for (let i = 0; i<call_list_items.length; i++)
     {
-        nameText = call_list_items[i].getElementsByTagName("span")[0].innerText;
-        phoneText = call_list_items[i].getElementsByTagName("span")[2].innerText;
+        nameText = call_list_items[parseInt(i)].getElementsByTagName("span")[0].innerText;
+        phoneText = call_list_items[parseInt(i)].getElementsByTagName("span")[2].innerText;
         text = (nameText+" "+phoneText.replace("Tel.: ","")).replace(",", "").toLowerCase();
         if (check_in(text, words))
         {
@@ -50,7 +50,7 @@ function scrollToIndex(index)
 {
     deleteScrollId();
     openCallList();
-    let foundDiv = currentCallBoxes[index];
+    let foundDiv = currentCallBoxes[parseInt(index)];
     foundDiv.id = "scroll_to";
     let childDiv = foundDiv.childNodes[0];
     childDiv.className = childDiv.className.replace("found_call_items", "");
@@ -68,7 +68,7 @@ function getAllNotHiddenCallBoxes() {
     if ( call_list_items.toString().indexOf("HTMLCollection") !== -1 ) call_list_items = Array.prototype.slice.call( call_list_items );
     for (let index = call_list_items.length - 1; index >= 0; index--)
     {
-        if ( call_list_items[index].className.indexOf("hidden_box") !== -1 )
+        if ( call_list_items[parseInt(index)].className.indexOf("hidden_box") !== -1 )
         {
             call_list_items.splice(index, 1);
         }
@@ -87,9 +87,9 @@ function noItemFound()
 }
 
 function check_in(str, words) {
-    for (var i = 0; i<words.length;i++)
+    for (let i = 0; i<words.length;i++)
     {
-        if (str.indexOf(words[i]) === -1)
+        if (str.indexOf(words[parseInt(i)]) === -1)
         {
             return false;
         }

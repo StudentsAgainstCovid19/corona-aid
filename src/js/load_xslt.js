@@ -1,20 +1,20 @@
 
 function getXSLT(filename)
 {
-    var xsl_doc = xslt_files[filename];
-    if (!xsl_doc)
+    let xslDoc = xslt_files.get(filename);
+    if ( !xslDoc )
     {
         console.log("Loading XSL-File: "+filename);
-        xsl_doc = loadXMLDoc(filename, "text/xsl");
-        xslt_files[filename] = xsl_doc;
+        xslDoc = loadXMLDoc(filename, "text/xsl");
+        xslt_files.set(filename, xslDoc);
     }
-    return xsl_doc;
+    return xslDoc;
 }
 
 function loadXMLDoc(filename, mimeType="application/xml", errorHandlingFn = null)
 {
     try {
-        request = new XMLHttpRequest();
+        let request = new XMLHttpRequest();
         request.open("GET", filename, false);
         if ( errorHandlingFn )
         {
@@ -52,8 +52,8 @@ function runXSLT(xsl_file, xml, id=null)
 
 function postRequest(res, content)
 {
-    var parser = new DOMParser();
-    var request = new XMLHttpRequest();
+    let parser = new DOMParser();
+    let request = new XMLHttpRequest();
     request.open("POST", apiUrl+res, true);
     request.setRequestHeader("Content-type", "application/xml");
     request.setRequestHeader("Accept", "application/xml");
@@ -64,8 +64,8 @@ function postRequest(res, content)
 function putRequest(res)
 {
     console.log("PUT-Request");
-    var parser = new DOMParser();
-    var request = new XMLHttpRequest();
+    let parser = new DOMParser();
+    let request = new XMLHttpRequest();
     request.open("PUT", apiUrl+res, true);
     request.send(null);
 }
