@@ -19,9 +19,9 @@ async function displayClusteredMap(id_array)
     {
         if (id_array.length === 0) break;
 
-        if (id_array[0] === parseInt(infected_people[i].getElementsByTagName("id")[0].childNodes[0].nodeValue))
+        if (id_array[0] === parseInt(infected_people[parseInt(i)].getElementsByTagName("id")[0].childNodes[0].nodeValue))
         {
-            xmlString += xmlSerializer.serializeToString(infected_people[i]);
+            xmlString += xmlSerializer.serializeToString(infected_people[parseInt(i)]);
             id_array.shift();
         }
     }
