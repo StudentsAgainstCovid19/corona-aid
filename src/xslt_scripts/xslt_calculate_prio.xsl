@@ -38,6 +38,7 @@
     <xsl:template match="/">
         <infected>
             <xsl:for-each select="Set/item">
+                <xsl:sort select="infected/person/id" data-type="number"/>
                 <xsl:variable name="sumSymptomsNotNull">
                     <xsl:call-template name="handleNullability">
                         <xsl:with-param name="value" select="sumSymptoms"/>

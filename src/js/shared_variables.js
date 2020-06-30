@@ -12,7 +12,7 @@ var prioList; // contains the XML-Document that is calculated in xslt_calculate_
 
 var config_hash_table = {}; // configs fetched from db at start up
 
-var xslt_files = {}; // hash table to prevent reloading of xsl-files
+var xslt_files = new Map(); // hash table to prevent reloading of xsl-files
 
 var symptomsXML; // XML-file for all available symptoms
 

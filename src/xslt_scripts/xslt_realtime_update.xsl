@@ -2,6 +2,7 @@
     <xsl:template match="root">
         <infected>
             <xsl:for-each select="infected/person">
+                <xsl:sort select="infected/person/id" data-type="number"/>
                 <person>
                     <xsl:variable name="id" select="id"/>
                     <xsl:choose>
