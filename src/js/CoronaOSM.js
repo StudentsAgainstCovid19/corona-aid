@@ -120,12 +120,12 @@ async function setClusterLayer() {
                 }
 
                 const key = [size, amountDone, amountCalled];
-                styleSVGIcon = piechart_cache.get(key);
+                styleSVGIcon = piechart_cache.get(key.toString());
                 if (!styleSVGIcon)
                 { // caching did not work due to the fact that styles are disposed if a cluster is reloaded / disposed.
                     // Now we cache the SVG output as openlayers icon by the XSLTProcessor
                     styleSVGIcon = createPieChart(size, amountDone, amountCalled);
-                    piechart_cache.set(key, styleSVGIcon);
+                    piechart_cache.set(key.toString(), styleSVGIcon);
                 }
                 style = createClusterFromSVG(styleSVGIcon);
             }
