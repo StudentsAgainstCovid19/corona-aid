@@ -168,9 +168,8 @@
     display: flex;
 }
 
-#action_bar {
-    position: absolute;
-    left: 15%;
+#actionBar {
+    left: 3%;
     bottom: 3%;
     background-color: white;
     padding: 0.5em;

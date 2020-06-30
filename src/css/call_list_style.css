@@ -81,6 +81,15 @@ h2{
 .search_bar_slideout{
     animation: slideout_search_bar .7s ease-in-out forwards;
 }
+
+.actionBarSlidein{
+    animation: slidein_search_bar .7s ease-in-out forwards;
+}
+
+.actionBarSlideout{
+    animation: slideout_search_bar .7s ease-in-out forwards;
+}
+
 @keyframes slidein_search_bar {
     from {
         left: 3%;
