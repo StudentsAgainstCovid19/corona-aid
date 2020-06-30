@@ -170,9 +170,16 @@
 
 #action_bar {
     position: absolute;
-    left: 20%;
+    left: 15%;
     bottom: 3%;
     background-color: white;
+    padding: 0.5em;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    border-radius: 10px;
+    align-content: center;
+
 }
 
 #snackbar {
@@ -215,4 +222,40 @@
 
 #centeredSnackbarText {
     text-align: center;
+}
+
+.spaceAround{
+    margin: 0.5em;
+}
+
+#showDistrictsLabel{
+    position: relative;
+    top: 3px;
+}
+
+
+.smallButton{
+    cursor: pointer;
+    display: inline;
+    text-transform: lowercase;
+    letter-spacing: 1px;
+    outline: none;
+    position: relative;
+    height: auto;
+    width: auto;
+    -webkit-transition: all 0.3s;
+    -moz-transition: all 0.3s;
+    transition: all 0.3s;
+    border-radius: 5px;
+    overflow: hidden;
+    font-family: "HelveticaNeue-Light", "Helvetica Neue Light", "Helvetica Neue", Helvetica, Arial, "Lucida Grande", sans-serif;
+    font-weight: 100;
+    font-size: 0.8em;
+    background-color: gray;
+    color: white;
+    border: 3px solid gray;
+}
+
+.smallButton:hover{
+   background-color: darkgray;
 }
