@@ -155,17 +155,15 @@
     background-color: darkgrey;
 }
 
-#progressBarSpan {
-    position: relative;
-    bottom: 5%;
-    left: -50%;
-}
-
 #progressBarDiv {
-    width: 100px;
-    height: 10px;
-    background-color: white;
+    position: absolute;
+    top: 3%;
+    right: 3%;
+    width: 200px;
+    height: 20px;
+    background-color: transparent;
     display: flex;
+    z-index: 5;
 }
 
 #actionBar {
