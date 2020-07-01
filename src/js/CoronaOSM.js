@@ -163,6 +163,48 @@ async function setClusterLayer() {
     });
 }
 
+function setDistrictsLayer()
+{
+    // load xml from backend and process with xslt
+    let districtsXML = loadXMLDoc("./assets/example_districts.xml");
+    let districtsXSL = getXSLT("./xslt_scripts/xslt_show_districts.xsl");
+
+    let districtsKML = runXSLT(districtsXSL, districtsXML);
+
+    districtLayer = new ol.layer.Vector({
+        source: new ol.source.Vector()
+    });
+
+    districtLayer.getSource().addFeatures(new ol.format.KML().readFeatures(districtsKML, {featureProjection: "EPSG:3857"}));
+    map.addLayer(districtLayer);
+}
+
+function toggleLayerVisibility()
+{
+    if ( !clusteredLayer.getVisible() )
+    {
+        clusteredLayer.setVisible(true);
+        setVisibilityDistricts(false);
+    }
+    else {
+        clusteredLayer.setVisible(false);
+        setVisibilityDistricts(true);
+    }
+
+}
+
+function setVisibilityDistricts(visibilityState)
+{
+    if ( !visibilityState )
+    {
+        if ( districtLayer ) districtLayer.setVisible(true);
+    }
+    else {
+        if ( !districtLayer ) setDistrictsLayer();
+        else districtLayer.setVisible(false);
+    }
+}
+
 function parseFeatureTree(ft)
 {
 
@@ -234,7 +276,6 @@ function getType(person)
         let prioMapping = ["low", "low", "intermediate", "high", "veryhigh"];
         return prioMapping[parseInt(person.getElementsByTagName("priority")[0].childNodes[0].nodeValue)];
     }
-    return "low";
 }
 
 function createPieChart(size, amountDone, amountCalled) {
@@ -277,7 +318,7 @@ function createClusterFromSVG(icon)
 {
     return new ol.style.Style({
         image: icon
-    })
+    });
 }
 
 function calculateCirclePoint(angle)

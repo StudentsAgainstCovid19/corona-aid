@@ -349,6 +349,7 @@ function failedCall(id)
                 "</History>";
 
     postRequest("history", xml_string);
+    deleteTimeouts();
     clearRightBar();
 }
 
@@ -365,9 +366,10 @@ function closeDetailedView(id)
         }, function(notUsed){}, id);
 }
 
-function submitDetailView(id)
+function submitDetailView(id, historyItemId = null)
 {
-    let xml_string = "<History>" +
+    let xmlString = "<History>" +
+        ( historyItemId ? "<historyItemId>" + historyItemId + "</historyItemId>" : "") +
         "<infectedId>"+id+"</infectedId>"+
         "<notes>"+document.getElementById("notes_area").value+"</notes>"+
         "<personalFeeling>"+(document.getElementById("wellbeing_slider").value)+"</personalFeeling>"+
@@ -376,13 +378,23 @@ function submitDetailView(id)
 
     for (let i=0; i<symptomsList.length; i++)
     {
-        xml_string += "<symptom>"+parseInt(symptomsList[i])+"</symptom>";
+        xmlString += "<symptom>"+parseInt(symptomsList[i])+"</symptom>";
     }
-    xml_string +=
+    xmlString +=
         "</symptoms>" +
         "<timestamp>" + Date.now() + "</timestamp>" +
         "</History>";
-    postRequest("history", xml_string);
+
+    if ( !historyItemId )
+    {
+        postRequest("history", xmlString);
+    }
+    else
+    {
+        putRequest("history", xmlString);
+    }
+
+    deleteTimeouts();
     clearRightBar();
 }
 

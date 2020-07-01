@@ -284,7 +284,7 @@
         <div id="prescribeTestDiv" class="flex-container-testresult">
         <xsl:variable name="testDaysText">
             <xsl:call-template name="dayFormatting">
-                <xsl:with-param name="days" select="tests/test[id = $lastTestDoneId]/timestamp"/>
+                <xsl:with-param name="days" select="tests/test[id = $lastTestDoneId]/daysOverdue"/>
             </xsl:call-template>
         </xsl:variable>
             <input type="checkbox" id="test_result_checkbox" name="test_result_checkbox" class="chk">
@@ -360,7 +360,10 @@
             Abbrechen
              </button>
             <button id="submitButton" class="dialogButton submit_button">
-                <xsl:attribute name="onclick">submitDetailView(<xsl:value-of select="id"/>);</xsl:attribute>
+                <xsl:attribute name="onclick">submitDetailView(<xsl:value-of select="id"/>
+                    <xsl:if test="updateFlag = 'true'">
+                        ,<xsl:value-of select="historyItems/historyItem[last()]/id"/>
+                    </xsl:if>);</xsl:attribute>
                 Senden
             </button>
             <button id="notCalledButton" class="dialogButton btn-gray">
@@ -370,7 +373,6 @@
         </div>
         </div>
 
-
-
     </xsl:template>
+
 </xsl:stylesheet>
