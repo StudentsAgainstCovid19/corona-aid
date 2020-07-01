@@ -6,6 +6,7 @@ function parseNodeValueFromXML(xml_obj, tagName)
 
 function init()
 {
+    showLoading();
     loadConfig();
     initMap();
     calculatePriorities();
@@ -14,6 +15,7 @@ function init()
     window.onbeforeunload = function(){
         cleanUp();
     }
+    setTimeout(hideLoading, 1000);
 }
 
 function connectWebSocket() {

@@ -165,6 +165,7 @@ async function setClusterLayer() {
 
 function setDistrictsLayer()
 {
+    showLoading();
     // load xml from backend and process with xslt
     let districtsXML = loadXMLDoc("./assets/example_districts.xml");
     let districtsXSL = getXSLT("./xslt_scripts/xslt_show_districts.xsl");
@@ -178,6 +179,7 @@ function setDistrictsLayer()
 
     districtLayer.getSource().addFeatures(new ol.format.KML().readFeatures(districtsKML, {featureProjection: config_hash_table["projectionType"]}));
     map.addLayer(districtLayer);
+    hideLoading();
 }
 
 function toggleLayerVisibility()
@@ -198,11 +200,11 @@ function setVisibilityDistricts(visibilityState)
 {
     if ( !visibilityState )
     {
-        if ( districtLayer ) districtLayer.setVisible(true);
+        if ( districtLayer ) districtLayer.setVisible(false);
     }
     else {
         if ( !districtLayer ) setDistrictsLayer();
-        else districtLayer.setVisible(false);
+        else districtLayer.setVisible(true);
     }
 }
 

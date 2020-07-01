@@ -40,6 +40,7 @@ function addLockingTimer(infectedId)
             }, function(){
                 if ( autoUnlockTimeout ) clearTimeout(autoUnlockTimeout);
                 putRequest("infected/unlock/" + infectedId);
+                hidePopUp();
                 clearRightBar();
             }, infectedId);
     }, parseInt(config_hash_table["autoResetOffset"])*0.8*1000);
@@ -53,6 +54,7 @@ function addAutoUnlockTimeout(infectedId)
     autoUnlockTimeout = setTimeout(function(){
         onCancelPopup();
         putRequest("infected/unlock/"+infectedId);
+        hidePopUp();
         clearRightBar();
     }, parseInt(config_hash_table["autoResetOffset"])*1000);
 
@@ -276,12 +278,9 @@ function prescribeTest(id)
     makeConfirmPopup("Wollen Sie einen Test anordnen?",
         function(id) {
             if (detailedXML === null) return;
-            // TODO: check whether prescribed, change xml, reload detail view
-            // var availableTests = detailedXML.getElementsByTagName("test");
-            // console.log(availableTests.lastChild);
 
-            const xml_string = "<TestInsertDto><infectedId>"+id+"</infectedId><result>0</result><timestamp>"+parseInt(Date.now()/1000.0)+"</timestamp></TestInsertDto>";
-            postRequest("test", xml_string);
+            const xmlString = "<TestInsertDto><infectedId>"+id+"</infectedId><result>0</result><timestamp>"+Date.now()+"</timestamp></TestInsertDto>";
+            postRequest("test", xmlString);
         }, function (id) { }, id );
 }
 
