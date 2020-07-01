@@ -15,7 +15,7 @@
 
     <xsl:template match="historyItem">
         <div id="notesItem">
-            <p class="bold_text">Vom <xsl:value-of select="timestamp"/>: <span id="notesText"><xsl:value-of select="notes"/></span></p>
+            <p class="bold_text">Vom <xsl:value-of select="date"/>: <span id="notesText"><xsl:value-of select="notes"/></span></p>
         </div>
     </xsl:template>
 </xsl:stylesheet>

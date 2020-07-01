@@ -41,3 +41,14 @@ function closeRightBar()
     }
     currentInfectedId = null;
 }
+
+function showLoading()
+{
+    let loadingScreen = document.getElementById("loadingScreen");
+    if ( loadingScreen.classList.contains("invisible_object") ) loadingScreen.classList.remove("invisible_object");
+}
+
+function hideLoading() {
+    let loadingScreen = document.getElementById("loadingScreen");
+    if ( !loadingScreen.classList.contains("invisible_object") ) loadingScreen.classList.add("invisible_object");
+}
