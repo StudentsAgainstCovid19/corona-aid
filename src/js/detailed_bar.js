@@ -368,7 +368,7 @@ function closeDetailedView(id)
 
 function submitDetailView(id, historyItemId = null)
 {
-    let xmlString = "<History>" +
+    let xmlString = "<HistoryItem"+(historyItemId ? "Update" : "Insert")+"Dto>"+
         ( historyItemId ? "<historyItemId>" + historyItemId + "</historyItemId>" : "") +
         "<infectedId>"+id+"</infectedId>"+
         "<notes>"+document.getElementById("notes_area").value+"</notes>"+
@@ -383,8 +383,8 @@ function submitDetailView(id, historyItemId = null)
     xmlString +=
         "</symptoms>" +
         "<timestamp>" + Date.now() + "</timestamp>" +
-        "</History>";
-
+        "</HistoryItem"+(historyItemId ? "Update" : "Insert")+"Dto>";
+    console.log(xmlString);
     if ( !historyItemId )
     {
         postRequest("history", xmlString);
