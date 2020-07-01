@@ -37,80 +37,83 @@
 
     <xsl:template match="/">
         <infected>
-            <xsl:for-each select="Set/item">
+            <xsl:apply-templates select="Set/item">
                 <xsl:sort select="infected/person/id" data-type="number"/>
-                <xsl:variable name="sumSymptomsNotNull">
-                    <xsl:call-template name="handleNullability">
-                        <xsl:with-param name="value" select="sumSymptoms"/>
-                        <xsl:with-param name="default" select="0"/>
-                    </xsl:call-template>
-                </xsl:variable>
-                <xsl:variable name="wellBeingNotNull">
-                    <xsl:call-template name="handleNullability">
-                        <xsl:with-param name="value" select="personalFeeling"/>
-                        <xsl:with-param name="default" select="1"/>
-                    </xsl:call-template>
-                </xsl:variable>
-
-
-                <person>
-                    <id>
-                        <xsl:value-of select="id"/>
-                    </id>
-                    <firstnames>
-                        <xsl:value-of select="forename"/>
-                    </firstnames>
-                    <lastname>
-                        <xsl:value-of select="surname"/>
-                    </lastname>
-                    <age>
-                        <xsl:value-of select="age"/>
-                    </age>
-                    <calledbool>
-                        <xsl:choose>
-                            <xsl:when test="not(lastUnsuccessfulCallToday = '')  and done = 'false'">true</xsl:when>
-                            <xsl:otherwise>false</xsl:otherwise>
-                        </xsl:choose>
-                    </calledbool>
-                    <lastcall>
-                        <xsl:value-of select="lastUnsuccessfulCallTodayString"/>
-                    </lastcall>
-                    <phone>
-                        <xsl:value-of select="phone"/>
-                    </phone>
-                    <subjectiveWellbeing>
-                        <xsl:value-of select="$wellBeingNotNull"/>
-                    </subjectiveWellbeing>
-                    <lat>
-                        <xsl:value-of select="lat"/>
-                    </lat>
-                    <lon>
-                        <xsl:value-of select="lon"/>
-                    </lon>
-                    <done>
-                        <xsl:choose>
-                            <xsl:when test="done = 'true'">1</xsl:when>
-                            <xsl:otherwise>0</xsl:otherwise>
-                        </xsl:choose>
-                    </done>
-
-                    <locked>
-                        <xsl:value-of select="locked"/>
-                    </locked>
-
-
-
-
-                    <priority>
-                        <xsl:call-template name="prio_calculation">
-                            <xsl:with-param name="age" select="age"/>
-                            <xsl:with-param name="subjectiveWellbeing" select="$wellBeingNotNull"/>
-                            <xsl:with-param name="preExIllnesses" select="sumInitialDiseases"/>
-                            <xsl:with-param name="sumSymptoms" select="$sumSymptomsNotNull"/>
-                        </xsl:call-template>
-                    </priority>
-                </person>
-            </xsl:for-each>
+            </xsl:apply-templates>
         </infected>
+    </xsl:template>
+
+    <xsl:template match="item">
+        <xsl:variable name="sumSymptomsNotNull">
+            <xsl:call-template name="handleNullability">
+                <xsl:with-param name="value" select="sumSymptoms"/>
+                <xsl:with-param name="default" select="0"/>
+            </xsl:call-template>
+        </xsl:variable>
+        <xsl:variable name="wellBeingNotNull">
+            <xsl:call-template name="handleNullability">
+                <xsl:with-param name="value" select="personalFeeling"/>
+                <xsl:with-param name="default" select="1"/>
+            </xsl:call-template>
+        </xsl:variable>
+
+
+        <person>
+            <id>
+                <xsl:value-of select="id"/>
+            </id>
+            <firstnames>
+                <xsl:value-of select="forename"/>
+            </firstnames>
+            <lastname>
+                <xsl:value-of select="surname"/>
+            </lastname>
+            <age>
+                <xsl:value-of select="age"/>
+            </age>
+            <calledbool>
+                <xsl:choose>
+                    <xsl:when test="not(lastUnsuccessfulCallToday = '')  and done = 'false'">true</xsl:when>
+                    <xsl:otherwise>false</xsl:otherwise>
+                </xsl:choose>
+            </calledbool>
+            <lastcall>
+                <xsl:value-of select="lastUnsuccessfulCallTodayString"/>
+            </lastcall>
+            <phone>
+                <xsl:value-of select="phone"/>
+            </phone>
+            <subjectiveWellbeing>
+                <xsl:value-of select="$wellBeingNotNull"/>
+            </subjectiveWellbeing>
+            <lat>
+                <xsl:value-of select="lat"/>
+            </lat>
+            <lon>
+                <xsl:value-of select="lon"/>
+            </lon>
+            <done>
+                <xsl:choose>
+                    <xsl:when test="done = 'true'">1</xsl:when>
+                    <xsl:otherwise>0</xsl:otherwise>
+                </xsl:choose>
+            </done>
+
+            <locked>
+                <xsl:value-of select="locked"/>
+            </locked>
+
+
+
+
+            <priority>
+                <xsl:call-template name="prio_calculation">
+                    <xsl:with-param name="age" select="age"/>
+                    <xsl:with-param name="subjectiveWellbeing" select="$wellBeingNotNull"/>
+                    <xsl:with-param name="preExIllnesses" select="sumInitialDiseases"/>
+                    <xsl:with-param name="sumSymptoms" select="$sumSymptomsNotNull"/>
+                </xsl:call-template>
+            </priority>
+        </person>
     </xsl:template>
 </xsl:stylesheet>

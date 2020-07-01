@@ -29,56 +29,59 @@
         </div>
         <div class="seperator"></div>
         <div class = "call_list_content">
-            <xsl:for-each select="infected/person">
+            <xsl:apply-templates select="infected/person">
+                <!-- fill call list -->
                 <xsl:sort select="done" data-type="number"/>
                 <xsl:sort select="priority" order="descending" data-type="number"/>
-
-                <xsl:variable name="div_classtag">
-                    <xsl:call-template name="div_classtag_template">
-                        <xsl:with-param name="called" select="calledbool"/>
-                        <xsl:with-param name="prio" select="priority"/>
-                    </xsl:call-template>
-                </xsl:variable>
-
-
-                <xsl:variable name="wellbeing_desc">
-                    <xsl:call-template name="wellbeing_desc">
-                        <xsl:with-param name="wellbeing" select="subjectiveWellbeing"/>
-                    </xsl:call-template>
-                </xsl:variable>
-                <div>
-                        <xsl:attribute name="class">call_list_element<xsl:if test="locked = 'true'">
-                                hidden_box
-                            </xsl:if>
-                        </xsl:attribute>
-                        <div tabindex="0">
-
-                            <xsl:attribute name="class">
-                                <xsl:choose>
-                                    <xsl:when test="done = 1">done_call_box</xsl:when>
-                                    <xsl:otherwise><xsl:value-of select="$div_classtag"/></xsl:otherwise>
-                                </xsl:choose> call_box</xsl:attribute>
-
-
-                            <xsl:attribute name="onclick">try_acquire_lock(<xsl:value-of select="id"/>)</xsl:attribute>
-
-                            <h2>Name: </h2>
-                            <span><xsl:value-of select="lastname"/>, <xsl:value-of select="firstnames"/></span>
-                            <h2>Zustand:  </h2>
-                            <span>
-                                <xsl:value-of select="$wellbeing_desc"/>
-                            </span>
-                            <h2>Tel.:</h2>
-                            <span><xsl:value-of select="phone"/></span>
-                            <xsl:if test="$div_classtag = 'calledAlready'">
-                                <h2>Letzter Versuch: </h2>
-                                <span>Heute, <xsl:value-of select="lastcall"/> Uhr</span>
-                            </xsl:if>
-                        </div>
-                </div>
-
-            </xsl:for-each>
+            </xsl:apply-templates>
         </div>
 
+    </xsl:template>
+
+
+    <xsl:template match="person"> <!-- fill call list -->
+        <xsl:variable name="div_classtag">
+            <xsl:call-template name="div_classtag_template">
+                <xsl:with-param name="called" select="calledbool"/>
+                <xsl:with-param name="prio" select="priority"/>
+            </xsl:call-template>
+        </xsl:variable>
+
+
+        <xsl:variable name="wellbeing_desc">
+            <xsl:call-template name="wellbeing_desc">
+                <xsl:with-param name="wellbeing" select="subjectiveWellbeing"/>
+            </xsl:call-template>
+        </xsl:variable>
+        <div>
+            <xsl:attribute name="class">call_list_element<xsl:if test="locked = 'true'">
+                hidden_box
+            </xsl:if>
+            </xsl:attribute>
+            <div tabindex="0">
+
+                <xsl:attribute name="class">
+                    <xsl:choose>
+                        <xsl:when test="done = 1">done_call_box</xsl:when>
+                        <xsl:otherwise><xsl:value-of select="$div_classtag"/></xsl:otherwise>
+                    </xsl:choose> call_box</xsl:attribute>
+
+
+                <xsl:attribute name="onclick">try_acquire_lock(<xsl:value-of select="id"/>)</xsl:attribute>
+
+                <h2>Name: </h2>
+                <span><xsl:value-of select="lastname"/>, <xsl:value-of select="firstnames"/></span>
+                <h2>Zustand:  </h2>
+                <span>
+                    <xsl:value-of select="$wellbeing_desc"/>
+                </span>
+                <h2>Tel.:</h2>
+                <span><xsl:value-of select="phone"/></span>
+                <xsl:if test="$div_classtag = 'calledAlready'">
+                    <h2>Letzter Versuch: </h2>
+                    <span>Heute, <xsl:value-of select="lastcall"/> Uhr</span>
+                </xsl:if>
+            </div>
+        </div>
     </xsl:template>
 </xsl:stylesheet>

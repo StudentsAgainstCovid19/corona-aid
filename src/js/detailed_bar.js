@@ -17,6 +17,7 @@ function try_acquire_lock(id) { // id for infected
                 function(infectedId)
                 {
                     putRequest("infected/unlock/"+infectedId);
+                    deleteTimeouts();
                 }, id);
         }
         else

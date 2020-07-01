@@ -14,33 +14,36 @@
 
     <xsl:template match="/">
         <div id="clustered_list">
-            <xsl:for-each select="infected/person">
+            <xsl:apply-templates select="infected/person">
+                <!-- fill clustered list -->
                 <xsl:sort select="done" order="ascending"/>
                 <xsl:sort select="priority" order="descending"/>
+            </xsl:apply-templates>
+        </div>
+    </xsl:template>
 
-                <xsl:variable name="priority_img">
-                    <xsl:call-template name="priority_img_template">
-                        <xsl:with-param name="prio" select="priority"/>
-                    </xsl:call-template>
-                </xsl:variable>
+    <xsl:template match="infected/person">
+        <!-- fill clustered list -->
+        <xsl:variable name="priority_img">
+            <xsl:call-template name="priority_img_template">
+                <xsl:with-param name="prio" select="priority"/>
+            </xsl:call-template>
+        </xsl:variable>
 
-                <div class="list_div">
-                    <xsl:attribute name="onclick">try_acquire_lock(<xsl:value-of select="id"/>)</xsl:attribute>
-                    <xsl:if test="done = 1">
-                        <xsl:attribute name="class">done_div</xsl:attribute>
-                    </xsl:if>
-                    <p>
-                        <span>
-                            <xsl:attribute name="class">wellbeing_imagespan</xsl:attribute>
-                            <img>
-                                <xsl:attribute name="class">wellbeing_indicator</xsl:attribute>
-                                <xsl:attribute name="src">./assets/markers/<xsl:value-of select="$priority_img"/>_prio.svg</xsl:attribute>
-                            </img>
-                        </span> <xsl:value-of select="lastname"/>, <xsl:value-of select="firstnames"/>
-                    </p>
-                </div>
-
-            </xsl:for-each>
+        <div class="list_div">
+            <xsl:attribute name="onclick">try_acquire_lock(<xsl:value-of select="id"/>)</xsl:attribute>
+            <xsl:if test="done = 1">
+                <xsl:attribute name="class">done_div</xsl:attribute>
+            </xsl:if>
+            <p>
+                <span>
+                    <xsl:attribute name="class">wellbeing_imagespan</xsl:attribute>
+                    <img>
+                        <xsl:attribute name="class">wellbeing_indicator</xsl:attribute>
+                        <xsl:attribute name="src">./assets/markers/<xsl:value-of select="$priority_img"/>_prio.svg</xsl:attribute>
+                    </img>
+                </span> <xsl:value-of select="lastname"/>, <xsl:value-of select="firstnames"/>
+            </p>
         </div>
     </xsl:template>
 </xsl:stylesheet>
