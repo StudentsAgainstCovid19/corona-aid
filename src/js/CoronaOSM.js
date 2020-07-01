@@ -13,7 +13,7 @@ function initMap() {
         ],
         view: new ol.View({
             center: getStandardCenter(),
-            projection: "EPSG:3857",
+            projection: config_hash_table["projectionType"],
             zoom: parseInt(config_hash_table["standardZoom"])
         })
     });
@@ -174,8 +174,9 @@ function setDistrictsLayer()
     districtLayer = new ol.layer.Vector({
         source: new ol.source.Vector()
     });
+    console.log(districtsKML)
 
-    districtLayer.getSource().addFeatures(new ol.format.KML().readFeatures(districtsKML, {featureProjection: "EPSG:3857"}));
+    districtLayer.getSource().addFeatures(new ol.format.KML().readFeatures(districtsKML, {featureProjection: config_hash_table["projectionType"]}));
     map.addLayer(districtLayer);
 }
 

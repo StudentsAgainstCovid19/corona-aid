@@ -1,14 +1,14 @@
 
 <districts>
     <district>
-        <amountInfected>500</amountInfected>
+        <amountInfected>400</amountInfected>
         <area>200</area>
         <name>Oststadt</name>
         <outline>
             <point><lon>54.264</lon><lat>25.56</lat></point>
-            <point><lon>54.265</lon><lat>25.56</lat></point>
-            <point><lon>54.266</lon><lat>25.56</lat></point>
-            <point><lon>54.267</lon><lat>25.56</lat></point>
+            <point><lon>52</lon><lat>25.56</lat></point>
+            <point><lon>52</lon><lat>0</lat></point>
+            <point><lon>54.267</lon><lat>0</lat></point>
         </outline>
     </district>
 </districts>

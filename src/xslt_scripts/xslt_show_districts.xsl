@@ -1,22 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <xsl:stylesheet version="1.0" xmlns:xsl="http://www.w3.org/1999/XSL/Transform">
 
-    <xsl:template match="districts">
-        <?xml version="1.0" encoding="UTF-8"?>
-        <kml xmlns="http://www.opengis.net/kml/2.2">
+    <xsl:template match="/">
+        <kml>
             <Document>
-                <Style id="transBluePoly">
-                    <LineStyle>
-                        <width>5</width>
-                        <color>500000ff</color>
-                    </LineStyle>
-                    <PolyStyle>
-                        <color>4000ff00</color>
-                        <fill>1</fill>
-                        <outline>1</outline>
-                    </PolyStyle>
-                </Style>
-                <xsl:apply-templates select="district"/>
+                <xsl:call-template name="insertStyles"/>
+                <xsl:apply-templates select="districts/district"/>
             </Document>
         </kml>
     </xsl:template>
@@ -45,11 +34,39 @@
 
     <xsl:template name="polygonStyleChooser">
         <xsl:param name="density"/>
-        #transBluePoly
+        <xsl:choose>
+            <xsl:when test="$density &lt; 2.5">#districtGreen</xsl:when>
+            <xsl:otherwise>#districtRed</xsl:otherwise>
+        </xsl:choose>
+
     </xsl:template>
 
-    <xsl:template name="point">
+    <xsl:template match="point">
         <xsl:value-of select="lon"/>, <xsl:value-of select="lat"/>, 0
     </xsl:template>
 
+    <xsl:template name="insertStyles">
+        <Style id="districtGreen">
+            <LineStyle>
+                <width>5</width>
+                <color>5000ff00</color>
+            </LineStyle>
+            <PolyStyle>
+                <color>4000d000</color>
+                <fill>1</fill>
+                <outline>1</outline>
+            </PolyStyle>
+        </Style>
+        <Style id="districtRed">
+            <LineStyle>
+                <width>5</width>
+                <color>500000ff</color>
+            </LineStyle>
+            <PolyStyle>
+                <color>400000ff</color>
+                <fill>1</fill>
+                <outline>1</outline>
+            </PolyStyle>
+        </Style>
+    </xsl:template>
 </xsl:stylesheet>
