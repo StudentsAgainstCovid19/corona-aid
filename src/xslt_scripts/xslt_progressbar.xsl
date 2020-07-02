@@ -1,7 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <xsl:stylesheet version="1.0" xmlns:xsl="http://www.w3.org/1999/XSL/Transform">
     <xsl:template match="/">
-        <svg xmlns="http://www.w3.org/2000/svg" width="200" height="10">
+        <svg xmlns="http://www.w3.org/2000/svg" width="200" height="20"  viewBox=" 0 0 100 10" >
+
             <defs>
                 <linearGradient id="progressColorGradient" x1="0%" y1="100%" x2="100%" y2="100%">
                     <stop offset="0%" style="stop-color:rgb(255,0,0);stop-opacity:1" />

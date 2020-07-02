@@ -42,16 +42,18 @@
     <div id="corona_logo" class="corona_logo">
       <img src="assets/Corona_Aid_Logo.jpg" alt="Corona Aid Logo" class="corona_logo_img">
     </div>
-    <div id="action_bar" class="floating_object">
-        <button onclick="showHelp();">?</button>
-        <button onclick="standardZoom();">zoom_std</button>
+    <div id="actionBar" class="floating_object">
+        <button onclick="showHelp();" class="spaceAround smallButton">?</button>
+        <button onclick="standardZoom();" class="spaceAround smallButton">Zoom ausrichten</button>
         <input id="districts" type="checkbox" onclick="toggleLayerVisibility();"/>
-        <label for="districts">Zeige Distrikte</label>
+        <label id="showDistrictsLabel" for="districts" class="spaceAround">Zeige Stadtteile</label>
     </div>
+  <div id="progressBarDiv" class="floating_object"></div>
     <div id="right_bar" class="floating_object">
-      <span id="progressBarSpan"><div id="progressBarDiv" class="floating_object"></div></span>
       <div id="infected_detailed_view_right"></div>
     </div>
+
+<!--    <div><span id="progressBarSpan1"><div id="progressBarDiv1" class="floating_object"></div></span></div> -->
 
     <div id="snackbar" class="floating_object"><p id="centeredSnackbarText"></p></div>
 
@@ -94,7 +96,16 @@
     </div>
 
     <img id="global_overlay" class="invisible_object" src="./assets/icons/blur_filter.svg" alt="blur overlay" />
-    <div id="popup_window" class="invisible_object"></div>
+    <div id="popup_window" class="invisible_object">
+    </div>
+    <div id="helpPopup" class="invisible_object">
+      <h1>Hilfe: Kreisdiagramme</h1>
+      <p>Die Zahl innerhalb eines Kreisdiagramms steht für die Anzahl der Personen, welche noch kontaktiert werden müssen</p>
+      <p>Grün: Der grüne Anteil des Kreisdiagramms steht für die Personen, welche heute schon kontaktiert wurden.</p>
+      <p>Gelb: Der gelbe Anteil des Kreisdiagramms steht für die Personen, welche heute noch kontaktiert werden müssen.</p>
+      <p>Lila: Dieser Anteil steht für die Personen, bei welchen der Kontaktversuch gescheitert ist. Diese müssen im Laufe dse Tages erneut kontaktiert werden.</p>
+      <button onclick="closeHelpPopup()" class="dialogButton cancel_button">Schließen</button>
+    </div>
 
     <div id="transparent_overlay" class="invisible_object">
       <div id="confirm_popup">
