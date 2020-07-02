@@ -33,23 +33,25 @@
             <forename><xsl:value-of select="forename"/></forename>
             <symptoms>
                 <xsl:if test="count(historyItems/historyItem[not(status = 0)]) > 0">
-                    <xsl:for-each select="historyItems/historyItem[not(status = 0)][last()]/symptoms/symptom">
-                        <xsl:variable name="sinceDays">
-                            <xsl:call-template name="getSinceDaysSymptom">
-                                <xsl:with-param name="symptomId" select="id"/>
-                            </xsl:call-template>
-                        </xsl:variable>
-
-                        <symptom>
-                            <id><xsl:value-of select="id"/></id>
-                            <sinceDays><xsl:value-of select="$sinceDays"/></sinceDays>
-                            <degreeOfDanger><xsl:value-of select="degreeOfDanger"/></degreeOfDanger>
-                            <name><xsl:value-of select="name"/></name>
-                            <probability><xsl:value-of select="probability"/></probability>
-                        </symptom>
-                    </xsl:for-each>
+                    <xsl:apply-templates select="historyItems/historyItem[not(status = 0)][last()]/symptoms/symptom"/>
                 </xsl:if>
             </symptoms>
         </symptomXML>
+    </xsl:template>
+
+    <xsl:template match="symptom">
+        <xsl:variable name="sinceDays">
+            <xsl:call-template name="getSinceDaysSymptom">
+                <xsl:with-param name="symptomId" select="id"/>
+            </xsl:call-template>
+        </xsl:variable>
+
+        <symptom>
+            <id><xsl:value-of select="id"/></id>
+            <sinceDays><xsl:value-of select="$sinceDays"/></sinceDays>
+            <degreeOfDanger><xsl:value-of select="degreeOfDanger"/></degreeOfDanger>
+            <name><xsl:value-of select="name"/></name>
+            <probability><xsl:value-of select="probability"/></probability>
+        </symptom>
     </xsl:template>
 </xsl:stylesheet>

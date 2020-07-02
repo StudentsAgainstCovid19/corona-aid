@@ -31,11 +31,10 @@
                     </xsl:when>
                     <xsl:when  test="not(angle = 0)">
                         <path>
-                            <xsl:attribute name="d">M <xsl:value-of select="$lastX"/>, <xsl:value-of select="$lastY"/> A 50 50 0 <xsl:value-of select="$largeAngle"/> 1 <xsl:value-of select="x"/>, <xsl:value-of select="y"/> L 50 50</xsl:attribute>
+                            <xsl:attribute name="d">M <xsl:value-of select="$lastX"/>, <xsl:value-of select="$lastY"/> A 50, 50, 0 <xsl:value-of select="$largeAngle"/>, 1, <xsl:value-of select="x"/>, <xsl:value-of select="y"/> L 50, 50</xsl:attribute>
                             <xsl:attribute name="fill"><xsl:value-of select="color"/></xsl:attribute>
                         </path>
                     </xsl:when>
-
                 </xsl:choose>
             </xsl:for-each>
 
@@ -55,5 +54,9 @@
                 </tspan>
             </text>
         </svg>
+    </xsl:template>
+
+    <xsl:template match="arc">
+
     </xsl:template>
 </xsl:stylesheet>
