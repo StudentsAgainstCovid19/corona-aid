@@ -93,7 +93,7 @@ function addHistoryItem(successProbability, infected_id, symptom_list)
 
 function prescribeTest(infected_id)
 {
-    let xml_str = "<TestInsertDto><infectedId>"+infected_id+"</infectedId><result>0</result><timestamp>"+parseInt(Date.now()/1000.0)+"</timestamp></TestInsertDto>";
+    let xml_str = "<TestInsertDto><infectedId>"+infected_id+"</infectedId><result>0</result><timestamp>"+Date.now()+"</timestamp></TestInsertDto>";
     postRequest("test/", xml_str);
 }
 

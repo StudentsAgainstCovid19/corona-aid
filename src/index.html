@@ -19,7 +19,7 @@
     <link rel="stylesheet" href="./css/popup_style.css" type="text/css" />
     <link rel="stylesheet" href="./css/scrollbars.css" type="text/css" />
     <!-- JS -->
-    <script src="./js/slide_animations_listeners.js"></script>
+    <script src="./js/animations.js"></script>
     <script src="./js/action_bar.js"></script>
     <script src="./js/index.js"></script>
     <script src="./js/shared_variables.js"></script>
@@ -39,11 +39,14 @@
 
     </div>
     <div id="map_div"></div>
+    <div id="corona_logo" class="corona_logo">
+      <img src="assets/Corona_Aid_Logo.jpg" alt="Corona Aid Logo" class="corona_logo_img">
+    </div>
     <div id="actionBar" class="floating_object">
         <button onclick="showHelp();" class="spaceAround smallButton">?</button>
-        <button onclick="standardZoom();" class="spaceAround smallButton">zoom_std</button>
-        <input id="districts" type="checkbox" />
-        <label id="showDistrictsLabel" for="districts" class="spaceAround">Zeige Distrikte</label>
+        <button onclick="standardZoom();" class="spaceAround smallButton">Zoom ausrichten</button>
+        <input id="districts" type="checkbox" onclick="toggleLayerVisibility();"/>
+        <label id="showDistrictsLabel" for="districts" class="spaceAround">Zeige Stadtteile</label>
     </div>
   <div id="progressBarDiv" class="floating_object"></div>
     <div id="right_bar" class="floating_object">
@@ -112,6 +115,16 @@
         <button id="cancel_confirm_button" class="dialogButton cancel_button" onclick="onCancelPopup();">Abbrechen</button>
         </div>
       </div>
+    </div>
+
+    <div id="loadingScreen" class="floating_object">
+      <span><div id="waitText">Bitte warten...</div></span>
+      <span>
+        <img src="favicon.ico"/>
+      </span>
+      <span>
+        <img src="./assets/icons/loading_animation.png" class="loadingScreenAnimation"/>
+      </span>
     </div>
   </body>
 </html>

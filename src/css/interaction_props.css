@@ -8,7 +8,7 @@
 
 #zoom_buttons {
     position: center;
-    bottom: 1%;
+    bottom: 4%;
     left: 35%;
     background-color: transparent;
 }
@@ -253,6 +253,73 @@
     border: 3px solid gray;
 }
 
-.smallButton:hover{
-   background-color: darkgray;
+.smallButton:hover {
+    background-color: darkgray;
+}
+
+#loadingScreen {
+    background-color: rgba(256,256,256, 0.7);
+    border-radius: 50%;
+    left: 45%;
+    top: 45%;
+    height: 10em;
+    width: 10em;
+    vertical-align: middle;
+    box-shadow: 2px 2px black;
+}
+
+#loadingScreen img{
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    display: block;
+    margin: auto;
+    position: absolute;
+    opacity: 0.7;
+}
+
+.loadingScreenAnimation {
+    animation: loadingAnimation 1s ease-in-out infinite;
+}
+
+
+@keyframes loadingAnimation {
+    from {
+        transform: rotate(0deg);
+    }
+
+    to {
+        transform: rotate(360deg);
+    }
+}
+
+
+#loadingScreen span {
+    width: auto;
+}
+
+#waitText{
+    background-color: white;
+    padding: 3px;
+    border-radius: 10px;
+    display: inline-block;
+    opacity: 1;
+    z-index: 6;
+    left: 18%;
+    top: 45%;
+    margin: auto;
+    position: relative;
+}
+
+.corona_logo{
+    position: absolute;
+    bottom: 3px;
+    right: 5px;
+    z-index: 5;
+    width: 10%;
+}
+.corona_logo_img{
+    width: 100%;
+    height: 13%;
 }

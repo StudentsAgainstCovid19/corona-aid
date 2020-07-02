@@ -130,6 +130,11 @@ h2{
     border-width: 0 0 0 5px;
     margin: 2px;
     padding: 5px 5px 8px 5px;
+    transition: 0.3s;
+}
+
+.call_box :hover {
+    border-width: 0 0 0 8px;
 }
 
 .call_list_element{
@@ -139,8 +144,10 @@ h2{
 }
 
 .call_list_element :hover {
+    border-width: 0 0 0 10px;
     background-color: #e6e6e6;
 }
+
 
 .lowprio {
     border-color: green;

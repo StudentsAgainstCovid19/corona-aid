@@ -13,7 +13,7 @@ function initMap() {
         ],
         view: new ol.View({
             center: getStandardCenter(),
-            projection: "EPSG:3857",
+            projection: config_hash_table["projectionType"],
             zoom: parseInt(config_hash_table["standardZoom"])
         })
     });
@@ -163,6 +163,51 @@ async function setClusterLayer() {
     });
 }
 
+function setDistrictsLayer()
+{
+    showLoading();
+    // load xml from backend and process with xslt
+    let districtsXML = loadXMLDoc("./assets/example_districts.xml");
+    let districtsXSL = getXSLT("./xslt_scripts/xslt_show_districts.xsl");
+
+    let districtsKML = runXSLT(districtsXSL, districtsXML);
+
+    districtLayer = new ol.layer.Vector({
+        source: new ol.source.Vector()
+    });
+    console.log(districtsKML)
+
+    districtLayer.getSource().addFeatures(new ol.format.KML().readFeatures(districtsKML, {featureProjection: config_hash_table["projectionType"]}));
+    map.addLayer(districtLayer);
+    hideLoading();
+}
+
+function toggleLayerVisibility()
+{
+    if ( !clusteredLayer.getVisible() )
+    {
+        clusteredLayer.setVisible(true);
+        setVisibilityDistricts(false);
+    }
+    else {
+        clusteredLayer.setVisible(false);
+        setVisibilityDistricts(true);
+    }
+
+}
+
+function setVisibilityDistricts(visibilityState)
+{
+    if ( !visibilityState )
+    {
+        if ( districtLayer ) districtLayer.setVisible(false);
+    }
+    else {
+        if ( !districtLayer ) setDistrictsLayer();
+        else districtLayer.setVisible(true);
+    }
+}
+
 function parseFeatureTree(ft)
 {
 
@@ -234,7 +279,6 @@ function getType(person)
         let prioMapping = ["low", "low", "intermediate", "high", "veryhigh"];
         return prioMapping[parseInt(person.getElementsByTagName("priority")[0].childNodes[0].nodeValue)];
     }
-    return "low";
 }
 
 function createPieChart(size, amountDone, amountCalled) {
@@ -277,7 +321,7 @@ function createClusterFromSVG(icon)
 {
     return new ol.style.Style({
         image: icon
-    })
+    });
 }
 
 function calculateCirclePoint(angle)
