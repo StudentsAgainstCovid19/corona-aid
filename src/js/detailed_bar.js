@@ -17,6 +17,7 @@ function try_acquire_lock(id) { // id for infected
                 function(infectedId)
                 {
                     putRequest("infected/unlock/"+infectedId);
+                    deleteTimeouts();
                 }, id);
         }
         else
@@ -40,6 +41,7 @@ function addLockingTimer(infectedId)
             }, function(){
                 if ( autoUnlockTimeout ) clearTimeout(autoUnlockTimeout);
                 putRequest("infected/unlock/" + infectedId);
+                hidePopUp();
                 clearRightBar();
             }, infectedId);
     }, parseInt(config_hash_table["autoResetOffset"])*0.8*1000);
@@ -53,6 +55,7 @@ function addAutoUnlockTimeout(infectedId)
     autoUnlockTimeout = setTimeout(function(){
         onCancelPopup();
         putRequest("infected/unlock/"+infectedId);
+        hidePopUp();
         clearRightBar();
     }, parseInt(config_hash_table["autoResetOffset"])*1000);
 
@@ -276,12 +279,9 @@ function prescribeTest(id)
     makeConfirmPopup("Wollen Sie einen Test anordnen?",
         function(id) {
             if (detailedXML === null) return;
-            // TODO: check whether prescribed, change xml, reload detail view
-            // var availableTests = detailedXML.getElementsByTagName("test");
-            // console.log(availableTests.lastChild);
 
-            const xml_string = "<TestInsertDto><infectedId>"+id+"</infectedId><result>0</result><timestamp>"+parseInt(Date.now()/1000.0)+"</timestamp></TestInsertDto>";
-            postRequest("test", xml_string);
+            const xmlString = "<TestInsertDto><infectedId>"+id+"</infectedId><result>0</result><timestamp>"+Date.now()+"</timestamp></TestInsertDto>";
+            postRequest("test", xmlString);
         }, function (id) { }, id );
 }
 
@@ -349,6 +349,7 @@ function failedCall(id)
                 "</History>";
 
     postRequest("history", xml_string);
+    deleteTimeouts();
     clearRightBar();
 }
 
@@ -365,9 +366,10 @@ function closeDetailedView(id)
         }, function(notUsed){}, id);
 }
 
-function submitDetailView(id)
+function submitDetailView(id, historyItemId = null)
 {
-    let xml_string = "<History>" +
+    let xmlString = "<HistoryItem"+(historyItemId ? "Update" : "Insert")+"Dto>"+
+        ( historyItemId ? "<historyItemId>" + historyItemId + "</historyItemId>" : "") +
         "<infectedId>"+id+"</infectedId>"+
         "<notes>"+document.getElementById("notes_area").value+"</notes>"+
         "<personalFeeling>"+(document.getElementById("wellbeing_slider").value)+"</personalFeeling>"+
@@ -376,13 +378,23 @@ function submitDetailView(id)
 
     for (let i=0; i<symptomsList.length; i++)
     {
-        xml_string += "<symptom>"+parseInt(symptomsList[i])+"</symptom>";
+        xmlString += "<symptom>"+parseInt(symptomsList[i])+"</symptom>";
     }
-    xml_string +=
+    xmlString +=
         "</symptoms>" +
         "<timestamp>" + Date.now() + "</timestamp>" +
-        "</History>";
-    postRequest("history", xml_string);
+        "</HistoryItem"+(historyItemId ? "Update" : "Insert")+"Dto>";
+    console.log(xmlString);
+    if ( !historyItemId )
+    {
+        postRequest("history", xmlString);
+    }
+    else
+    {
+        putRequest("history", xmlString);
+    }
+
+    deleteTimeouts();
     clearRightBar();
 }
 

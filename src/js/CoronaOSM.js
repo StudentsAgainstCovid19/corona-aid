@@ -13,7 +13,7 @@ function initMap() {
         ],
         view: new ol.View({
             center: getStandardCenter(),
-            projection: "EPSG:3857",
+            projection: config_hash_table["projectionType"],
             zoom: parseInt(config_hash_table["standardZoom"])
         })
     });
@@ -50,7 +50,7 @@ function readExt(feature, extensionsNode)
 // the underlying icons. See:
 // https://github.com/openlayers/openlayers/issues/3137
 // https://github.com/openlayers/openlayers/pull/1590
-var piechart_cache = {}; // map to cache openlayer-icons, to prevent flickering
+var piechart_cache = new Map(); // map to cache openlayer-icons, to prevent flickering
 
 // asynchronous to prevent extreme slowdowns
 async function setMarkers() {
@@ -120,12 +120,12 @@ async function setClusterLayer() {
                 }
 
                 const key = [size, amountDone, amountCalled];
-                styleSVGIcon = piechart_cache[key];
+                styleSVGIcon = piechart_cache.get(key.toString());
                 if (!styleSVGIcon)
                 { // caching did not work due to the fact that styles are disposed if a cluster is reloaded / disposed.
                     // Now we cache the SVG output as openlayers icon by the XSLTProcessor
                     styleSVGIcon = createPieChart(size, amountDone, amountCalled);
-                    piechart_cache[key] = styleSVGIcon;
+                    piechart_cache.set(key.toString(), styleSVGIcon);
                 }
                 style = createClusterFromSVG(styleSVGIcon);
             }
@@ -163,6 +163,51 @@ async function setClusterLayer() {
     });
 }
 
+function setDistrictsLayer()
+{
+    showLoading();
+    // load xml from backend and process with xslt
+    let districtsXML = loadXMLDoc("./assets/example_districts.xml");
+    let districtsXSL = getXSLT("./xslt_scripts/xslt_show_districts.xsl");
+
+    let districtsKML = runXSLT(districtsXSL, districtsXML);
+
+    districtLayer = new ol.layer.Vector({
+        source: new ol.source.Vector()
+    });
+    console.log(districtsKML)
+
+    districtLayer.getSource().addFeatures(new ol.format.KML().readFeatures(districtsKML, {featureProjection: config_hash_table["projectionType"]}));
+    map.addLayer(districtLayer);
+    hideLoading();
+}
+
+function toggleLayerVisibility()
+{
+    if ( !clusteredLayer.getVisible() )
+    {
+        clusteredLayer.setVisible(true);
+        setVisibilityDistricts(false);
+    }
+    else {
+        clusteredLayer.setVisible(false);
+        setVisibilityDistricts(true);
+    }
+
+}
+
+function setVisibilityDistricts(visibilityState)
+{
+    if ( !visibilityState )
+    {
+        if ( districtLayer ) districtLayer.setVisible(false);
+    }
+    else {
+        if ( !districtLayer ) setDistrictsLayer();
+        else districtLayer.setVisible(true);
+    }
+}
+
 function parseFeatureTree(ft)
 {
 
@@ -185,7 +230,7 @@ function getAmountDone(array)
     let amount=0;
     for (let i=0; i<array.length; i++)
     {
-        if (array[i].get('done'))
+        if (array[parseInt(i)].get('done'))
         {
             amount+=1;
         }
@@ -198,7 +243,7 @@ function getAmountCalled(array)
     let amount=0;
     for (let i=0; i<array.length; i++)
     {
-        if (array[i].get('called') && !array[i].get('done'))
+        if (array[parseInt(i)].get('called') && !array[parseInt(i)].get('done'))
         {
             amount+=1;
         }
@@ -234,7 +279,6 @@ function getType(person)
         let prioMapping = ["low", "low", "intermediate", "high", "veryhigh"];
         return prioMapping[parseInt(person.getElementsByTagName("priority")[0].childNodes[0].nodeValue)];
     }
-    return "low";
 }
 
 function createPieChart(size, amountDone, amountCalled) {
@@ -277,7 +321,7 @@ function createClusterFromSVG(icon)
 {
     return new ol.style.Style({
         image: icon
-    })
+    });
 }
 
 function calculateCirclePoint(angle)

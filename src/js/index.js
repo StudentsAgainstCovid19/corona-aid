@@ -6,6 +6,7 @@ function parseNodeValueFromXML(xml_obj, tagName)
 
 function init()
 {
+    showLoading();
     loadConfig();
     initMap();
     calculatePriorities();
@@ -14,6 +15,7 @@ function init()
     window.onbeforeunload = function(){
         cleanUp();
     }
+    setTimeout(hideLoading, 1000);
 }
 
 function connectWebSocket() {
@@ -40,8 +42,8 @@ function loadConfig()
     let items = configXML.getElementsByTagName("item");
     for (let i=0; i<items.length; i++)
     {
-        config_hash_table[parseNodeValueFromXML(items[i], "configKey")] =
-            parseNodeValueFromXML(items[i], "configValue");
+        config_hash_table[parseNodeValueFromXML(items[parseInt(i)], "configKey")] =
+            parseNodeValueFromXML(items[parseInt(i)], "configValue");
     }
 }
 
@@ -79,7 +81,7 @@ function realtimeUpdate( updateXML )
     let items = updateXML.children[0].getElementsByTagName("item");
     for (let index = 0; index < items.length; index++)
     {
-        xml_str += serializer.serializeToString(items[index]);
+        xml_str += serializer.serializeToString(items[parseInt(index)]);
     }
     updateXMLStr += xml_str;
     runUpdate();
@@ -126,4 +128,6 @@ function showProgressBar()
 {
     let progressXSL = getXSLT("./xslt_scripts/xslt_progressbar.xsl");
     runXSLT(progressXSL, prioList, "progressBarDiv");
+    let bar = document.getElementById("progressBarDiv");
+    console.log(bar);
 }

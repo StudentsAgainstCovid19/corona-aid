@@ -87,7 +87,7 @@
     </xsl:template>
 
     <xsl:template match="historyItems">
-        <xsl:variable name="rawAmount" select="count(historyItems/historyItem[not(status = 0)])"/>
+        <xsl:variable name="rawAmount" select="count(/InfectedDto/historyItems/historyItem[not(status = 0)])"/>
         <xsl:variable name="amountValues">
             <xsl:choose>
                 <xsl:when test="$rawAmount > 7">7</xsl:when>
@@ -114,33 +114,38 @@
         <span>
             <svg id="wellbeing_indicator_history" height="100"   xmlns="http://www.w3.org/2000/svg">
                 <xsl:attribute name="width"><xsl:value-of select="$width"/></xsl:attribute>
-            <!-- TODO: improve code quality, no foreach -->
-                <xsl:for-each select="historyItems/historyItem[not(status = 0)][position() > ($rawAmount - $amountValues)]">
+                <xsl:apply-templates select="/InfectedDto/historyItems/historyItem[not(status = 0)][position() > ($rawAmount - $amountValues)]">
                     <xsl:sort select="timestamp" data-type="number"/>
-                    <xsl:variable name="color">
-                        <xsl:call-template name="getWellbeingColor">
-                            <xsl:with-param name="wellbeing" select="personalFeeling"/>
-                        </xsl:call-template>
-                    </xsl:variable>
-                    <xsl:variable name="circle_x_pos" select="position()*70 - 45"/>
-                    <circle cy="50" r="20" stroke-width="2px" stroke="black">
-                        <xsl:attribute name="fill"><xsl:value-of select="$color"/></xsl:attribute>
-                        <xsl:attribute name="cx"><xsl:value-of select="$circle_x_pos"/></xsl:attribute>
-                    </circle>
-                    <xsl:if test="not(position() = $amountValues)">
-                        <xsl:variable name="line_x1_pos" select="position()*70 - 21"/>
-                        <xsl:variable name="line_x2_pos" select="position()*70 + 1"/>
-
-                        <line y1="50" y2="50" stroke="black" stroke-width="5">
-                            <xsl:attribute name="x1"><xsl:value-of select="$line_x1_pos"/></xsl:attribute>
-                            <xsl:attribute name="x2"><xsl:value-of select="$line_x2_pos"/></xsl:attribute>
-                        </line>
-                    </xsl:if>
-                </xsl:for-each>
+                    <xsl:with-param name="amountValues" select="$amountValues"/>
+                </xsl:apply-templates>
             </svg>
         </span>
         <xsl:if test="$amountValues > 0">
             <span>gestern</span>
+        </xsl:if>
+    </xsl:template>
+    
+    <xsl:template match="historyItem">
+        <xsl:param name="amountValues"/>
+
+        <xsl:variable name="color">
+            <xsl:call-template name="getWellbeingColor">
+                <xsl:with-param name="wellbeing" select="personalFeeling"/>
+            </xsl:call-template>
+        </xsl:variable>
+        <xsl:variable name="circle_x_pos" select="position()*70 - 45"/>
+        <circle cy="50" r="20" stroke-width="2px" stroke="black">
+            <xsl:attribute name="fill"><xsl:value-of select="$color"/></xsl:attribute>
+            <xsl:attribute name="cx"><xsl:value-of select="$circle_x_pos"/></xsl:attribute>
+        </circle>
+        <xsl:if test="not(position() = $amountValues)">
+            <xsl:variable name="line_x1_pos" select="position()*70 - 21"/>
+            <xsl:variable name="line_x2_pos" select="position()*70 + 1"/>
+
+            <line y1="50" y2="50" stroke="black" stroke-width="5">
+                <xsl:attribute name="x1"><xsl:value-of select="$line_x1_pos"/></xsl:attribute>
+                <xsl:attribute name="x2"><xsl:value-of select="$line_x2_pos"/></xsl:attribute>
+            </line>
         </xsl:if>
     </xsl:template>
 
@@ -284,7 +289,7 @@
         <div id="prescribeTestDiv" class="flex-container-testresult">
         <xsl:variable name="testDaysText">
             <xsl:call-template name="dayFormatting">
-                <xsl:with-param name="days" select="tests/test[id = $lastTestDoneId]/timestamp"/>
+                <xsl:with-param name="days" select="tests/test[id = $lastTestDoneId]/daysOverdue"/>
             </xsl:call-template>
         </xsl:variable>
             <input type="checkbox" id="test_result_checkbox" name="test_result_checkbox" class="chk">
@@ -332,6 +337,18 @@
                 </input>
             </p>
         </div>
+
+            <xsl:call-template name="notesContent"/>
+
+            <xsl:call-template name="actionButtons"/>
+
+
+
+        </div>
+
+    </xsl:template>
+
+    <xsl:template name="notesContent">
         <div id="notesDiv">
             <div id="notesHeaderDiv">
                 <p id="notesHeaderText" class="text">Weitere Hinweise:</p>
@@ -350,17 +367,19 @@
             </div>
             <textarea id="notes_area" class="notes_field" rows="10" cols="30" maxlength="100"/>
         </div>
+    </xsl:template>
 
-
-
-
+    <xsl:template name="actionButtons">
         <div id="endButtonsDiv" class="flex-container-endbuttons">
             <button class="dialogButton cancel_button">
-            <xsl:attribute name="onclick">closeDetailedView(<xsl:value-of select="id"/>);</xsl:attribute>
-            Abbrechen
-             </button>
+                <xsl:attribute name="onclick">closeDetailedView(<xsl:value-of select="id"/>);</xsl:attribute>
+                Abbrechen
+            </button>
             <button id="submitButton" class="dialogButton submit_button">
-                <xsl:attribute name="onclick">submitDetailView(<xsl:value-of select="id"/>);</xsl:attribute>
+                <xsl:attribute name="onclick">submitDetailView(<xsl:value-of select="id"/>
+                    <xsl:if test="updateFlag = 'true'">
+                        ,<xsl:value-of select="historyItems/historyItem[last()]/id"/>
+                    </xsl:if>);</xsl:attribute>
                 Senden
             </button>
             <button id="notCalledButton" class="dialogButton btn-gray">
@@ -368,9 +387,6 @@
                 Nicht abgenommen
             </button>
         </div>
-        </div>
-
-
-
     </xsl:template>
+
 </xsl:stylesheet>

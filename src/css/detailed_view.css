@@ -355,6 +355,13 @@
     animation: slideout_detailed_div .7s ease-in-out forwards;
 }
 
+.progressBarSlidein{
+    animation: slideinProgressBar .7s ease-in-out forwards;
+}
+.progressBarSlideout{
+    animation: slideoutProgressBar .7s ease-in-out forwards;
+}
+
 
 @keyframes slidein_detailed_div {
     from {
@@ -373,6 +380,24 @@
 
     to {
         transform: translate(0, 0);
+    }
+}
+@keyframes slideoutProgressBar {
+    from {
+        right: 33%
+    }
+
+    to {
+        right: 3%
+    }
+}
+@keyframes slideinProgressBar {
+    from {
+        right: 3%
+    }
+
+    to {
+        right: 33%
     }
 }
 
