@@ -271,3 +271,15 @@
     margin: auto;
     position: relative;
 }
+
+.corona_logo{
+    position: absolute;
+    bottom: 3px;
+    right: 5px;
+    z-index: 5;
+    width: 10%;
+}
+.corona_logo_img{
+    width: 100%;
+    height: 13%;
+}
