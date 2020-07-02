@@ -161,6 +161,16 @@
 }
 
 
-.helpPopup{
+#helpPopup{
+    position: absolute;
+    width: 30%;
+    height: auto;
+    max-height: 60%;
+    z-index: 7;
+    top: 20%;
+    left: 35%;
+    background-color: white;
+    border-radius: 20px;
+    font-family: "HelveticaNeue-Light", "Helvetica Neue Light", "Helvetica Neue", Helvetica, Arial, "Lucida Grande", sans-serif;
     padding: 1em;
 }
