@@ -8,14 +8,13 @@
 
 #zoom_buttons {
     bottom: 1%;
-    left: 1%;
+    left: 50%;
     background-color: transparent;
 }
 
 #zoom_in_button {
     height: 50px;
     width: 50px;
-    margin-left: 10px;
     right: 0;
     bottom: 1%;
 }
@@ -29,7 +28,7 @@
 
 .zoom_button {
     border-radius: 50%;
-    background-color: gray;
+    background-color: #808080;
     border: 0;
     position: relative;
     color: white;
@@ -50,7 +49,7 @@
 }
 
 .zoom_button:hover {
-    background-color: slategray;
+    background-color: #909090;
     transform: translateY(1px);
     box-shadow: 1px 1px black;
 }
@@ -77,8 +76,10 @@
 #search_input {
     height: 1.5em;
     border-width: 1px;
-    border-radius: 5px;
-    margin: auto;
+    border-radius: 3px;
+    margin-left: 5px;
+    mnargin-right: 5px;
+    padding: 3px;
 }
 
 #search_div {
