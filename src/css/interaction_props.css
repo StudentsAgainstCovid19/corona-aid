@@ -7,9 +7,8 @@
 }
 
 #zoom_buttons {
-    position: center;
-    bottom: 4%;
-    left: 35%;
+    bottom: 1%;
+    left: 1%;
     background-color: transparent;
 }
 
@@ -30,7 +29,7 @@
 
 .zoom_button {
     border-radius: 50%;
-    background-color: slategray;
+    background-color: gray;
     border: 0;
     position: relative;
     color: white;
@@ -46,14 +45,14 @@
     user-select:none;
     -o-user-select:none;
 }
-.zoom_button:active{
+.zoom_button:active {
     transform: translateY(4px);
 }
 
 .zoom_button:hover {
-    background-color: white;
-    color: slategray;
-    box-shadow: 5px 5px black;
+    background-color: slategray;
+    transform: translateY(1px);
+    box-shadow: 1px 1px black;
 }
 
 .flex_div {
@@ -131,7 +130,7 @@
     right: -5%;
 }
 
-#continue_search_buttons{
+#continue_search_buttons {
     display: flex;
     flex-direction: column;
     top: 3%;
@@ -159,8 +158,8 @@
 
 #progressBarDiv {
     position: absolute;
-    top: 3%;
-    right: 3%;
+    top: 1%;
+    right: 1%;
     width: 200px;
     height: 20px;
     background-color: transparent;
@@ -196,7 +195,6 @@
     animation: showSnackbar 3s ease-in-out forwards;
 }
 
-
 @keyframes showSnackbar {
     from {
         visibility: hidden;
@@ -222,7 +220,7 @@
     text-align: center;
 }
 
-.spaceAround{
+.spaceAround {
     margin: 0.5em;
 }
 
@@ -232,7 +230,7 @@
 }
 
 
-.smallButton{
+.smallButton {
     cursor: pointer;
     display: inline;
     text-transform: lowercase;
@@ -269,7 +267,7 @@
     box-shadow: 2px 2px black;
 }
 
-#loadingScreen img{
+#loadingScreen img {
     top: 0;
     left: 0;
     right: 0;

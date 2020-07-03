@@ -4,7 +4,10 @@
 }
 
 .list_div {
-    padding: 5px;
+    padding-top: 3px;
+    padding-bottom: 3px;
+    padding-left: 20px;
+    padding-right: 20px;
 }
 
 .list_div:hover {

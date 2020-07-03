@@ -110,17 +110,16 @@ h2 {
 .wellbeing_imagespan {
     position: relative;
     top: 4px;
-    margin-right: 5px;
+    margin-right: 10px;
 }
 
 
-.wellbeing_indicator
-{
+.wellbeing_indicator {
     height: 20px;
     width: 20px;
 }
 
-.call_box  {
+.call_box {
     color: black;
     border-style: solid;
     background-color: #f2f2f2;
