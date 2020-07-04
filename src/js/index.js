@@ -6,6 +6,7 @@ function parseNodeValueFromXML(xml_obj, tagName)
 
 function init()
 {
+    showLoading();
     loadConfig();
     initMap();
     calculatePriorities();
@@ -14,6 +15,7 @@ function init()
     window.onbeforeunload = function(){
         cleanUp();
     }
+    setTimeout(hideLoading, 1000);
 }
 
 function connectWebSocket() {
@@ -126,4 +128,6 @@ function showProgressBar()
 {
     let progressXSL = getXSLT("./xslt_scripts/xslt_progressbar.xsl");
     runXSLT(progressXSL, prioList, "progressBarDiv");
+    let bar = document.getElementById("progressBarDiv");
+    console.log(bar);
 }

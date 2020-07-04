@@ -65,11 +65,13 @@ function postRequest(res, content)
     request.send(parser.parseFromString(content,"application/xml"));
 }
 
-function putRequest(res)
+function putRequest(res, content=null)
 {
     console.log("PUT-Request");
     let parser = new DOMParser();
     let request = new XMLHttpRequest();
     request.open("PUT", apiUrl+res, true);
-    request.send(null);
+    request.setRequestHeader("Content-type", "application/xml");
+    request.setRequestHeader("Accept", "application/xml");
+    request.send(content);
 }
