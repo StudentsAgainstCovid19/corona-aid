@@ -1,25 +1,20 @@
-#clustered_list
-{
+#clustered_list {
     padding: 5px;
     overflow: auto;
 }
 
-.list_div
-{
-    padding: 5px;
-
+.list_div {
+    padding: 3px 20px 4px;
 }
 
-.list_div:hover
-{
+.list_div:hover {
     background-color: #e6e6e6;
     border-radius: 5px;
     border-width: 10px;
-
+    cursor: pointer;
 }
 
-.done_div
-{
+.done_div {
     padding: 5px;
     border-radius: 5px;
     border-width: 10px;
@@ -27,7 +22,6 @@
     filter: grayscale(100%);
 }
 
-.done_div:hover
-{
+.done_div:hover {
     background-color: #e6e6e6;
 }
