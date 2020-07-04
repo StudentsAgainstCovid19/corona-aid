@@ -4,15 +4,18 @@ function getXSLT(filename)
     let xslDoc = xslt_files.get(filename);
     if ( !xslDoc )
     {
-        console.log("Loading XSL-File: "+filename);
-        xslDoc = loadXMLDoc(filename, "text/xsl");
+        // console.log("(GetXSLT) Loading XSL-File: "+filename);
+        xslDoc = loadXMLDoc(filename, "text/xsl", null, true);
         xslt_files.set(filename, xslDoc);
     }
     return xslDoc;
 }
 
-function loadXMLDoc(filename, mimeType="application/xml", errorHandlingFn = null)
+function loadXMLDoc(filename, mimeType="application/xml", errorHandlingFn = null, callingFromGetXSLT = false)
 {
+    if (!callingFromGetXSLT) {
+        // console.log(`(LoadXMLDoc) loading XML-file: ${filename}`);
+    }
     try {
         let request = new XMLHttpRequest();
         request.open("GET", filename, false);
@@ -37,6 +40,7 @@ function loadXMLDoc(filename, mimeType="application/xml", errorHandlingFn = null
 // run an xslt script using an xml and set result as content of dom object with id
 function runXSLT(xsl_file, xml, id=null)
 {
+    console.log(`(RunXSLT) transforming the following xml-file: \n\n${new XMLSerializer().serializeToString(xml)}`);
     xsltProcessor = new XSLTProcessor();
     xsltProcessor.importStylesheet(xsl_file);
     if (id != null)
