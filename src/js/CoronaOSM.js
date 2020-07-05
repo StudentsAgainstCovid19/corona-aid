@@ -3,6 +3,7 @@ function initMap() {
     // OpenLayers takes lon as first argument and then lat
     map = new ol.Map({
         target: 'map_div',
+        interactions: ol.interaction.defaults({altShiftDragRotate:false, pinchRotate:false}),
         controls: [],
         loadTilesWhileAnimating: true,
         loadTilesWhileInteracting: true,
