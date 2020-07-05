@@ -1,7 +1,7 @@
 
 async function calculatePriorities()
 {
-    var callListsXML = loadXMLDoc(apiUrl+"/infected?compress=true");
+    var callListsXML = loadXMLDoc(apiUrl+"/infected?compress");
     var prioCalcXSL = getXSLT("./xslt_scripts/xslt_calculate_prio.xsl");
 
     prioList = runXSLT(prioCalcXSL, callListsXML);

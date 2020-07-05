@@ -146,7 +146,6 @@ async function setClusterLayer() {
         if (clickedFeatures.length === 0) return;
 
         let clicked_ids = parseFeatureTree(clickedFeatures[0]);
-        console.log(clicked_ids);
         let v = clicked_ids[0];
         for (let i = 0; i < clicked_ids.length; i++)
         {
@@ -177,7 +176,6 @@ function setDistrictsLayer()
     districtLayer = new ol.layer.Vector({
         source: new ol.source.Vector()
     });
-    console.log(districtsKML)
 
     districtLayer.getSource().addFeatures(new ol.format.KML().readFeatures(districtsKML, {featureProjection: config_hash_table["projectionType"]}));
     map.addLayer(districtLayer);
