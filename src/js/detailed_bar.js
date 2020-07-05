@@ -43,7 +43,7 @@ function addLockingTimer(infectedId)
                 putRequest("infected/unlock/" + infectedId);
                 hidePopUp();
                 clearRightBar();
-            }, infectedId);
+            }, infectedId, true);
     }, parseInt(config_hash_table["autoResetOffset"])*0.8*1000);
 
 
@@ -85,7 +85,7 @@ function handleErrorsDetailRequest( statusCode )
             return;
 
     }
-    makeConfirmPopup(displayText, null, null, null, true, "Schließen");
+    makeConfirmPopup(displayText, null, null, null, false,true, "Schließen");
 }
 
 function parseInfectedID(xmlDocument)
@@ -152,16 +152,16 @@ function displayPopUp()
 {
     let filter_overlay = document.getElementById("global_overlay");
     let popup_window = document.getElementById("popup_window");
-    filter_overlay.className = "";
-    popup_window.className = "";
+    filter_overlay.classList.remove("invisible_object");
+    popup_window.classList.remove("invisible_object");
 }
 
 function hidePopUp()
 {
     let filter_overlay = document.getElementById("global_overlay");
     let popup_window = document.getElementById("popup_window");
-    filter_overlay.className = "invisible_object";
-    popup_window.className = "invisible_object";
+    filter_overlay.classList.add("invisible_object");
+    popup_window.classList.add("invisible_object");
     popup_window.innerHTML = "";
 }
 
@@ -278,14 +278,12 @@ function prescribeTest(id)
 {
     makeConfirmPopup("Wollen Sie einen Test anordnen?",
         function(id) {
-            if (detailedXML === null) return;
-
             const xmlString = "<TestInsertDto><infectedId>"+id+"</infectedId><result>0</result><timestamp>"+Date.now()+"</timestamp></TestInsertDto>";
             postRequest("test", xmlString);
         }, function (id) { }, id );
 }
 
-function makeConfirmPopup(text, onSubmitCallback, onCancelCallback, parameters, hideSubmitButton = false, cancelButtonText="Abbrechen")
+function makeConfirmPopup(text, onSubmitCallback, onCancelCallback, parameters, blurEffect = false, hideSubmitButton = false, cancelButtonText="Abbrechen")
 {
     confirmConfig = [onSubmitCallback, onCancelCallback, parameters];
 
@@ -294,9 +292,9 @@ function makeConfirmPopup(text, onSubmitCallback, onCancelCallback, parameters, 
     textP.innerHTML = text;
     overlay.className = "";
     let submitButton = document.getElementById("submit_confirm_button");
-    if (hideSubmitButton)
+    if ( hideSubmitButton )
     {
-        if ( submitButton.className.indexOf("invisible_object") === -1 ) submitButton.className += " invisible_object";
+        if ( submitButton.classList.contains("invisible_object") ) submitButton.classList.add("invisible_object");
         setFocus("cancel_confirm_button");
     }
     else
@@ -307,6 +305,17 @@ function makeConfirmPopup(text, onSubmitCallback, onCancelCallback, parameters, 
 
     let cancelButton = document.getElementById("cancel_confirm_button");
     cancelButton.innerText = cancelButtonText;
+
+    if (blurEffect && !overlay.classList.contains("overlayBlurred"))
+    {
+        overlay.classList.add("overlayBlurred");
+    }
+    else if (!blurEffect && overlay.classList.contains("overlayBlurred"))
+    {
+        overlay.classList.remove("overlayBlurred");
+    }
+
+    document.getElementById("confirm_popup").className = "floating_object";
 }
 
 function setFocus(id)
@@ -330,6 +339,8 @@ function onCancelPopup()
 {
     const overlay = document.getElementById("transparent_overlay");
     overlay.className = "invisible_object";
+    const popup = document.getElementById("confirm_popup");
+    popup.className = "invisible_object";
     if (confirmConfig[1] != null)
     {
         confirmConfig[1](confirmConfig[2]);
@@ -376,7 +387,7 @@ function submitDetailView(id, historyItemId = null)
         "<status>1</status><symptoms>";
     symptoms = document.getElementsByClassName("symptom_checkbox");
 
-    for (let i=0; i<symptomsList.length; i++)
+    for (let i = 0; i < symptomsList.length; i++)
     {
         xmlString += "<symptom>"+parseInt(symptomsList[i])+"</symptom>";
     }
@@ -384,7 +395,6 @@ function submitDetailView(id, historyItemId = null)
         "</symptoms>" +
         "<timestamp>" + Date.now() + "</timestamp>" +
         "</HistoryItem"+(historyItemId ? "Update" : "Insert")+"Dto>";
-    console.log(xmlString);
     if ( !historyItemId )
     {
         postRequest("history", xmlString);
