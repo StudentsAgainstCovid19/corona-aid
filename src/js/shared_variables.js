@@ -8,6 +8,7 @@ var currentInfectedId;
 var map;
 var clusteredLayer;
 var districtLayer;
+var districtsXML;
 var detailedXML; // contains the XML-Document of the current detailed view
 var prioList; // contains the XML-Document that is calculated in xslt_calculate_prio.xsl
 
