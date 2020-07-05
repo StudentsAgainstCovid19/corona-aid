@@ -325,9 +325,7 @@ function setFocus(id)
 
 function onSubmitPopup()
 {
-
-    const overlay = document.getElementById("transparent_overlay");
-    overlay.className = "invisible_object";
+    hideGenericPopup();
     if (confirmConfig[0] != null)
     {
         confirmConfig[0](confirmConfig[2]);
@@ -337,15 +335,20 @@ function onSubmitPopup()
 
 function onCancelPopup()
 {
-    const overlay = document.getElementById("transparent_overlay");
-    overlay.className = "invisible_object";
-    const popup = document.getElementById("confirm_popup");
-    popup.className = "invisible_object";
+    hideGenericPopup();
     if (confirmConfig[1] != null)
     {
         confirmConfig[1](confirmConfig[2]);
     }
     confirmConfig = [null, null, null];
+}
+
+function hideGenericPopup()
+{
+    const overlay = document.getElementById("transparent_overlay");
+    overlay.className = "invisible_object";
+    const popup = document.getElementById("confirm_popup");
+    popup.className = "invisible_object";
 }
 
 function failedCall(id)

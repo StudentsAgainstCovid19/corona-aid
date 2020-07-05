@@ -128,6 +128,4 @@ function showProgressBar()
 {
     let progressXSL = getXSLT("./xslt_scripts/xslt_progressbar.xsl");
     runXSLT(progressXSL, prioList, "progressBarDiv");
-    let bar = document.getElementById("progressBarDiv");
-    console.log(bar);
 }

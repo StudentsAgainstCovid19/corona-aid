@@ -146,7 +146,8 @@ async function setClusterLayer() {
         if (clickedFeatures.length === 0) return;
 
         let clicked_ids = parseFeatureTree(clickedFeatures[0]);
-        let v=clicked_ids[0];
+        console.log(clicked_ids);
+        let v = clicked_ids[0];
         for (let i = 0; i < clicked_ids.length; i++)
         {
             v+=clicked_ids[i];
