@@ -152,10 +152,11 @@ function getFeatureStyle(feature)
 function setDistrictsLayer() {
     showLoading();
     // load xml from backend and process with xslt
-    let districtsXML = loadXMLDoc("./assets/example_districts.xml");
+    if ( !districtsXML ) districtsXML = loadXMLDoc(apiUrl + "district/analytics");
     let districtsXSL = getXSLT("./xslt_scripts/xslt_show_districts.xsl");
 
     let districtsKML = runXSLT(districtsXSL, districtsXML);
+    console.log(districtsKML)
 
     districtLayer = new ol.layer.Vector({
         source: new ol.source.Vector()
