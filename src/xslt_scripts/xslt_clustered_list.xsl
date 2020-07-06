@@ -40,6 +40,8 @@
                     <xsl:attribute name="class">wellbeing_imagespan</xsl:attribute>
                     <img>
                         <xsl:attribute name="class">wellbeing_indicator</xsl:attribute>
+                        <!-- Todo -->
+                        <xsl:attribute name="alt">Wohlbefinden</xsl:attribute>
                         <xsl:attribute name="src">./assets/markers/<xsl:value-of select="$priority_img"/>_prio.svg</xsl:attribute>
                     </img>
                 </span> <xsl:value-of select="lastname"/>, <xsl:value-of select="firstnames"/>

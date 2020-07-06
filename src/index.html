@@ -43,7 +43,7 @@
       <img src="assets/Corona_Aid_Logo.jpg" alt="Corona Aid Logo" class="corona_logo_img">
     </div>
     <div id="actionBar" class="floating_object">
-        <button onclick="showHelp();" class="spaceAround smallButton">?</button>
+        <button onclick="showHelp();" class="spaceAround smallFButton">?</button>
         <button onclick="standardZoom();" class="spaceAround smallButton">Zoom ausrichten</button>
         <input id="districts" type="checkbox" onclick="toggleLayerVisibility();"/>
         <label id="showDistrictsLabel" for="districts" class="spaceAround">Zeige Stadtteile</label>
@@ -61,12 +61,12 @@
       <div id="search_container">
         <div class="flex_div">
           <button id="open_list_button" onclick="toggle_call_list();">
-            <img src="./assets/icons/list_button.svg" id="open_list_svg" alt="menu button" />
+            <img src="./assets/icons/list_button.svg" id="open_list_svg" alt="Menü" />
           </button>
           <input type="text" placeholder="Suche..." id="search_input">
           <button id="search_button" onclick="search_call_list();">
             <div id="search_div">
-              <img src="./assets/icons/search_magnifier.svg" alt="search magnifier"/>
+              <img src="./assets/icons/search_magnifier.svg" alt="Such-Icon"/>
             </div>
           </button>
         </div>
@@ -75,13 +75,13 @@
       <span id="continue_search_span">
         <div id="continue_search_buttons" class="floating_object invisible_object">
           <button class="continue_search_btn" onclick="close_continue_search();">
-            <img src="./assets/icons/close_button.svg" class="close_search_icons"/>
+            <img src="./assets/icons/close_button.svg" alt="Suche schließen" class="close_search_icons"/>
           </button>
           <button id="lastSearchButton" class="continue_search_btn" onclick="findLast();">
-            <img src="./assets/icons/last_button.svg" class="close_search_icons"/>
+            <img src="./assets/icons/last_button.svg" alt="Vorheriges Suchergebnis" class="close_search_icons"/>
           </button>
           <button id="nextSearchButton" class="continue_search_btn" onclick="findNext();">
-            <img src="./assets/icons/next_button.svg" class="close_search_icons"/>
+            <img src="./assets/icons/next_button.svg" alt="Nächstes Suchergebnis" class="close_search_icons"/>
           </button>
         </div>
       </span>
@@ -118,10 +118,10 @@
     <div id="loadingScreen" class="floating_object">
       <span><div id="waitText">Bitte warten...</div></span>
       <span>
-        <img src="favicon.ico"/>
+        <img src="favicon.ico" alt="Corona Aid Icon"/>
       </span>
       <span>
-        <img src="./assets/icons/loading_animation.png" class="loadingScreenAnimation"/>
+        <img src="./assets/icons/loading_animation.png" class="loadingScreenAnimation" alt="Lade-Animation"/>
       </span>
     </div>
   </body>
