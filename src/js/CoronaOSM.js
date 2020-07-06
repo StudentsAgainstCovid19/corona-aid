@@ -156,7 +156,7 @@ function setDistrictsLayer() {
     let districtsXSL = getXSLT("./xslt_scripts/xslt_show_districts.xsl");
 
     let districtsKML = runXSLT(districtsXSL, districtsXML);
-    console.log(districtsKML)
+    console.log(new XMLSerializer().serializeToString(districtsKML));
 
     districtLayer = new ol.layer.Vector({
         source: new ol.source.Vector()
@@ -215,7 +215,7 @@ function getAmountDone(array) {
 function getAmountCalled(array) {
     let amount=0;
     for (let i = 0; i<array.length; i++) {
-        if (array[parseInt(i)].get("called") && !array[i].get("done")) amount+=1;
+        if (array[i].get("called") && !array[i].get("done")) amount+=1;
     }
     return amount;
 }
