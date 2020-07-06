@@ -15,7 +15,7 @@ function init() {
     setTimeout(hideLoading, 1000);
 }
 
-function realtimeUpdate( updateXML ) {
+function realtimeUpdate(updateXML) {
     let serializer = new XMLSerializer();
     let xml_str = "";
     let items = updateXML.children[0].getElementsByTagName("item");
@@ -42,7 +42,7 @@ function loadConfig() {
     // init configs
     let configXML = loadXMLDoc(apiUrl+"config", "application/xml", configLoadErrorFn);
 
-    if ( !configXML ) return;
+    if (!configXML) return;
     let items = configXML.getElementsByTagName("item");
     for (let i=0; i<items.length; i++) {
         config_hash_table[parseNodeValueFromXML(items[parseInt(i)], "configKey")] =

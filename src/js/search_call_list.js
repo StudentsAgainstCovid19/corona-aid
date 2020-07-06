@@ -13,7 +13,7 @@ async function search_call_list() {
     let hits = [];
 
     let text, nameText, phoneText;
-    for (let i = 0; i<callListItems.length; i++) {
+    for (let i = 0; i < callListItems.length; i++) {
         nameText = callListItems[parseInt(i)].getElementsByTagName("span")[0].innerText;
         phoneText = callListItems[parseInt(i)].getElementsByTagName("span")[2].innerText;
         text = (nameText+" "+phoneText.replace("Tel.: ","")).replace(",", "").toLowerCase();
@@ -74,7 +74,7 @@ function noItemFound() {
 }
 
 function check_in(str, words) {
-    for (let i = 0; i<words.length;i++) {
+    for (let i = 0; i < words.length; i++) {
         if (str.indexOf(words[parseInt(i)]) === -1) return false;
     }
     return true;
@@ -93,20 +93,20 @@ function addKeyClickListenerToChild(elemId) {
     onEnter = false;
 
     box.addEventListener("keyup", function (event) {
-        setTimeout(function(){calledLast = false;}, 200);
-        setTimeout(function(){calledNext = false;}, 200);
-        if ( event.key === "Enter" ) {
-            if( onEnter ) return;
+        setTimeout(function(){ calledLast = false; }, 200);
+        setTimeout(function(){ calledNext = false; }, 200);
+        if (event.key === "Enter") {
+            if(onEnter) return;
             box.click();
             onEnter = true;
         }
         else if (event.key === "s") {
-            if ( !calledLast ) {
+            if (!calledLast) {
                 findLast();
                 calledLast = true;
             }
         } else if (event.key === "d") {
-            if ( !calledNext ) {
+            if (!calledNext) {
                 findNext();
                 calledNext = true;
             }

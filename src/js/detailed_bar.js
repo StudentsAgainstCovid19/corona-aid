@@ -1,12 +1,10 @@
-
 function try_acquire_lock(id) { // id for infected
     close_continue_search();
     if (detail_bar === 2) return showSnackbar("Die Patientenansicht ist noch geöffnet.\nBitte kümmern Sie sich erst um den derzeitigen Patienten.");
-    console.log("Trying to load infected: "+id);
+    console.log("Trying to load infected: " + id);
     detailedXML = loadXMLDoc(apiUrl + "infected/" + id, "application/xml", handleErrorsDetailRequest);
 
-    if ( detailedXML )
-    {
+    if (detailedXML) {
         addLockingTimer(id);
         if ( detailedXML.getElementsByTagName("done")[0].innerHTML === "true") {
             makeConfirmPopup("Dieser Patient wurde heute bereits bearbeitet.\nFortfahren mit dem Editieren?",
@@ -14,14 +12,11 @@ function try_acquire_lock(id) { // id for infected
                     slideOpenRightBar();
                     setDetailedView(detailedXML);
                 },
-                function(infectedId)
-                {
+                function(infectedId) {
                     putRequest("infected/unlock/"+infectedId);
                     deleteTimeouts();
                 }, id);
-        }
-        else
-        {
+        } else {
             slideOpenRightBar();
             setDetailedView(detailedXML);
         }
@@ -29,28 +24,24 @@ function try_acquire_lock(id) { // id for infected
     console.log(detailedXML);
 }
 
-function addLockingTimer(infectedId)
-{
+function addLockingTimer(infectedId) {
     if ( autoWarningLocking ) clearTimeout( autoWarningLocking );
     addAutoUnlockTimeout(infectedId);
     autoWarningLocking = setTimeout(function(){
         makeConfirmPopup("Ihre Session läuft ab.\n Wollen Sie weiterhin den Patienten bearbeiten?",
-            function(){
+            function() {
                 postRequest("infected/lock/" + infectedId);
                 addLockingTimer(infectedId);
-            }, function(){
+            }, function() {
                 if ( autoUnlockTimeout ) clearTimeout(autoUnlockTimeout);
                 putRequest("infected/unlock/" + infectedId);
                 hidePopUp();
                 clearRightBar();
             }, infectedId, true);
     }, parseInt(config_hash_table["autoResetOffset"])*0.8*1000);
-
-
 }
 
-function addAutoUnlockTimeout(infectedId)
-{
+function addAutoUnlockTimeout(infectedId) {
     if ( autoUnlockTimeout ) clearTimeout(autoUnlockTimeout);
     autoUnlockTimeout = setTimeout(function(){
         onCancelPopup();
@@ -58,17 +49,14 @@ function addAutoUnlockTimeout(infectedId)
         hidePopUp();
         clearRightBar();
     }, parseInt(config_hash_table["autoResetOffset"])*1000);
-
 }
 
-function deleteTimeouts()
-{
-    if ( autoUnlockTimeout ) clearTimeout(autoUnlockTimeout);
-    if ( autoWarningLocking ) clearTimeout(autoWarningLocking);
+function deleteTimeouts() {
+    if (autoUnlockTimeout) clearTimeout(autoUnlockTimeout);
+    if (autoWarningLocking) clearTimeout(autoWarningLocking);
 }
 
-function handleErrorsDetailRequest( statusCode )
-{
+function handleErrorsDetailRequest( statusCode ) {
     let displayText;
     switch (statusCode) {
         case 200:
@@ -83,19 +71,15 @@ function handleErrorsDetailRequest( statusCode )
             break;
         default:
             return;
-
     }
     makeConfirmPopup(displayText, null, null, null, false,true, "Schließen");
 }
 
-function parseInfectedID(xmlDocument)
-{
+function parseInfectedID(xmlDocument) {
     let children = xmlDocument.children[0].children;
     let id;
-    for (let index = 0; index < children.length; index++)
-    {
-        if (children[index].nodeName === "id")
-        {
+    for (let index = 0; index < children.length; index++) {
+        if (children[index].nodeName === "id") {
             id = parseInt(children[index].innerHTML);
             break;
         }
@@ -104,10 +88,8 @@ function parseInfectedID(xmlDocument)
 }
 
 // set the detailed view with a given xml file for all specific data
-function setDetailedView(xml_doc)
-{
-    if (xml_doc != null)
-    {
+function setDetailedView(xml_doc) {
+    if (xml_doc != null) {
         detail_bar = 2;
         currentInfectedId = parseInfectedID(xml_doc);
         symptomsList = [];
@@ -119,45 +101,39 @@ function setDetailedView(xml_doc)
         let parseSymptomsXSL = getXSLT("./xslt_scripts/xslt_parse_symptoms.xsl");
         initialSymptoms = runXSLT(parseSymptomsXSL, xml_doc);
 
-
         let symptomsXSL = getXSLT("./xslt_scripts/xslt_symptom_div.xsl");
 
         runXSLT(symptomsXSL, initialSymptoms, "symptomsDiv");
 
         let symp_checkboxes = document.getElementById("symptomsDiv").getElementsByClassName("symptom_checkbox");
-        for ( let i = 0; i < symp_checkboxes.length; i++)
-        {
+        for ( let i = 0; i < symp_checkboxes.length; i++) {
             let id = parseInt(symp_checkboxes[i].id.replace("symp_",""));
             symptomsList.push(id);
         }
     }
 }
 
-function showNotes()
-{
+function showNotes() {
     if (!detailedXML) return;
 
-    var notesXSL = getXSLT("./xslt_scripts/xslt_notes_popup.xsl");
+    let notesXSL = getXSLT("./xslt_scripts/xslt_notes_popup.xsl");
     runXSLT(notesXSL, detailedXML, "popup_window");
     let notesDiv = document.getElementById("notesHistoryDiv");
 
-    if (notesDiv)
-    {
+    if (notesDiv) {
         setTimeout(function(){notesDiv.scrollTop = notesDiv.scrollHeight;}, 50);
     }
     displayPopUp();
 }
 
-function displayPopUp()
-{
+function displayPopUp() {
     let filter_overlay = document.getElementById("global_overlay");
     let popup_window = document.getElementById("popup_window");
     filter_overlay.classList.remove("invisible_object");
     popup_window.classList.remove("invisible_object");
 }
 
-function hidePopUp()
-{
+function hidePopUp() {
     let filter_overlay = document.getElementById("global_overlay");
     let popup_window = document.getElementById("popup_window");
     filter_overlay.classList.add("invisible_object");
@@ -165,15 +141,13 @@ function hidePopUp()
     popup_window.innerHTML = "";
 }
 
-function deepCopyXML(node)
-{
+function deepCopyXML(node) {
     let parser = new DOMParser();
     let serializer = new XMLSerializer();
     return parser.parseFromString(serializer.serializeToString(node), "application/xml");
 }
 
-function showSymptoms ()
-{
+function showSymptoms () {
     if (!detailedXML) return;
     if ( !symptomsXML ) symptomsXML = loadXMLDoc(apiUrl+"symptom");
     // construct xml document for popup
@@ -188,59 +162,43 @@ function showSymptoms ()
     displayPopUp();
 }
 
-function symptomInteraction(id)
-{
-    var checkbox = document.getElementById("symptom_"+id);
+function symptomInteraction(id) {
+    let checkbox = document.getElementById("symptom_"+id);
     editSymptomsList = changeSymptom(checkbox, editSymptomsList, id);
 }
 
-function symptomsChanged(id)
-{
-    var checkbox = document.getElementById("symp_"+id);
+function symptomsChanged(id) {
+    let checkbox = document.getElementById("symp_"+id);
     symptomsList = changeSymptom(checkbox, symptomsList, id);
 }
 
-function changeSymptom(checkbox, list, id)
-{
-    if ( !checkbox )
-    {
-        console.log("Error occurred...");
-    }
+function changeSymptom(checkbox, list, id) {
+    if (!checkbox) console.log("Error occurred...");
 
-    if ( checkbox.checked )
-    {
+    if ( checkbox.checked ) {
         if (list.indexOf(id) === -1) list.push(id);
-    }
-    else
-    {
+    } else {
         const index = list.indexOf(id);
-        if (index > -1)
-        {
-            list.splice(index, 1);
-        }
+        if (index > -1) list.splice(index, 1);
     }
     return list;
 }
 
-function showPreExistingIllnesses()
-{
+function showPreExistingIllnesses() {
     if (!detailedXML) return;
-    var illnessXSL = getXSLT("./xslt_scripts/xslt_show_illnesses.xsl");
+    let illnessXSL = getXSLT("./xslt_scripts/xslt_show_illnesses.xsl");
 
     runXSLT(illnessXSL, detailedXML, "popup_window");
     displayPopUp();
 }
 
-function submitSymptoms()
-{
+function submitSymptoms() {
     if ( !symptomsXML ) symptomsXML = loadXMLDoc(apiUrl+"symptom");
 
     symptomsList = editSymptomsList;
     symptomsList.sort((a, b) => a - b);
 
     let xmlDoc = constructSymptomPopupXML();
-
-
 
     let mergeSymptomsXSL = getXSLT("./xslt_scripts/xslt_merge_symptoms.xsl");
     let mergedXML = runXSLT(mergeSymptomsXSL, xmlDoc);
@@ -252,8 +210,7 @@ function submitSymptoms()
     hidePopUp();
 }
 
-function constructSymptomPopupXML()
-{
+function constructSymptomPopupXML() {
     let parser = new DOMParser();
     let xmlDoc = parser.parseFromString("<symptomPopupXML></symptomPopupXML>", "application/xml");
     xmlDoc.children[0].appendChild(deepCopyXML(initialSymptoms).children[0]);
@@ -262,20 +219,17 @@ function constructSymptomPopupXML()
     return xmlDoc;
 }
 
-function constructIdList()
-{
+function constructIdList() {
     let parser = new DOMParser();
     let temp_id_string = "<symptomIdList>";
-    for (let i = 0; i < symptomsList.length; i++)
-    {
+    for (let i = 0; i < symptomsList.length; i++) {
         temp_id_string += "<symp_id>"+symptomsList[i]+"</symp_id>";
     }
     return parser.parseFromString(temp_id_string + "</symptomIdList>", "application/xml");
 }
 
 
-function prescribeTest(id)
-{
+function prescribeTest(id) {
     makeConfirmPopup("Wollen Sie einen Test anordnen?",
         function(id) {
             const xmlString = "<TestInsertDto><infectedId>"+id+"</infectedId><result>0</result><timestamp>"+Date.now()+"</timestamp></TestInsertDto>";
@@ -283,8 +237,7 @@ function prescribeTest(id)
         }, function (id) { }, id );
 }
 
-function makeConfirmPopup(text, onSubmitCallback, onCancelCallback, parameters, blurEffect = false, hideSubmitButton = false, cancelButtonText="Abbrechen")
-{
+function makeConfirmPopup(text, onSubmitCallback, onCancelCallback, parameters, blurEffect = false, hideSubmitButton = false, cancelButtonText="Abbrechen") {
     confirmConfig = [onSubmitCallback, onCancelCallback, parameters];
 
     const overlay = document.getElementById("transparent_overlay");
@@ -292,13 +245,10 @@ function makeConfirmPopup(text, onSubmitCallback, onCancelCallback, parameters, 
     textP.innerHTML = text;
     overlay.className = "";
     let submitButton = document.getElementById("submit_confirm_button");
-    if ( hideSubmitButton )
-    {
+    if ( hideSubmitButton ) {
         if ( submitButton.classList.contains("invisible_object") ) submitButton.classList.add("invisible_object");
         setFocus("cancel_confirm_button");
-    }
-    else
-    {
+    } else {
         submitButton.className = submitButton.className.replace("invisible_object", "");
         setFocus("submit_confirm_button");
     }
@@ -306,53 +256,39 @@ function makeConfirmPopup(text, onSubmitCallback, onCancelCallback, parameters, 
     let cancelButton = document.getElementById("cancel_confirm_button");
     cancelButton.innerText = cancelButtonText;
 
-    if (blurEffect && !overlay.classList.contains("overlayBlurred"))
-    {
+    if (blurEffect && !overlay.classList.contains("overlayBlurred")) {
         overlay.classList.add("overlayBlurred");
-    }
-    else if (!blurEffect && overlay.classList.contains("overlayBlurred"))
-    {
+    } else if (!blurEffect && overlay.classList.contains("overlayBlurred")) {
         overlay.classList.remove("overlayBlurred");
     }
 
     document.getElementById("confirm_popup").className = "floating_object";
 }
 
-function setFocus(id)
-{
+function setFocus(id) {
     document.getElementById(id).focus();
 }
 
-function onSubmitPopup()
-{
+function onSubmitPopup() {
     hideGenericPopup();
-    if (confirmConfig[0] != null)
-    {
-        confirmConfig[0](confirmConfig[2]);
-    }
+    if (confirmConfig[0] != null) confirmConfig[0](confirmConfig[2]);
     confirmConfig = [null, null, null];
 }
 
-function onCancelPopup()
-{
+function onCancelPopup() {
     hideGenericPopup();
-    if (confirmConfig[1] != null)
-    {
-        confirmConfig[1](confirmConfig[2]);
-    }
+    if (confirmConfig[1] != null) confirmConfig[1](confirmConfig[2]);
     confirmConfig = [null, null, null];
 }
 
-function hideGenericPopup()
-{
+function hideGenericPopup() {
     const overlay = document.getElementById("transparent_overlay");
     overlay.className = "invisible_object";
     const popup = document.getElementById("confirm_popup");
     popup.className = "invisible_object";
 }
 
-function failedCall(id)
-{
+function failedCall(id) {
     const xml_string = "<History>" +
                 "<infectedId>"+id+"</infectedId>"+
                 "<notes></notes>"+
@@ -367,8 +303,7 @@ function failedCall(id)
     clearRightBar();
 }
 
-function closeDetailedView(id)
-{
+function closeDetailedView(id) {
     makeConfirmPopup(   "Sind Sie sich sicher, dass Sie die Patientenansicht schließen wollen?\n" +
                             "Ein Datenverlust wird die Folge sein. Falls der Patient nicht abgenommen\n" +
                             "hat, wählen Sie den Button \"nicht abgenommen\"!\n\n" +
@@ -380,8 +315,7 @@ function closeDetailedView(id)
         }, function(notUsed){}, id);
 }
 
-function submitDetailView(id, historyItemId = null)
-{
+function submitDetailView(id, historyItemId = null) {
     let xmlString = "<HistoryItem"+(historyItemId ? "Update" : "Insert")+"Dto>"+
         ( historyItemId ? "<historyItemId>" + historyItemId + "</historyItemId>" : "") +
         "<infectedId>"+id+"</infectedId>"+
@@ -390,20 +324,16 @@ function submitDetailView(id, historyItemId = null)
         "<status>1</status><symptoms>";
     symptoms = document.getElementsByClassName("symptom_checkbox");
 
-    for (let i = 0; i < symptomsList.length; i++)
-    {
+    for (let i = 0; i < symptomsList.length; i++) {
         xmlString += "<symptom>"+parseInt(symptomsList[i])+"</symptom>";
     }
     xmlString +=
         "</symptoms>" +
         "<timestamp>" + Date.now() + "</timestamp>" +
         "</HistoryItem"+(historyItemId ? "Update" : "Insert")+"Dto>";
-    if ( !historyItemId )
-    {
+    if (!historyItemId) {
         postRequest("history", xmlString);
-    }
-    else
-    {
+    } else {
         putRequest("history", xmlString);
     }
 
@@ -411,20 +341,18 @@ function submitDetailView(id, historyItemId = null)
     clearRightBar();
 }
 
-function clearRightBar()
-{
+function clearRightBar() {
     detail_bar = 0;
     closeRightBar();
     document.getElementById("infected_detailed_view_right").innerHTML = "";
 }
 
-function showSnackbar(message)
-{
+function showSnackbar(message) {
     let snackbar = document.getElementById("snackbar");
     let snackbarText = document.getElementById("centeredSnackbarText");
     snackbarText.innerText = message;
     snackbar.className = snackbar.className.replace(" showSnackbarAnimation", "");
-    setTimeout(function(){snackbar.className += " showSnackbarAnimation"}, 50);
+    setTimeout(function() { snackbar.className += " showSnackbarAnimation" }, 50);
 
     let detailedView = document.getElementById("infected_detailed_view_right");
     detailedView.scrollTop = detailedView.scrollHeight;

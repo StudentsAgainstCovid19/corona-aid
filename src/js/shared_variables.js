@@ -26,10 +26,7 @@ var confirmConfig = [null, null, null]; // list for generic confirm popup.
                                         // onCancelCallback and third value are parameters for
                                         // those callbacks
 
-
-var realtimeWebSocket;
-
-var apiUrl = "https://dev.api.corona-aid-ka.de/";
+const apiUrl = "https://dev.api.corona-aid-ka.de/";
 
 var updateXMLStr = "";
 var suppressUpdates = false;

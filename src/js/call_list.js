@@ -1,4 +1,3 @@
-
 async function calculatePriorities() {
     let callListsXML = loadXMLDoc(apiUrl + "infected?compress");
     let prioCalcXSL = getXSLT("./xslt_scripts/xslt_calculate_prio.xsl");
@@ -8,7 +7,7 @@ async function calculatePriorities() {
 }
 
 async function initCallList(openCallListBool = true) {
-    var displayCallXSL = getXSLT("./xslt_scripts/xslt_call_list.xsl");
+    let displayCallXSL = getXSLT("./xslt_scripts/xslt_call_list.xsl");
     runXSLT(displayCallXSL, prioList, "call_list_div");
     if (openCallListBool) openCallList();
     addSearchBarListener();

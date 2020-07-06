@@ -7,17 +7,13 @@
 // The relative amount of calls is specified as decimal percentage.
 //
 
-function parseInfectedIds()
-{
-
+function parseInfectedIds() {
     let people_ids = [];
 
     let people = prioList.getElementsByTagName("person");
 
-    for (let index = 0; index < people.length; index++)
-    {
-        if (parseInt(parseNodeValueFromXML(people[parseInt(index)], "done")) === 0)
-        {
+    for (let index = 0; index < people.length; index++) {
+        if (parseInt(parseNodeValueFromXML(people[parseInt(index)], "done")) === 0) {
             people_ids.push(parseInt(parseNodeValueFromXML(people[parseInt(index)], "id")));
         }
     }
@@ -25,48 +21,40 @@ function parseInfectedIds()
     return people_ids;
 }
 
-function parseSymptoms()
-{
+function parseSymptoms() {
     if ( !symptomsXML ) symptomsXML = loadXMLDoc(apiUrl+"symptom");
 
     let symptoms = [];
 
     let items = symptomsXML.getElementsByTagName("item");
 
-    for (let index = 0; index < items.length; index++)
-    {
+    for (let index = 0; index < items.length; index++) {
         symptoms.push([parseInt(parseNodeValueFromXML(items[parseInt(index)], "id")),
             parseFloat(parseNodeValueFromXML(items[parseInt(index)], "probability"))/100.0]);
     }
     return symptoms;
 }
 
-function prepareData()
-{
+function prepareData() {
     const relAmountCalls = 0.5;
-    const testProba = 0.1;
+    const testProbability = 0.1;
     const successProbability = 0.8;
 
     let symptomList = parseSymptoms();
     let people = parseInfectedIds();
-    for (let index = 0; index < people.length; index++)
-    {
-        if (Math.random() < relAmountCalls)
-        {
+    for (let index = 0; index < people.length; index++) {
+        if (Math.random() < relAmountCalls) {
             addHistoryItem(successProbability, people[parseInt(index)], symptomList);
-            if (Math.random() < testProba)
-            {
+            if (Math.random() < testProbability) {
                 prescribeTest(people[parseInt(index)]);
             }
         }
     }
 }
 
-function addHistoryItem(successProbability, infected_id, symptom_list)
-{
+function addHistoryItem(successProbability, infected_id, symptom_list) {
     let xml_string;
-    if (Math.random() > successProbability)
-    {  // status = 0
+    if (Math.random() > successProbability) {  // status = 0
         xml_string = "<History>" +
             "<infectedId>"+infected_id+"</infectedId>"+
             "<notes></notes>"+
@@ -75,8 +63,7 @@ function addHistoryItem(successProbability, infected_id, symptom_list)
             "<symptoms></symptoms>"+
             "<timestamp>" + Date.now() + "</timestamp>" +
             "</History>";
-    }
-    else{ // status = 1
+    } else { // status = 1
         xml_string = "<History>" +
             "<infectedId>"+infected_id+"</infectedId>"+
             "<notes></notes>"+
@@ -91,19 +78,15 @@ function addHistoryItem(successProbability, infected_id, symptom_list)
     postRequest("history", xml_string);
 }
 
-function prescribeTest(infected_id)
-{
+function prescribeTest(infected_id) {
     let xml_str = "<TestInsertDto><infectedId>"+infected_id+"</infectedId><result>0</result><timestamp>"+Date.now()+"</timestamp></TestInsertDto>";
     postRequest("test/", xml_str);
 }
 
-function buildSymptomString(symptom_list)
-{
+function buildSymptomString(symptom_list) {
     let xml_string = "";
-    for ( let index = 0; index < symptom_list.length; index++ )
-    {
-        if (Math.random() < symptom_list[parseInt(index)][1])
-        {
+    for (let index = 0; index < symptom_list.length; index++) {
+        if (Math.random() < symptom_list[parseInt(index)][1]) {
             xml_string += "<symptom>"+symptom_list[parseInt(index)][0]+"</symptom>";
         }
     }
