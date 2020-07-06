@@ -1,10 +1,10 @@
-async function search_call_list() {
+async function searchCallList() {
     currentlySearched = true;
     window.location.hash = "";
     deleteScrollId();
 
-    let input_field = document.getElementById("search_input");
-    let words = input_field.value.toLowerCase().split(" ");
+    let inputField = document.getElementById("search_input");
+    let words = inputField.value.toLowerCase().split(" ");
     let callListItems = getAllNotHiddenCallBoxes();
     currentCallBoxes = callListItems;
 
@@ -17,7 +17,7 @@ async function search_call_list() {
         nameText = callListItems[parseInt(i)].getElementsByTagName("span")[0].innerText;
         phoneText = callListItems[parseInt(i)].getElementsByTagName("span")[2].innerText;
         text = (nameText+" "+phoneText.replace("Tel.: ","")).replace(",", "").toLowerCase();
-        if (check_in(text, words)) hits.push(i);
+        if (checkIn(text, words)) hits.push(i);
     }
 
     foundIndices = hits;
@@ -50,18 +50,18 @@ function scrollToIndex(index) {
     }, 100);
     window.location.hash = "#scroll_to";
     addKeyClickListenerToChild("scroll_to");
-    show_continue_search();
+    showContinueSearch();
 }
 
 function getAllNotHiddenCallBoxes() {
-    let call_list_items = document.getElementsByClassName("call_list_element");
-    if (call_list_items.toString().indexOf("HTMLCollection") !== -1) call_list_items = Array.prototype.slice.call(call_list_items);
-    for (let index = call_list_items.length - 1; index >= 0; index--) {
-        if (call_list_items[parseInt(index)].className.indexOf("hidden_box") !== -1) {
-            call_list_items.splice(index, 1);
+    let callListItems = document.getElementsByClassName("call_list_element");
+    if (callListItems.toString().indexOf("HTMLCollection") !== -1) callListItems = Array.prototype.slice.call(callListItems);
+    for (let index = callListItems.length - 1; index >= 0; index--) {
+        if (callListItems[parseInt(index)].className.indexOf("hidden_box") !== -1) {
+            callListItems.splice(index, 1);
         }
     }
-    return call_list_items;
+    return callListItems;
 }
 
 function noItemFound() {
@@ -73,7 +73,7 @@ function noItemFound() {
     currentlySearched = false;
 }
 
-function check_in(str, words) {
+function checkIn(str, words) {
     for (let i = 0; i < words.length; i++) {
         if (str.indexOf(words[parseInt(i)]) === -1) return false;
     }
@@ -83,7 +83,7 @@ function check_in(str, words) {
 function addSearchBarListener() {
     let searchBar = document.getElementById("search_bar");
     searchBar.addEventListener("keyup", function (event){
-        if (event.key === "Enter") search_call_list();
+        if (event.key === "Enter") searchCallList();
     });
 }
 
@@ -115,7 +115,7 @@ function addKeyClickListenerToChild(elemId) {
     box.focus();
 }
 
-function close_continue_search() {
+function closeContinueSearch() {
     document.getElementById("continue_search_buttons").className += " invisible_object";
     console.log(); // without, hiding of continue search box is very laggy
 
@@ -123,12 +123,12 @@ function close_continue_search() {
     suppressUpdates = false;
 }
 
-function show_continue_search() {
+function showContinueSearch() {
     suppressUpdates = true;
     updateButtonStates();
-    let continue_search_bar = document.getElementById("continue_search_buttons");
-    continue_search_bar.className = continue_search_bar.className.replace(" invisible_object", "");
-    setTimeout(function (){ close_continue_search(); }, parseInt(config_hash_table["closeContinueSearchTime"]));
+    let continueSearchBar = document.getElementById("continue_search_buttons");
+    continueSearchBar.className = continueSearchBar.className.replace(" invisible_object", "");
+    setTimeout(function (){ closeContinueSearch(); }, parseInt(configHashTable["closeContinueSearchTime"]));
 }
 
 function findNext() {

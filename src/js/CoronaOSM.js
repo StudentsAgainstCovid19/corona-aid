@@ -13,16 +13,16 @@ function initMap() {
         ],
         view: new ol.View({
             center: getStandardCenter(),
-            projection: config_hash_table["projectionType"],
-            zoom: parseInt(config_hash_table["standardZoom"])
+            projection: configHashTable["projectionType"],
+            zoom: parseInt(configHashTable["standardZoom"])
         })
     });
     setClusterLayer();
 }
 
 function getStandardCenter() {
-    return ol.proj.fromLonLat([ parseFloat(config_hash_table["standardLon"]),
-                                parseFloat(config_hash_table["standardLat"])]);
+    return ol.proj.fromLonLat([ parseFloat(configHashTable["standardLon"]),
+                                parseFloat(configHashTable["standardLat"])]);
 }
 
 function readExt(feature, extensionsNode) {
@@ -60,7 +60,7 @@ async function setMarkers() {
     });
 
     let clusterSource = new ol.source.Cluster({
-        distance: parseInt(config_hash_table["clusteredDistance"]),
+        distance: parseInt(configHashTable["clusteredDistance"]),
         source: new ol.source.Vector({
             features: gpxFeatures
         })
@@ -70,56 +70,8 @@ async function setMarkers() {
 }
 
 async function setClusterLayer() {
-    let styles = getStyles();
     clusteredLayer = new ol.layer.Vector({
-        style: function(feature) {
-            let size = feature.get('features').length;
-            let style;
-            if (size < 2) {
-                switch (feature.get('features')[0].get("type")) {
-                    case "calledAlready":
-                        style = styles[0];
-                        break;
-                    case "lowprio":
-                        style = styles[1];
-                        break;
-                    case "intermediateprio":
-                        style = styles[2];
-                        break;
-                    case "highprio":
-                        style = styles[3];
-                        break;
-                    case "veryhighprio":
-                        style = styles[4];
-                        break;
-                    default:
-                        style = styles[4];
-                        break;
-                }
-            } else {
-                // use a pie chart
-                let amountDone, amountCalled;
-                let styleSVGIcon;
-                if (feature.get("amountDone") && feature.get("amountCalled")) {
-                    amountDone = feature.get("amountDone");
-                    amountCalled = feature.get("amountCalled");
-                } else {
-                    amountDone = getAmountDone(feature.get('features'));
-                    amountCalled = getAmountCalled(feature.get('features'));
-                }
-
-                const key = [size, amountDone, amountCalled];
-                styleSVGIcon = pieChartCache.get(key.toString());
-                if (!styleSVGIcon)
-                { // caching did not work due to the fact that styles are disposed if a cluster is reloaded / disposed.
-                    // Now we cache the SVG output as openlayers icon by the XSLTProcessor
-                    styleSVGIcon = createPieChart(size, amountDone, amountCalled);
-                    pieChartCache.set(key.toString(), styleSVGIcon);
-                }
-                style = createClusterFromSVG(styleSVGIcon);
-            }
-            return style;
-        }
+        style: getFeatureStyle
     });
 
     map.addLayer(clusteredLayer);
@@ -133,17 +85,68 @@ async function setClusterLayer() {
         );
         if (clickedFeatures.length === 0) return;
 
-        let clicked_ids = parseFeatureTree(clickedFeatures[0]);
-        let v = clicked_ids[0];
-        for (let i = 0; i < clicked_ids.length; i++) v+=clicked_ids[i];
+        let clickedIds = parseFeatureTree(clickedFeatures[0]);
+        let v = clickedIds[0];
+        for (let i = 0; i < clickedIds.length; i++) v+=clickedIds[i];
 
-        if (clicked_ids.length === 1) {
-            try_acquire_lock(clicked_ids[0]);
+        if (clickedIds.length === 1) {
+            tryAcquireLock(clickedIds[0]);
         } else {
             // open list with people with according ids
-            displayClusteredMap(clicked_ids);
+            displayClusteredMap(clickedIds);
         }
     });
+}
+
+function getFeatureStyle(feature)
+{
+    let styles = getStyles();
+    let size = feature.get("features").length;
+    let style;
+    if (size < 2) {
+        switch (feature.get("features")[0].get("type")) {
+            case "calledAlready":
+                style = styles[0];
+                break;
+            case "lowprio":
+                style = styles[1];
+                break;
+            case "intermediateprio":
+                style = styles[2];
+                break;
+            case "highprio":
+                style = styles[3];
+                break;
+            case "veryhighprio":
+                style = styles[4];
+                break;
+            default:
+                style = styles[4];
+                break;
+        }
+    } else {
+        // use a pie chart
+        let amountDone, amountCalled;
+        let styleSVGIcon;
+        if (feature.get("amountDone") && feature.get("amountCalled")) {
+            amountDone = feature.get("amountDone");
+            amountCalled = feature.get("amountCalled");
+        } else {
+            amountDone = getAmountDone(feature.get("features"));
+            amountCalled = getAmountCalled(feature.get("features"));
+        }
+
+        const key = [size, amountDone, amountCalled];
+        styleSVGIcon = pieChartCache.get(key.toString());
+        if (!styleSVGIcon)
+        { // caching did not work due to the fact that styles are disposed if a cluster is reloaded / disposed.
+            // Now we cache the SVG output as openlayers icon by the XSLTProcessor
+            styleSVGIcon = createPieChart(size, amountDone, amountCalled);
+            pieChartCache.set(key.toString(), styleSVGIcon);
+        }
+        style = createClusterFromSVG(styleSVGIcon);
+    }
+    return style;
 }
 
 function setDistrictsLayer() {
@@ -158,7 +161,7 @@ function setDistrictsLayer() {
         source: new ol.source.Vector()
     });
 
-    districtLayer.getSource().addFeatures(new ol.format.KML().readFeatures(districtsKML, {featureProjection: config_hash_table["projectionType"]}));
+    districtLayer.getSource().addFeatures(new ol.format.KML().readFeatures(districtsKML, {featureProjection: configHashTable["projectionType"]}));
     map.addLayer(districtLayer);
     hideLoading();
 }
@@ -184,24 +187,24 @@ function setVisibilityDistricts(visibilityState) {
 
 function parseFeatureTree(ft) {
 
-    let id_list = [];
+    let idList = [];
     let id = ft.get('id');
-    if (id) id_list = [parseInt(id)];
+    if (id) idList = [parseInt(id)];
 
     let children = ft.get("features");
-    if ( !children || children.length === 0 ) return id_list;
+    if ( !children || children.length === 0 ) return idList;
     children.forEach(function (child){
         let ids = parseFeatureTree(child);
-        id_list = id_list.concat(ids);
+        idList = idList.concat(ids);
     });
-    return id_list;
+    return idList;
 }
 
 
 function getAmountDone(array) {
     let amount=0;
-    for (let i=0; i<array.length; i++) {
-        if (array[parseInt(i)].get('done')) {
+    for (let i = 0; i<array.length; i++) {
+        if (array[i].get("done")) {
             amount+=1;
         }
     }
@@ -210,8 +213,8 @@ function getAmountDone(array) {
 
 function getAmountCalled(array) {
     let amount=0;
-    for (let i=0; i<array.length; i++) {
-        if (array[parseInt(i)].get('called') && !array[parseInt(i)].get('done')) amount+=1;
+    for (let i = 0; i<array.length; i++) {
+        if (array[parseInt(i)].get("called") && !array[i].get("done")) amount+=1;
     }
     return amount;
 }
@@ -224,7 +227,7 @@ function getStyles() {
             image: new ol.style.Icon({
                 opacity: 1,
                 src: "./assets/markers/" + icons[i],
-                scale: parseFloat(config_hash_table["markerScale"])
+                scale: parseFloat(configHashTable["markerScale"])
             })
         }));
     }
@@ -243,7 +246,7 @@ function getType(person) {
 function createPieChart(size, amountDone, amountCalled) {
     if (size === 0) {
         console.log("Error occurred while creating pie chart.");
-        return;
+        return null;
     }
     colors = ['green', 'purple'];
     angles = [0, amountDone / parseFloat(size) * 360, (amountDone + amountCalled) / parseFloat(size) * 360];
@@ -271,8 +274,8 @@ function createPieChart(size, amountDone, amountCalled) {
     return new ol.style.Icon({
         opacity: 1,
         src: "data:image/svg+xml;utf8," + serializer.serializeToString(chart),
-        scale: parseFloat(config_hash_table["pieChartScaleConstant"])
-            + (size-amountDone) * parseFloat(config_hash_table["pieChartScaleLinear"])
+        scale: parseFloat(configHashTable["pieChartScaleConstant"])
+            + (size-amountDone) * parseFloat(configHashTable["pieChartScaleLinear"])
     });
 }
 
@@ -289,16 +292,16 @@ function calculateCirclePoint(angle) {
 
 // button listeners for zooming
 function zoomIn() {
-    map.getView().animate({zoom: map.getView().getZoom() + parseFloat(config_hash_table["zoomChange"]),
-                    duration: parseInt(config_hash_table["animationDuration"])});
+    map.getView().animate({zoom: map.getView().getZoom() + parseFloat(configHashTable["zoomChange"]),
+                    duration: parseInt(configHashTable["animationDuration"])});
 }
 
 function zoomOut() {
-    map.getView().animate({zoom: map.getView().getZoom() - parseFloat(config_hash_table["zoomChange"]),
-                    duration: parseInt(config_hash_table["animationDuration"])});
+    map.getView().animate({zoom: map.getView().getZoom() - parseFloat(configHashTable["zoomChange"]),
+                    duration: parseInt(configHashTable["animationDuration"])});
 }
 
 function standardZoom() {
-    map.getView().animate({zoom: config_hash_table["standardZoom"],
+    map.getView().animate({zoom: configHashTable["standardZoom"],
                                     center: getStandardCenter()});
 }

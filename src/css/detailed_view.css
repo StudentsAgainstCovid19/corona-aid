@@ -215,7 +215,7 @@
 #wellbeing_slider::-webkit-slider-runnable-track {
     width: 100%;
     height: 8.4px;
-    box-shadow: 1px 1px 1px #000000, 0 0 1px #0d0d0d;
+    box-shadow: 1px 1px 1px #000, 0 0 1px #0d0d0d;
     background: url('../assets/icons/wellbeing_slider.svg');
 }
 
@@ -312,10 +312,6 @@
 #informationDiv {
     border-bottom-style: solid;
     border-bottom-color: lightgray;
-}
-
-#prescribeTestDiv {
-
 }
 
 #wellbeingContentDiv {
@@ -493,10 +489,6 @@ input[type="checkbox"] {
 
 #symptomsTable {
     padding-top: 0.5em;
-}
-
-.symptom_checkbox {
-
 }
 
 .bold_text {

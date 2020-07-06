@@ -60,11 +60,11 @@
     <div id="search_bar" class="floating_object">
       <div id="search_container">
         <div class="flex_div">
-          <button id="open_list_button" onclick="toggle_call_list();">
+          <button id="open_list_button" onclick="toggleCallList();">
             <img src="./assets/icons/list_button.svg" id="open_list_svg" alt="Menü" />
           </button>
           <input type="text" placeholder="Suche..." id="search_input">
-          <button id="search_button" onclick="search_call_list();">
+          <button id="search_button" onclick="searchCallList();">
             <div id="search_div">
               <img src="./assets/icons/search_magnifier.svg" alt="Such-Icon"/>
             </div>
@@ -74,7 +74,7 @@
 
       <span id="continue_search_span">
         <div id="continue_search_buttons" class="floating_object invisible_object">
-          <button class="continue_search_btn" onclick="close_continue_search();">
+          <button class="continue_search_btn" onclick="closeContinueSearch();">
             <img src="./assets/icons/close_button.svg" alt="Suche schließen" class="close_search_icons"/>
           </button>
           <button id="lastSearchButton" class="continue_search_btn" onclick="findLast();">

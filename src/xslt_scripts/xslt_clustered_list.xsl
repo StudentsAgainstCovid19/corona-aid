@@ -31,7 +31,7 @@
         </xsl:variable>
 
         <div class="list_div">
-            <xsl:attribute name="onclick">try_acquire_lock(<xsl:value-of select="id"/>)</xsl:attribute>
+            <xsl:attribute name="onclick">tryAcquireLock(<xsl:value-of select="id"/>)</xsl:attribute>
             <xsl:if test="done = 1">
                 <xsl:attribute name="class">done_div</xsl:attribute>
             </xsl:if>
