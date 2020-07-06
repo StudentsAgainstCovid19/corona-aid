@@ -27,7 +27,7 @@
         <div class="call_list_header">
             <h1>Anrufsliste</h1>
         </div>
-        <div class="seperator"></div>
+        <div class="separator"></div>
         <div class = "call_list_content">
             <xsl:apply-templates select="infected/person">
                 <!-- fill call list -->

@@ -1,4 +1,3 @@
-
 .overlayBlurred {
     position: absolute;
     width: 100%;
@@ -27,19 +26,18 @@
     flex-direction: column;
     align-content: center;
     justify-content: center;
-
 }
 
-
-.popupHeader{
-    display:flex;
+.popupHeader {
+    display: flex;
     justify-content: center;
     align-content: start;
     margin: 1em;
     font-weight: bold;
     font-size: 1.3em;
 }
-#listOfPossibleSymptoms{
+
+#listOfPossibleSymptoms {
     height: auto;
     max-height: 70%;
     padding-left: 1em;
@@ -49,7 +47,8 @@
     margin-right: 1em;
     margin-left: 1em;
 }
-#symptomsPopupEnd{
+
+#symptomsPopupEnd {
     display:flex;
     flex-direction: row;
     justify-content: space-around;
@@ -57,9 +56,7 @@
     margin: 1em;
 }
 
-
-#confirm_popup
-{
+#confirm_popup {
     position: absolute;
     width: 20%;
     height: auto;
@@ -74,22 +71,23 @@
     align-content: space-between;
     padding: 1em;
     border: darkgray solid 3px;
-
     z-index: 9;
 }
-#confirm_popup_buttons{
+
+#confirm_popup_buttons {
     display:flex;
     align-content: center;
     justify-content: space-evenly;
 }
-#confirm_text{
+
+#confirm_text {
     font-weight: bold;
     display:flex;
     justify-content: center;
     align-content: center;
 }
 
-#listOfIllnesses{
+#listOfIllnesses {
     margin-left: 1em;
     margin-right: 1em;
     overflow: auto;
@@ -100,7 +98,7 @@
     justify-content: center;
 }
 
-#close_illnesses_button_div{
+#close_illnesses_button_div {
     display: flex;
     justify-content: center;
     align-content: center;
@@ -111,15 +109,11 @@
     width: 30%;
 }
 
-
-
-.invisible_object
-{
+.invisible_object {
     display: none !important;
 }
 
-#transparent_overlay
-{
+#transparent_overlay {
     position: absolute;
     z-index: 8;
     width: 100%;
@@ -128,13 +122,12 @@
     left: 0;
 }
 
-
-#notesHistoryDiv{
+#notesHistoryDiv {
     display: flex;
     flex-direction: column;
     justify-content: start;
     align-content: end;
-    margin:1em;
+    margin: 1em;
     border: solid black 3px;
     border-radius: 10px;
     height: auto;
@@ -142,22 +135,22 @@
     overflow: auto;
 }
 
-#notesItem{
+#notesItem {
     display:flex;
     justify-content: start;
     align-content: center;
     flex-direction: row;
 }
 
-#notesText{
+#notesText {
     font-weight: 300;
 }
 
-#hideNotesButton{
+#hideNotesButton {
     width: 30%;
 }
 
-#hideNotesButtonDiv{
+#hideNotesButtonDiv {
     display: flex;
     flex-direction: row;
     justify-content: center;
