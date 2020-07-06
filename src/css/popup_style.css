@@ -26,11 +26,10 @@
     flex-direction: column;
     align-content: center;
     justify-content: center;
-
 }
 
 .popupHeader {
-    display:flex;
+    display: flex;
     justify-content: center;
     align-content: start;
     margin: 1em;
@@ -128,7 +127,7 @@
     flex-direction: column;
     justify-content: start;
     align-content: end;
-    margin:1em;
+    margin: 1em;
     border: solid black 3px;
     border-radius: 10px;
     height: auto;

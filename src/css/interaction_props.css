@@ -37,12 +37,10 @@
     outline: none;
     margin: 0 2px 0 2px;
     cursor: pointer;
-
     -moz-user-select: none;
     -webkit-user-select: none;
     -ms-user-select: none;
     user-select: none;
-    -o-user-select: none;
 }
 
 .zoom_button:active {
@@ -211,6 +209,7 @@
         visibility: visible;
         opacity: 1;
     }
+
     85% {
         visibility: visible;
         opacity: 1;

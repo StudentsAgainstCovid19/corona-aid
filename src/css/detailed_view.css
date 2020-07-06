@@ -34,10 +34,6 @@
     font-weight: 300;
 }
 
-.notPrescribed:hover {
-    background: darkgray;
-}
-
 .notPrescribed {
     font-size: inherit;
     background: gray;
@@ -58,6 +54,10 @@
     overflow: hidden;
     font-family: "HelveticaNeue-Light", "Helvetica Neue Light", "Helvetica Neue", Helvetica, Arial, "Lucida Grande", sans-serif;
     font-weight: 300;
+}
+
+.notPrescribed:hover {
+    background: darkgray;
 }
 
 #addSymptomButton {
@@ -162,7 +162,7 @@
 }
 
 .submit_button {
-    background-color: #00cc00;
+    background-color: #0c0;
     border-color: black;
 }
 
@@ -199,13 +199,13 @@
     font-size: 0.8em;
 }
 
-.btn-gray:hover {
-    background: darkgray;
-}
-
 .btn-gray {
     border: 3px solid gray;
     background: gray;
+}
+
+.btn-gray:hover {
+    background: darkgray;
 }
 
 #wellbeing_slider {
@@ -357,6 +357,7 @@
     from {
         transform: translate(0, 0);
     }
+
     to {
         transform: translate(-100%, 0);
     }
@@ -366,6 +367,7 @@
     from {
         transform: translate(-100%, 0);
     }
+
     to {
         transform: translate(0, 0);
     }
@@ -375,6 +377,7 @@
     from {
         right: 33%;
     }
+
     to {
         right: 3%;
     }
@@ -384,6 +387,7 @@
     from {
         right: 3%;
     }
+
     to {
         right: 33%;
     }
