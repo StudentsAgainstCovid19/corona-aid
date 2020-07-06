@@ -89,7 +89,7 @@ function parseInfectedID(xmlDocument) {
 
 // set the detailed view with a given xml file for all specific data
 function setDetailedView(xmlDoc) {
-    if (xmlDoc != null) {
+    if ( xmlDoc ) {
         detailBarMode = 2;
         currentInfectedId = parseInfectedID(xmlDoc);
         symptomsList = [];
@@ -127,10 +127,10 @@ function showNotes() {
 }
 
 function displayPopUp() {
-    let filter_overlay = document.getElementById("global_overlay");
-    let popup_window = document.getElementById("popup_window");
-    filter_overlay.classList.remove("invisible_object");
-    popup_window.classList.remove("invisible_object");
+    let filterOverlay = document.getElementById("global_overlay");
+    let popupWindow = document.getElementById("popup_window");
+    filterOverlay.classList.remove("invisible_object");
+    popupWindow.classList.remove("invisible_object");
 }
 
 function hidePopUp() {
@@ -221,11 +221,11 @@ function constructSymptomPopupXML() {
 
 function constructIdList() {
     let parser = new DOMParser();
-    let temp_id_string = "<symptomIdList>";
+    let tempIdString = "<symptomIdList>";
     for (let i = 0; i < symptomsList.length; i++) {
-        temp_id_string += "<symp_id>"+symptomsList[i]+"</symp_id>";
+        tempIdString += "<symp_id>"+symptomsList[i]+"</symp_id>";
     }
-    return parser.parseFromString(temp_id_string + "</symptomIdList>", "application/xml");
+    return parser.parseFromString(tempIdString + "</symptomIdList>", "application/xml");
 }
 
 
@@ -271,7 +271,7 @@ function setFocus(id) {
 
 function onSubmitPopup() {
     hideGenericPopup();
-    if (confirmConfig[0] != null) confirmConfig[0](confirmConfig[2]);
+    if ( confirmConfig[0] ) confirmConfig[0](confirmConfig[2]);
     confirmConfig = [null, null, null];
 }
 
@@ -289,7 +289,7 @@ function hideGenericPopup() {
 }
 
 function failedCall(id) {
-    const xml_string = "<History>" +
+    const xmlString = "<History>" +
                 "<infectedId>"+id+"</infectedId>"+
                 "<notes></notes>"+
                 "<personalFeeling>0</personalFeeling>"+
@@ -298,7 +298,7 @@ function failedCall(id) {
                 "<timestamp>" + Date.now() + "</timestamp>" +
                 "</History>";
 
-    postRequest("history", xml_string);
+    postRequest("history", xmlString);
     deleteTimeouts();
     clearRightBar();
 }
@@ -352,7 +352,7 @@ function showSnackbar(message) {
     let snackbarText = document.getElementById("centeredSnackbarText");
     snackbarText.innerText = message;
     snackbar.className = snackbar.className.replace(" showSnackbarAnimation", "");
-    setTimeout(function() { snackbar.className += " showSnackbarAnimation" }, 50);
+    setTimeout(function() { snackbar.className += " showSnackbarAnimation"; }, 50);
 
     let detailedView = document.getElementById("infected_detailed_view_right");
     detailedView.scrollTop = detailedView.scrollHeight;

@@ -1,7 +1,7 @@
 function initMap() {
     // OpenLayers takes lon as first argument and then lat
     map = new ol.Map({
-        target: 'map_div',
+        target: "map_div",
         interactions: ol.interaction.defaults({altShiftDragRotate:false, pinchRotate:false}),
         controls: [],
         loadTilesWhileAnimating: true,
@@ -27,7 +27,7 @@ function getStandardCenter() {
 
 function readExt(feature, extensionsNode) {
     //var parser = new DOMParser();
-    //var extensionXml = parser.parseFromString(extensionsNode, 'application/xml');
+    //var extensionXml = parser.parseFromString(extensionsNode, "application/xml");
 
     function parseExtensions(tagName) {
         return extensionsNode.getElementsByTagName(tagName)[0].childNodes[0].nodeValue;
@@ -56,7 +56,7 @@ async function setMarkers() {
     // read features in gpx
     let gpx = new ol.format.GPX({readExtensions: readExt});
     let gpxFeatures = gpx.readFeatures(xmlSerializer.serializeToString(gpxData), {
-        featureProjection: 'EPSG:3857'
+        featureProjection: configHashTable["projectionType"]
     });
 
     let clusterSource = new ol.source.Cluster({
@@ -77,7 +77,7 @@ async function setClusterLayer() {
     map.addLayer(clusteredLayer);
 
 
-    map.on('click', function(evt){
+    map.on("click", function(evt){
         let clickedFeatures = [];
         map.forEachFeatureAtPixel(
             evt.pixel,
@@ -189,7 +189,7 @@ function setVisibilityDistricts(visibilityState) {
 function parseFeatureTree(ft) {
 
     let idList = [];
-    let id = ft.get('id');
+    let id = ft.get("id");
     if (id) idList = [parseInt(id)];
 
     let children = ft.get("features");
@@ -221,7 +221,7 @@ function getAmountCalled(array) {
 }
 
 function getStyles() {
-    let icons = ['tried_call.svg', 'lower_prio.svg', 'intermed_prio.svg', 'high_prio.svg', 'veryhigh_prio.svg'];
+    let icons = ["tried_call.svg", "lower_prio.svg", "intermed_prio.svg", "high_prio.svg", "veryhigh_prio.svg"];
     let styles = [];
     for (let i = 0; i < icons.length; i++) {
         styles.push(new ol.style.Style({
@@ -249,14 +249,14 @@ function createPieChart(size, amountDone, amountCalled) {
         console.log("Error occurred while creating pie chart.");
         return null;
     }
-    colors = ['green', 'purple'];
-    angles = [0, amountDone / parseFloat(size) * 360, (amountDone + amountCalled) / parseFloat(size) * 360];
-    let xml_string = "<chart><amountRemaining>" + (size - amountDone) + "</amountRemaining><arcs>";
+    let colors = ["green", "purple"];
+    let angles = [0, amountDone / parseFloat(size) * 360, (amountDone + amountCalled) / parseFloat(size) * 360];
+    let xmlString = "<chart><amountRemaining>" + (size - amountDone) + "</amountRemaining><arcs>";
 
     for (let i = 0; i < colors.length; i++) {
         let coordinates = calculateCirclePoint(angles[i + 1]);
 
-        xml_string += "<arc>" +
+        xmlString += "<arc>" +
             "<x>" + coordinates[0] + "</x>" +
             "<y>" + coordinates[1] + "</y>" +
             "<color>" + colors[i] + "</color>" +
@@ -264,9 +264,9 @@ function createPieChart(size, amountDone, amountCalled) {
             "</arc>";
 
     }
-    xml_string += "</arcs></chart>";
+    xmlString += "</arcs></chart>";
     let xmlParser = new DOMParser();
-    let xmlDoc = xmlParser.parseFromString(xml_string, "application/xml");
+    let xmlDoc = xmlParser.parseFromString(xmlString, "application/xml");
     let pieChartXSL = getXSLT("./xslt_scripts/xslt_pie_chart_gen.xsl");
     let chart = runXSLT(pieChartXSL, xmlDoc);
 
