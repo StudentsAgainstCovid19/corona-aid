@@ -1,47 +1,39 @@
-
-function parseNodeValueFromXML(xml_obj, tagName)
-{
+function parseNodeValueFromXML(xml_obj, tagName) {
     return xml_obj.getElementsByTagName(tagName)[0].childNodes[0].nodeValue
 }
 
-function init()
-{
+function init() {
     showLoading();
     loadConfig();
     initMap();
     calculatePriorities();
     makeAsyncUpdateProcess();
     connectWebSocket();
-    window.onbeforeunload = function(){
+    window.onbeforeunload = function() {
         cleanUp();
     }
     setTimeout(hideLoading, 1000);
 }
 
 function connectWebSocket() {
-    var evtSource = new EventSource(apiUrl + "realtime/sse");
-
+    let evtSource = new EventSource(apiUrl + "realtime/sse");
 
     evtSource.onmessage = function(e) {
         let parser = new DOMParser();
         let xmlDocument = parser.parseFromString(e.data, "application/xml");
-        if (xmlDocument.children[0].nodeName !== "EmptySet")
-        {
+        if (xmlDocument.children[0].nodeName !== "EmptySet") {
             realtimeUpdate(xmlDocument);
         }
     }
-
 }
 
-function loadConfig()
-{
+function loadConfig() {
     // init configs
     let configXML = loadXMLDoc(apiUrl+"config", "application/xml", configLoadErrorFn);
 
     if ( !configXML ) return;
     let items = configXML.getElementsByTagName("item");
-    for (let i=0; i<items.length; i++)
-    {
+    for (let i=0; i<items.length; i++) {
         config_hash_table[parseNodeValueFromXML(items[parseInt(i)], "configKey")] =
             parseNodeValueFromXML(items[parseInt(i)], "configValue");
     }
@@ -74,23 +66,20 @@ function serviceUnavailableError() {
     document.getElementById("zoom_buttons").className += " invisible_object";
 }
 
-function realtimeUpdate( updateXML )
-{
+function realtimeUpdate( updateXML ) {
     let serializer = new XMLSerializer();
     let xml_str = "";
     let items = updateXML.children[0].getElementsByTagName("item");
-    for (let index = 0; index < items.length; index++)
-    {
+    for (let index = 0; index < items.length; index++) {
         xml_str += serializer.serializeToString(items[parseInt(index)]);
     }
     updateXMLStr += xml_str;
     runUpdate();
 }
 
-async function runUpdate()
-{
+async function runUpdate() {
     if (updateXMLStr === "" || suppressUpdates) return;
-    let serializer = new XMLSerializer();
+    //let serializer = new XMLSerializer();
     let parser = new DOMParser();
     let xmlDoc = parser.parseFromString("<root></root>", "application/xml");
     xmlDoc.children[0].appendChild(parser.parseFromString("<updateList>" + updateXMLStr + "</updateList>", "application/xml").children[0]);
@@ -102,30 +91,25 @@ async function runUpdate()
     initCallList(false);
 }
 
-function makeAsyncUpdateProcess()
-{
+function makeAsyncUpdateProcess() {
     updatePromise = setInterval(function(){runUpdate();}, config_hash_table["frontendRefreshIntervall"]);
 }
 
-function enforceUpdate()
-{
-    if ( !updatePromise ) clearInterval(updatePromise);
+function enforceUpdate() {
+    if (!updatePromise) clearInterval(updatePromise);
 
     runUpdate();
     makeAsyncUpdateProcess();
 }
 
-function cleanUp()
-{
-    if ( detail_bar === 2)
-    {
+function cleanUp() {
+    if (detail_bar === 2) {
         // unlock infected
         postRequest("infected/unlock/"+currentInfectedId);
     }
 }
 
-function showProgressBar()
-{
+function showProgressBar() {
     let progressXSL = getXSLT("./xslt_scripts/xslt_progressbar.xsl");
     runXSLT(progressXSL, prioList, "progressBarDiv");
 }
