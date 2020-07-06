@@ -8,17 +8,17 @@
 //
 
 function parseInfectedIds() {
-    let people_ids = [];
+    let peopleIds = [];
 
     let people = prioList.getElementsByTagName("person");
 
     for (let index = 0; index < people.length; index++) {
         if (parseInt(parseNodeValueFromXML(people[parseInt(index)], "done")) === 0) {
-            people_ids.push(parseInt(parseNodeValueFromXML(people[parseInt(index)], "id")));
+            peopleIds.push(parseInt(parseNodeValueFromXML(people[parseInt(index)], "id")));
         }
     }
 
-    return people_ids;
+    return peopleIds;
 }
 
 function parseSymptoms() {
@@ -52,11 +52,11 @@ function prepareData() {
     }
 }
 
-function addHistoryItem(successProbability, infected_id, symptom_list) {
-    let xml_string;
+function addHistoryItem(successProbability, infectedId, symptomList) {
+    let xmlString;
     if (Math.random() > successProbability) {  // status = 0
-        xml_string = "<History>" +
-            "<infectedId>"+infected_id+"</infectedId>"+
+        xmlString = "<History>" +
+            "<infectedId>"+infectedId+"</infectedId>"+
             "<notes></notes>"+
             "<personalFeeling>0</personalFeeling>"+
             "<status>0</status>"+
@@ -64,31 +64,31 @@ function addHistoryItem(successProbability, infected_id, symptom_list) {
             "<timestamp>" + Date.now() + "</timestamp>" +
             "</History>";
     } else { // status = 1
-        xml_string = "<History>" +
-            "<infectedId>"+infected_id+"</infectedId>"+
+        xmlString = "<History>" +
+            "<infectedId>"+infectedId+"</infectedId>"+
             "<notes></notes>"+
             "<personalFeeling>"+parseInt(Math.random()*5+1)+"</personalFeeling>"+
             "<status>1</status><symptoms>"+
-            buildSymptomString(symptom_list) +
+            buildSymptomString(symptomList) +
             "</symptoms>" + "<timestamp>" + Date.now() + "</timestamp>" +
             "</History>";
 
 
     }
-    postRequest("history", xml_string);
+    postRequest("history", xmlString);
 }
 
-function prescribeTest(infected_id) {
-    let xml_str = "<TestInsertDto><infectedId>"+infected_id+"</infectedId><result>0</result><timestamp>"+Date.now()+"</timestamp></TestInsertDto>";
-    postRequest("test/", xml_str);
+function prescribeTest(infectedId) {
+    let xmlString = "<TestInsertDto><infectedId>"+infectedId+"</infectedId><result>0</result><timestamp>"+Date.now()+"</timestamp></TestInsertDto>";
+    postRequest("test/", xmlString);
 }
 
-function buildSymptomString(symptom_list) {
-    let xml_string = "";
-    for (let index = 0; index < symptom_list.length; index++) {
-        if (Math.random() < symptom_list[parseInt(index)][1]) {
-            xml_string += "<symptom>"+symptom_list[parseInt(index)][0]+"</symptom>";
+function buildSymptomString(symptomList) {
+    let xmlString = "";
+    for (let index = 0; index < symptomList.length; index++) {
+        if (Math.random() < symptomList[parseInt(index)][1]) {
+            xmlString += "<symptom>"+symptomList[parseInt(index)][0]+"</symptom>";
         }
     }
-    return xml_string;
+    return xmlString;
 }

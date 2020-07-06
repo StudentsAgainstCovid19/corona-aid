@@ -1,12 +1,12 @@
 async function displayClusteredMap(idArray) {
-    close_continue_search();
+    closeContinueSearch();
     if (!prioList || idArray.length === 0) return;
-    if (detail_bar === 2) return showSnackbar("Die Patientenansicht ist noch geöffnet.\n" +
+    if (detailBarMode === 2) return showSnackbar("Die Patientenansicht ist noch geöffnet.\n" +
                                     "Bitte kümmern Sie sich erst um den derzeitigen Patienten.");
-    detail_bar = 1;
+    detailBarMode = 1;
     slideOpenRightBar();
-    let right_bar = document.getElementById("infected_detailed_view_right");
-    right_bar.innerHTML = "";
+    let rightBar = document.getElementById("infected_detailed_view_right");
+    rightBar.innerHTML = "";
 
     idArray.sort((a, b) => a - b);
 

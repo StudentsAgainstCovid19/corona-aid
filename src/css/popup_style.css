@@ -1,7 +1,7 @@
 .overlayBlurred {
     position: absolute;
     width: 100%;
-    -webkit-filter: blur(5px); /* TODO use filter that can be used for all browsers*/
+    -webkit-filter: blur(5px); /* TODO use filter that can be used for all browsers */
     filter: blur(5px);
     backdrop-filter: blur(6px);
     height: 100%;
@@ -49,7 +49,7 @@
 }
 
 #symptomsPopupEnd {
-    display:flex;
+    display: flex;
     flex-direction: row;
     justify-content: space-around;
     align-content: center;
@@ -104,7 +104,7 @@
     align-content: center;
 }
 
-#close_illnesses_button{
+#close_illnesses_button {
     margin: 1em;
     width: 30%;
 }

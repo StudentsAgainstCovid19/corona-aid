@@ -1,6 +1,6 @@
-function try_acquire_lock(id) { // id for infected
-    close_continue_search();
-    if (detail_bar === 2) return showSnackbar("Die Patientenansicht ist noch geöffnet.\nBitte kümmern Sie sich erst um den derzeitigen Patienten.");
+function tryAcquireLock(id) { // id for infected
+    closeContinueSearch();
+    if (detailBarMode === 2) return showSnackbar("Die Patientenansicht ist noch geöffnet.\nBitte kümmern Sie sich erst um den derzeitigen Patienten.");
     console.log("Trying to load infected: " + id);
     detailedXML = loadXMLDoc(apiUrl + "infected/" + id, "application/xml", handleErrorsDetailRequest);
 
@@ -38,7 +38,7 @@ function addLockingTimer(infectedId) {
                 hidePopUp();
                 clearRightBar();
             }, infectedId, true);
-    }, parseInt(config_hash_table["autoResetOffset"])*0.8*1000);
+    }, parseInt(configHashTable["autoResetOffset"])*0.8*1000);
 }
 
 function addAutoUnlockTimeout(infectedId) {
@@ -48,7 +48,7 @@ function addAutoUnlockTimeout(infectedId) {
         putRequest("infected/unlock/"+infectedId);
         hidePopUp();
         clearRightBar();
-    }, parseInt(config_hash_table["autoResetOffset"])*1000);
+    }, parseInt(configHashTable["autoResetOffset"])*1000);
 }
 
 function deleteTimeouts() {
@@ -88,26 +88,26 @@ function parseInfectedID(xmlDocument) {
 }
 
 // set the detailed view with a given xml file for all specific data
-function setDetailedView(xml_doc) {
-    if (xml_doc != null) {
-        detail_bar = 2;
-        currentInfectedId = parseInfectedID(xml_doc);
+function setDetailedView(xmlDoc) {
+    if (xmlDoc != null) {
+        detailBarMode = 2;
+        currentInfectedId = parseInfectedID(xmlDoc);
         symptomsList = [];
 
         let displayDetailed = getXSLT("./xslt_scripts/xslt_detailed_view.xsl");
 
-        runXSLT(displayDetailed, xml_doc, "infected_detailed_view_right");
+        runXSLT(displayDetailed, xmlDoc, "infected_detailed_view_right");
 
         let parseSymptomsXSL = getXSLT("./xslt_scripts/xslt_parse_symptoms.xsl");
-        initialSymptoms = runXSLT(parseSymptomsXSL, xml_doc);
+        initialSymptoms = runXSLT(parseSymptomsXSL, xmlDoc);
 
         let symptomsXSL = getXSLT("./xslt_scripts/xslt_symptom_div.xsl");
 
         runXSLT(symptomsXSL, initialSymptoms, "symptomsDiv");
 
-        let symp_checkboxes = document.getElementById("symptomsDiv").getElementsByClassName("symptom_checkbox");
-        for ( let i = 0; i < symp_checkboxes.length; i++) {
-            let id = parseInt(symp_checkboxes[i].id.replace("symp_",""));
+        let sympCheckboxes = document.getElementById("symptomsDiv").getElementsByClassName("symptom_checkbox");
+        for ( let i = 0; i < sympCheckboxes.length; i++) {
+            let id = parseInt(sympCheckboxes[i].id.replace("symp_",""));
             symptomsList.push(id);
         }
     }
@@ -134,11 +134,11 @@ function displayPopUp() {
 }
 
 function hidePopUp() {
-    let filter_overlay = document.getElementById("global_overlay");
-    let popup_window = document.getElementById("popup_window");
-    filter_overlay.classList.add("invisible_object");
-    popup_window.classList.add("invisible_object");
-    popup_window.innerHTML = "";
+    let filterOverlay = document.getElementById("global_overlay");
+    let popupWindow = document.getElementById("popup_window");
+    filterOverlay.classList.add("invisible_object");
+    popupWindow.classList.add("invisible_object");
+    popupWindow.innerHTML = "";
 }
 
 function deepCopyXML(node) {
@@ -154,7 +154,7 @@ function showSymptoms () {
     let parser = new DOMParser();
     let xmlDocument = constructSymptomPopupXML();
 
-    var symptomsXSL = getXSLT("./xslt_scripts/xslt_edit_symptoms.xsl");
+    let symptomsXSL = getXSLT("./xslt_scripts/xslt_edit_symptoms.xsl");
     runXSLT(symptomsXSL, xmlDocument, "popup_window");
 
     editSymptomsList = symptomsList;
@@ -342,7 +342,7 @@ function submitDetailView(id, historyItemId = null) {
 }
 
 function clearRightBar() {
-    detail_bar = 0;
+    detailBarMode = 0;
     closeRightBar();
     document.getElementById("infected_detailed_view_right").innerHTML = "";
 }

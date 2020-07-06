@@ -67,7 +67,7 @@
                     </xsl:choose> call_box</xsl:attribute>
 
 
-                <xsl:attribute name="onclick">try_acquire_lock(<xsl:value-of select="id"/>)</xsl:attribute>
+                <xsl:attribute name="onclick">tryAcquireLock(<xsl:value-of select="id"/>)</xsl:attribute>
 
                 <h2>Name: </h2>
                 <span><xsl:value-of select="lastname"/>, <xsl:value-of select="firstnames"/></span>

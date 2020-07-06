@@ -1,5 +1,5 @@
-function parseNodeValueFromXML(xml_obj, tagName) {
-    return xml_obj.getElementsByTagName(tagName)[0].childNodes[0].nodeValue;
+function parseNodeValueFromXML(xmlObj, tagName) {
+    return xmlObj.getElementsByTagName(tagName)[0].childNodes[0].nodeValue;
 }
 
 function init() {
@@ -17,12 +17,12 @@ function init() {
 
 function realtimeUpdate(updateXML) {
     let serializer = new XMLSerializer();
-    let xml_str = "";
+    let xmlString = "";
     let items = updateXML.children[0].getElementsByTagName("item");
     for (let index = 0; index < items.length; index++) {
-        xml_str += serializer.serializeToString(items[parseInt(index)]);
+        xmlString += serializer.serializeToString(items[parseInt(index)]);
     }
-    updateXMLStr += xml_str;
+    updateXMLStr += xmlString;
     runUpdate();
 }
 
@@ -35,7 +35,7 @@ function connectWebSocket() {
         if (xmlDocument.children[0].nodeName !== "EmptySet") {
             realtimeUpdate(xmlDocument);
         }
-    }
+    };
 }
 
 function loadConfig() {
@@ -45,7 +45,7 @@ function loadConfig() {
     if (!configXML) return;
     let items = configXML.getElementsByTagName("item");
     for (let i=0; i<items.length; i++) {
-        config_hash_table[parseNodeValueFromXML(items[parseInt(i)], "configKey")] =
+        configHashTable[parseNodeValueFromXML(items[parseInt(i)], "configKey")] =
             parseNodeValueFromXML(items[parseInt(i)], "configValue");
     }
 }
@@ -57,7 +57,7 @@ function configLoadErrorFn(statusCode) {
                 "Es werden Standardkonfigurationen ausgewählt.\n" +
                 "Die Website wird vermutlich nicht funktionieren.",
                 null, null, true, "Schließen");
-            config_hash_table = {"standardLat":"49.013868","standardLon":"8.404346", "clusteredDistance": "200",
+            configHashTable = {"standardLat":"49.013868","standardLon":"8.404346", "clusteredDistance": "200",
                 "pieChartScale":"0.6","markerScale":"0.3","standardZoom":"13","zoomChange":"0.5", "animationDuration" : 200};
             break;
         case 502:
@@ -92,7 +92,7 @@ async function runUpdate() {
 }
 
 function makeAsyncUpdateProcess() {
-    updatePromise = setInterval(function(){runUpdate();}, config_hash_table["frontendRefreshIntervall"]);
+    updatePromise = setInterval(function(){runUpdate();}, configHashTable["frontendRefreshIntervall"]);
 }
 
 function enforceUpdate() {
@@ -103,7 +103,7 @@ function enforceUpdate() {
 }
 
 function cleanUp() {
-    if (detail_bar === 2) {
+    if (detailBarMode === 2) {
         // unlock infected
         postRequest("infected/unlock/"+currentInfectedId);
     }
