@@ -87,6 +87,10 @@
     color: white;
 }
 
+#search_div img {
+    height: 1.2em;
+}
+
 #search_span {
     top: 25%;
     vertical-align: middle;

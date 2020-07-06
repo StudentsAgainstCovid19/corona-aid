@@ -66,7 +66,7 @@
           <input type="text" placeholder="Suche..." id="search_input">
           <button id="search_button" onclick="search_call_list();">
             <div id="search_div">
-              <img src="./assets/icons/search_magnifier.svg" style="height:1.2em" alt="search magnifier"/>
+              <img src="./assets/icons/search_magnifier.svg" alt="search magnifier"/>
             </div>
           </button>
         </div>
@@ -94,10 +94,10 @@
       </div>
     </div>
 
-    <img id="global_overlay" class="invisible_object" src="./assets/icons/blur_filter.svg" alt="blur overlay" />
-    <div id="popup_window" class="invisible_object">
+    <img id="global_overlay" class="invisible_object overlayBlurred" src="./assets/icons/blur_filter.svg" alt="blur overlay" />
+    <div id="popup_window" class="invisible_object popupWindowStyle">
     </div>
-    <div id="helpPopup" class="invisible_object">
+    <div id="helpPopup" class="invisible_object popupWindowStyle">
       <h1>Hilfe: Kreisdiagramme</h1>
       <p>Die Zahl innerhalb eines Kreisdiagramms steht für die Anzahl der Personen, welche noch kontaktiert werden müssen</p>
       <p>Grün: Der grüne Anteil des Kreisdiagramms steht für die Personen, welche heute schon kontaktiert wurden.</p>
@@ -106,13 +106,12 @@
       <button onclick="closeHelpPopup()" class="dialogButton cancel_button">Schließen</button>
     </div>
 
-    <div id="transparent_overlay" class="invisible_object">
-      <div id="confirm_popup">
-        <p id="confirm_text"></p>
-        <div id="confirm_popup_buttons">
+    <div id="transparent_overlay" class="invisible_object"></div>
+    <div id="confirm_popup" class="invisible_object">
+      <p id="confirm_text"></p>
+      <div id="confirm_popup_buttons">
         <button id="submit_confirm_button" class="dialogButton submit_button" onclick="onSubmitPopup();">Bestätigen</button>
         <button id="cancel_confirm_button" class="dialogButton cancel_button" onclick="onCancelPopup();">Abbrechen</button>
-        </div>
       </div>
     </div>
 

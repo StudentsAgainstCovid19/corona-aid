@@ -37,7 +37,6 @@ function slideOpenRightBar()
     if (detailedView.className.indexOf("detailed_slideout") > -1 || detailedView.className === "floating_object") {
         detailedView.className = "floating_object detailed_slidein";
         progressBar.className = "progressBarSlidein"
-        console.log("slidein test");
     }
 }
 
