@@ -32,7 +32,6 @@
     color: black;
     font-family: "HelveticaNeue-Light", "Helvetica Neue Light", "Helvetica Neue", Helvetica, Arial, "Lucida Grande", sans-serif;
     font-weight: 300;
-
 }
 
 .notPrescribed:hover {
@@ -166,6 +165,7 @@
     background-color: #00cc00;
     border-color: black;
 }
+
 .submit_button:hover {
     color: #00cc00;
     background-color: white;
@@ -178,7 +178,6 @@
 }
 
 .dialogButton {
-    font-size: inherit;
     cursor: pointer;
     padding: 10px 10px;
     display: inline;
@@ -198,8 +197,6 @@
     font-family: "HelveticaNeue-Light", "Helvetica Neue Light", "Helvetica Neue", Helvetica, Arial, "Lucida Grande", sans-serif;
     font-weight: 100;
     font-size: 0.8em;
-    width: auto;
-    height: auto;
 }
 
 .btn-gray:hover {
@@ -220,7 +217,6 @@
     height: 8.4px;
     box-shadow: 1px 1px 1px #000000, 0px 0px 1px #0d0d0d;
     background: url('../assets/icons/wellbeing_slider.svg');
-
 }
 
 #wellbeing_slider::-moz-range-track {
@@ -271,6 +267,7 @@
 #symptomHeader {
     font-size: 1.5em;
 }
+
 #courseOfDiseaseHeader {
     font-size: 1.5em;
 }
@@ -278,7 +275,7 @@
 #riskParagraph {
     font-family: "HelveticaNeue-Light", "Helvetica Neue Light", "Helvetica Neue", Helvetica, Arial, "Lucida Grande", sans-serif;
     font-weight: 300;
-    position:relative;
+    position: relative;
 }
 
 #riskDiv {
@@ -296,6 +293,7 @@
     position: relative;
     top: 5px;
 }
+
 #preexistingIllnessButton {
     margin: 0em;
 }
@@ -321,7 +319,7 @@
 }
 
 #wellbeingContentDiv {
-    width:100%;
+    width: 100%;
     border-bottom-style: solid;
     border-bottom-color: lightgray;
 }
@@ -342,6 +340,7 @@
 .detailed_slidein {
     animation: slidein_detailed_div .7s ease-in-out forwards;
 }
+
 .detailed_slideout {
     animation: slideout_detailed_div .7s ease-in-out forwards;
 }
@@ -349,6 +348,7 @@
 .progressBarSlidein {
     animation: slideinProgressBar .7s ease-in-out forwards;
 }
+
 .progressBarSlideout {
     animation: slideoutProgressBar .7s ease-in-out forwards;
 }
@@ -372,6 +372,7 @@
         transform: translate(0, 0);
     }
 }
+
 @keyframes slideoutProgressBar {
     from {
         right: 33%
@@ -381,6 +382,7 @@
         right: 3%
     }
 }
+
 @keyframes slideinProgressBar {
     from {
         right: 3%
@@ -412,7 +414,6 @@
     justify-content: space-evenly;
     align-items: center;
 }
-
 
 #prescribeTestBorderdiv {
     border-bottom-style: solid;
@@ -489,9 +490,8 @@ input[type="checkbox"]:checked + label::before {
 }
 
 input[type="checkbox"] {
-    display:none;
+    display: none;
 }
-
 
 #symptomsTable {
     padding-top: 0.5em;
@@ -507,7 +507,7 @@ input[type="checkbox"] {
 
 #notesDiv {
     margin: 0.5em;
-    display:flex;
+    display: flex;
     flex-direction: column;
     justify-content: start;
     align-content: center;
