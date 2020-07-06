@@ -1,5 +1,5 @@
 function parseNodeValueFromXML(xml_obj, tagName) {
-    return xml_obj.getElementsByTagName(tagName)[0].childNodes[0].nodeValue
+    return xml_obj.getElementsByTagName(tagName)[0].childNodes[0].nodeValue;
 }
 
 function init() {
@@ -11,7 +11,7 @@ function init() {
     connectWebSocket();
     window.onbeforeunload = function() {
         cleanUp();
-    }
+    };
     setTimeout(hideLoading, 1000);
 }
 

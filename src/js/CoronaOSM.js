@@ -126,11 +126,11 @@ async function setClusterLayer() {
 
 
     map.on('click', function(evt){
-        let clickedFeatures = []
+        let clickedFeatures = [];
         map.forEachFeatureAtPixel(
             evt.pixel,
             function(ft) { clickedFeatures.push(ft); }
-        )
+        );
         if (clickedFeatures.length === 0) return;
 
         let clicked_ids = parseFeatureTree(clickedFeatures[0]);
