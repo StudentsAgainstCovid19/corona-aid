@@ -47,13 +47,13 @@ function prepareData()
     const testProba = 0.1;
     const successProbability = 0.8;
 
-    let symptom_list = parseSymptoms();
+    let symptomList = parseSymptoms();
     let people = parseInfectedIds();
     for (let index = 0; index < people.length; index++)
     {
         if (Math.random() < relAmountCalls)
         {
-            addHistoryItem(successProbability, people[parseInt(index)], symptom_list);
+            addHistoryItem(successProbability, people[parseInt(index)], symptomList);
             if (Math.random() < testProba)
             {
                 prescribeTest(people[parseInt(index)]);

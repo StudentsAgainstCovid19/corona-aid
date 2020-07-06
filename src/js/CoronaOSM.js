@@ -173,8 +173,7 @@ function toggleLayerVisibility() {
     }
 }
 
-function setVisibilityDistricts(visibilityState)
-{
+function setVisibilityDistricts(visibilityState) {
     if ( !visibilityState ) {
         if ( districtLayer ) districtLayer.setVisible(false);
     } else {
@@ -212,9 +211,7 @@ function getAmountDone(array) {
 function getAmountCalled(array) {
     let amount=0;
     for (let i=0; i<array.length; i++) {
-        if (array[parseInt(i)].get('called') && !array[parseInt(i)].get('done')) {
-            amount+=1;
-        }
+        if (array[parseInt(i)].get('called') && !array[parseInt(i)].get('done')) amount+=1;
     }
     return amount;
 }

@@ -15,6 +15,17 @@ function init() {
     setTimeout(hideLoading, 1000);
 }
 
+function realtimeUpdate( updateXML ) {
+    let serializer = new XMLSerializer();
+    let xml_str = "";
+    let items = updateXML.children[0].getElementsByTagName("item");
+    for (let index = 0; index < items.length; index++) {
+        xml_str += serializer.serializeToString(items[parseInt(index)]);
+    }
+    updateXMLStr += xml_str;
+    runUpdate();
+}
+
 function connectWebSocket() {
     let evtSource = new EventSource(apiUrl + "realtime/sse");
 
@@ -64,17 +75,6 @@ function serviceUnavailableError() {
     document.getElementById("cancel_confirm_button").className += " invisible_object";
     document.getElementById("search_bar").className += " invisible_object";
     document.getElementById("zoom_buttons").className += " invisible_object";
-}
-
-function realtimeUpdate( updateXML ) {
-    let serializer = new XMLSerializer();
-    let xml_str = "";
-    let items = updateXML.children[0].getElementsByTagName("item");
-    for (let index = 0; index < items.length; index++) {
-        xml_str += serializer.serializeToString(items[parseInt(index)]);
-    }
-    updateXMLStr += xml_str;
-    runUpdate();
 }
 
 async function runUpdate() {
