@@ -63,7 +63,6 @@ function postRequest(res, content)
 
 function putRequest(res, content=null)
 {
-    console.log("PUT-Request");
     let parser = new DOMParser();
     let request = new XMLHttpRequest();
     request.open("PUT", apiUrl+res, true);

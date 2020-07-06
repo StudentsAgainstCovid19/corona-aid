@@ -1,4 +1,4 @@
-#left_bar{
+#left_bar {
     display:flex;
     position: fixed;
     overflow: hidden;
@@ -10,37 +10,35 @@
     outline: none;
 }
 
-#call_list_div
-{
+#call_list_div {
     overflow: auto;
     height: 100%;
     width: 100%;
     background-color: white;
 }
 
-.call_list_header
-{
+.call_list_header {
     margin: 5px 10px 5px 10px;
     justify-content: center;
     border-bottom: 1px black;
 }
 
-.call_list_content{
+.call_list_content {
     flex-direction: column;
     margin-top: 10px;
 }
 
-h1{
+h1 {
     font-size:medium;
 }
 
-h2{
+h2 {
     font-size: small;
     margin-bottom: -0.1px;
     margin-top: 8px;
 }
 
-.seperator{
+.seperator {
     background-color: black;
     height: 1px;
 }
@@ -51,7 +49,6 @@ h2{
 .call_list_slideout {
     animation: slideout_call_div .7s ease-in-out forwards;
 }
-
 
 @keyframes slidein_call_div {
     from {
@@ -96,13 +93,13 @@ h2{
     }
 
     to {
-        left: 16%;
+        left: 14%;
     }
 }
 
 @keyframes slideout_search_bar {
     from {
-        left: 16%;
+        left: 14%;
     }
 
     to {
@@ -113,17 +110,16 @@ h2{
 .wellbeing_imagespan {
     position: relative;
     top: 4px;
-    margin-right: 5px;
+    margin-right: 10px;
 }
 
 
-.wellbeing_indicator
-{
+.wellbeing_indicator {
     height: 20px;
     width: 20px;
 }
 
-.call_box  {
+.call_box {
     color: black;
     border-style: solid;
     background-color: #f2f2f2;
@@ -133,21 +129,20 @@ h2{
     transition: 0.3s;
 }
 
-.call_box :hover {
+.call_box:hover {
     border-width: 0 0 0 8px;
-}
-
-.call_list_element{
-    border-top: 1px black;
-    margin: 5px 0 5px 0;
-    cursor: pointer;
-}
-
-.call_list_element :hover {
-    border-width: 0 0 0 10px;
     background-color: #e6e6e6;
 }
 
+.call_list_element {
+    border-top: 1px black;
+    margin: 5px 0 5px 0;
+}
+
+.call_list_element:hover {
+    border-width: 0 0 0 10px;
+    cursor: pointer;
+}
 
 .lowprio {
     border-color: green;
@@ -169,8 +164,7 @@ h2{
     border-color: purple;
 }
 
-.done_call_box
-{
+.done_call_box {
     background-color: lightgrey;
     filter: grayscale(100%);
 }

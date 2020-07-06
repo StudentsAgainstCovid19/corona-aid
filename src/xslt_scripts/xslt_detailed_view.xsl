@@ -264,11 +264,10 @@
         </xsl:variable>
 
         <div id="riskDiv">
-            <p id="riskParagraph">Risikoeinschätzung:
-                <span id="wellbeingImageSpan"><img id="wellbeingImage"><xsl:attribute name="src">./assets/markers/<xsl:value-of select="$prio_svg"/>_prio.svg</xsl:attribute></img></span>
-                <span id="riskEvaluationTextSpan"><xsl:value-of select="$prio_desc"/></span>
-                <span id="preexistingIllnessButtonSpan"><button id="preexisting_illness_button" onclick="showPreExistingIllnesses();" class="dialogButton btn-gray" >Vorerkrankungen</button></span>
-           </p>
+            <p id="riskParagraph">Risikoeinschätzung:</p>
+            <img id="wellbeingImage"><xsl:attribute name="src">./assets/markers/<xsl:value-of select="$prio_svg"/>_prio.svg</xsl:attribute></img>
+            <p  id="riskText"><xsl:value-of select="$prio_desc"/></p>
+            <div id="preexistingIllnessButtonDiv"><button id="preexistingIllnessButton" onclick="showPreExistingIllnesses();" class="dialogButton btn-gray" >Vorerkrankungen</button></div>
         </div>
 
         <xsl:variable name="lastTestDoneId">
@@ -292,7 +291,7 @@
                 <xsl:with-param name="days" select="tests/test[id = $lastTestDoneId]/daysOverdue"/>
             </xsl:call-template>
         </xsl:variable>
-            <input type="checkbox" id="test_result_checkbox" name="test_result_checkbox" class="chk">
+            <input type="checkbox" id="test_result_checkbox" name="test_result_checkbox">
                 <xsl:attribute name="disabled"/>
                 <xsl:if test="tests/test[id = $lastTestDoneId]/result = 1">
                     <xsl:attribute name="checked"/>

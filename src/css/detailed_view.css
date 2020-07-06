@@ -1,5 +1,4 @@
-
-#right_bar{
+#right_bar {
     width: 30%;
     height: 100%;
     left: 100%;
@@ -18,17 +17,15 @@
     overflow-x: hidden;
 }
 
-#overallDiv{
+#overallDiv {
     width: 100%
 }
 
-.checkbox{
+.checkbox {
     width: 22px;
     height: 18px;
     background-color: #eee;
 }
-
-
 
 .alreadyPrescribed {
     margin-left: 20px;
@@ -82,14 +79,14 @@
     outline: none;
 }
 
-#addSymptomButton:hover{
+#addSymptomButton:hover {
     box-shadow: 4px 4px gray;
     background-color: white;
     border-color: slategray;
     color: slategray;
 }
 
-.text{
+.text {
     margin-left: 1em;
     color: black;
     font-family: "HelveticaNeue-Light", "Helvetica Neue Light", "Helvetica Neue", Helvetica, Arial, "Lucida Grande", sans-serif;
@@ -102,7 +99,7 @@
     font-family: "HelveticaNeue-Light", "Helvetica Neue Light", "Helvetica Neue", Helvetica, Arial, "Lucida Grande", sans-serif;
 }
 
-.notesDiv{
+.notesDiv {
     overflow: auto;
     margin: 1em;
     border: solid black 3px;
@@ -111,23 +108,20 @@
     padding-right: 1em;
 }
 
-#textInformationen{
+#textInformationen {
     margin-top: 20px;
 }
 
-#test_result_label{
+#test_result_label {
     font-family: "HelveticaNeue-Light", "Helvetica Neue Light", "Helvetica Neue", Helvetica, Arial, "Lucida Grande", sans-serif;
     font-weight: 300;
-
-
 }
-#prescribe_test{
+
+#prescribe_test {
     position: relative;
     right: -1em;
     top: -3px;
 }
-
-
 
 .sinceDays {
     color: #737373;
@@ -146,13 +140,9 @@
     border-radius: 10px;
     background-color: white;
     border: solid black 3px;
-
-
 }
 
-
-
-#wellbeingHistoryDiv{
+#wellbeingHistoryDiv {
     margin-left: 1em;
     display: flex;
     width: 100%;
@@ -165,6 +155,7 @@
     background-color: red;
     border-color: black;
 }
+
 .cancel_button:hover {
     color: red;
     background-color: white;
@@ -181,9 +172,7 @@
     border-color: #00cc00;
 }
 
-
-
-#preexistingIllnessButtonSpan{
+#preexistingIllnessButtonSpan {
     position: relative;
     right: -1em;
 }
@@ -213,11 +202,11 @@
     height: auto;
 }
 
-.btn-gray:hover{
+.btn-gray:hover {
     background: darkgray;
 }
 
-.btn-gray{
+.btn-gray {
     border: 3px solid gray;
     background: gray;
 }
@@ -239,10 +228,9 @@
     height: 8.4px;
     box-shadow: 1px 1px 1px #000000, 0px 0px 1px #0d0d0d;
     background: url('../assets/icons/wellbeing_slider.svg');
-
 }
 
-#wellbeing_slider::-moz-range-thumb{
+#wellbeing_slider::-moz-range-thumb {
     -webkit-appearance: none;
     border: 1px solid #000000;
     height: 36px;
@@ -253,7 +241,7 @@
     box-shadow: 1px 1px 1px #000000, 0px 0px 1px #0d0d0d; /* Add cool effects to your sliders! */
 }
 
-#wellbeing_slider::-webkit-slider-thumb{
+#wellbeing_slider::-webkit-slider-thumb {
     w-webkit-appearance: none;
     border: 1px solid #000000;
     height: 36px;
@@ -280,73 +268,76 @@
     cursor: grabbing;
 }
 
-#symptomHeader{
+#symptomHeader {
     font-size: 1.5em;
 }
-#courseOfDiseaseHeader{
+#courseOfDiseaseHeader {
     font-size: 1.5em;
 }
 
-#riskParagraph{
+#riskParagraph {
     font-family: "HelveticaNeue-Light", "Helvetica Neue Light", "Helvetica Neue", Helvetica, Arial, "Lucida Grande", sans-serif;
     font-weight: 300;
     position:relative;
-    padding-left: 1em;
-
 }
 
-#riskDiv{
+#riskDiv {
     border-bottom-style: solid;
     border-bottom-color: lightgray;
-
+    display: flex;
+    flex-direction: row;
+    align-content: center;
+    justify-content: start;
+    padding: 1em;
+    flex-wrap: wrap;
 }
 
-#riskEvaluationTextSpan{
+#preexistingIllnessButtonDiv {
     position: relative;
-    right: -1em;
+    top: 5px;
+}
+#preexistingIllnessButton {
+    margin: 0em;
 }
 
+#riskText {
+    margin-right: 1em;
+}
 
+#wellbeingImage {
+    height: 3em;
+    width: 3em;
+    margin-left: 1.2em;
+    margin-right: 1.2em;
+}
 
-#informationDiv{
+#informationDiv {
     border-bottom-style: solid;
     border-bottom-color: lightgray;
 }
 
-#prescribeTestDiv{
+#prescribeTestDiv {
 
 }
 
-#wellbeingContentDiv{
+#wellbeingContentDiv {
     width:100%;
     border-bottom-style: solid;
     border-bottom-color: lightgray;
 }
 
-#wellbeingImageSpan{
-    position: relative;
-    top: 1.3em;
-    right: -0.5em;
-}
-
-#wellbeingImage{
-    height: 3em;
-    width: 3em;
-}
-
-#wellbeingHistoryParagraph{
+#wellbeingHistoryParagraph {
     position: relative;
     top: 1em;
 }
 
-#submitButton{
+#submitButton {
     margin-left: 0;
 }
 
-#endButtonsDiv{
+#endButtonsDiv {
     width: 100%;
 }
-
 
 .detailed_slidein {
     animation: slidein_detailed_div .7s ease-in-out forwards;
@@ -355,13 +346,12 @@
     animation: slideout_detailed_div .7s ease-in-out forwards;
 }
 
-.progressBarSlidein{
+.progressBarSlidein {
     animation: slideinProgressBar .7s ease-in-out forwards;
 }
-.progressBarSlideout{
+.progressBarSlideout {
     animation: slideoutProgressBar .7s ease-in-out forwards;
 }
-
 
 @keyframes slidein_detailed_div {
     from {
@@ -401,12 +391,12 @@
     }
 }
 
-#notCalledButton{
+#notCalledButton {
     margin-left: 0;
     margin-right: 0;
 }
 
-.flex-container-testresult{
+.flex-container-testresult {
     display: flex;
     width: 100%;
     flex-direction: row;
@@ -415,7 +405,7 @@
     align-items: center;
 }
 
-.flex-container-endbuttons{
+.flex-container-endbuttons {
     display: flex;
     width: 100%;
     flex-direction: row;
@@ -424,7 +414,7 @@
 }
 
 
-#prescribeTestBorderdiv{
+#prescribeTestBorderdiv {
     border-bottom-style: solid;
     border-bottom-color: lightgray;
 }
@@ -467,6 +457,21 @@ input[type="checkbox"] + label::before {
     margin-right: 5px;
 }
 
+input[type="checkbox"]:disabled + label::before {
+    content: '\a0'; /* nicht umbrechendes Leerzeichen */
+    position: relative;
+    display: inline-block;
+    width: 22px;
+    height: 22px;
+    background: white;
+    background-position: center;
+    border: 3px solid red;
+    border-radius: 50%;
+    background-image: url('../assets/icons/checkbox_not_set.svg');
+    top: -3px;
+    margin-right: 5px;
+}
+
 input[type="checkbox"]:checked + label::before {
     content: '\a0';
     display: inline-block;
@@ -500,7 +505,7 @@ input[type="checkbox"] {
     font-weight: bold;
 }
 
-#notesDiv{
+#notesDiv {
     margin: 0.5em;
     display:flex;
     flex-direction: column;
@@ -509,18 +514,18 @@ input[type="checkbox"] {
     margin-bottom: 2em;
 }
 
-#notesHeaderDiv{
+#notesHeaderDiv {
     display: flex;
     justify-content: start;
     align-content: center;
     flex-direction: row;
 }
 
-#notesHeaderText{
+#notesHeaderText {
     position: relative;
     top: 10px;
 }
 
-#notes_area{
+#notes_area {
     width: 70%;
 }

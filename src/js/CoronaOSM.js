@@ -3,6 +3,7 @@ function initMap() {
     // OpenLayers takes lon as first argument and then lat
     map = new ol.Map({
         target: 'map_div',
+        interactions: ol.interaction.defaults({altShiftDragRotate:false, pinchRotate:false}),
         controls: [],
         loadTilesWhileAnimating: true,
         loadTilesWhileInteracting: true,
@@ -145,7 +146,7 @@ async function setClusterLayer() {
         if (clickedFeatures.length === 0) return;
 
         let clicked_ids = parseFeatureTree(clickedFeatures[0]);
-        let v=clicked_ids[0];
+        let v = clicked_ids[0];
         for (let i = 0; i < clicked_ids.length; i++)
         {
             v+=clicked_ids[i];
@@ -175,7 +176,6 @@ function setDistrictsLayer()
     districtLayer = new ol.layer.Vector({
         source: new ol.source.Vector()
     });
-    console.log(districtsKML)
 
     districtLayer.getSource().addFeatures(new ol.format.KML().readFeatures(districtsKML, {featureProjection: config_hash_table["projectionType"]}));
     map.addLayer(districtLayer);

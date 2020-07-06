@@ -1,8 +1,8 @@
 
-async function displayClusteredMap(id_array)
+async function displayClusteredMap(idArray)
 {
     close_continue_search();
-    if ( !prioList || id_array.length === 0 ) return;
+    if ( !prioList || idArray.length === 0 ) return;
     if ( detail_bar === 2 )  return showSnackbar("Die Patientenansicht ist noch geöffnet.\n" +
                                     "Bitte kümmern Sie sich erst um den derzeitigen Patienten.");
     detail_bar = 1;
@@ -10,29 +10,27 @@ async function displayClusteredMap(id_array)
     let right_bar = document.getElementById("infected_detailed_view_right");
     right_bar.innerHTML = "";
 
-    id_array.sort((a, b) => a - b);
+    idArray.sort((a, b) => a - b);
 
-    let infected_people = prioList.getElementsByTagName("person");
+    let infectedPeople = prioList.getElementsByTagName("person");
     let infectedIdList = [];
-    for (let index = 0; index < infected_people.length; index++)
+    for (let index = 0; index < infectedPeople.length; index++)
     {
-        infectedIdList.push(parseInt(infected_people[index].getElementsByTagName("id")[0].childNodes[0].nodeValue));
+        infectedIdList.push([parseInt(infectedPeople[index].getElementsByTagName("id")[0].childNodes[0].nodeValue), index]);
     }
 
-    infectedIdList.sort((a, b) => a - b);
-    xmlString = "<infected>"
+    infectedIdList.sort((a, b) => a[0] - b[0]);
+    let xmlString = "<infected>";
     let xmlSerializer = new XMLSerializer();
-    for (let i = 0; i<infected_people.length; i++)
+    for (let i = 0; i<infectedPeople.length && idArray.length > 0; i++)
     {
-        if (id_array.length === 0) break;
-
-        if (id_array[0] === infectedIdList[parseInt(i)]);
+        if (idArray[0] === infectedIdList[i][0])
         {
-            xmlString += xmlSerializer.serializeToString(infected_people[parseInt(i)]);
-            id_array.shift();
+            xmlString += xmlSerializer.serializeToString(infectedPeople[infectedIdList[i][1]]);
+            idArray.shift();
         }
     }
-    if (id_array.length !== 0)
+    if (idArray.length !== 0)
     {
         // TODO: handle error!
         console.log("Error occurred. Not all ids in cluster are in priority list. Inconsistency...");
