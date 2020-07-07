@@ -6,6 +6,8 @@
     backdrop-filter: blur(6px);
     height: 100%;
     z-index: 6;
+    top: 0;
+    left: 0;
 }
 
 .popupWindowStyle {
@@ -155,4 +157,38 @@
     flex-direction: row;
     justify-content: center;
     align-content: center;
+}
+
+#districtsPopup {
+    background-color: white;
+    border-radius: 10px;
+    padding: 5px 10px 10px 10px;
+}
+
+#districtsPopup div {
+    border-bottom-color: black;
+    border-width: 0 0 1px 0;
+    border-style: solid;
+    display: flex;
+    background-color: transparent;
+}
+
+#districtsPopup p:first-child {
+    text-align: center;
+    font-weight: bold;
+}
+
+#closeOverlaySpan {
+    margin: 5px 0 0 5px;
+}
+
+#closeOverlaySpan button{
+    outline: none;
+    border-radius: 50%;
+    border-color: transparent;
+    background-color: inherit;
+}
+
+#closeOverlaySpan button:hover {
+    background-color: lightgrey;
 }

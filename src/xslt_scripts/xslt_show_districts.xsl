@@ -17,6 +17,7 @@
             <styleUrl>#style<xsl:value-of select="id"/></styleUrl>
             <Polygon>
                 <extrude>1</extrude>
+                <Data><amountInfected><xsl:value-of select="infected"/></amountInfected></Data>
                 <altitudeMode>relativeToGround</altitudeMode>
                 <outerBoundaryIs>
                     <LinearRing>
