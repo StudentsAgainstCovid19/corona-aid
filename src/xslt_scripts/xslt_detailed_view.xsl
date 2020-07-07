@@ -364,7 +364,11 @@
                     </xsl:choose>
                 </button>
             </div>
-            <textarea id="notes_area" class="notes_field" rows="10" cols="30" maxlength="100"/>
+            <textarea id="notes_area" class="notes_field" rows="10" cols="30" maxlength="100">
+                <xsl:if test="updateFlag = 'true'">
+                    <xsl:value-of select="historyItems/historyItem[last()]/notes"/>
+                </xsl:if>
+            </textarea>
         </div>
     </xsl:template>
 
