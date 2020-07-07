@@ -1,53 +1,44 @@
-async function search_call_list()
-{
+async function searchCallList() {
     currentlySearched = true;
     window.location.hash = "";
     deleteScrollId();
 
-    let input_field = document.getElementById("search_input");
-    let words = input_field.value.toLowerCase().split(" ");
-    let call_list_items = getAllNotHiddenCallBoxes();
-    currentCallBoxes = call_list_items;
+    let inputField = document.getElementById("search_input");
+    let words = inputField.value.toLowerCase().split(" ");
+    let callListItems = getAllNotHiddenCallBoxes();
+    currentCallBoxes = callListItems;
 
-    if (call_list_items.length === 0) return noItemFound();
+    if (callListItems.length === 0) return noItemFound();
 
     let hits = [];
 
     let text, nameText, phoneText;
-    for (let i = 0; i<call_list_items.length; i++)
-    {
-        nameText = call_list_items[parseInt(i)].getElementsByTagName("span")[0].innerText;
-        phoneText = call_list_items[parseInt(i)].getElementsByTagName("span")[2].innerText;
+    for (let i = 0; i < callListItems.length; i++) {
+        nameText = callListItems[parseInt(i)].getElementsByTagName("span")[0].innerText;
+        phoneText = callListItems[parseInt(i)].getElementsByTagName("span")[2].innerText;
         text = (nameText+" "+phoneText.replace("Tel.: ","")).replace(",", "").toLowerCase();
-        if (check_in(text, words))
-        {
-            hits.push(i);
-        }
+        if (checkIn(text, words)) hits.push(i);
     }
 
     foundIndices = hits;
     currentFoundIndex = 0;
-    if (hits.length > 0)
-    {
+    if (hits.length > 0) {
         scrollToIndex(hits[0]);
-
     } else {
         noItemFound();
     }
 }
 
-function deleteScrollId()
-{
+function deleteScrollId() {
     let scrollToDiv = document.getElementById("scroll_to");
-    if ( scrollToDiv ) {
+    if (scrollToDiv) {
         scrollToDiv.children[0].removeEventListener("keyup", function(e){});
         scrollToDiv.children[0].removeEventListener("keydown", function(e){});
         scrollToDiv.id = ""; // delete id
     }
 }
 
-function scrollToIndex(index)
-{
+function scrollToIndex(index) {
     deleteScrollId();
     openCallList();
     let foundDiv = currentCallBoxes[parseInt(index)];
@@ -59,83 +50,63 @@ function scrollToIndex(index)
     }, 100);
     window.location.hash = "#scroll_to";
     addKeyClickListenerToChild("scroll_to");
-    show_continue_search();
-
+    showContinueSearch();
 }
 
 function getAllNotHiddenCallBoxes() {
-    let call_list_items = document.getElementsByClassName("call_list_element");
-    if ( call_list_items.toString().indexOf("HTMLCollection") !== -1 ) call_list_items = Array.prototype.slice.call( call_list_items );
-    for (let index = call_list_items.length - 1; index >= 0; index--)
-    {
-        if ( call_list_items[parseInt(index)].className.indexOf("hidden_box") !== -1 )
-        {
-            call_list_items.splice(index, 1);
+    let callListItems = document.getElementsByClassName("call_list_element");
+    if (callListItems.toString().indexOf("HTMLCollection") !== -1) callListItems = Array.prototype.slice.call(callListItems);
+    for (let index = callListItems.length - 1; index >= 0; index--) {
+        if (callListItems[parseInt(index)].className.indexOf("hidden_box") !== -1) {
+            callListItems.splice(index, 1);
         }
     }
-    return call_list_items;
+    return callListItems;
 }
 
-function noItemFound()
-{
+function noItemFound() {
     let searchbar = document.getElementById("search_container");
     searchbar.className = searchbar.className.replace(" no_call_items_found","");
-    setTimeout(function(){
+    setTimeout(function() {
         searchbar.className += " no_call_items_found";
     }, 100);
     currentlySearched = false;
 }
 
-function check_in(str, words) {
-    for (let i = 0; i<words.length;i++)
-    {
-        if (str.indexOf(words[parseInt(i)]) === -1)
-        {
-            return false;
-        }
+function checkIn(str, words) {
+    for (let i = 0; i < words.length; i++) {
+        if (str.indexOf(words[parseInt(i)]) === -1) return false;
     }
     return true;
 }
 
-function addSearchBarListener()
-{
+function addSearchBarListener() {
     let searchBar = document.getElementById("search_bar");
     searchBar.addEventListener("keyup", function (event){
-        if ( event.key === "Enter" )
-        {
-            search_call_list();
-        }
+        if (event.key === "Enter") searchCallList();
     });
 }
 
 
-function addKeyClickListenerToChild(elemId)
-{
+function addKeyClickListenerToChild(elemId) {
     let box = document.getElementById(elemId).children[0];
     onEnter = false;
 
     box.addEventListener("keyup", function (event) {
-
-        setTimeout(function(){calledLast = false;}, 200);
-        setTimeout(function(){calledNext = false;}, 200);
-        if ( event.key === "Enter" )
-        {
-            if( onEnter ) return;
+        setTimeout(function(){ calledLast = false; }, 200);
+        setTimeout(function(){ calledNext = false; }, 200);
+        if (event.key === "Enter") {
+            if(onEnter) return;
             box.click();
             onEnter = true;
         }
-        else if (event.key === "s")
-        {
-            if ( !calledLast )
-            {
+        else if (event.key === "s") {
+            if (!calledLast) {
                 findLast();
                 calledLast = true;
             }
-        }
-        else if (event.key === "d")
-        {
-            if ( !calledNext )
-            {
+        } else if (event.key === "d") {
+            if (!calledNext) {
                 findNext();
                 calledNext = true;
             }
@@ -144,25 +115,24 @@ function addKeyClickListenerToChild(elemId)
     box.focus();
 }
 
-function close_continue_search() {
+function closeContinueSearch() {
     document.getElementById("continue_search_buttons").className += " invisible_object";
     console.log(); // without, hiding of continue search box is very laggy
 
-    if ( suppressUpdates ) enforceUpdate();
+    if (suppressUpdates) enforceUpdate();
     suppressUpdates = false;
 }
 
-function show_continue_search() {
+function showContinueSearch() {
     suppressUpdates = true;
     updateButtonStates();
-    let continue_search_bar = document.getElementById("continue_search_buttons");
-    continue_search_bar.className = continue_search_bar.className.replace(" invisible_object", "");
-    setTimeout(function (){ close_continue_search(); }, parseInt(config_hash_table["closeContinueSearchTime"]));
+    let continueSearchBar = document.getElementById("continue_search_buttons");
+    continueSearchBar.className = continueSearchBar.className.replace(" invisible_object", "");
+    setTimeout(function (){ closeContinueSearch(); }, parseInt(configHashTable["closeContinueSearchTime"]));
 }
 
 function findNext() {
-    if (currentFoundIndex < (foundIndices.length - 1))
-    {
+    if (currentFoundIndex < (foundIndices.length - 1)) {
         currentFoundIndex++;
         scrollToIndex(foundIndices[currentFoundIndex]);
     }
@@ -170,16 +140,14 @@ function findNext() {
 }
 
 function findLast() {
-    if (currentFoundIndex > 0)
-    {
+    if (currentFoundIndex > 0) {
         currentFoundIndex--;
         scrollToIndex(foundIndices[currentFoundIndex]);
     }
     updateButtonStates();
 }
 
-function updateButtonStates()
-{
+function updateButtonStates() {
     let nextButton = document.getElementById("nextSearchButton");
     let lastButton = document.getElementById("lastSearchButton");
     nextButton.className = nextButton.className.replace("disabled_button", "");

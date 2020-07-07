@@ -1,18 +1,16 @@
-
-#global_overlay {
+.overlayBlurred {
     position: absolute;
     width: 100%;
-    -webkit-filter: blur(5px); /* TODO use filter that can be used for all browsers*/
+    -webkit-filter: blur(5px); /* TODO use filter that can be used for all browsers */
     filter: blur(5px);
     backdrop-filter: blur(6px);
     height: 100%;
     z-index: 6;
+    top: 0;
+    left: 0;
 }
 
-#popup_window
-{
-
-
+.popupWindowStyle {
     position: absolute;
     width: 30%;
     height: auto;
@@ -23,23 +21,25 @@
     background-color: white;
     border-radius: 20px;
     font-family: "HelveticaNeue-Light", "Helvetica Neue Light", "Helvetica Neue", Helvetica, Arial, "Lucida Grande", sans-serif;
+}
+
+#popup_window {
     display: flex;
     flex-direction: column;
     align-content: center;
     justify-content: center;
-
 }
 
-
-.popupHeader{
-    display:flex;
+.popupHeader {
+    display: flex;
     justify-content: center;
     align-content: start;
     margin: 1em;
     font-weight: bold;
     font-size: 1.3em;
 }
-#listOfPossibleSymptoms{
+
+#listOfPossibleSymptoms {
     height: auto;
     max-height: 70%;
     padding-left: 1em;
@@ -49,17 +49,16 @@
     margin-right: 1em;
     margin-left: 1em;
 }
-#symptomsPopupEnd{
-    display:flex;
+
+#symptomsPopupEnd {
+    display: flex;
     flex-direction: row;
     justify-content: space-around;
     align-content: center;
     margin: 1em;
 }
 
-
-#confirm_popup
-{
+#confirm_popup {
     position: absolute;
     width: 20%;
     height: auto;
@@ -74,20 +73,23 @@
     align-content: space-between;
     padding: 1em;
     border: darkgray solid 3px;
+    z-index: 9;
 }
-#confirm_popup_buttons{
-    display:flex;
+
+#confirm_popup_buttons {
+    display: flex;
     align-content: center;
     justify-content: space-evenly;
 }
-#confirm_text{
+
+#confirm_text {
     font-weight: bold;
     display:flex;
     justify-content: center;
     align-content: center;
 }
 
-#listOfIllnesses{
+#listOfIllnesses {
     margin-left: 1em;
     margin-right: 1em;
     overflow: auto;
@@ -98,39 +100,36 @@
     justify-content: center;
 }
 
-#close_illnesses_button_div{
+#close_illnesses_button_div {
     display: flex;
     justify-content: center;
     align-content: center;
 }
 
-#close_illnesses_button{
+#close_illnesses_button {
     margin: 1em;
     width: 30%;
 }
 
-
-
-.invisible_object
-{
+.invisible_object {
     display: none !important;
 }
 
-#transparent_overlay
-{
+#transparent_overlay {
     position: absolute;
     z-index: 8;
     width: 100%;
     height: 100%;
+    top: 0;
+    left: 0;
 }
 
-
-#notesHistoryDiv{
+#notesHistoryDiv {
     display: flex;
     flex-direction: column;
     justify-content: start;
     align-content: end;
-    margin:1em;
+    margin: 1em;
     border: solid black 3px;
     border-radius: 10px;
     height: auto;
@@ -138,39 +137,58 @@
     overflow: auto;
 }
 
-#notesItem{
+#notesItem {
     display:flex;
     justify-content: start;
     align-content: center;
     flex-direction: row;
 }
 
-#notesText{
+#notesText {
     font-weight: 300;
 }
 
-#hideNotesButton{
+#hideNotesButton {
     width: 30%;
 }
 
-#hideNotesButtonDiv{
+#hideNotesButtonDiv {
     display: flex;
     flex-direction: row;
     justify-content: center;
     align-content: center;
 }
 
-
-#helpPopup{
-    position: absolute;
-    width: 30%;
-    height: auto;
-    max-height: 60%;
-    z-index: 7;
-    top: 20%;
-    left: 35%;
+#districtsPopup {
     background-color: white;
-    border-radius: 20px;
-    font-family: "HelveticaNeue-Light", "Helvetica Neue Light", "Helvetica Neue", Helvetica, Arial, "Lucida Grande", sans-serif;
-    padding: 1em;
+    border-radius: 10px;
+    padding: 5px 10px 10px 10px;
+}
+
+#districtsPopup div {
+    border-bottom-color: black;
+    border-width: 0 0 1px 0;
+    border-style: solid;
+    display: flex;
+    background-color: transparent;
+}
+
+#districtsPopup p:first-child {
+    text-align: center;
+    font-weight: bold;
+}
+
+#closeOverlaySpan {
+    margin: 5px 0 0 5px;
+}
+
+#closeOverlaySpan button{
+    outline: none;
+    border-radius: 50%;
+    border-color: transparent;
+    background-color: inherit;
+}
+
+#closeOverlaySpan button:hover {
+    background-color: lightgrey;
 }

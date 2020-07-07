@@ -1,4 +1,4 @@
-var detail_bar = 0; // value that indicates what detailed bar shows:
+var detailBarMode = 0; // value that indicates what detailed bar shows:
 // 0: nothing
 // 1: clustered_list
 // 2: details
@@ -8,12 +8,14 @@ var currentInfectedId;
 var map;
 var clusteredLayer;
 var districtLayer;
+var popupOverlay;
+var districtsXML;
 var detailedXML; // contains the XML-Document of the current detailed view
 var prioList; // contains the XML-Document that is calculated in xslt_calculate_prio.xsl
 
-var config_hash_table = {}; // configs fetched from db at start up
+var configHashTable = {}; // configs fetched from db at start up
 
-var xslt_files = new Map(); // hash table to prevent reloading of xsl-files
+var xsltFiles = new Map(); // hash table to prevent reloading of xsl-files
 
 var symptomsXML; // XML-file for all available symptoms
 
@@ -26,10 +28,7 @@ var confirmConfig = [null, null, null]; // list for generic confirm popup.
                                         // onCancelCallback and third value are parameters for
                                         // those callbacks
 
-
-var realtimeWebSocket;
-
-var apiUrl = "https://dev.api.corona-aid-ka.de/";
+const apiUrl = "https://dev.api.corona-aid-ka.de/";
 
 var updateXMLStr = "";
 var suppressUpdates = false;

@@ -1,6 +1,7 @@
 ![Corona Aid Logo](https://user-images.githubusercontent.com/37160523/84581280-fc464f80-addf-11ea-93a9-fb5daec67018.jpg)
 
 # Corona Aid
+[![Codacy Badge](https://api.codacy.com/project/badge/Grade/509bb5a15ad84b808d773a8986cc78c4)](https://app.codacy.com/gh/StudentsAgainstCovid19/corona-aid?utm_source=github.com&utm_medium=referral&utm_content=StudentsAgainstCovid19/corona-aid&utm_campaign=Badge_Grade_Dashboard)
 ![GitHub Workflow Status](https://img.shields.io/github/workflow/status/StudentsAgainstCovid19/corona-aid/Docker%20Image%20CI?label=Docker%20build)
 
 This is the frontend of the Corona Aid application, developed by students of the DHBW Karlsruhe as part of a student project.

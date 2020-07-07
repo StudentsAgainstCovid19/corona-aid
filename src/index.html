@@ -40,10 +40,10 @@
     </div>
     <div id="map_div"></div>
     <div id="corona_logo" class="corona_logo">
-      <img src="assets/Corona_Aid_Logo.jpg" alt="Corona Aid Logo" class="corona_logo_img">
+      <img src="assets/Corona_Aid_Logo.png" alt="Corona Aid Logo" class="corona_logo_img">
     </div>
     <div id="actionBar" class="floating_object">
-        <button onclick="showHelp();" class="spaceAround smallButton">?</button>
+        <button onclick="showHelp();" class="spaceAround smallFButton">?</button>
         <button onclick="standardZoom();" class="spaceAround smallButton">Zoom ausrichten</button>
         <input id="districts" type="checkbox" onclick="toggleLayerVisibility();"/>
         <label id="showDistrictsLabel" for="districts" class="spaceAround">Zeige Stadtteile</label>
@@ -60,13 +60,13 @@
     <div id="search_bar" class="floating_object">
       <div id="search_container">
         <div class="flex_div">
-          <button id="open_list_button" onclick="toggle_call_list();">
-            <img src="./assets/icons/list_button.svg" id="open_list_svg" alt="menu button" />
+          <button id="open_list_button" onclick="toggleCallList();">
+            <img src="./assets/icons/list_button.svg" id="open_list_svg" alt="Menü" />
           </button>
           <input type="text" placeholder="Suche..." id="search_input">
-          <button id="search_button" onclick="search_call_list();">
+          <button id="search_button" onclick="searchCallList();">
             <div id="search_div">
-              <img src="./assets/icons/search_magnifier.svg" style = "height:1.2em" alt="search magnifier"/>
+              <img src="./assets/icons/search_magnifier.svg" alt="Such-Icon"/>
             </div>
           </button>
         </div>
@@ -74,19 +74,18 @@
 
       <span id="continue_search_span">
         <div id="continue_search_buttons" class="floating_object invisible_object">
-          <button class="continue_search_btn" onclick="close_continue_search();">
-            <img src="./assets/icons/close_button.svg" class="close_search_icons"/>
+          <button class="continue_search_btn" onclick="closeContinueSearch();">
+            <img src="./assets/icons/close_button.svg" alt="Suche schließen" class="close_search_icons"/>
           </button>
           <button id="lastSearchButton" class="continue_search_btn" onclick="findLast();">
-            <img src="./assets/icons/last_button.svg" class="close_search_icons"/>
+            <img src="./assets/icons/last_button.svg" alt="Vorheriges Suchergebnis" class="close_search_icons"/>
           </button>
           <button id="nextSearchButton" class="continue_search_btn" onclick="findNext();">
-            <img src="./assets/icons/next_button.svg" class="close_search_icons"/>
+            <img src="./assets/icons/next_button.svg" alt="Nächstes Suchergebnis" class="close_search_icons"/>
           </button>
         </div>
       </span>
     </div>
-
 
     <div id="zoom_buttons" class="floating_object">
       <div class="flex_div">
@@ -95,10 +94,10 @@
       </div>
     </div>
 
-    <img id="global_overlay" class="invisible_object" src="./assets/icons/blur_filter.svg" alt="blur overlay" />
-    <div id="popup_window" class="invisible_object">
+    <img id="global_overlay" class="invisible_object overlayBlurred" src="./assets/icons/blur_filter.svg" alt="blur overlay" />
+    <div id="popup_window" class="invisible_object popupWindowStyle">
     </div>
-    <div id="helpPopup" class="invisible_object">
+    <div id="helpPopup" class="invisible_object popupWindowStyle">
       <h1>Hilfe: Kreisdiagramme</h1>
       <p>Die Zahl innerhalb eines Kreisdiagramms steht für die Anzahl der Personen, welche noch kontaktiert werden müssen</p>
       <p>Grün: Der grüne Anteil des Kreisdiagramms steht für die Personen, welche heute schon kontaktiert wurden.</p>
@@ -107,24 +106,32 @@
       <button onclick="closeHelpPopup()" class="dialogButton cancel_button">Schließen</button>
     </div>
 
-    <div id="transparent_overlay" class="invisible_object">
-      <div id="confirm_popup">
-        <p id="confirm_text"></p>
-        <div id="confirm_popup_buttons">
+    <div id="transparent_overlay" class="invisible_object"></div>
+    <div id="confirm_popup" class="invisible_object">
+      <p id="confirm_text"></p>
+      <div id="confirm_popup_buttons">
         <button id="submit_confirm_button" class="dialogButton submit_button" onclick="onSubmitPopup();">Bestätigen</button>
         <button id="cancel_confirm_button" class="dialogButton cancel_button" onclick="onCancelPopup();">Abbrechen</button>
-        </div>
       </div>
     </div>
 
     <div id="loadingScreen" class="floating_object">
       <span><div id="waitText">Bitte warten...</div></span>
       <span>
-        <img src="favicon.ico"/>
+        <img src="favicon.ico" alt="Corona Aid Icon"/>
       </span>
       <span>
-        <img src="./assets/icons/loading_animation.png" class="loadingScreenAnimation"/>
+        <img src="./assets/icons/loading_animation.png" class="loadingScreenAnimation" alt="Lade-Animation"/>
       </span>
+    </div>
+
+    <div id="districtsPopup" class="invisible_object">
+      <div>
+        <p>Stadtteilübersicht:</p>
+        <span id="closeOverlaySpan"><button onclick="closeOverlay();"><img src="assets/icons/close_button.svg"/></button></span>
+      </div>
+      <p id="districtName"></p>
+      <p id="districtAmount"></p>
     </div>
   </body>
 </html>

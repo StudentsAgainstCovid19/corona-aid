@@ -27,7 +27,7 @@
         <div class="call_list_header">
             <h1>Anrufsliste</h1>
         </div>
-        <div class="seperator"></div>
+        <div class="separator"></div>
         <div class = "call_list_content">
             <xsl:apply-templates select="infected/person">
                 <!-- fill call list -->
@@ -67,10 +67,10 @@
                     </xsl:choose> call_box</xsl:attribute>
 
 
-                <xsl:attribute name="onclick">try_acquire_lock(<xsl:value-of select="id"/>)</xsl:attribute>
+                <xsl:attribute name="onclick">tryAcquireLock(<xsl:value-of select="id"/>)</xsl:attribute>
 
                 <h2>Name: </h2>
-                <span><xsl:value-of select="lastname"/>, <xsl:value-of select="firstnames"/></span>
+                <span><xsl:value-of select="concat(lastname, ', ', firstnames)"/></span>
                 <h2>Zustand:  </h2>
                 <span>
                     <xsl:value-of select="$wellbeing_desc"/>
