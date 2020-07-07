@@ -15,9 +15,14 @@
         <Placemark>
             <name><xsl:value-of select="name"/></name>
             <styleUrl>#style<xsl:value-of select="id"/></styleUrl>
+
+            <ExtendedData>
+                <Data name="amountInfected">
+                    <value><xsl:value-of select="infected"/></value>
+                </Data>
+            </ExtendedData>
             <Polygon>
                 <extrude>1</extrude>
-                <Data><amountInfected><xsl:value-of select="infected"/></amountInfected></Data>
                 <altitudeMode>relativeToGround</altitudeMode>
                 <outerBoundaryIs>
                     <LinearRing>

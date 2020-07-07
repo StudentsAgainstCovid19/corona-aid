@@ -107,12 +107,10 @@ function mapClickEvent(evt){
             feature = ft;
         });
 
-        console.log(feature.get("Data"));
-
         let districtName = document.getElementById("districtName");
-        districtName.innerText = "Stadtteil: "+feature["values_"]["name"];
+        districtName.innerText = "Stadtteil: "+feature.get("name");
         let districtAmount = document.getElementById("districtAmount");
-        districtAmount.innerText = "Anzahl Infizierte: >9000!!!";
+        districtAmount.innerText = "Anzahl Infizierte: "+feature.get("amountInfected");
 
         popupOverlay.setPosition(evt.coordinate);
         showOverlay();
