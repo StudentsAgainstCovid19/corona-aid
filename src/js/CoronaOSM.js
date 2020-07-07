@@ -184,7 +184,6 @@ function setDistrictsLayer() {
     let districtsXSL = getXSLT("./xslt_scripts/xslt_show_districts.xsl");
 
     let districtsKML = runXSLT(districtsXSL, districtsXML);
-    console.log(new XMLSerializer().serializeToString(districtsKML));
 
     districtLayer = new ol.layer.Vector({
         source: new ol.source.Vector()
