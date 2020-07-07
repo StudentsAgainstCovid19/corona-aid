@@ -84,7 +84,7 @@
 
 #confirm_text {
     font-weight: bold;
-    display:flex;
+    display: flex;
     justify-content: center;
     align-content: center;
 }
