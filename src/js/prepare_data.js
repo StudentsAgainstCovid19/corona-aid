@@ -46,7 +46,7 @@ function prepareData() {
         if (Math.random() < relAmountCalls) {
             addHistoryItem(successProbability, people[parseInt(index)], symptomList);
             if (Math.random() < testProbability) {
-                prescribeTest(people[parseInt(index)]);
+                prescribeTestSimulation(people[parseInt(index)]);
             }
         }
     }
@@ -78,7 +78,7 @@ function addHistoryItem(successProbability, infectedId, symptomList) {
     postRequest("history", xmlString);
 }
 
-function prescribeTest(infectedId) {
+function prescribeTestSimulation(infectedId) {
     let xmlString = "<TestInsertDto><infectedId>"+infectedId+"</infectedId><result>0</result><timestamp>"+Date.now()+"</timestamp></TestInsertDto>";
     postRequest("test/", xmlString);
 }

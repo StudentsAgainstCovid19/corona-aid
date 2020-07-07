@@ -234,6 +234,7 @@ function prescribeTest(id) {
         function(id) {
             const xmlString = "<TestInsertDto><infectedId>"+id+"</infectedId><result>0</result><timestamp>"+Date.now()+"</timestamp></TestInsertDto>";
             postRequest("test", xmlString);
+            document.getElementById("prescribe_test").setAttribute("disabled", "disabled");
         }, function (id) { }, id );
 }
 
