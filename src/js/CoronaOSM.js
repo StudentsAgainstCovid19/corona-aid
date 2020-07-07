@@ -77,7 +77,12 @@ async function setClusterLayer() {
     map.addLayer(clusteredLayer);
 
 
-    map.on("click", function(evt){
+    map.on("click", mapClickEvent);
+}
+
+function mapClickEvent(evt){
+    if ( clusteredLayer.getVisible() )
+    {
         let clickedFeatures = [];
         map.forEachFeatureAtPixel(
             evt.pixel,
@@ -95,7 +100,30 @@ async function setClusterLayer() {
             // open list with people with according ids
             displayClusteredMap(clickedIds);
         }
-    });
+    }
+    else {
+        let feature;
+        map.forEachFeatureAtPixel(evt.pixel, function (ft) {
+            feature = ft;
+        });
+
+        let districtName = document.getElementById("districtName");
+        districtName.innerText = "Stadtteil: "+feature.get("name");
+        let districtAmount = document.getElementById("districtAmount");
+        districtAmount.innerText = "Anzahl Infizierte: "+feature.get("amountInfected");
+
+        popupOverlay.setPosition(evt.coordinate);
+        showOverlay();
+    }
+
+}
+
+function closeOverlay() {
+    document.getElementById("districtsPopup").className = "invisible_object";
+}
+
+function showOverlay() {
+    document.getElementById("districtsPopup").className = "";
 }
 
 function getFeatureStyle(feature)
@@ -156,14 +184,20 @@ function setDistrictsLayer() {
     let districtsXSL = getXSLT("./xslt_scripts/xslt_show_districts.xsl");
 
     let districtsKML = runXSLT(districtsXSL, districtsXML);
-    console.log(districtsKML)
 
     districtLayer = new ol.layer.Vector({
         source: new ol.source.Vector()
     });
 
-    districtLayer.getSource().addFeatures(new ol.format.KML().readFeatures(districtsKML, {featureProjection: configHashTable["projectionType"]}));
+    districtLayer.getSource().addFeatures(new ol.format.KML({
+        extractAttributes: true,
+        extractStyles: true }).readFeatures(districtsKML, {featureProjection: configHashTable["projectionType"]}));
     map.addLayer(districtLayer);
+
+    popupOverlay = new ol.Overlay({
+        element: document.getElementById("districtsPopup")
+    });
+    map.addOverlay(popupOverlay);
     hideLoading();
 }
 
@@ -187,7 +221,6 @@ function setVisibilityDistricts(visibilityState) {
 }
 
 function parseFeatureTree(ft) {
-
     let idList = [];
     let id = ft.get("id");
     if (id) idList = [parseInt(id)];
@@ -215,7 +248,7 @@ function getAmountDone(array) {
 function getAmountCalled(array) {
     let amount=0;
     for (let i = 0; i<array.length; i++) {
-        if (array[parseInt(i)].get("called") && !array[i].get("done")) amount+=1;
+        if (array[i].get("called") && !array[i].get("done")) amount+=1;
     }
     return amount;
 }

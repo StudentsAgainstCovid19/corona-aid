@@ -13,21 +13,21 @@
     <xsl:template match="item">
         <xsl:variable name="polyPos" select="position()"/>
         <Placemark>
-            <name><xsl:value-of select="name"/><xsl:call-template name="convertDensityToPercentage">
-                <xsl:with-param name="density" select="infected div number(area)"/>
-            </xsl:call-template></name>
+            <name><xsl:value-of select="name"/></name>
             <styleUrl>#style<xsl:value-of select="id"/></styleUrl>
+
+            <ExtendedData>
+                <Data name="amountInfected">
+                    <value><xsl:value-of select="infected"/></value>
+                </Data>
+            </ExtendedData>
             <Polygon>
                 <extrude>1</extrude>
                 <altitudeMode>relativeToGround</altitudeMode>
                 <outerBoundaryIs>
                     <LinearRing>
                         <coordinates>
-                            <xsl:call-template name="polygonOutline">
-                                <xsl:with-param name="polyPos" select="$polyPos"/>
-                                <xsl:with-param name="max" select="count(geometry/coordinates)"/>
-                                <xsl:with-param name="index" select="1"/>
-                            </xsl:call-template>
+                            <xsl:apply-templates select="geometry/ring/point"/>
                         </coordinates>
                     </LinearRing>
                 </outerBoundaryIs>
@@ -39,21 +39,6 @@
 
     <xsl:template match="point">
         <xsl:value-of select="lon"/>, <xsl:value-of select="lat"/>, 0
-    </xsl:template>
-
-    <xsl:template name="polygonOutline">
-        <xsl:param name="index"/>
-        <xsl:param name="max"/>
-        <xsl:param name="polyPos"/>
-
-        <xsl:value-of select="/Set/item[$polyPos]/geometry/coordinates[$index]"/>, <xsl:value-of select="/Set/item[$polyPos]/geometry/coordinates[$index+1]"/>, 0
-        <xsl:if test="$index+2 &lt; $max">
-            <xsl:call-template name="polygonOutline">
-                <xsl:with-param name="index" select="$index+2"/>
-                <xsl:with-param name="max" select="$max"/>
-                <xsl:with-param name="polyPos" select="$polyPos"/>
-            </xsl:call-template>
-        </xsl:if>
     </xsl:template>
 
     <xsl:template name="insertStyles">

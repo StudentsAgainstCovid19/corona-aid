@@ -277,7 +277,7 @@ function onSubmitPopup() {
 
 function onCancelPopup() {
     hideGenericPopup();
-    if (confirmConfig[1] != null) confirmConfig[1](confirmConfig[2]);
+    if ( confirmConfig[1] ) confirmConfig[1](confirmConfig[2]);
     confirmConfig = [null, null, null];
 }
 
