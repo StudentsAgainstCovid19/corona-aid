@@ -68,7 +68,7 @@
     border-radius: 20px;
     margin: 10px;
     font-family: "HelveticaNeue-Light", "Helvetica Neue Light", "Helvetica Neue", Helvetica, Arial, "Lucida Grande", sans-serif;
-    display:flex;
+    display: flex;
     flex-direction: column;
     align-content: space-between;
     padding: 1em;
@@ -182,7 +182,7 @@
     margin: 5px 0 0 5px;
 }
 
-#closeOverlaySpan button{
+#closeOverlaySpan button {
     outline: none;
     border-radius: 50%;
     border-color: transparent;
