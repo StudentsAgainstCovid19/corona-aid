@@ -1,64 +1,56 @@
-
-function toggle_call_list()
-{
-    let call_list = document.getElementById("left_bar");
-    let search_bar = document.getElementById("search_bar");
+function toggleCallList() {
+    let callList = document.getElementById("left_bar");
+    let searchBar = document.getElementById("search_bar");
     let actionBar = document.getElementById("actionBar");
-    if (call_list.className === "call_list_slideout") {
-        call_list.className = "call_list_slidein";
-        search_bar.className =  search_bar.className.replace("search_bar_slideout", "") + " search_bar_slidein";
+    if (callList.className === "call_list_slideout") {
+        callList.className = "call_list_slidein";
+        searchBar.className =  searchBar.className.replace("search_bar_slideout", "") + " search_bar_slidein";
         actionBar.className =  actionBar.className.replace("actionBarSlideout", "") + " actionBarSlidein";
     } else {
-        call_list.className = "call_list_slideout";
-        search_bar.className =  search_bar.className.replace("search_bar_slidein", "") + " search_bar_slideout";
+        callList.className = "call_list_slideout";
+        searchBar.className =  searchBar.className.replace("search_bar_slidein", "") + " search_bar_slideout";
         actionBar.className =  actionBar.className.replace("actionBarSlidein", "") + " actionBarSlideout";
     }
-    close_continue_search();
+    closeContinueSearch();
 }
 
-function openCallList()
-{
-    let call_list = document.getElementById("left_bar");
-    let search_bar = document.getElementById("search_bar");
+function openCallList() {
+    let callList = document.getElementById("left_bar");
+    let searchBar = document.getElementById("search_bar");
     let actionBar = document.getElementById("actionBar");
-    if (call_list.className.indexOf("call_list_slidein") === -1)
-    {
-        search_bar.className =  search_bar.className.replace("search_bar_slideout", "") + " search_bar_slidein";
+    if (callList.className.indexOf("call_list_slidein") === -1) {
+        searchBar.className =  searchBar.className.replace("search_bar_slideout", "") + " search_bar_slidein";
         actionBar.className =  actionBar.className.replace("actionBarSlideout", "") + " actionBarSlidein";
-        call_list.className = "call_list_slidein";
+        callList.className = "call_list_slidein";
     }
 }
 
 
-function slideOpenRightBar()
-{
+function slideOpenRightBar() {
     let detailedView = document.getElementById("right_bar");
-    let progressBar = document.getElementById("progressBarDiv")
+    let progressBar = document.getElementById("progressBarDiv");
     if (detailedView.className.indexOf("detailed_slideout") > -1 || detailedView.className === "floating_object") {
         detailedView.className = "floating_object detailed_slidein";
-        progressBar.className = "progressBarSlidein"
-        console.log("slidein test");
+        progressBar.className = "progressBarSlidein";
     }
 }
 
-function closeRightBar()
-{
+function closeRightBar() {
     let detailedView = document.getElementById("right_bar");
     let progressBar = document.getElementById("progressBarDiv");
     if (detailedView.className.indexOf("detailed_slidein") > -1) {
         detailedView.className = "floating_object detailed_slideout";
-        progressBar.className = "progressBarSlideout"
+        progressBar.className = "progressBarSlideout";
     }
     currentInfectedId = null;
 }
 
-function showLoading()
-{
+function showLoading() {
     let loadingScreen = document.getElementById("loadingScreen");
-    if ( loadingScreen.classList.contains("invisible_object") ) loadingScreen.classList.remove("invisible_object");
+    if (loadingScreen.classList.contains("invisible_object")) loadingScreen.classList.remove("invisible_object");
 }
 
 function hideLoading() {
     let loadingScreen = document.getElementById("loadingScreen");
-    if ( !loadingScreen.classList.contains("invisible_object") ) loadingScreen.classList.add("invisible_object");
+    if (!loadingScreen.classList.contains("invisible_object")) loadingScreen.classList.add("invisible_object");
 }

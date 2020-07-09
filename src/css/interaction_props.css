@@ -7,28 +7,28 @@
 }
 
 #zoom_buttons {
-    position: center;
-    bottom: 4%;
-    left: 35%;
+    bottom: 1%;
+    left: 50%;
     background-color: transparent;
 }
 
 #zoom_in_button {
     height: 50px;
     width: 50px;
-    margin-left: 100px;
     right: 0;
+    bottom: 1%;
 }
 
 #zoom_out_button {
     height: 50px;
     width: 50px;
     left: 0;
+    bottom: 1%;
 }
 
 .zoom_button {
     border-radius: 50%;
-    background-color: slategray;
+    background-color: #808080;
     border: 0;
     position: relative;
     color: white;
@@ -37,21 +37,20 @@
     outline: none;
     margin: 0 2px 0 2px;
     cursor: pointer;
-
     -moz-user-select: none;
     -webkit-user-select: none;
-    -ms-user-select:none;
-    user-select:none;
-    -o-user-select:none;
+    -ms-user-select: none;
+    user-select: none;
 }
-.zoom_button:active{
+
+.zoom_button:active {
     transform: translateY(4px);
 }
 
 .zoom_button:hover {
-    background-color: white;
-    color: slategray;
-    box-shadow: 5px 5px black;
+    background-color: #909090;
+    transform: translateY(1px);
+    box-shadow: 1px 1px black;
 }
 
 .flex_div {
@@ -59,8 +58,8 @@
 }
 
 #search_bar {
-    top: 3%;
-    left: 3%;
+    top: 1%;
+    left: 1%;
     height: auto;
     outline: none;
     background-color: transparent;
@@ -69,20 +68,26 @@
 
 #search_container {
     background-color: white;
-    padding: 4px;
+    padding: 10px;
     border-radius: 10px;
 }
 
 #search_input {
     height: 1.5em;
     border-width: 1px;
-    border-radius: 5px;
-    margin: auto;
+    border-radius: 3px;
+    margin-left: 5px;
+    margin-right: 5px;
+    padding: 3px;
 }
 
 #search_div {
     display: flex;
     color: white;
+}
+
+#search_div img {
+    height: 1.2em;
 }
 
 #search_span {
@@ -116,20 +121,12 @@
     cursor: pointer;
 }
 
-#close_edit_symptoms_button {
-
-}
-
-#submit_edit_symptoms_button {
-
-}
-
 #continue_search_span {
     position: relative;
     right: -5%;
 }
 
-#continue_search_buttons{
+#continue_search_buttons {
     display: flex;
     flex-direction: column;
     top: 3%;
@@ -157,8 +154,8 @@
 
 #progressBarDiv {
     position: absolute;
-    top: 3%;
-    right: 3%;
+    top: 1%;
+    right: 1%;
     width: 200px;
     height: 20px;
     background-color: transparent;
@@ -167,8 +164,8 @@
 }
 
 #actionBar {
-    left: 3%;
-    bottom: 3%;
+    left: 1%;
+    bottom: 1%;
     background-color: white;
     padding: 0.5em;
     display: flex;
@@ -176,7 +173,6 @@
     justify-content: space-between;
     border-radius: 10px;
     align-content: center;
-
 }
 
 #snackbar {
@@ -195,7 +191,6 @@
     animation: showSnackbar 3s ease-in-out forwards;
 }
 
-
 @keyframes showSnackbar {
     from {
         visibility: hidden;
@@ -206,6 +201,7 @@
         visibility: visible;
         opacity: 1;
     }
+
     85% {
         visibility: visible;
         opacity: 1;
@@ -221,17 +217,16 @@
     text-align: center;
 }
 
-.spaceAround{
+.spaceAround {
     margin: 0.5em;
 }
 
-#showDistrictsLabel{
+#showDistrictsLabel {
     position: relative;
     top: 3px;
 }
 
-
-.smallButton{
+.smallButton {
     cursor: pointer;
     display: inline;
     text-transform: lowercase;
@@ -258,7 +253,7 @@
 }
 
 #loadingScreen {
-    background-color: rgba(256,256,256, 0.7);
+    background-color: rgba(256, 256, 256, 0.7);
     border-radius: 50%;
     left: 45%;
     top: 45%;
@@ -268,7 +263,7 @@
     box-shadow: 2px 2px black;
 }
 
-#loadingScreen img{
+#loadingScreen img {
     top: 0;
     left: 0;
     right: 0;
@@ -283,7 +278,6 @@
     animation: loadingAnimation 1s ease-in-out infinite;
 }
 
-
 @keyframes loadingAnimation {
     from {
         transform: rotate(0deg);
@@ -294,12 +288,11 @@
     }
 }
 
-
 #loadingScreen span {
     width: auto;
 }
 
-#waitText{
+#waitText {
     background-color: white;
     padding: 3px;
     border-radius: 10px;
@@ -312,14 +305,15 @@
     position: relative;
 }
 
-.corona_logo{
+.corona_logo {
     position: absolute;
-    bottom: 3px;
-    right: 5px;
+    bottom: 1%;
+    right: 1%;
     z-index: 5;
-    width: 10%;
+    width: 180px;
 }
-.corona_logo_img{
-    width: 100%;
-    height: 13%;
+
+.corona_logo_img {
+    width: 180px;
+    height: 45px;
 }

@@ -8,7 +8,7 @@
     <xsl:template match="symptomPopupXML">
 
 
-        <p class="popupHeader">Symptome von <xsl:value-of select="symptomXML/surname"/>, <xsl:value-of select="symptomXML/forename"/></p>
+        <p class="popupHeader">Symptome von <xsl:value-of select="concat(symptomXML/surname, ', ', symptomXML/forename)"/></p>
         <div id="listOfPossibleSymptoms">
             <xsl:apply-templates select="Set/item">
                 <xsl:sort select="probability" order="descending" data-type="number"/>

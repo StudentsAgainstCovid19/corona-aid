@@ -1,8 +1,8 @@
-
 function initMap() {
     // OpenLayers takes lon as first argument and then lat
     map = new ol.Map({
-        target: 'map_div',
+        target: "map_div",
+        interactions: ol.interaction.defaults({altShiftDragRotate:false, pinchRotate:false}),
         controls: [],
         loadTilesWhileAnimating: true,
         loadTilesWhileInteracting: true,
@@ -13,27 +13,23 @@ function initMap() {
         ],
         view: new ol.View({
             center: getStandardCenter(),
-            projection: config_hash_table["projectionType"],
-            zoom: parseInt(config_hash_table["standardZoom"])
+            projection: configHashTable["projectionType"],
+            zoom: parseInt(configHashTable["standardZoom"])
         })
     });
     setClusterLayer();
 }
 
-function getStandardCenter()
-{
-    return ol.proj.fromLonLat([ parseFloat(config_hash_table["standardLon"]),
-                                parseFloat(config_hash_table["standardLat"])]);
+function getStandardCenter() {
+    return ol.proj.fromLonLat([ parseFloat(configHashTable["standardLon"]),
+                                parseFloat(configHashTable["standardLat"])]);
 }
 
-function readExt(feature, extensionsNode)
-{
+function readExt(feature, extensionsNode) {
     //var parser = new DOMParser();
-    //var extensionXml = parser.parseFromString(extensionsNode, 'application/xml');
-    var val = extensionsNode.getElementsByTagName("id");
+    //var extensionXml = parser.parseFromString(extensionsNode, "application/xml");
 
-    function parseExtensions(tagName)
-    {
+    function parseExtensions(tagName) {
         return extensionsNode.getElementsByTagName(tagName)[0].childNodes[0].nodeValue;
     }
 
@@ -44,13 +40,11 @@ function readExt(feature, extensionsNode)
     feature.set("done", parseInt(parseExtensions("done"))===1);
 }
 
-
-
 // Solution to flickering was not implementing a cache for openlayer-styles but for
 // the underlying icons. See:
 // https://github.com/openlayers/openlayers/issues/3137
 // https://github.com/openlayers/openlayers/pull/1590
-var piechart_cache = new Map(); // map to cache openlayer-icons, to prevent flickering
+let pieChartCache = new Map(); // map to cache openlayer-icons, to prevent flickering
 
 // asynchronous to prevent extreme slowdowns
 async function setMarkers() {
@@ -62,11 +56,11 @@ async function setMarkers() {
     // read features in gpx
     let gpx = new ol.format.GPX({readExtensions: readExt});
     let gpxFeatures = gpx.readFeatures(xmlSerializer.serializeToString(gpxData), {
-        featureProjection: 'EPSG:3857'
+        featureProjection: configHashTable["projectionType"]
     });
 
     let clusterSource = new ol.source.Cluster({
-        distance: parseInt(config_hash_table["clusteredDistance"]),
+        distance: parseInt(configHashTable["clusteredDistance"]),
         source: new ol.source.Vector({
             features: gpxFeatures
         })
@@ -76,98 +70,117 @@ async function setMarkers() {
 }
 
 async function setClusterLayer() {
-    let styles = getStyles();
     clusteredLayer = new ol.layer.Vector({
-        style: function(feature) {
-            var size = feature.get('features').length;
-            var style;
-            if (size < 2)
-            {
-                switch (feature.get('features')[0].get("type")) {
-                    case "calledAlready":
-                        style = styles[0];
-                        break;
-                    case "lowprio":
-                        style = styles[1];
-                        break;
-                    case "intermediateprio":
-                        style = styles[2];
-                        break;
-                    case "highprio":
-                        style = styles[3];
-                        break;
-                    case "veryhighprio":
-                        style = styles[4];
-                        break;
-                    default:
-                        style = styles[4];
-                        break;
-                }
-            }
-            else {
-                // use a pie chart
-                let amountDone, amountCalled;
-                let styleSVGIcon;
-                if (feature.get("amountDone") && feature.get("amountCalled"))
-                {
-                    amountDone = feature.get("amountDone");
-                    amountCalled = feature.get("amountCalled");
-                }
-                else
-                {
-                    amountDone = getAmountDone(feature.get('features'));
-                    amountCalled = getAmountCalled(feature.get('features'));
-                }
-
-                const key = [size, amountDone, amountCalled];
-                styleSVGIcon = piechart_cache.get(key.toString());
-                if (!styleSVGIcon)
-                { // caching did not work due to the fact that styles are disposed if a cluster is reloaded / disposed.
-                    // Now we cache the SVG output as openlayers icon by the XSLTProcessor
-                    styleSVGIcon = createPieChart(size, amountDone, amountCalled);
-                    piechart_cache.set(key.toString(), styleSVGIcon);
-                }
-                style = createClusterFromSVG(styleSVGIcon);
-            }
-            return style;
-        }
+        style: getFeatureStyle
     });
 
     map.addLayer(clusteredLayer);
 
 
-    map.on('click', function(evt){
-        let clickedFeatures = []
-        map.forEachFeatureAtPixel(
-            evt.pixel,
-            function(ft, layer){clickedFeatures.push(ft);}
-        )
-        if (clickedFeatures.length === 0) return;
-
-        let clicked_ids = parseFeatureTree(clickedFeatures[0]);
-        let v=clicked_ids[0];
-        for (let i = 0; i < clicked_ids.length; i++)
-        {
-            v+=clicked_ids[i];
-        }
-
-        if (clicked_ids.length === 1)
-        {
-            try_acquire_lock(clicked_ids[0]);
-        }
-        else
-        {
-            // open list with people with according ids
-            displayClusteredMap(clicked_ids);
-        }
-    });
+    map.on("click", mapClickEvent);
 }
 
-function setDistrictsLayer()
+function mapClickEvent(evt){
+    if ( clusteredLayer.getVisible() )
+    {
+        let clickedFeatures = [];
+        map.forEachFeatureAtPixel(
+            evt.pixel,
+            function(ft) { clickedFeatures.push(ft); }
+        );
+        if (clickedFeatures.length === 0) return;
+
+        let clickedIds = parseFeatureTree(clickedFeatures[0]);
+        let v = clickedIds[0];
+        for (let i = 0; i < clickedIds.length; i++) v+=clickedIds[i];
+
+        if (clickedIds.length === 1) {
+            tryAcquireLock(clickedIds[0]);
+        } else {
+            // open list with people with according ids
+            displayClusteredMap(clickedIds);
+        }
+    }
+    else {
+        let feature;
+        map.forEachFeatureAtPixel(evt.pixel, function (ft) {
+            feature = ft;
+        });
+
+        let districtName = document.getElementById("districtName");
+        districtName.innerText = "Stadtteil: "+feature.get("name");
+        let districtAmount = document.getElementById("districtAmount");
+        districtAmount.innerText = "Anzahl Infizierte: "+feature.get("amountInfected");
+
+        popupOverlay.setPosition(evt.coordinate);
+        showOverlay();
+    }
+
+}
+
+function closeOverlay() {
+    document.getElementById("districtsPopup").className = "invisible_object";
+}
+
+function showOverlay() {
+    document.getElementById("districtsPopup").className = "";
+}
+
+function getFeatureStyle(feature)
 {
+    let styles = getStyles();
+    let size = feature.get("features").length;
+    let style;
+    if (size < 2) {
+        switch (feature.get("features")[0].get("type")) {
+            case "calledAlready":
+                style = styles[0];
+                break;
+            case "lowprio":
+                style = styles[1];
+                break;
+            case "intermediateprio":
+                style = styles[2];
+                break;
+            case "highprio":
+                style = styles[3];
+                break;
+            case "veryhighprio":
+                style = styles[4];
+                break;
+            default:
+                style = styles[4];
+                break;
+        }
+    } else {
+        // use a pie chart
+        let amountDone, amountCalled;
+        let styleSVGIcon;
+        if (feature.get("amountDone") && feature.get("amountCalled")) {
+            amountDone = feature.get("amountDone");
+            amountCalled = feature.get("amountCalled");
+        } else {
+            amountDone = getAmountDone(feature.get("features"));
+            amountCalled = getAmountCalled(feature.get("features"));
+        }
+
+        const key = [size, amountDone, amountCalled];
+        styleSVGIcon = pieChartCache.get(key.toString());
+        if (!styleSVGIcon)
+        { // caching did not work due to the fact that styles are disposed if a cluster is reloaded / disposed.
+            // Now we cache the SVG output as openlayers icon by the XSLTProcessor
+            styleSVGIcon = createPieChart(size, amountDone, amountCalled);
+            pieChartCache.set(key.toString(), styleSVGIcon);
+        }
+        style = createClusterFromSVG(styleSVGIcon);
+    }
+    return style;
+}
+
+function setDistrictsLayer() {
     showLoading();
     // load xml from backend and process with xslt
-    let districtsXML = loadXMLDoc("./assets/example_districts.xml");
+    if ( !districtsXML ) districtsXML = loadXMLDoc(apiUrl + "district/analytics");
     let districtsXSL = getXSLT("./xslt_scripts/xslt_show_districts.xsl");
 
     let districtsKML = runXSLT(districtsXSL, districtsXML);
@@ -175,107 +188,90 @@ function setDistrictsLayer()
     districtLayer = new ol.layer.Vector({
         source: new ol.source.Vector()
     });
-    console.log(districtsKML)
 
-    districtLayer.getSource().addFeatures(new ol.format.KML().readFeatures(districtsKML, {featureProjection: config_hash_table["projectionType"]}));
+    districtLayer.getSource().addFeatures(new ol.format.KML({
+        extractAttributes: true,
+        extractStyles: true }).readFeatures(districtsKML, {featureProjection: configHashTable["projectionType"]}));
     map.addLayer(districtLayer);
+
+    popupOverlay = new ol.Overlay({
+        element: document.getElementById("districtsPopup")
+    });
+    map.addOverlay(popupOverlay);
     hideLoading();
 }
 
-function toggleLayerVisibility()
-{
-    if ( !clusteredLayer.getVisible() )
-    {
+function toggleLayerVisibility() {
+    if ( !clusteredLayer.getVisible() ) {
         clusteredLayer.setVisible(true);
         setVisibilityDistricts(false);
-    }
-    else {
+    } else {
         clusteredLayer.setVisible(false);
         setVisibilityDistricts(true);
     }
-
 }
 
-function setVisibilityDistricts(visibilityState)
-{
-    if ( !visibilityState )
-    {
+function setVisibilityDistricts(visibilityState) {
+    if ( !visibilityState ) {
         if ( districtLayer ) districtLayer.setVisible(false);
-    }
-    else {
+    } else {
         if ( !districtLayer ) setDistrictsLayer();
         else districtLayer.setVisible(true);
     }
 }
 
-function parseFeatureTree(ft)
-{
-
-    let id_list = [];
-    let id = ft.get('id');
-    if (id) id_list = [parseInt(id)];
+function parseFeatureTree(ft) {
+    let idList = [];
+    let id = ft.get("id");
+    if (id) idList = [parseInt(id)];
 
     let children = ft.get("features");
-    if ( !children || children.length === 0 ) return id_list;
+    if ( !children || children.length === 0 ) return idList;
     children.forEach(function (child){
         let ids = parseFeatureTree(child);
-        id_list = id_list.concat(ids);
+        idList = idList.concat(ids);
     });
-    return id_list;
+    return idList;
 }
 
 
-function getAmountDone(array)
-{
+function getAmountDone(array) {
     let amount=0;
-    for (let i=0; i<array.length; i++)
-    {
-        if (array[parseInt(i)].get('done'))
-        {
+    for (let i = 0; i<array.length; i++) {
+        if (array[i].get("done")) {
             amount+=1;
         }
     }
     return amount;
 }
 
-function getAmountCalled(array)
-{
+function getAmountCalled(array) {
     let amount=0;
-    for (let i=0; i<array.length; i++)
-    {
-        if (array[parseInt(i)].get('called') && !array[parseInt(i)].get('done'))
-        {
-            amount+=1;
-        }
+    for (let i = 0; i<array.length; i++) {
+        if (array[i].get("called") && !array[i].get("done")) amount+=1;
     }
     return amount;
 }
 
-function getStyles()
-{
-    let icons = ['tried_call.svg', 'lower_prio.svg', 'intermed_prio.svg', 'high_prio.svg', 'veryhigh_prio.svg'];
+function getStyles() {
+    let icons = ["tried_call.svg", "lower_prio.svg", "intermed_prio.svg", "high_prio.svg", "veryhigh_prio.svg"];
     let styles = [];
-    for (let i=0; i<icons.length;i++)
-    {
+    for (let i = 0; i < icons.length; i++) {
         styles.push(new ol.style.Style({
             image: new ol.style.Icon({
                 opacity: 1,
                 src: "./assets/markers/" + icons[i],
-                scale: parseFloat(config_hash_table["markerScale"])
+                scale: parseFloat(configHashTable["markerScale"])
             })
         }));
     }
     return styles;
 }
 
-function getType(person)
-{
-    if (person.getElementsByTagName("called")[0].childNodes[0].nodeValue)
-    {
+function getType(person) {
+    if (person.getElementsByTagName("called")[0].childNodes[0].nodeValue) {
         return "calledAlready";
-    }
-    else
-    {
+    } else {
         let prioMapping = ["low", "low", "intermediate", "high", "veryhigh"];
         return prioMapping[parseInt(person.getElementsByTagName("priority")[0].childNodes[0].nodeValue)];
     }
@@ -284,17 +280,17 @@ function getType(person)
 function createPieChart(size, amountDone, amountCalled) {
     if (size === 0) {
         console.log("Error occurred while creating pie chart.");
-        return;
+        return null;
     }
-    colors = ['green', 'purple'];
-    angles = [0, amountDone / parseFloat(size) * 360, (amountDone + amountCalled) / parseFloat(size) * 360];
+    let colors = ["green", "purple"];
+    let angles = [0, amountDone / parseFloat(size) * 360, (amountDone + amountCalled) / parseFloat(size) * 360];
     let xml_string = '<?xml version="1.0"?><!DOCTYPE chart SYSTEM "' + apiUrl + 'dtd/create_pie_chart_result.dtd">';
-    xml_string += "<chart><amountRemaining>" + (size - amountDone) + "</amountRemaining><arcs>";
+    xmlString += "<chart><amountRemaining>" + (size - amountDone) + "</amountRemaining><arcs>";
 
     for (let i = 0; i < colors.length; i++) {
         let coordinates = calculateCirclePoint(angles[i + 1]);
 
-        xml_string += "<arc>" +
+        xmlString += "<arc>" +
             "<x>" + coordinates[0] + "</x>" +
             "<y>" + coordinates[1] + "</y>" +
             "<color>" + colors[i] + "</color>" +
@@ -302,9 +298,9 @@ function createPieChart(size, amountDone, amountCalled) {
             "</arc>";
 
     }
-    xml_string += "</arcs></chart>";
+    xmlString += "</arcs></chart>";
     let xmlParser = new DOMParser();
-    let xmlDoc = xmlParser.parseFromString(xml_string, "application/xml");
+    let xmlDoc = xmlParser.parseFromString(xmlString, "application/xml");
     let pieChartXSL = getXSLT("./xslt_scripts/xslt_pie_chart_gen.xsl");
     let chart = runXSLT(pieChartXSL, xmlDoc);
 
@@ -313,39 +309,34 @@ function createPieChart(size, amountDone, amountCalled) {
     return new ol.style.Icon({
         opacity: 1,
         src: "data:image/svg+xml;utf8," + serializer.serializeToString(chart),
-        scale: parseFloat(config_hash_table["pieChartScaleConstant"])
-            + (size-amountDone) * parseFloat(config_hash_table["pieChartScaleLinear"])
+        scale: parseFloat(configHashTable["pieChartScaleConstant"])
+            + (size-amountDone) * parseFloat(configHashTable["pieChartScaleLinear"])
     });
 }
 
-function createClusterFromSVG(icon)
-{
+function createClusterFromSVG(icon) {
     return new ol.style.Style({
         image: icon
     });
 }
 
-function calculateCirclePoint(angle)
-{
+function calculateCirclePoint(angle) {
     let angleRadians = (angle-90) * Math.PI / 180.0;
     return [50 + 50*Math.cos(angleRadians), 50 + 50*Math.sin(angleRadians)];
 }
 
 // button listeners for zooming
-function zoomIn()
-{
-    map.getView().animate({zoom: map.getView().getZoom() + parseFloat(config_hash_table["zoomChange"]),
-                    duration: parseInt(config_hash_table["animationDuration"])});
+function zoomIn() {
+    map.getView().animate({zoom: map.getView().getZoom() + parseFloat(configHashTable["zoomChange"]),
+                    duration: parseInt(configHashTable["animationDuration"])});
 }
 
-function zoomOut()
-{
-    map.getView().animate({zoom: map.getView().getZoom() - parseFloat(config_hash_table["zoomChange"]),
-                    duration: parseInt(config_hash_table["animationDuration"])});
+function zoomOut() {
+    map.getView().animate({zoom: map.getView().getZoom() - parseFloat(configHashTable["zoomChange"]),
+                    duration: parseInt(configHashTable["animationDuration"])});
 }
 
-function standardZoom()
-{
-    map.getView().animate({zoom: config_hash_table["standardZoom"],
+function standardZoom() {
+    map.getView().animate({zoom: configHashTable["standardZoom"],
                                     center: getStandardCenter()});
 }
