@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE Set SYSTEM "dtd/symptoms.dtd">
+<Set>
+    <item>
+        <id>1</id>
+        <name>Fieber</name>
+        <degreeOfDanger>8</degreeOfDanger>
+        <probability>50</probability>
+    </item>
+    <item>
+        <id>2</id>
+        <name>Kopfschmerzen</name>
+        <degreeOfDanger>5</degreeOfDanger>
+        <probability>50</probability>
+    </item>
+    <item>
+        <id>3</id>
+        <name>Trockener Husten</name>
+        <degreeOfDanger>7</degreeOfDanger>
+        <probability>25</probability>
+    </item>
+    <item>
+        <id>4</id>
+        <name>Verlust des Geschmacks- oder Geruchssinns</name>
+        <degreeOfDanger>1</degreeOfDanger>
+        <probability>62</probability>
+    </item>
+    <item>
+        <id>5</id>
+        <name>Halsschmerzen</name>
+        <degreeOfDanger>4</degreeOfDanger>
+        <probability>17</probability>
+    </item>
+    <item>
+        <id>6</id>
+        <name>Müdigkeit und Schwäche</name>
+        <degreeOfDanger>3</degreeOfDanger>
+        <probability>12</probability>
+    </item>
+    <item>
+        <id>7</id>
+        <name>Durchfall</name>
+        <degreeOfDanger>6</degreeOfDanger>
+        <probability>8</probability>
+    </item>
+    <item>
+        <id>8</id>
+        <name>Übelkeit und Erbrechen</name>
+        <degreeOfDanger>7</degreeOfDanger>
+        <probability>8</probability>
+    </item>
+    <item>
+        <id>9</id>
+        <name>Atembeschwerden und Kurzatmigkeit</name>
+        <degreeOfDanger>10</degreeOfDanger>
+        <probability>5</probability>
+    </item>
+    <item>
+        <id>10</id>
+        <name>Schmerzen oder Druckgefühl im Brustbereich</name>
+        <degreeOfDanger>8</degreeOfDanger>
+        <probability>5</probability>
+    </item>
+    <item>
+        <id>11</id>
+        <name>Appetitlosigkeit</name>
+        <degreeOfDanger>2</degreeOfDanger>
+        <probability>5</probability>
+    </item>
+    <item>
+        <id>12</id>
+        <name>Verlust der Sprach- oder Bewegungsfähigkeit</name>
+        <degreeOfDanger>6</degreeOfDanger>
+        <probability>2</probability>
+    </item>
+</Set>
