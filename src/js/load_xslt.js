@@ -1,7 +1,7 @@
 function getXSLT(filename) {
     let xslDoc = xsltFiles.get(filename);
     if ( !xslDoc ) {
-        console.log("(GetXSLT) Loading XSL-File: "+filename);
+        // console.log("(GetXSLT) Loading XSL-File: "+filename);
         xslDoc = loadXMLDoc(filename, "text/xsl");
         xsltFiles.set(filename, xslDoc);
     }
