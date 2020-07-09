@@ -192,3 +192,13 @@
 #closeOverlaySpan button:hover {
     background-color: lightgrey;
 }
+
+.helpPages{
+    width: 97%;
+    margin: 5px 5px 5px 5px;
+    border-width: 0;
+}
+
+.helpWindow{
+    font-family: Arial;
+}
