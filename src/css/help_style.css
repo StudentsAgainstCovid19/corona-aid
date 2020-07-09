@@ -1,0 +1,46 @@
+#helpListDiv {
+    display: flex;
+    flex-direction: column;
+    overflow: auto;
+    overflow-x: hidden;
+    border: grey solid;
+    border-width: 0 1px 0 0;
+    padding: 0 10px 0 10px;
+
+}
+
+#helpListDiv button {
+    width: 100%;
+    padding: 10px;
+    background-color: green;
+    color: white;
+    outline: none;
+    border-style: hidden;
+    margin-top: 10px;
+    font-size: 1em;
+}
+
+
+#helpListDiv button:hover {
+    color: green;
+    background-color: white;
+}
+
+#helpIframeDiv {
+    width: 75%;
+    height: 100%;
+    align-items: stretch;
+}
+
+#helpPopup {
+    padding: 10px;
+    height: 50%;
+    width: 40%;
+    left: 30%;
+    text-align: center;
+}
+
+#helpPopup .cancel_button {
+    bottom: 0;
+    position: absolute;
+}
