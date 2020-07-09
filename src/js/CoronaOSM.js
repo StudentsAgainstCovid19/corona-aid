@@ -110,7 +110,7 @@ function mapClickEvent(evt){
         let districtName = document.getElementById("districtName");
         districtName.innerText = "Stadtteil: "+feature.get("name");
         let districtAmount = document.getElementById("districtAmount");
-        districtAmount.innerText = "Anzahl Infizierte: "+feature.get("amountInfected");
+        districtAmount.innerHTML = "Anzahl Infizierte: <b>" + feature.get("amountInfected") + "</b>";
 
         popupOverlay.setPosition(evt.coordinate);
         showOverlay();

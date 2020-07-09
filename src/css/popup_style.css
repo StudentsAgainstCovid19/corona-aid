@@ -162,12 +162,14 @@
 #districtsPopup {
     background-color: white;
     border-radius: 10px;
-    padding: 5px 10px 10px 10px;
+    padding: 5px 10px 1px 10px;
 }
 
 #districtsPopup div {
     border-bottom-color: black;
     border-width: 0 0 1px 0;
+    padding: 5px 10px 5px 10px;
+    margin: -5px -10px -5px -10px;
     border-style: solid;
     display: flex;
     background-color: transparent;
@@ -179,26 +181,32 @@
 }
 
 #closeOverlaySpan {
-    margin: 5px 0 0 5px;
+    width: 40px;
+    height: 40px;
+    margin: 5px 0 0 auto;
 }
 
 #closeOverlaySpan button {
     outline: none;
+    width: 40px;
+    height: 40px;
     border-radius: 50%;
     border-color: transparent;
     background-color: inherit;
+    transition: .3s;
 }
 
 #closeOverlaySpan button:hover {
-    background-color: lightgrey;
+    background-color: lightgray;
+    transition: .3s;
 }
 
-.helpPages{
+.helpPages {
     width: 97%;
     margin: 5px 5px 5px 5px;
     border-width: 0;
 }
 
-.helpWindow{
+.helpWindow {
     font-family: Arial;
 }
