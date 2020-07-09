@@ -4,7 +4,7 @@ function getXSLT(filename)
     let xslDoc = xslt_files.get(filename);
     if ( !xslDoc )
     {
-        // console.log("(GetXSLT) Loading XSL-File: "+filename);
+        console.log("(GetXSLT) Loading XSL-File: "+filename);
         xslDoc = loadXMLDoc(filename, "text/xsl", null, true);
         xslt_files.set(filename, xslDoc);
     }
@@ -14,7 +14,7 @@ function getXSLT(filename)
 function loadXMLDoc(filename, mimeType="application/xml", errorHandlingFn = null, callingFromGetXSLT = false)
 {
     if (!callingFromGetXSLT) {
-        // console.log(`(LoadXMLDoc) loading XML-file: ${filename}`);
+        console.log(`(LoadXMLDoc) loading XML-file: ${filename}`);
     }
     try {
         let request = new XMLHttpRequest();
