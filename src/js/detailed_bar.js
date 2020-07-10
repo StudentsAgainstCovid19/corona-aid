@@ -212,10 +212,13 @@ function submitSymptoms() {
 
 function constructSymptomPopupXML() {
     let parser = new DOMParser();
-    let xmlDoc = parser.parseFromString("<symptomPopupXML></symptomPopupXML>", "application/xml");
+    let xmlHeaderString = '<?xml version="1.0" encoding="utf-8"?><!DOCTYPE symptomPopupXML SYSTEM "' + apiUrl
+        + 'dtd/construct_symptom_popup_xml_result.dtd">';
+    let xmlDoc = parser.parseFromString(xmlHeaderString + "<symptomPopupXML></symptomPopupXML>", "application/xml");
     xmlDoc.children[0].appendChild(deepCopyXML(initialSymptoms).children[0]);
     xmlDoc.children[0].appendChild(deepCopyXML(symptomsXML).children[0]);
     xmlDoc.children[0].appendChild(constructIdList().children[0]);
+    console.log(xmlDoc);
     return xmlDoc;
 }
 
@@ -234,6 +237,7 @@ function prescribeTest(id) {
         function(id) {
             const xmlString = "<TestInsertDto><infectedId>"+id+"</infectedId><result>0</result><timestamp>"+Date.now()+"</timestamp></TestInsertDto>";
             postRequest("test", xmlString);
+            document.getElementById("prescribe_test").setAttribute("disabled", "disabled");
         }, function (id) { }, id );
 }
 
@@ -245,7 +249,7 @@ function makeConfirmPopup(text, onSubmitCallback, onCancelCallback, parameters, 
     textP.innerHTML = text;
     overlay.className = "";
     let submitButton = document.getElementById("submit_confirm_button");
-    if ( hideSubmitButton ) {
+    if (hideSubmitButton) {
         if ( submitButton.classList.contains("invisible_object") ) submitButton.classList.add("invisible_object");
         setFocus("cancel_confirm_button");
     } else {

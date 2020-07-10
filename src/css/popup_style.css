@@ -1,13 +1,19 @@
 .overlayBlurred {
+    display: block;
     position: absolute;
-    width: 100%;
-    -webkit-filter: blur(5px); /* TODO use filter that can be used for all browsers */
-    filter: blur(5px);
-    backdrop-filter: blur(6px);
-    height: 100%;
+    backdrop-filter: blur(5px);
+    -webkit-backdrop-filter: blur(5px);
     z-index: 6;
-    top: 0;
-    left: 0;
+    width: 100vw;
+    height: 100vh;
+}
+
+@-moz-document url-prefix() {
+    .overlayBlurred {
+        display: block;
+        background-color: white;
+        opacity: .6;
+    }
 }
 
 .popupWindowStyle {
@@ -19,6 +25,9 @@
     top: 20%;
     left: 35%;
     background-color: white;
+    -webkit-box-shadow: 0 0 10px grey;
+    -moz-box-shadow: 0 0 10px grey;
+    box-shadow: 0 0 10px grey;
     border-radius: 20px;
     font-family: "HelveticaNeue-Light", "Helvetica Neue Light", "Helvetica Neue", Helvetica, Arial, "Lucida Grande", sans-serif;
 }
@@ -68,11 +77,13 @@
     border-radius: 20px;
     margin: 10px;
     font-family: "HelveticaNeue-Light", "Helvetica Neue Light", "Helvetica Neue", Helvetica, Arial, "Lucida Grande", sans-serif;
-    display:flex;
+    display: flex;
     flex-direction: column;
     align-content: space-between;
     padding: 1em;
-    border: darkgray solid 3px;
+    -webkit-box-shadow: 0 0 10px grey;
+    -moz-box-shadow: 0 0 10px grey;
+    box-shadow: 0 0 10px grey;
     z-index: 9;
 }
 
@@ -84,7 +95,7 @@
 
 #confirm_text {
     font-weight: bold;
-    display:flex;
+    display: flex;
     justify-content: center;
     align-content: center;
 }
@@ -138,7 +149,7 @@
 }
 
 #notesItem {
-    display:flex;
+    display: flex;
     justify-content: start;
     align-content: center;
     flex-direction: row;
@@ -162,12 +173,14 @@
 #districtsPopup {
     background-color: white;
     border-radius: 10px;
-    padding: 5px 10px 10px 10px;
+    padding: 5px 10px 1px 10px;
 }
 
 #districtsPopup div {
     border-bottom-color: black;
     border-width: 0 0 1px 0;
+    padding: 5px 10px 5px 10px;
+    margin: -5px -10px -5px -10px;
     border-style: solid;
     display: flex;
     background-color: transparent;
@@ -179,16 +192,32 @@
 }
 
 #closeOverlaySpan {
-    margin: 5px 0 0 5px;
+    width: 40px;
+    height: 40px;
+    margin: 5px 0 0 auto;
 }
 
-#closeOverlaySpan button{
+#closeOverlaySpan button {
     outline: none;
+    width: 40px;
+    height: 40px;
     border-radius: 50%;
     border-color: transparent;
     background-color: inherit;
+    transition: .3s;
 }
 
 #closeOverlaySpan button:hover {
-    background-color: lightgrey;
+    background-color: lightgray;
+    transition: .3s;
+}
+
+.helpPages {
+    width: 100%;
+    margin: 5px 5px 5px 5px;
+    border-width: 0;
+}
+
+.helpWindow {
+    font-family: Arial, serif;
 }

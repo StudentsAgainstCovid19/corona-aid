@@ -1,0 +1,37 @@
+<helpPages>
+    <helpPage>
+        <id>1</id>
+        <name>Farben</name>
+        <path>./help/colors</path>
+    </helpPage>
+    <helpPage>
+        <id>2</id>
+        <name>Navigation</name>
+        <path>./help/navigation</path>
+    </helpPage>
+    <helpPage>
+        <id>2</id>
+        <name>Tortendiagramme</name>
+        <path>./help/piecharts</path>
+    </helpPage>
+    <helpPage>
+        <id>3</id>
+        <name>Prioritäten</name>
+        <path>./help/priority</path>
+    </helpPage>
+    <helpPage>
+        <id>4</id>
+        <name>Optimierungen</name>
+        <path>./help/optimization</path>
+    </helpPage>
+    <helpPage>
+        <id>5</id>
+        <name>Datenschutzerklärung</name>
+        <path>./help/</path>
+    </helpPage>
+    <helpPage>
+        <id>6</id>
+        <name>Impressum</name>
+        <path>./help/impressum</path>
+    </helpPage>
+</helpPages>

@@ -1,7 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <xsl:stylesheet version="1.0" xmlns:xsl="http://www.w3.org/1999/XSL/Transform">
-
-
+    <xsl:output
+        method="html"
+        version="1.0"
+        encoding="utf-8"/>
     <xsl:template name="priority_img_template">
         <xsl:param name="prio"/>
         <xsl:choose>
@@ -13,12 +15,17 @@
     </xsl:template>
 
     <xsl:template match="/">
+        <div id="clusteredListOuterDiv">
         <div id="clustered_list">
             <xsl:apply-templates select="infected/person">
                 <!-- fill clustered list -->
                 <xsl:sort select="done" order="ascending"/>
                 <xsl:sort select="priority" order="descending"/>
             </xsl:apply-templates>
+        </div>
+        <div id="closeClusteredListDiv">
+            <button onclick="closeClusteredList();" class="dialogButton cancel_button">Schließen</button>
+        </div>
         </div>
     </xsl:template>
 

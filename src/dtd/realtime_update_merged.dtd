@@ -1,0 +1,31 @@
+<?xml encoding="UTF-8"?>
+
+<!ELEMENT root (updateList,infected)>
+
+<!ELEMENT updateList (item)*>
+<!ELEMENT item (infectedId,done,called,lastUnsuccessfulCallTodayString,
+                locked)>
+<!ELEMENT infectedId (#PCDATA)>
+<!ELEMENT done (#PCDATA)>
+<!ELEMENT called (#PCDATA)>
+<!ELEMENT lastUnsuccessfulCallTodayString (#PCDATA)>
+<!ELEMENT locked (#PCDATA)>
+
+<!ELEMENT infected (person)*>
+<!ELEMENT person (id,firstnames,lastname,age,calledbool,lastcall,phone,
+                  subjectiveWellbeing,lat,lon,done,locked,priority)>
+<!ELEMENT id (#PCDATA)>
+<!-- TODO change to firstname (not firstnames) when ready -->
+<!ELEMENT firstnames (#PCDATA)>
+<!ELEMENT lastname (#PCDATA)>
+<!ELEMENT age (#PCDATA)>
+<!ELEMENT calledbool (#PCDATA)>
+<!ELEMENT lastcall (#PCDATA)>
+<!ELEMENT phone (#PCDATA)>
+<!ELEMENT subjectiveWellbeing (#PCDATA)>
+<!ELEMENT lat (#PCDATA)>
+<!ELEMENT lon (#PCDATA)>
+<!ELEMENT priority (#PCDATA)>
+
+
+

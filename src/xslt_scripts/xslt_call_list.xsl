@@ -1,5 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <xsl:stylesheet version="1.0" xmlns:xsl="http://www.w3.org/1999/XSL/Transform">
+    <xsl:output
+        method="html"
+        version="1.0"
+        encoding="utf-8"/>
     <xsl:template name="div_classtag_template">
         <xsl:param name="prio"/>
         <xsl:param name="called"/>
@@ -58,6 +62,7 @@
                 hidden_box
             </xsl:if>
             </xsl:attribute>
+
             <div tabindex="0">
 
                 <xsl:attribute name="class">
@@ -75,6 +80,12 @@
                 <span>
                     <xsl:value-of select="$wellbeing_desc"/>
                 </span>
+
+                <span>
+                    <xsl:attribute name="class">tooltiptext</xsl:attribute>
+                    <xsl:value-of select="$wellbeing_desc"/>
+                </span>
+
                 <h2>Tel.:</h2>
                 <span><xsl:value-of select="phone"/></span>
                 <xsl:if test="$div_classtag = 'calledAlready'">

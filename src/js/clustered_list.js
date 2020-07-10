@@ -37,3 +37,9 @@ async function displayClusteredMap(idArray) {
     let clusteredListXSL = getXSLT("./xslt_scripts/xslt_clustered_list.xsl");
     runXSLT(clusteredListXSL, xmlDoc, "infected_detailed_view_right");
 }
+
+function closeClusteredList() {
+    let rightBar = document.getElementById("infected_detailed_view_right");
+    rightBar.innerHTML = "";
+    closeRightBar();
+}
