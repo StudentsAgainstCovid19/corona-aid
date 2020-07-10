@@ -1,6 +1,7 @@
 #clustered_list {
     padding: 5px;
     overflow: auto;
+    margin-bottom: 4em;
 }
 
 .list_div {
@@ -24,4 +25,18 @@
 
 .done_div:hover {
     background-color: #e6e6e6;
+}
+
+#closeClusteredListDiv{
+    height: 4em;
+    width: 100%;
+    border-top: solid 2px lightgray;
+    background: white;
+    position: fixed;
+    bottom: 0;
+    padding: 5px;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-content: end;
 }

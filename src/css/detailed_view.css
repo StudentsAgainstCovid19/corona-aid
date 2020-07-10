@@ -467,6 +467,21 @@ input[type="checkbox"]:disabled + label::before {
     margin-right: 5px;
 }
 
+input[type="checkbox"]:disabled:checked + label::before {
+    content: '\a0'; /* nicht umbrechendes Leerzeichen */
+    position: relative;
+    display: inline-block;
+    width: 22px;
+    height: 22px;
+    border: 3px solid #27ae60;
+    background: white;
+    background-position: center;
+    border-radius: 50%;
+    background-image: url('../assets/icons/check-circle.svg');
+    top: -3px;
+    margin-right: 5px;
+}
+
 input[type="checkbox"]:checked + label::before {
     content: '\a0';
     display: inline-block;
@@ -474,13 +489,6 @@ input[type="checkbox"]:checked + label::before {
     background-image: url('../assets/icons/check-circle.svg');
     transition: all 0.4s cubic-bezier(0.54, 0.01, 0, 1.49);
     transform: scale(1) rotateZ(0deg);
-}
-
-/* TODO: get checkbox to work with this icon */
-#test_result_checkbox {
-    background-position: center;
-    background-image: url('../assets/icons/checkbox_not_set.svg');
-    border-color: red !important;
 }
 
 input[type="checkbox"] {
