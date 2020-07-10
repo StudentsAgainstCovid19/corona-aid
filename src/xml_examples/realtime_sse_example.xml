@@ -1,7 +1,0 @@
-<InfectedRealtimeDto>
-   <infectedId>1</infectedId>
-   <done>true</done>
-   <called>true</called>
-   <lastUnsuccessfulCallTodayString>14:00</lastUnsuccessfulCallTodayString>
-   <locked>false</locked>
-</InfectedRealtimeDto>

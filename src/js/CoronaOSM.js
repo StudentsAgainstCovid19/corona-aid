@@ -284,8 +284,7 @@ function createPieChart(size, amountDone, amountCalled) {
     }
     let colors = ["green", "purple"];
     let angles = [0, amountDone / parseFloat(size) * 360, (amountDone + amountCalled) / parseFloat(size) * 360];
-    let xmlString = '<?xml version="1.0"?><!DOCTYPE chart SYSTEM "' + apiUrl + 'dtd/create_pie_chart_result.dtd">';
-    xmlString += "<chart><amountRemaining>" + (size - amountDone) + "</amountRemaining><arcs>";
+    let xmlString = "<chart><amountRemaining>" + (size - amountDone) + "</amountRemaining><arcs>";
 
     for (let i = 0; i < colors.length; i++) {
         let coordinates = calculateCirclePoint(angles[i + 1]);

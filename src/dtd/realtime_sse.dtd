@@ -1,9 +1,0 @@
-<?xml encoding="UTF-8"?>
-
-<!ELEMENT InfectedRealtimeDto (infectedId,done,called,
-                               lastUnsuccessfulCallTodayString,locked)>
-<!ELEMENT infectedId (#PCDATA)>
-<!ELEMENT done (#PCDATA)>
-<!ELEMENT called (#PCDATA)>
-<!ELEMENT lastUnsuccessfulCallTodayString (#PCDATA)>
-<!ELEMENT locked (#PCDATA)>
