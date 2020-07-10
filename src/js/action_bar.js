@@ -11,10 +11,10 @@ function showHelp() {
 }
 
 function closeHelpPopup() {
-    let filterOverlay = document.getElementById("global_overlay");
-    filterOverlay.className = "invisible_object";
     let helpPopup = document.getElementById("helpPopup");
     helpPopup.className = "popupWindowStyle invisible_object";
+
+    hidePopUp();
 }
 
 function showHelpPage(path) {

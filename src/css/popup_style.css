@@ -1,13 +1,19 @@
 .overlayBlurred {
+    display: block;
     position: absolute;
-    width: 100%;
-    -webkit-filter: blur(5px); /* TODO use filter that can be used for all browsers */
-    filter: blur(5px);
-    backdrop-filter: blur(6px);
-    height: 100%;
+    backdrop-filter: blur(5px);
+    -webkit-backdrop-filter: blur(5px);
     z-index: 6;
-    top: 0;
-    left: 0;
+    width: 100vw;
+    height: 100vh;
+}
+
+@-moz-document url-prefix() {
+    .overlayBlurred {
+        display: block;
+        background-color: white;
+        opacity: .6;
+    }
 }
 
 .popupWindowStyle {
@@ -19,6 +25,9 @@
     top: 20%;
     left: 35%;
     background-color: white;
+    -webkit-box-shadow: 0 0 10px grey;
+    -moz-box-shadow: 0 0 10px grey;
+    box-shadow: 0 0 10px grey;
     border-radius: 20px;
     font-family: "HelveticaNeue-Light", "Helvetica Neue Light", "Helvetica Neue", Helvetica, Arial, "Lucida Grande", sans-serif;
 }
@@ -72,7 +81,9 @@
     flex-direction: column;
     align-content: space-between;
     padding: 1em;
-    border: darkgray solid 3px;
+    -webkit-box-shadow: 0 0 10px grey;
+    -moz-box-shadow: 0 0 10px grey;
+    box-shadow: 0 0 10px grey;
     z-index: 9;
 }
 

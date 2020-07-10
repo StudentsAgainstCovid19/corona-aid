@@ -44,8 +44,16 @@
       <img src="assets/Corona_Aid_Logo.png" alt="Corona Aid Logo" class="corona_logo_img">
     </div>
     <div id="actionBar" class="floating_object">
-        <button onclick="showHelp();" class="spaceAround smallFButton">?</button>
-        <button onclick="standardZoom();" class="spaceAround smallButton">Zoom ausrichten</button>
+        <button onclick="showHelp();" class="spaceAround smallButton">
+          <div class="iconButton">
+            <img src="./assets/icons/help.svg" alt="Hilfe"/>
+          </div>
+        </button>
+        <button onclick="standardZoom();" class="spaceAround smallButton">
+          <div class="iconButton">
+            <img src="./assets/icons/reset_zoom.svg" alt="Zoom zurücksetzen"/>
+          </div>
+        </button>
         <input id="districts" type="checkbox" onclick="toggleLayerVisibility();"/>
         <label id="showDistrictsLabel" for="districts" class="spaceAround">Zeige Stadtteile</label>
     </div>
@@ -53,9 +61,6 @@
     <div id="right_bar" class="floating_object">
       <div id="infected_detailed_view_right"></div>
     </div>
-
-<!--    <div><span id="progressBarSpan1"><div id="progressBarDiv1" class="floating_object"></div></span></div> -->
-
     <div id="snackbar" class="floating_object"><p id="centeredSnackbarText"></p></div>
 
     <div id="search_bar" class="floating_object">
@@ -66,7 +71,7 @@
           </button>
           <input type="text" placeholder="Suche..." id="search_input">
           <button id="search_button" onclick="searchCallList();">
-            <div id="search_div">
+            <div class="iconButton">
               <img src="./assets/icons/search_magnifier.svg" alt="Such-Icon"/>
             </div>
           </button>
@@ -95,7 +100,7 @@
       </div>
     </div>
 
-    <img id="global_overlay" class="invisible_object overlayBlurred" src="./assets/icons/blur_filter.svg" alt="blur overlay" />
+    <div id="global_overlay" class="invisible_object overlayBlurred"></div>
     <div id="popup_window" class="invisible_object popupWindowStyle">
     </div>
     <div id="helpPopup" class="invisible_object popupWindowStyle" >
