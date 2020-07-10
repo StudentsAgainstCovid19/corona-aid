@@ -6,6 +6,11 @@
     </helpPage>
     <helpPage>
         <id>2</id>
+        <name>Navigation</name>
+        <path>./help/navigation</path>
+    </helpPage>
+    <helpPage>
+        <id>2</id>
         <name>Tortendiagramme</name>
         <path>./help/piecharts</path>
     </helpPage>
