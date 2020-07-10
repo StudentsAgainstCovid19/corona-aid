@@ -1,7 +1,7 @@
 #clustered_list {
     padding: 5px;
     overflow: auto;
-    margin-bottom: 4em;
+    height: 91%
 }
 
 .list_div {
@@ -28,7 +28,7 @@
 }
 
 #closeClusteredListDiv{
-    height: 4em;
+    height: 7%;
     width: 100%;
     border-top: solid 2px lightgray;
     background: white;
