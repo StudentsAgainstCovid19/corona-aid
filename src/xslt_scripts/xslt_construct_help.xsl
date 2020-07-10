@@ -3,9 +3,12 @@
 
 
     <xsl:template match="/">
-        <div class="flex_div">
+        <div id="helpPopupFlexDiv">
+            <div id="helpPopupLeftSide">
             <div id="helpListDiv">
                 <xsl:apply-templates select="helpPages/helpPage"/>
+            </div>
+            <button id="closeHelpPopupButton" onclick="closeHelpPopup()" class="dialogButton cancel_button">Schließen</button>
             </div>
             <div id="helpIframeDiv">
                 <iframe id="helpIframe" class="helpPages">
@@ -13,9 +16,6 @@
                 </iframe>
             </div>
         </div>
-
-
-        <button onclick="closeHelpPopup()" class="dialogButton cancel_button">Schließen</button>
     </xsl:template>
 
     <xsl:template match="helpPage">
