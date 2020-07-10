@@ -54,6 +54,17 @@
     height: 100%;
 }
 
+<<<<<<< Updated upstream
 body{
     font-family: "HelveticaNeue-Light", "Helvetica Neue Light", "Helvetica Neue", Helvetica, Arial, "Lucida Grande", sans-serif;
+=======
+#helpPopup .cancel_button {
+    bottom: 0;
+    position: absolute;
+}
+
+.wellbeing_indicator_size{
+    width: 1.5em;
+    height: 1.5em;
+>>>>>>> Stashed changes
 }
