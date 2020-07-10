@@ -14,7 +14,7 @@ function closeHelpPopup() {
     let helpPopup = document.getElementById("helpPopup");
     helpPopup.className = "popupWindowStyle invisible_object";
 
-    hidePopUp()
+    hidePopUp();
 }
 
 function showHelpPage(path) {
