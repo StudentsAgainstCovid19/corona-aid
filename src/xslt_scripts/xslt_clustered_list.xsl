@@ -13,12 +13,17 @@
     </xsl:template>
 
     <xsl:template match="/">
+        <div id="clusteredListOuterDiv">
         <div id="clustered_list">
             <xsl:apply-templates select="infected/person">
                 <!-- fill clustered list -->
                 <xsl:sort select="done" order="ascending"/>
                 <xsl:sort select="priority" order="descending"/>
             </xsl:apply-templates>
+        </div>
+        <div id="closeClusteredListDiv">
+            <button onclick="closeClusteredList();" class="dialogButton cancel_button">Schließen</button>
+        </div>
         </div>
     </xsl:template>
 

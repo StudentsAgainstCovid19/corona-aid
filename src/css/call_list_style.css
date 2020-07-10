@@ -12,6 +12,7 @@
 
 #call_list_div {
     overflow: auto;
+    overflow-x: hidden;
     height: 100%;
     width: 100%;
     background-color: white;
@@ -214,4 +215,33 @@ h2 {
 
 .hidden_box {
     display: none;
+}
+
+.call_box .tooltiptext {
+    visibility: hidden;
+    width: 120px;
+    background-color: black;
+    color: #fff;
+    text-align: center;
+    border-radius: 6px;
+    padding: 5px 0;
+    position: absolute;
+    left: 110%;
+    z-index: 10;
+}
+
+.call_box .tooltiptext::after {
+    content: "";
+    position: absolute;
+    top: 50%;
+    right: 100%;
+    margin-top: -5px;
+    border-width: 5px;
+    border-style: solid;
+    border-color: transparent black transparent transparent;
+    z-index: 10;
+}
+
+.call_box:hover .tooltiptext {
+    visibility: visible;
 }
