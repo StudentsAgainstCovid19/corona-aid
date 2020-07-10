@@ -467,6 +467,15 @@ input[type="checkbox"]:disabled + label::before {
     margin-right: 5px;
 }
 
+input[type="checkbox"]:checked + label::before {
+    content: '\a0';
+    display: inline-block;
+    background-position: center;
+    background-image: url('../assets/icons/check-circle.svg');
+    transition: all 0.4s cubic-bezier(0.54, 0.01, 0, 1.49);
+    transform: scale(1) rotateZ(0deg);
+}
+
 input[type="checkbox"]:disabled:checked + label::before {
     content: '\a0'; /* nicht umbrechendes Leerzeichen */
     position: relative;
@@ -480,15 +489,6 @@ input[type="checkbox"]:disabled:checked + label::before {
     background-image: url('../assets/icons/check-circle.svg');
     top: -3px;
     margin-right: 5px;
-}
-
-input[type="checkbox"]:checked + label::before {
-    content: '\a0';
-    display: inline-block;
-    background-position: center;
-    background-image: url('../assets/icons/check-circle.svg');
-    transition: all 0.4s cubic-bezier(0.54, 0.01, 0, 1.49);
-    transform: scale(1) rotateZ(0deg);
 }
 
 input[type="checkbox"] {

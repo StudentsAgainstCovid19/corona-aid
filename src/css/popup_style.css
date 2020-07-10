@@ -138,7 +138,7 @@
 }
 
 #notesItem {
-    display:flex;
+    display: flex;
     justify-content: start;
     align-content: center;
     flex-direction: row;
@@ -208,5 +208,5 @@
 }
 
 .helpWindow {
-    font-family: Arial;
+    font-family: Arial, serif;
 }
