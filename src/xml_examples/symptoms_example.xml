@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!DOCTYPE Set SYSTEM "dtd/symptoms.dtd">
+<!DOCTYPE Set SYSTEM "dtd/symptom.dtd">
 <Set>
     <item>
         <id>1</id>
