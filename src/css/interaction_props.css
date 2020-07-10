@@ -81,13 +81,17 @@
     padding: 3px;
 }
 
-#search_div {
+.iconButton {
     display: flex;
     color: white;
 }
 
-#search_div img {
+#search_button img {
     height: 1.2em;
+}
+
+#actionBar img {
+    height: 1.6em;
 }
 
 #search_span {

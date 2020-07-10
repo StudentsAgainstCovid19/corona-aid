@@ -1,7 +1,7 @@
 #left_bar {
     display: flex;
     position: fixed;
-    overflow-x: visible;
+    overflow: hidden;
     width: 13%;
     z-index: 5;
     height: 100%;
@@ -12,6 +12,7 @@
 
 #call_list_div {
     overflow: auto;
+    overflow-x: hidden;
     height: 100%;
     width: 100%;
     background-color: white;
