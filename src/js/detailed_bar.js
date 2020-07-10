@@ -212,10 +212,13 @@ function submitSymptoms() {
 
 function constructSymptomPopupXML() {
     let parser = new DOMParser();
-    let xmlDoc = parser.parseFromString("<symptomPopupXML></symptomPopupXML>", "application/xml");
+    let xmlHeaderString = '<?xml version="1.0" encoding="utf-8"?><!DOCTYPE symptomPopupXML SYSTEM "' + apiUrl
+        + 'dtd/construct_symptom_popup_xml_result.dtd">';
+    let xmlDoc = parser.parseFromString(xmlHeaderString + "<symptomPopupXML></symptomPopupXML>", "application/xml");
     xmlDoc.children[0].appendChild(deepCopyXML(initialSymptoms).children[0]);
     xmlDoc.children[0].appendChild(deepCopyXML(symptomsXML).children[0]);
     xmlDoc.children[0].appendChild(constructIdList().children[0]);
+    console.log(xmlDoc);
     return xmlDoc;
 }
 

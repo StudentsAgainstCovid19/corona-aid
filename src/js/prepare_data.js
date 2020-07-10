@@ -72,15 +72,17 @@ function addHistoryItem(successProbability, infectedId, symptomList) {
             buildSymptomString(symptomList) +
             "</symptoms>" + "<timestamp>" + Date.now() + "</timestamp>" +
             "</History>";
-
-
     }
-    postRequest("history", xmlString);
+    let xmlHeaderString = '<?xml version="1.0" encoding="utf-8"?><!DOCTYPE History SYSTEM "' + apiUrl
+        + 'dtd/push_history_item.dtd">';
+    postRequest("history", xmlHeaderString+xmlString);
 }
 
 function prescribeTestSimulation(infectedId) {
     let xmlString = "<TestInsertDto><infectedId>"+infectedId+"</infectedId><result>0</result><timestamp>"+Date.now()+"</timestamp></TestInsertDto>";
-    postRequest("test/", xmlString);
+    let xmlHeaderString = '<?xml version="1.0" encoding="utf-8"?><!DOCTYPE TestInsertDto SYSTEM "' + apiUrl
+    + 'dtd/push_prescribe_test.dtd">';
+    postRequest("test/", xmlHeaderString+xmlString);
 }
 
 function buildSymptomString(symptomList) {

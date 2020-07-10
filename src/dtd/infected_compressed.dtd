@@ -1,0 +1,21 @@
+<?xml encoding="UTF-8"?>
+
+<!ELEMENT Set (item)*>
+<!ELEMENT item (lastUnsuccessfulCallTodayString,id,age,forename,surname,
+                lat,lon,phone,done,locked,lastUnsuccessfulCallToday,
+                personalFeeling,sumInitialDiseases,sumSymptoms)>
+
+<!ELEMENT lastUnsuccessfulCallTodayString (#PCDATA)>
+<!ELEMENT id (#PCDATA)>
+<!ELEMENT age (#PCDATA)>
+<!ELEMENT forename (#PCDATA)>
+<!ELEMENT surname (#PCDATA)>
+<!ELEMENT lat (#PCDATA)>
+<!ELEMENT lon (#PCDATA)>
+<!ELEMENT phone (#PCDATA)>
+<!ELEMENT done (#PCDATA)>
+<!ELEMENT locked (#PCDATA)>
+<!ELEMENT lastUnsuccessfulCallToday (#PCDATA)>
+<!ELEMENT personalFeeling (#PCDATA)>
+<!ELEMENT sumInitialDiseases (#PCDATA)>
+<!ELEMENT sumSymptoms (#PCDATA)>
