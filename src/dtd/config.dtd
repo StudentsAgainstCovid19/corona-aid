@@ -1,8 +1,0 @@
-<?xml encoding="UTF-8"?>
-
-<!ELEMENT Set (item)*>
-<!ELEMENT item (id,configKey,configValue)>
-
-<!ELEMENT id (#PCDATA)>
-<!ELEMENT configKey (#PCDATA)>
-<!ELEMENT configValue (#PCDATA)>

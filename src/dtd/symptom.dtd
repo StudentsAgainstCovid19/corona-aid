@@ -1,8 +1,0 @@
-<?xml encoding="UTF-8"?>
-
-<!ELEMENT Set (item)*>
-<!ELEMENT item (id,name,degreeOfDanger,probability)>
-<!ELEMENT id (#PCDATA)>
-<!ELEMENT name (#PCDATA)>
-<!ELEMENT degreeOfDanger (#PCDATA)>
-<!ELEMENT probability (#PCDATA)>
