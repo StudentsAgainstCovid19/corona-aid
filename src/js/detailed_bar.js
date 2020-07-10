@@ -246,7 +246,7 @@ function makeConfirmPopup(text, onSubmitCallback, onCancelCallback, parameters, 
     textP.innerHTML = text;
     overlay.className = "";
     let submitButton = document.getElementById("submit_confirm_button");
-    if ( hideSubmitButton ) {
+    if (hideSubmitButton) {
         if ( submitButton.classList.contains("invisible_object") ) submitButton.classList.add("invisible_object");
         setFocus("cancel_confirm_button");
     } else {
