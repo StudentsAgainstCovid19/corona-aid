@@ -1,6 +1,6 @@
 #clustered_list {
     padding: 5px;
-    height: 93%;
+    height: 92%;
     overflow: auto;
 }
 
@@ -33,15 +33,11 @@
 }
 
 #closeClusteredListDiv {
-    height: 7%;
+    height: 8%;
     width: 100%;
     border-top: solid 2px lightgray;
     background: white;
-    position: fixed;
-    bottom: 0;
-    padding: 5px;
-    display: flex;
-    flex-direction: row;
-    justify-content: center;
-    align-content: end;
+    position: relative;
+    text-align: center;
+
 }

@@ -148,6 +148,7 @@
     flex-direction: row;
     justify-content: start;
     align-items: center;
+    overflow-y: auto;
 }
 
 .cancel_button {
@@ -525,4 +526,8 @@ input[type="checkbox"] {
 
 #notes_area {
     width: 70%;
+}
+
+#wellbeingHistorySpaceRight{
+    padding-right: 2em;
 }

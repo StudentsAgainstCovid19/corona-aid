@@ -139,7 +139,7 @@
             </svg>
         </span>
         <xsl:if test="$amountValues > 0">
-            <span>gestern</span>
+            <span id="wellbeingHistorySpaceRight">gestern</span>
         </xsl:if>
     </xsl:template>
 
