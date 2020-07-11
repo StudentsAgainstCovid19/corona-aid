@@ -11,8 +11,8 @@
             </xsl:apply-templates>
         </div>
         <div id="symptomsPopupEnd">
-            <button id="close_edit_symptoms_button" onclick="hidePopUp();" class="dialogButton cancel_button">Schließen</button>
-            <button id="submit_edit_symptoms_button" onclick="submitSymptoms();" class="dialogButton submit_button">Bestätigen</button>
+            <button id="close_edit_symptoms_button" onclick="hidePopUp();" class="dialogButton cancelButton">Schließen</button>
+            <button id="submit_edit_symptoms_button" onclick="submitSymptoms();" class="dialogButton submitButton">Bestätigen</button>
          </div>
 
     </xsl:template>

@@ -22,7 +22,7 @@
             </xsl:apply-templates>
         </div>
         <div id="closeClusteredListDiv">
-            <button onclick="closeClusteredList();" class="dialogButton cancel_button">Schließen</button>
+            <button onclick="closeClusteredList();" class="dialogButton cancelButton">Schließen</button>
         </div>
         </div>
     </xsl:template>
