@@ -139,7 +139,7 @@
             </svg>
         </span>
         <xsl:if test="$amountValues > 0">
-            <span>gestern</span>
+            <span id="wellbeingHistorySpaceRight">gestern</span>
         </xsl:if>
     </xsl:template>
 
@@ -210,9 +210,9 @@
 
         <div id="overallDiv">
         <div id="informationDiv">
-            <p id="textInformationen" class="text bold_text">Informationen zu <xsl:value-of select="surname"/>, <xsl:value-of select="forename"/></p>
+            <p id="textInformationen" class="text boldText">Informationen zu <xsl:value-of select="surname"/>, <xsl:value-of select="forename"/></p>
             <p class="text">Alter: <xsl:value-of select="age"/> Jahre</p>
-            <p class="text">Tel.: <span class="bold_text"><xsl:choose>
+            <p class="text">Tel.: <span class="boldText"><xsl:choose>
                 <xsl:when test="count(contactData/contactItem[contactKey = 'phone']) > 0">
                     <xsl:value-of select="contactData/contactItem[contactKey = 'phone']/contactValue"/>
                 </xsl:when>
@@ -259,9 +259,12 @@
 
         <div id="riskDiv">
             <p id="riskParagraph">Risikoeinschätzung:</p>
-            <img id="wellbeingImage"><xsl:attribute name="src">./assets/markers/<xsl:value-of select="$prio_svg"/>_prio.svg</xsl:attribute></img>
+            <img id="wellbeingImage">
+                <xsl:attribute name="src">./assets/markers/<xsl:value-of select="$prio_svg"/>_prio.svg</xsl:attribute>
+                <xsl:attribute name="alt">Risiko</xsl:attribute>
+            </img>
             <p  id="riskText"><xsl:value-of select="$prio_desc"/></p>
-            <div id="preexistingIllnessButtonDiv"><button id="preexistingIllnessButton" onclick="showPreExistingIllnesses();" class="dialogButton btn-gray" >Vorerkrankungen</button></div>
+            <div id="preexistingIllnessButtonDiv"><button id="preexistingIllnessButton" onclick="showPreExistingIllnesses();" class="dialogButton grayButton" >Vorerkrankungen</button></div>
         </div>
 
         <xsl:variable name="lastTestDoneId">
@@ -302,7 +305,7 @@
             </xsl:choose>
 
             </label>
-        <button id="prescribe_test" class="dialogButton btn-gray">
+        <button id="prescribe_test" class="dialogButton grayButton">
             <xsl:choose>
                 <xsl:when test="not(tests/test[id = $lastTestPrescribedId]/result = 0)">
                     <xsl:attribute name="onclick">prescribeTest(<xsl:value-of select="id"/>);</xsl:attribute>
@@ -345,7 +348,7 @@
         <div id="notesDiv">
             <div id="notesHeaderDiv">
                 <p id="notesHeaderText" class="text">Weitere Hinweise:</p>
-                <button  class="dialogButton btn-gray">
+                <button  class="dialogButton grayButton">
                     <xsl:choose>
                         <xsl:when test="count(historyItems/historyItem[(notes != '')]) > 0">
                             <xsl:attribute name="onclick">showNotes();</xsl:attribute>
@@ -367,19 +370,19 @@
     </xsl:template>
 
     <xsl:template name="actionButtons">
-        <div id="endButtonsDiv" class="flex-container-endbuttons">
-            <button class="dialogButton cancel_button">
+        <div id="endButtonsDiv">
+            <button class="dialogButton cancelButton">
                 <xsl:attribute name="onclick">closeDetailedView(<xsl:value-of select="id"/>);</xsl:attribute>
                 Abbrechen
             </button>
-            <button id="submitButton" class="dialogButton submit_button">
+            <button id="submitButton" class="dialogButton submitButton">
                 <xsl:attribute name="onclick">submitDetailView(<xsl:value-of select="id"/>
                     <xsl:if test="updateFlag = 'true'">
                         ,<xsl:value-of select="historyItems/historyItem[last()]/id"/>
                     </xsl:if>);</xsl:attribute>
                 Senden
             </button>
-            <button id="notCalledButton" class="dialogButton btn-gray">
+            <button id="notCalledButton" class="dialogButton grayButton">
                 <xsl:attribute name="onclick">failedCall(<xsl:value-of select="id"/>);</xsl:attribute>
                 Nicht abgenommen
             </button>

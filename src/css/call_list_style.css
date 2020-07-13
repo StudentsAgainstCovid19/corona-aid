@@ -73,22 +73,22 @@ h2 {
 }
 
 .search_bar_slidein {
-    animation: slidein_search_bar .7s ease-in-out forwards;
+    animation: slideinBar .7s ease-in-out forwards;
 }
 
 .search_bar_slideout {
-    animation: slideout_search_bar .7s ease-in-out forwards;
+    animation: slideoutBar .7s ease-in-out forwards;
 }
 
 .actionBarSlidein {
-    animation: slidein_search_bar .7s ease-in-out forwards;
+    animation: slideinBar .7s ease-in-out forwards;
 }
 
 .actionBarSlideout {
-    animation: slideout_search_bar .7s ease-in-out forwards;
+    animation: slideoutBar .7s ease-in-out forwards;
 }
 
-@keyframes slidein_search_bar {
+@keyframes slideinBar {
     from {
         left: 3%;
     }
@@ -98,7 +98,7 @@ h2 {
     }
 }
 
-@keyframes slideout_search_bar {
+@keyframes slideoutBar {
     from {
         left: 14%;
     }

@@ -6,7 +6,7 @@
                 <div id="helpListDiv">
                     <xsl:apply-templates select="helpPages/helpPage"/>
                 </div>
-                <button onclick="closeHelpPopup()" class="dialogButton cancel_button">Schließen</button>
+                <button onclick="closeHelpPopup()" class="dialogButton cancelButton">Schließen</button>
             </div>
             <div id="helpIframeDiv">
                 <iframe id="helpIframe" class="helpPages">

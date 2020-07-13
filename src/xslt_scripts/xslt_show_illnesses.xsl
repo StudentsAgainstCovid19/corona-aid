@@ -9,7 +9,7 @@
             </xsl:apply-templates>
         </div>
         <div id="close_illnesses_button_div">
-        <button id="close_illnesses_button" class="dialogButton cancel_button" onclick="hidePopUp();">Schließen</button>
+        <button id="close_illnesses_button" class="dialogButton cancelButton" onclick="hidePopUp();">Schließen</button>
         </div>
     </xsl:template>
 

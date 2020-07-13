@@ -9,13 +9,13 @@
             <xsl:apply-templates select="historyItems/historyItem[not(notes = '')]"/>
         </div>
         <div id="hideNotesButtonDiv">
-        <button id="hideNotesButton" onclick="hidePopUp();" class="dialogButton cancel_button">Schließen</button>
+        <button id="hideNotesButton" onclick="hidePopUp();" class="dialogButton cancelButton">Schließen</button>
         </div>
     </xsl:template>
 
     <xsl:template match="historyItem">
         <div id="notesItem">
-            <p class="bold_text">Vom <xsl:value-of select="date"/>: <span id="notesText"><xsl:value-of select="notes"/></span></p>
+            <p class="boldText">Vom <xsl:value-of select="date"/>: <span id="notesText"><xsl:value-of select="notes"/></span></p>
         </div>
     </xsl:template>
 </xsl:stylesheet>
