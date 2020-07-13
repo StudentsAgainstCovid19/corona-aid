@@ -259,7 +259,10 @@
 
         <div id="riskDiv">
             <p id="riskParagraph">Risikoeinschätzung:</p>
-            <img id="wellbeingImage"><xsl:attribute name="src">./assets/markers/<xsl:value-of select="$prio_svg"/>_prio.svg</xsl:attribute></img>
+            <img id="wellbeingImage">
+                <xsl:attribute name="src">./assets/markers/<xsl:value-of select="$prio_svg"/>_prio.svg</xsl:attribute>
+                <xsl:attribute name="alt">Risiko</xsl:attribute>
+            </img>
             <p  id="riskText"><xsl:value-of select="$prio_desc"/></p>
             <div id="preexistingIllnessButtonDiv"><button id="preexistingIllnessButton" onclick="showPreExistingIllnesses();" class="dialogButton grayButton" >Vorerkrankungen</button></div>
         </div>
