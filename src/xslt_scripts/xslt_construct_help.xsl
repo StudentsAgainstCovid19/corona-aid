@@ -10,7 +10,7 @@
             </div>
             <div id="helpIframeDiv">
                 <iframe id="helpIframe" class="helpPages">
-                    <xsl:attribute name="src"><xsl:value-of select="helpPages/helpPage[4]/path"/>.html</xsl:attribute>
+                    <xsl:attribute name="src"><xsl:value-of select="helpPages/helpPage[1]/path"/>.html</xsl:attribute>
                 </iframe>
             </div>
     </xsl:template>

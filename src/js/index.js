@@ -56,7 +56,7 @@ function configLoadErrorFn(statusCode) {
             makeConfirmPopup("Die Konfigurationen konnten nicht geladen werden.\n" +
                 "Es werden Standardkonfigurationen ausgewählt.\n" +
                 "Die Website wird vermutlich nicht funktionieren.",
-                null, null, true, "Schließen");
+                null, null, true, true, true, false,"Schließen");
             configHashTable = {"standardLat":"49.013868","standardLon":"8.404346", "clusteredDistance": "200",
                 "pieChartScale":"0.6","markerScale":"0.3","standardZoom":"13","zoomChange":"0.5", "animationDuration" : 200};
             break;
