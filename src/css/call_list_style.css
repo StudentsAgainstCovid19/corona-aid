@@ -1,7 +1,7 @@
 #left_bar {
     display: flex;
     position: fixed;
-    overflow: hidden;
+    overflow-x: visible;
     width: 13%;
     z-index: 5;
     height: 100%;
@@ -228,6 +228,7 @@ h2 {
     position: absolute;
     left: 110%;
     z-index: 10;
+    opacity: 0;
 }
 
 .call_box .tooltiptext::after {
@@ -240,8 +241,11 @@ h2 {
     border-style: solid;
     border-color: transparent black transparent transparent;
     z-index: 10;
+
 }
 
 .call_box:hover .tooltiptext {
     visibility: visible;
+    opacity: 1;
+    transition: 0.5s;
 }

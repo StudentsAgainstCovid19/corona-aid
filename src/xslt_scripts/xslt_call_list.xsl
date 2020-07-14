@@ -54,6 +54,7 @@
             </xsl:call-template>
         </xsl:variable>
         <div>
+            <xsl:attribute name="onmouseenter">cumulativeOffset(this)</xsl:attribute>
             <xsl:attribute name="class">call_list_element<xsl:if test="locked = 'true'">
                 hidden_box
             </xsl:if>
