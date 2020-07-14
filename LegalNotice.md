@@ -9,7 +9,7 @@ Amalienstraße 6
 Kontakt:
 ```
 Telefon: 01520/4079320
-E-Mail: info@chillibits.com
+E-Mail: support@corona-aid-ka.de
 ```
 
 ## Haftungsausschluss
