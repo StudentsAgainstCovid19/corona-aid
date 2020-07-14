@@ -126,7 +126,7 @@ function showOverlay() {
     document.getElementById("districtsPopup").className = "";
 }
 
-function getFeatureStyle(feature)
+function getFeatureStyle(feature, resolution)
 {
     let styles = getStyles();
     let size = feature.get("features").length;
@@ -163,14 +163,19 @@ function getFeatureStyle(feature)
             amountDone = getAmountDone(feature.get("features"));
             amountCalled = getAmountCalled(feature.get("features"));
         }
-
         const key = [size, amountDone, amountCalled];
-        styleSVGIcon = pieChartCache.get(key.toString());
-        if (!styleSVGIcon)
-        { // caching did not work due to the fact that styles are disposed if a cluster is reloaded / disposed.
+        let patientsRemainingLimit = parseInt(configHashTable["pieChartsDisableCachingMinRemainingPatients"]); // default: 500
+        if (size-amountDone < patientsRemainingLimit) { // do not cache anymore if minimum of remaining patients is reached
+            styleSVGIcon = pieChartCache.get(key.toString());
+        }
+        if (!styleSVGIcon) {
+            // caching did not work due to the fact that styles are disposed if a cluster is reloaded / disposed.
             // Now we cache the SVG output as openlayers icon by the XSLTProcessor
-            styleSVGIcon = createPieChart(size, amountDone, amountCalled);
+            // Resolution of map, see: https://gis.stackexchange.com/a/130853
+            styleSVGIcon = createPieChart(size, amountDone, amountCalled, resolution);
             pieChartCache.set(key.toString(), styleSVGIcon);
+        } else {
+            console.log("Now caching");
         }
         style = createClusterFromSVG(styleSVGIcon);
     }
@@ -277,7 +282,7 @@ function getType(person) {
     }
 }
 
-function createPieChart(size, amountDone, amountCalled) {
+function createPieChart(size, amountDone, amountCalled, resolution) {
     if (size === 0) {
         console.log("Error occurred while creating pie chart.");
         return null;
@@ -306,11 +311,14 @@ function createPieChart(size, amountDone, amountCalled) {
 
     let serializer = new XMLSerializer();
 
+    let remainingPatients = size-amountDone;
+    let pieChartScaleConstant = parseFloat(configHashTable["pieChartScaleConstant"]); // default: 0.42
+    let pieChartScaleLinear = parseFloat(configHashTable["pieChartScaleLinear"]); // default: 0.0035
+    let zoomScaleFactor = Math.pow(Math.E, -(0.004*resolution));
     return new ol.style.Icon({
         opacity: 1,
         src: "data:image/svg+xml;utf8," + serializer.serializeToString(chart),
-        scale: parseFloat(configHashTable["pieChartScaleConstant"])
-            + (size-amountDone) * parseFloat(configHashTable["pieChartScaleLinear"])
+        scale: (pieChartScaleConstant + remainingPatients * pieChartScaleLinear)*zoomScaleFactor
     });
 }
 
