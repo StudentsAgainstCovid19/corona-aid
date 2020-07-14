@@ -8,7 +8,8 @@
         } while(welement);
 
         console.log("top :" + top + " | element: " + element + " | berechnet: " + screenHeight + " | scrollTop: " + scrolltop);
-        element.childNodes[0].childNodes[7].style.top = screenHeight + "px";
-
+        console.log(element);
+        var temp = element.childNodes[0].getElementsByClassName("tooltiptext")[0].style.top = screenHeight + "px";
+        console.log(temp);
     };
 
