@@ -1,0 +1,13 @@
+<?xml encoding="UTF-8"?>
+
+<!ELEMENT symptomXML (surname,forename,symptoms)>
+<!ELEMENT surname (#PCDATA)>
+<!ELEMENT forename (#PCDATA)>
+<!ELEMENT symptoms (symptom)*>
+
+<!ELEMENT symptom (id,sinceDays,degreeOfDanger,name,probability)>
+<!ELEMENT id (#PCDATA)>
+<!ELEMENT sinceDays (#PCDATA)>
+<!ELEMENT degreeOfDanger (#PCDATA)>
+<!ELEMENT name (#PCDATA)>
+<!ELEMENT probability (#PCDATA)>
