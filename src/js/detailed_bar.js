@@ -1,7 +1,7 @@
 function tryAcquireLock(id) { // id for infected
     closeContinueSearch();
     if (detailBarMode === 2) return showSnackbar("Die Patientenansicht ist noch geöffnet.\nBitte kümmern Sie sich erst um den derzeitigen Patienten.");
-    console.log("Trying to load infected: " + id);
+
     detailedXML = loadXMLDoc(apiUrl + "infected/" + id, "application/xml", handleErrorsDetailRequest);
 
     if (detailedXML) {
@@ -21,23 +21,21 @@ function tryAcquireLock(id) { // id for infected
             setDetailedView(detailedXML);
         }
     }
-    console.log(detailedXML);
 }
 
 function addLockingTimer(infectedId) {
     if ( autoWarningLocking ) clearTimeout( autoWarningLocking );
     addAutoUnlockTimeout(infectedId);
     autoWarningLocking = setTimeout(function(){
-        makeConfirmPopup("Ihre Session läuft ab.\n Wollen Sie weiterhin den Patienten bearbeiten?",
+        makeConfirmPopup("Ihre Session läuft in Kürze ab. Möchten Sie die Person weiter bearbeiten?",
             function() {
                 postRequest("infected/lock/" + infectedId);
                 addLockingTimer(infectedId);
             }, function() {
-                if ( autoUnlockTimeout ) clearTimeout(autoUnlockTimeout);
-                putRequest("infected/unlock/" + infectedId);
+                if ( autoUnlockTimeout ) clearTimeout( autoUnlockTimeout );
                 hidePopUp();
                 clearRightBar();
-            }, infectedId, true);
+            }, infectedId, true, false, true, "", "Weiter bearbeiten!");
     }, parseInt(configHashTable["autoResetOffset"])*0.8*1000);
 }
 
@@ -72,7 +70,7 @@ function handleErrorsDetailRequest( statusCode ) {
         default:
             return;
     }
-    makeConfirmPopup(displayText, null, null, null, false,true, "Schließen");
+    makeConfirmPopup(displayText, null, null, null, false,false, true, "Schließen");
 }
 
 function parseInfectedID(xmlDocument) {
@@ -238,7 +236,12 @@ function prescribeTest(id) {
         }, function (id) { }, id );
 }
 
-function makeConfirmPopup(text, onSubmitCallback, onCancelCallback, parameters, blurEffect = false, hideSubmitButton = false, cancelButtonText="Abbrechen") {
+
+function makeConfirmPopup(text, onSubmitCallback, onCancelCallback, parameters, blurEffect = false,
+                          hideSubmitButton = false,
+                          hideCancelButton = false,
+                          cancelButtonText= "Abbrechen",
+                          submitButtonText = "Bestätigen") {
     confirmConfig = [onSubmitCallback, onCancelCallback, parameters];
 
     const overlay = document.getElementById("transparent_overlay");
@@ -253,9 +256,13 @@ function makeConfirmPopup(text, onSubmitCallback, onCancelCallback, parameters, 
         submitButton.className = submitButton.className.replace("invisible_object", "");
         setFocus("submit_confirm_button");
     }
+    submitButton.innerText = submitButtonText;
 
     let cancelButton = document.getElementById("cancel_confirm_button");
     cancelButton.innerText = cancelButtonText;
+
+    if ( hideCancelButton ) cancelButton.classList.add( "invisible_object" );
+    else if ( cancelButton.classList.contains( "invisible_object" )) cancelButton.classList.remove( "invisible_object" );
 
     if (blurEffect && !overlay.classList.contains("overlayBlurred")) {
         overlay.classList.add("overlayBlurred");
