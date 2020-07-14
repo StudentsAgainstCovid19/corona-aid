@@ -1,0 +1,49 @@
+<?xml encoding="UTF-8"?>
+
+<!ELEMENT InfectedDto (contactData,tests,initialDiseases,historyItems,
+                       age,updateFlag,id,forename,surname,birthDate,
+                       city,postalCode,street,houseNumber,lat,lon,
+                       healthInsuranceNumber,done)>
+
+<!ELEMENT contactData (contactItem)*>
+<!ELEMENT contactItem (id,contactKey,contactValue)>
+<!ELEMENT id (#PCDATA)>
+<!ELEMENT contactKey (#PCDATA)>
+<!ELEMENT contactValue (#PCDATA)>
+
+<!ELEMENT tests (test)*>
+<!ELEMENT test (daysOverdue,id,infectedId,timestamp,result)>
+<!ELEMENT daysOverdue (#PCDATA)>
+<!ELEMENT infectedId (#PCDATA)>
+<!ELEMENT timestamp (#PCDATA)>
+<!ELEMENT result (#PCDATA)>
+
+<!ELEMENT initialDiseases (initialDisease)*>
+<!ELEMENT initialDisease (id, name, degreeOfDanger, probability)>
+
+<!ELEMENT historyItems (historyItem)*>
+<!ELEMENT historyItem (symptoms,date,id,infectedId,timestamp,status,
+                       personalFeeling,notes)>
+<!ELEMENT symptoms (symptom)*>
+<!ELEMENT symptom (id,name,degreeOfDanger,probability)>
+<!ELEMENT name (#PCDATA)>
+<!ELEMENT degreeOfDanger (#PCDATA)>
+<!ELEMENT probability (#PCDATA)>
+<!ELEMENT date (#PCDATA)>
+<!ELEMENT status (#PCDATA)>
+<!ELEMENT personalFeeling (#PCDATA)>
+<!ELEMENT notes (#PCDATA)>
+
+<!ELEMENT age (#PCDATA)>
+<!ELEMENT updateFlag (#PCDATA)>
+<!ELEMENT forename (#PCDATA)>
+<!ELEMENT surname (#PCDATA)>
+<!ELEMENT birthDate (#PCDATA)>
+<!ELEMENT city (#PCDATA)>
+<!ELEMENT postalCode (#PCDATA)>
+<!ELEMENT street (#PCDATA)>
+<!ELEMENT houseNumber (#PCDATA)>
+<!ELEMENT lat (#PCDATA)>
+<!ELEMENT lon (#PCDATA)>
+<!ELEMENT healthInsuranceNumber (#PCDATA)>
+<!ELEMENT done (#PCDATA)>

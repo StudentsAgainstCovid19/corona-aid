@@ -1,0 +1,6 @@
+<?xml encoding="UTF-8"?>
+
+<!ELEMENT TestInsertDto (infectedId,result,timestamp)>
+<!ELEMENT infectedId (#PCDATA)>
+<!ELEMENT result (#PCDATA)>
+<!ELEMENT timestamp (#PCDATA)>
