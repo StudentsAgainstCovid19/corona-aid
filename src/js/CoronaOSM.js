@@ -1,7 +1,7 @@
 function initMap() {
     // OpenLayers takes lon as first argument and then lat
     map = new ol.Map({
-        target: "mapDiv",
+        target: "map_div",
         interactions: ol.interaction.defaults({altShiftDragRotate:false, pinchRotate:false}),
         controls: [],
         loadTilesWhileAnimating: true,
@@ -22,13 +22,10 @@ function initMap() {
 
 function getStandardCenter() {
     return ol.proj.fromLonLat([ parseFloat(configHashTable["standardLon"]),
-                                parseFloat(configHashTable["standardLat"])]);
+        parseFloat(configHashTable["standardLat"])]);
 }
 
 function readExt(feature, extensionsNode) {
-    //var parser = new DOMParser();
-    //var extensionXml = parser.parseFromString(extensionsNode, "application/xml");
-
     function parseExtensions(tagName) {
         return extensionsNode.getElementsByTagName(tagName)[0].childNodes[0].nodeValue;
     }
@@ -116,14 +113,6 @@ function mapClickEvent(evt){
         showOverlay();
     }
 
-}
-
-function closeOverlay() {
-    document.getElementById("districtsPopup").className = "invisibleObject";
-}
-
-function showOverlay() {
-    document.getElementById("districtsPopup").className = "";
 }
 
 function getFeatureStyle(feature, resolution)
@@ -282,69 +271,18 @@ function getType(person) {
     }
 }
 
-function createPieChart(size, amountDone, amountCalled, resolution) {
-    if (size === 0) {
-        console.log("Error occurred while creating pie chart.");
-        return null;
-    }
-    let colors = ["green", "purple"];
-    let angles = [0, amountDone / parseFloat(size) * 360, (amountDone + amountCalled) / parseFloat(size) * 360];
-    let xmlString = '<?xml version="1.0"?><!DOCTYPE chart SYSTEM "' + apiUrl + 'dtd/create_pie_chart_result.dtd">';
-    xmlString += "<chart><amountRemaining>" + (size - amountDone) + "</amountRemaining><arcs>";
-
-    for (let i = 0; i < colors.length; i++) {
-        let coordinates = calculateCirclePoint(angles[i + 1]);
-
-        xmlString += "<arc>" +
-            "<x>" + coordinates[0] + "</x>" +
-            "<y>" + coordinates[1] + "</y>" +
-            "<color>" + colors[i] + "</color>" +
-            "<angle>" + (angles[i + 1] - angles[i]) + "</angle>" +
-            "</arc>";
-
-    }
-    xmlString += "</arcs></chart>";
-    let xmlParser = new DOMParser();
-    let xmlDoc = xmlParser.parseFromString(xmlString, "application/xml");
-    let pieChartXSL = getXSLT("./xslt_scripts/xslt_pie_chart_gen.xsl");
-    let chart = runXSLT(pieChartXSL, xmlDoc);
-
-    let serializer = new XMLSerializer();
-
-    let remainingPatients = size-amountDone;
-    let pieChartScaleConstant = parseFloat(configHashTable["pieChartScaleConstant"]); // default: 0.42
-    let pieChartScaleLinear = parseFloat(configHashTable["pieChartScaleLinear"]); // default: 0.0035
-    let zoomScaleFactor = Math.pow(Math.E, -(0.004*resolution));
-    return new ol.style.Icon({
-        opacity: 1,
-        src: "data:image/svg+xml;utf8," + serializer.serializeToString(chart),
-        scale: (pieChartScaleConstant + remainingPatients * pieChartScaleLinear)*zoomScaleFactor
-    });
-}
-
-function createClusterFromSVG(icon) {
-    return new ol.style.Style({
-        image: icon
-    });
-}
-
-function calculateCirclePoint(angle) {
-    let angleRadians = (angle-90) * Math.PI / 180.0;
-    return [50 + 50*Math.cos(angleRadians), 50 + 50*Math.sin(angleRadians)];
-}
-
 // button listeners for zooming
 function zoomIn() {
     map.getView().animate({zoom: map.getView().getZoom() + parseFloat(configHashTable["zoomChange"]),
-                    duration: parseInt(configHashTable["animationDuration"])});
+        duration: parseInt(configHashTable["animationDuration"])});
 }
 
 function zoomOut() {
     map.getView().animate({zoom: map.getView().getZoom() - parseFloat(configHashTable["zoomChange"]),
-                    duration: parseInt(configHashTable["animationDuration"])});
+        duration: parseInt(configHashTable["animationDuration"])});
 }
 
 function standardZoom() {
     map.getView().animate({zoom: configHashTable["standardZoom"],
-                                    center: getStandardCenter()});
+        center: getStandardCenter()});
 }

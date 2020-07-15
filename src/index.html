@@ -8,7 +8,7 @@
 
     <!-- OpenLayers -->
     <link rel="stylesheet" type="text/css"
-      href="https://cdn.jsdelivr.net/gh/openlayers/openlayers.github.io@master/en/v6.3.1/css/ol.css" />
+          href="https://cdn.jsdelivr.net/gh/openlayers/openlayers.github.io@master/en/v6.3.1/css/ol.css" />
     <script src="https://cdn.jsdelivr.net/gh/openlayers/openlayers.github.io@master/en/v6.3.1/build/ol.js"></script>
     <!-- CSS -->
     <link rel="stylesheet" href="./css/interaction_props.css" type="text/css" />
@@ -21,7 +21,9 @@
     <link rel="stylesheet" href="./css/help_style.css" type="text/css" />
     <!-- JS -->
     <script src="./js/animations.js"></script>
-    <script src="./js/action_bar.js"></script>
+    <script src="./js/backend_interaction.js"></script>
+    <script src="./js/piecharts.js"></script>
+    <script src="./js/popups.js"></script>
     <script src="./js/index.js"></script>
     <script src="./js/shared_variables.js"></script>
     <script src="./js/clustered_list.js"></script>
@@ -34,33 +36,33 @@
     <!-- Embed XSLT -->
     <script src="./js/load_xslt.js"></script>
   </head>
-  
+
   <body onload="init();">
-    <div id="leftBar" class="floating_object">
-      <div id="callListDiv"></div>
+    <div id="left_bar" class="floating_object">
+      <div id="call_list_div"></div>
 
     </div>
-    <div id="mapDiv"></div>
+    <div id="map_div"></div>
     <div id="corona_logo" class="corona_logo">
       <img src="assets/Corona_Aid_Logo.png" alt="Corona Aid Logo" class="corona_logo_img">
     </div>
     <div id="actionBar" class="floating_object">
-        <button onclick="showHelp();" class="spaceAround smallButton">
-          <div class="iconButton">
-            <img src="./assets/icons/help.svg" alt="Hilfe"/>
-          </div>
-        </button>
-        <button onclick="standardZoom();" class="spaceAround smallButton">
-          <div class="iconButton">
-            <img src="./assets/icons/reset_zoom.svg" alt="Zoom zurücksetzen"/>
-          </div>
-        </button>
-        <input id="districts" type="checkbox" onclick="toggleLayerVisibility();"/>
-        <label id="showDistrictsLabel" for="districts" class="spaceAround">Zeige Stadtteile</label>
+      <button onclick="showHelp();" class="spaceAround smallButton">
+        <div class="iconButton">
+          <img src="./assets/icons/help.svg" alt="Hilfe"/>
+        </div>
+      </button>
+      <button onclick="standardZoom();" class="spaceAround smallButton">
+        <div class="iconButton">
+          <img src="./assets/icons/reset_zoom.svg" alt="Zoom zurücksetzen"/>
+        </div>
+      </button>
+      <input id="districts" type="checkbox" onclick="toggleLayerVisibility();"/>
+      <label id="showDistrictsLabel" for="districts" class="spaceAround">Zeige Stadtteile</label>
     </div>
-  <div id="progressBarDiv" class="floating_object"></div>
-    <div id="rightBar" class="floating_object">
-      <div id="infectedDetailedViewRight"></div>
+    <div id="progressBarDiv" class="floating_object"></div>
+    <div id="right_bar" class="floating_object">
+      <div id="infected_detailed_view_right"></div>
     </div>
     <div id="snackbar" class="floating_object"><p id="centeredSnackbarText"></p></div>
 
@@ -80,18 +82,18 @@
       </div>
 
       <span id="continue_search_span">
-        <div id="continue_search_buttons" class="floating_object invisibleObject">
-          <button class="continue_search_btn" onclick="closeContinueSearch();">
-            <img src="./assets/icons/close_button.svg" alt="Suche schließen" class="close_search_icons"/>
-          </button>
-          <button id="lastSearchButton" class="continue_search_btn" onclick="findLast();">
-            <img src="./assets/icons/last_button.svg" alt="Vorheriges Suchergebnis" class="close_search_icons"/>
-          </button>
-          <button id="nextSearchButton" class="continue_search_btn" onclick="findNext();">
-            <img src="./assets/icons/next_button.svg" alt="Nächstes Suchergebnis" class="close_search_icons"/>
-          </button>
-        </div>
-      </span>
+            <div id="continue_search_buttons" class="floating_object invisible_object">
+              <button class="continue_search_btn" onclick="closeContinueSearch();">
+                <img src="./assets/icons/close_button.svg" alt="Suche schließen" class="close_search_icons"/>
+              </button>
+              <button id="lastSearchButton" class="continue_search_btn" onclick="findLast();">
+                <img src="./assets/icons/last_button.svg" alt="Vorheriges Suchergebnis" class="close_search_icons"/>
+              </button>
+              <button id="nextSearchButton" class="continue_search_btn" onclick="findNext();">
+                <img src="./assets/icons/next_button.svg" alt="Nächstes Suchergebnis" class="close_search_icons"/>
+              </button>
+            </div>
+          </span>
     </div>
 
     <div id="zoom_buttons" class="floating_object">
@@ -101,16 +103,14 @@
       </div>
     </div>
 
-    <div id="global_overlay" class="invisibleObject overlayBlurred"></div>
-    <div id="popupWindow" class="invisibleObject popupWindowStyle">
-    </div>
-    <div id="helpPopup" class="invisibleObject popupWindowStyle" >
-    </div>
+    <div id="global_overlay" class="invisible_object overlayBlurred"></div>
+    <div id="popup_window" class="invisible_object popupWindowStyle"></div>
+    <div id="helpPopup" class="invisible_object popupWindowStyle"></div>
 
-    <div id="transparent_overlay" class="invisibleObject"></div>
-    <div id="confirmPopup" class="invisibleObject">
-      <p id="confirmText"></p>
-      <div id="confirmPopupButtons">
+    <div id="transparent_overlay" class="invisible_object"></div>
+    <div id="confirm_popup" class="invisible_object">
+      <p id="confirm_text"></p>
+      <div id="confirm_popup_buttons">
         <button id="submit_confirm_button" class="dialogButton submitButton" onclick="onSubmitPopup();">Bestätigen</button>
         <button id="cancel_confirm_button" class="dialogButton cancelButton" onclick="onCancelPopup();">Abbrechen</button>
       </div>
@@ -119,14 +119,14 @@
     <div id="loadingScreen" class="floating_object">
       <span><div id="waitText">Bitte warten...</div></span>
       <span>
-        <img src="favicon.ico" alt="Corona Aid Icon"/>
-      </span>
+            <img src="favicon.ico" alt="Corona Aid Icon"/>
+          </span>
       <span>
-        <img src="./assets/icons/loading_animation.png" class="loadingScreenAnimation" alt="Lade-Animation"/>
-      </span>
+            <img src="./assets/icons/loading_animation.png" class="loadingScreenAnimation" alt="Lade-Animation"/>
+          </span>
     </div>
 
-    <div id="districtsPopup" class="invisibleObject">
+    <div id="districtsPopup" class="invisible_object">
       <div>
         <p>Stadtteilübersicht:</p>
         <span id="closeOverlaySpan"><button onclick="closeOverlay();"><img src="assets/icons/close_button.svg" alt="Schließen"/></button></span>
