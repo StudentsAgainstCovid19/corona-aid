@@ -6,6 +6,6 @@ var cumulativeOffset = function(element){
         screenHeight = top - scrolltop + Math.floor(element.offsetHeight / 2)-10;
         welement = welement.offsetParent;
     } while(welement);
-
+    element.childNodes[0].getElementsByClassName("tooltiptext")[0].style.top = screenHeight + "px";
 };
 
