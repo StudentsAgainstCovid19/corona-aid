@@ -20,3 +20,7 @@ function closeHelpPopup() {
 function showHelpPage(path) {
     document.getElementById("helpIframe").setAttribute("src", path);
 }
+
+function openExternalHelpPage(url) {
+    window.open(url, "_blank");
+}

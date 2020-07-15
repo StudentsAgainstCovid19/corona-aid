@@ -17,7 +17,7 @@
 
     <xsl:template match="helpPage">
         <button>
-            <xsl:attribute name="onclick">showHelpPage("<xsl:value-of select="path"/>.html");</xsl:attribute>
+            <xsl:attribute name="onclick"><xsl:value-of select="operation"/>("<xsl:value-of select="path"/>");</xsl:attribute>
             <xsl:value-of select="name"/>
         </button>
     </xsl:template>
