@@ -14,8 +14,8 @@
             </xsl:apply-templates>
         </div>
         <div id="symptomsPopupEnd">
-            <button id="close_edit_symptoms_button" onclick="hidePopUp();" class="dialogButton cancelButton">Schließen</button>
-            <button id="submit_edit_symptoms_button" onclick="submitSymptoms();" class="dialogButton submitButton">Bestätigen</button>
+            <button id="closeEditSymptomsButton" onclick="hidePopUp();" class="dialogButton cancelButton">Schließen</button>
+            <button id="submitEditSymptomsButton" onclick="submitSymptoms();" class="dialogButton submitButton">Bestätigen</button>
          </div>
 
     </xsl:template>
@@ -23,7 +23,7 @@
     <xsl:template match="item">
         <xsl:variable name="id" select="id"/>
         <p>
-            <input type="checkbox" class="symptom_checkbox">
+            <input type="checkbox" class="symptomCheckbox">
                 <xsl:attribute name="id">symptom_<xsl:value-of select="id"/></xsl:attribute>
                 <xsl:attribute name="onclick">symptomInteraction(<xsl:value-of select="id"/>);</xsl:attribute>
                 <xsl:if test="count(/symptomPopupXML/symptomIdList/symp_id[text() = $id]) > 0">

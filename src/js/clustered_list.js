@@ -5,7 +5,7 @@ async function displayClusteredMap(idArray) {
                                     "Bitte kümmern Sie sich erst um den derzeitigen Patienten.");
     detailBarMode = 1;
     slideOpenRightBar();
-    let rightBar = document.getElementById("infected_detailed_view_right");
+    let rightBar = document.getElementById("infectedDetailedViewRight");
     rightBar.innerHTML = "";
 
     idArray.sort((a, b) => a - b);
@@ -35,11 +35,11 @@ async function displayClusteredMap(idArray) {
     let xmlDoc = xmlParser.parseFromString(xmlString, "application/xml");
 
     let clusteredListXSL = getXSLT("./xslt_scripts/xslt_clustered_list.xsl");
-    runXSLT(clusteredListXSL, xmlDoc, "infected_detailed_view_right");
+    runXSLT(clusteredListXSL, xmlDoc, "infectedDetailedViewRight");
 }
 
 function closeClusteredList() {
-    let rightBar = document.getElementById("infected_detailed_view_right");
+    let rightBar = document.getElementById("infectedDetailedViewRight");
     rightBar.innerHTML = "";
     closeRightBar();
 }

@@ -72,9 +72,9 @@ function serviceUnavailableError() {
         "Gehen Sie einen Kaffee trinken, doch verbrennen Sie sich nicht.\n" +
         "Falls der Fehler in 15 Minuten erneut auftritt, melden Sie sich unter:\n" +
         "<a href=\"mailto:support@corona-aid-ka.de\">support@corona-aid-ka.de</a>", null, null, null, true, "Schließen");
-    document.getElementById("cancel_confirm_button").className += " invisible_object";
-    document.getElementById("search_bar").className += " invisible_object";
-    document.getElementById("zoom_buttons").className += " invisible_object";
+    document.getElementById("cancelConfirmButton").className += " invisibleObject";
+    document.getElementById("searchBar").className += " invisibleObject";
+    document.getElementById("zoomButtons").className += " invisibleObject";
 }
 
 async function runUpdate() {
@@ -92,7 +92,7 @@ async function runUpdate() {
 }
 
 function makeAsyncUpdateProcess() {
-    updatePromise = setInterval(function(){runUpdate();}, configHashTable["frontendRefreshIntervall"]);
+    updatePromise = setInterval(function() { runUpdate(); }, configHashTable["frontendRefreshIntervall"]);
 }
 
 function enforceUpdate() {
