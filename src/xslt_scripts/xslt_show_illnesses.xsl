@@ -11,8 +11,8 @@
                 <xsl:sort select="degreeOfDanger" order="descending"/>
             </xsl:apply-templates>
         </div>
-        <div id="close_illnesses_button_div">
-        <button id="close_illnesses_button" class="dialogButton cancelButton" onclick="hidePopUp();">Schließen</button>
+        <div id="closeIllnessesButtonDiv">
+        <button id="closeIllnessesButton" class="dialogButton cancelButton" onclick="hidePopUp();">Schließen</button>
         </div>
     </xsl:template>
 

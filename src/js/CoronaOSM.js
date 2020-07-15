@@ -1,7 +1,7 @@
 function initMap() {
     // OpenLayers takes lon as first argument and then lat
     map = new ol.Map({
-        target: "map_div",
+        target: "mapDiv",
         interactions: ol.interaction.defaults({altShiftDragRotate:false, pinchRotate:false}),
         controls: [],
         loadTilesWhileAnimating: true,
@@ -119,7 +119,7 @@ function mapClickEvent(evt){
 }
 
 function closeOverlay() {
-    document.getElementById("districtsPopup").className = "invisible_object";
+    document.getElementById("districtsPopup").className = "invisibleObject";
 }
 
 function showOverlay() {

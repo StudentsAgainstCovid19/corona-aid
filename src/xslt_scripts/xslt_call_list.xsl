@@ -28,11 +28,11 @@
     </xsl:template>
 
     <xsl:template match="/">
-        <div class="call_list_header">
+        <div class="callListHeader">
             <h1>Anrufsliste</h1>
         </div>
         <div class="separator"></div>
-        <div class = "call_list_content">
+        <div class = "callListContent">
             <xsl:apply-templates select="infected/person">
                 <!-- fill call list -->
                 <xsl:sort select="done" data-type="number"/>
@@ -59,8 +59,8 @@
         </xsl:variable>
         <div>
             <xsl:attribute name="onmouseenter">cumulativeOffset(this)</xsl:attribute>
-            <xsl:attribute name="class">call_list_element<xsl:if test="locked = 'true'">
-                hidden_box
+            <xsl:attribute name="class">callListElement<xsl:if test="locked = 'true'">
+                hiddenBox
             </xsl:if>
             </xsl:attribute>
 
@@ -68,9 +68,9 @@
 
                 <xsl:attribute name="class">
                     <xsl:choose>
-                        <xsl:when test="done = 1">done_call_box</xsl:when>
+                        <xsl:when test="done = 1">doneCallBox</xsl:when>
                         <xsl:otherwise><xsl:value-of select="$div_classtag"/></xsl:otherwise>
-                    </xsl:choose> call_box</xsl:attribute>
+                    </xsl:choose> callBox</xsl:attribute>
 
 
                 <xsl:attribute name="onclick">tryAcquireLock(<xsl:value-of select="id"/>)</xsl:attribute>

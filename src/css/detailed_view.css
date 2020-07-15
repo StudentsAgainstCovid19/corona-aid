@@ -1,4 +1,4 @@
-#right_bar {
+#rightBar {
     width: 30%;
     height: 100%;
     left: 100%;
@@ -10,7 +10,7 @@
     display: flex;
 }
 
-#infected_detailed_view_right {
+#infectedDetailedViewRight {
     width: 100%;
     height: 100%;
     overflow-y: auto;
@@ -21,16 +21,9 @@
     width: 100%;
 }
 
-.checkbox {
-    width: 22px;
-    height: 18px;
-    background-color: #eee;
-}
-
 .alreadyPrescribed {
     margin-left: 20px;
     color: black;
-    font-family: "HelveticaNeue-Light", "Helvetica Neue Light", "Helvetica Neue", Helvetica, Arial, "Lucida Grande", sans-serif;
     font-weight: 300;
 }
 
@@ -52,7 +45,6 @@
     border: 3px solid #fff;
     color: #fff;
     overflow: hidden;
-    font-family: "HelveticaNeue-Light", "Helvetica Neue Light", "Helvetica Neue", Helvetica, Arial, "Lucida Grande", sans-serif;
     font-weight: 300;
 }
 
@@ -72,7 +64,6 @@
     color: white;
     box-shadow: 2px 2px black;
     margin-left: 1em;
-    font-family: "HelveticaNeue-Light", "Helvetica Neue Light", "Helvetica Neue", Helvetica, Arial, "Lucida Grande", sans-serif;
     font-size: 15px;
     cursor: pointer;
     outline: none;
@@ -88,14 +79,12 @@
 .text {
     margin-left: 1em;
     color: black;
-    font-family: "HelveticaNeue-Light", "Helvetica Neue Light", "Helvetica Neue", Helvetica, Arial, "Lucida Grande", sans-serif;
     font-weight: 300;
 }
 
-.notes_field {
+.notesField {
     resize: none;
     margin-left: 1em;
-    font-family: "HelveticaNeue-Light", "Helvetica Neue Light", "Helvetica Neue", Helvetica, Arial, "Lucida Grande", sans-serif;
 }
 
 .notesDiv {
@@ -111,12 +100,11 @@
     margin-top: 20px;
 }
 
-#test_result_label {
-    font-family: "HelveticaNeue-Light", "Helvetica Neue Light", "Helvetica Neue", Helvetica, Arial, "Lucida Grande", sans-serif;
+#testResultLabel {
     font-weight: 300;
 }
 
-#prescribe_test {
+#prescribeTest {
     position: relative;
     right: -1em;
     top: -3px;
@@ -128,13 +116,12 @@
 
 #symptomsDiv {
     color: black;
-    font-family: "HelveticaNeue-Light", "Helvetica Neue Light", "Helvetica Neue", Helvetica, Arial, "Lucida Grande", sans-serif;
     font-weight: 300;
     padding-left: 1em;
     overflow: auto;
     margin-left: 1em;
     margin-right: 1em;
-    height: 150px;
+    height: 200px;
     width: 80%;
     border-radius: 10px;
     background-color: white;
@@ -195,7 +182,6 @@
     border-radius: 50px;
     color: #fff;
     overflow: hidden;
-    font-family: "HelveticaNeue-Light", "Helvetica Neue Light", "Helvetica Neue", Helvetica, Arial, "Lucida Grande", sans-serif;
     font-weight: 100;
     font-size: 0.8em;
 }
@@ -209,25 +195,25 @@
     background: darkgray;
 }
 
-#wellbeing_slider {
+#wellbeingSlider {
     width: 240px;
 }
 
-#wellbeing_slider::-webkit-slider-runnable-track {
+#wellbeingSlider::-webkit-slider-runnable-track {
     width: 100%;
     height: 8.4px;
     box-shadow: 1px 1px 1px #000, 0 0 1px #0d0d0d;
     background: url('../assets/icons/wellbeing_slider.svg');
 }
 
-#wellbeing_slider::-moz-range-track {
+#wellbeingSlider::-moz-range-track {
     width: 100%;
     height: 8.4px;
     box-shadow: 1px 1px 1px #000, 0 0 1px #0d0d0d;
     background: url('../assets/icons/wellbeing_slider.svg');
 }
 
-#wellbeing_slider::-moz-range-thumb {
+#wellbeingSlider::-moz-range-thumb {
     -webkit-appearance: none;
     border: 1px solid black;
     height: 36px;
@@ -238,7 +224,7 @@
     box-shadow: 1px 1px 1px black, 0 0 1px #0d0d0d; /* Add cool effects to your sliders! */
 }
 
-#wellbeing_slider::-webkit-slider-thumb {
+#wellbeingSlider::-webkit-slider-thumb {
     -webkit-appearance: none;
     border: 1px solid black;
     height: 36px;
@@ -249,19 +235,19 @@
     box-shadow: 1px 1px 1px black, 0 0 1px #0d0d0d; /* Add cool effects to your sliders! */
 }
 
-#wellbeing_slider::-moz-range-thumb:hover {
+#wellbeingSlider::-moz-range-thumb:hover {
     cursor: grab;
 }
 
-#wellbeing_slider::-webkit-slider-thumb:hover {
+#wellbeingSlider::-webkit-slider-thumb:hover {
     cursor: grab;
 }
 
-#wellbeing_slider::-moz-range-thumb:active {
+#wellbeingSlider::-moz-range-thumb:active {
     cursor: grabbing;
 }
 
-#wellbeing_slider::-webkit-slider-thumb:active {
+#wellbeingSlider::-webkit-slider-thumb:active {
     cursor: grabbing;
 }
 
@@ -274,7 +260,6 @@
 }
 
 #riskParagraph {
-    font-family: "HelveticaNeue-Light", "Helvetica Neue Light", "Helvetica Neue", Helvetica, Arial, "Lucida Grande", sans-serif;
     font-weight: 300;
     position: relative;
 }
@@ -335,11 +320,11 @@
 }
 
 .detailed_slidein {
-    animation: slidein_detailed_div .7s ease-in-out forwards;
+    animation: slideinDetailedDiv .7s ease-in-out forwards;
 }
 
 .detailed_slideout {
-    animation: slideout_detailed_div .7s ease-in-out forwards;
+    animation: slideoutDetailedDiv .7s ease-in-out forwards;
 }
 
 .progressBarSlidein {
@@ -350,7 +335,7 @@
     animation: slideoutProgressBar .7s ease-in-out forwards;
 }
 
-@keyframes slidein_detailed_div {
+@keyframes slideinDetailedDiv {
     from {
         transform: translate(0, 0);
     }
@@ -360,7 +345,7 @@
     }
 }
 
-@keyframes slideout_detailed_div {
+@keyframes slideoutDetailedDiv {
     from {
         transform: translate(-100%, 0);
     }
@@ -390,7 +375,7 @@
     }
 }
 
-.flex-container-testresult {
+.flexContainerTestresult {
     display: flex;
     width: 100%;
     flex-direction: row;
@@ -455,6 +440,8 @@ input[type="checkbox"]:checked + label::before {
 }
 
 input[type="checkbox"]:disabled:checked + label::before {
+    border: 3px solid #27ae60;
+    border-radius: 50%;
     background-position: center;
     background-image: url('../assets/icons/check-circle.svg');
 }
@@ -491,7 +478,7 @@ input[type="checkbox"] {
     top: 10px;
 }
 
-#notes_area {
+#notesArea {
     width: 70%;
 }
 

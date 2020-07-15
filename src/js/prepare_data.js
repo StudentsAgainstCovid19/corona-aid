@@ -81,7 +81,7 @@ function addHistoryItem(successProbability, infectedId, symptomList) {
 function prescribeTestSimulation(infectedId) {
     let xmlString = "<TestInsertDto><infectedId>"+infectedId+"</infectedId><result>0</result><timestamp>"+Date.now()+"</timestamp></TestInsertDto>";
     let xmlHeaderString = '<?xml version="1.0" encoding="utf-8"?><!DOCTYPE TestInsertDto SYSTEM "' + apiUrl
-    + 'dtd/push_prescribe_test.dtd">';
+    + 'dtd/push_prescribeTest.dtd">';
     postRequest("test/", xmlHeaderString+xmlString);
 }
 

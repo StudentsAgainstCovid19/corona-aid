@@ -29,10 +29,9 @@
     -moz-box-shadow: 0 0 10px grey;
     box-shadow: 0 0 10px grey;
     border-radius: 20px;
-    font-family: "HelveticaNeue-Light", "Helvetica Neue Light", "Helvetica Neue", Helvetica, Arial, "Lucida Grande", sans-serif;
 }
 
-#popup_window {
+#popupWindow {
     display: flex;
     flex-direction: column;
     align-content: center;
@@ -67,7 +66,7 @@
     margin: 1em;
 }
 
-#confirm_popup {
+#confirmPopup {
     position: absolute;
     width: 20%;
     height: auto;
@@ -76,7 +75,6 @@
     background-color: white;
     border-radius: 20px;
     margin: 10px;
-    font-family: "HelveticaNeue-Light", "Helvetica Neue Light", "Helvetica Neue", Helvetica, Arial, "Lucida Grande", sans-serif;
     display: flex;
     flex-direction: column;
     align-content: space-between;
@@ -87,13 +85,13 @@
     z-index: 9;
 }
 
-#confirm_popup_buttons {
+#confirmPopupButtons {
     display: flex;
     align-content: center;
     justify-content: space-evenly;
 }
 
-#confirm_text {
+#confirmText {
     font-weight: bold;
     display: flex;
     justify-content: center;
@@ -111,18 +109,18 @@
     justify-content: center;
 }
 
-#close_illnesses_button_div {
+#closeIllnessesButtonDiv {
     display: flex;
     justify-content: center;
     align-content: center;
 }
 
-#close_illnesses_button {
+#closeIllnessesButton {
     margin: 1em;
     width: 30%;
 }
 
-.invisible_object {
+.invisibleObject {
     display: none !important;
 }
 

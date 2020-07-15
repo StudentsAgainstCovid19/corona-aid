@@ -44,9 +44,9 @@ function scrollToIndex(index) {
     let foundDiv = currentCallBoxes[parseInt(index)];
     foundDiv.id = "scroll_to";
     let childDiv = foundDiv.childNodes[0];
-    childDiv.className = childDiv.className.replace("found_call_items", "");
+    childDiv.className = childDiv.className.replace("foundCallItems", "");
     setTimeout(function () {
-        childDiv.className += " found_call_items";
+        childDiv.className += " foundCallItems";
     }, 100);
     window.location.hash = "#scroll_to";
     addKeyClickListenerToChild("scroll_to");
@@ -54,10 +54,10 @@ function scrollToIndex(index) {
 }
 
 function getAllNotHiddenCallBoxes() {
-    let callListItems = document.getElementsByClassName("call_list_element");
+    let callListItems = document.getElementsByClassName("callListElement");
     if (callListItems.toString().indexOf("HTMLCollection") !== -1) callListItems = Array.prototype.slice.call(callListItems);
     for (let index = callListItems.length - 1; index >= 0; index--) {
-        if (callListItems[parseInt(index)].className.indexOf("hidden_box") !== -1) {
+        if (callListItems[parseInt(index)].className.indexOf("hiddenBox") !== -1) {
             callListItems.splice(index, 1);
         }
     }
@@ -66,9 +66,9 @@ function getAllNotHiddenCallBoxes() {
 
 function noItemFound() {
     let searchbar = document.getElementById("search_container");
-    searchbar.className = searchbar.className.replace(" no_call_items_found","");
+    searchbar.className = searchbar.className.replace(" noCallItemsFound","");
     setTimeout(function() {
-        searchbar.className += " no_call_items_found";
+        searchbar.className += " noCallItemsFound";
     }, 100);
     currentlySearched = false;
 }
@@ -116,7 +116,7 @@ function addKeyClickListenerToChild(elemId) {
 }
 
 function closeContinueSearch() {
-    document.getElementById("continue_search_buttons").className += " invisible_object";
+    document.getElementById("continue_search_buttons").className += " invisibleObject";
     console.log(); // without, hiding of continue search box is very laggy
 
     if (suppressUpdates) enforceUpdate();
@@ -127,7 +127,7 @@ function showContinueSearch() {
     suppressUpdates = true;
     updateButtonStates();
     let continueSearchBar = document.getElementById("continue_search_buttons");
-    continueSearchBar.className = continueSearchBar.className.replace(" invisible_object", "");
+    continueSearchBar.className = continueSearchBar.className.replace(" invisibleObject", "");
     setTimeout(function (){ closeContinueSearch(); }, parseInt(configHashTable["closeContinueSearchTime"]));
 }
 

@@ -44,9 +44,9 @@
             </xsl:if>
             <p>
                 <span>
-                    <xsl:attribute name="class">wellbeing_imagespan</xsl:attribute>
+                    <xsl:attribute name="class">wellbeingImagespan</xsl:attribute>
                     <img>
-                        <xsl:attribute name="class">wellbeing_indicator</xsl:attribute>
+                        <xsl:attribute name="class">wellbeingIndicator</xsl:attribute>
                         <!-- Todo -->
                         <xsl:attribute name="alt">Wohlbefinden</xsl:attribute>
                         <xsl:attribute name="src">./assets/markers/<xsl:value-of select="$priority_img"/>_prio.svg</xsl:attribute>

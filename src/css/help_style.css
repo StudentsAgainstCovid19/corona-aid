@@ -57,16 +57,12 @@
     height: 100%;
 }
 
-body {
-    font-family: "HelveticaNeue-Light", "Helvetica Neue Light", "Helvetica Neue", Helvetica, Arial, "Lucida Grande", sans-serif;
-}
-
 #helpPopup .cancelButton {
     bottom: 0;
     position: absolute;
 }
 
-.wellbeing_indicator_size {
+.wellbeingIndicator_size {
     width: 1.5em;
     height: 1.5em;
 }

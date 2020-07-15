@@ -10,7 +10,7 @@ async function calculatePriorities() {
 
 async function initCallList(openCallListBool = true) {
     let displayCallXSL = getXSLT("./xslt_scripts/xslt_call_list.xsl");
-    runXSLT(displayCallXSL, prioList, "call_list_div");
+    runXSLT(displayCallXSL, prioList, "callListDiv");
     if (openCallListBool) openCallList();
     addSearchBarListener();
     setMarkers();

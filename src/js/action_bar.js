@@ -12,7 +12,7 @@ function showHelp() {
 
 function closeHelpPopup() {
     let helpPopup = document.getElementById("helpPopup");
-    helpPopup.className = "popupWindowStyle invisible_object";
+    helpPopup.className = "popupWindowStyle invisibleObject";
 
     hidePopUp();
 }

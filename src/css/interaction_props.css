@@ -3,7 +3,6 @@
     background-color: white;
     z-index: 5;
     color: black;
-    font-family: "HelveticaNeue-Light", "Helvetica Neue Light", "Helvetica Neue", Helvetica, Arial, "Lucida Grande", sans-serif;
 }
 
 #zoom_buttons {
@@ -244,7 +243,6 @@
     transition: all 0.3s;
     border-radius: 5px;
     overflow: hidden;
-    font-family: "HelveticaNeue-Light", "Helvetica Neue Light", "Helvetica Neue", Helvetica, Arial, "Lucida Grande", sans-serif;
     font-weight: 100;
     font-size: 0.8em;
     background-color: gray;
