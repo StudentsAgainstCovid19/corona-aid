@@ -240,10 +240,8 @@ h2 {
     border-style: solid;
     border-color: transparent black transparent transparent;
     z-index: 10;
-
 }
 
 .call_box:hover .tooltiptext {
     visibility: visible;
 }
-

@@ -2,36 +2,43 @@
     <helpPage>
         <id>1</id>
         <name>Farben</name>
-        <path>./help/colors</path>
+        <operation>showHelpPage</operation>
+        <path>./help/colors.html</path>
     </helpPage>
     <helpPage>
         <id>2</id>
         <name>Navigation</name>
-        <path>./help/navigation</path>
+        <operation>showHelpPage</operation>
+        <path>./help/navigation.html</path>
     </helpPage>
     <helpPage>
         <id>2</id>
         <name>Tortendiagramme</name>
-        <path>./help/piecharts</path>
+        <operation>showHelpPage</operation>
+        <path>./help/piecharts.html</path>
     </helpPage>
     <helpPage>
         <id>3</id>
         <name>Prioritäten</name>
-        <path>./help/priority</path>
+        <operation>showHelpPage</operation>
+        <path>./help/priority.html</path>
     </helpPage>
     <helpPage>
         <id>4</id>
         <name>Optimierungen</name>
-        <path>./help/optimization</path>
+        <operation>showHelpPage</operation>
+        <path>./help/optimization.html</path>
     </helpPage>
     <helpPage>
         <id>5</id>
-        <name>Datenschutzerklärung</name>
-        <path>./help/</path>
+        <name>Datenschutz</name>
+        <operation>openExternalHelpPage</operation>
+        <path>https://github.com/StudentsAgainstCovid19/corona-aid-docs/blob/master/LEGAL-NOTICE.md#datenschutz</path>
     </helpPage>
     <helpPage>
         <id>6</id>
         <name>Impressum</name>
-        <path>./help/impressum</path>
+        <operation>openExternalHelpPage</operation>
+        <path>https://github.com/StudentsAgainstCovid19/corona-aid-docs/blob/master/LEGAL-NOTICE.md#impressum</path>
     </helpPage>
 </helpPages>

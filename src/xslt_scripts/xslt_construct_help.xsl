@@ -10,14 +10,14 @@
             </div>
             <div id="helpIframeDiv">
                 <iframe id="helpIframe" class="helpPages">
-                    <xsl:attribute name="src"><xsl:value-of select="helpPages/helpPage[1]/path"/>.html</xsl:attribute>
+                    <xsl:attribute name="src"><xsl:value-of select="helpPages/helpPage[1]/path"/></xsl:attribute>
                 </iframe>
             </div>
     </xsl:template>
 
     <xsl:template match="helpPage">
         <button>
-            <xsl:attribute name="onclick">showHelpPage("<xsl:value-of select="path"/>.html");</xsl:attribute>
+            <xsl:attribute name="onclick"><xsl:value-of select="operation"/>("<xsl:value-of select="path"/>");</xsl:attribute>
             <xsl:value-of select="name"/>
         </button>
     </xsl:template>
