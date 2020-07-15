@@ -14,8 +14,8 @@ async function searchCallList() {
 
     let text, nameText, phoneText;
     for (let i = 0; i < callListItems.length; i++) {
-        nameText = callListItems[parseInt(i)].getElementsByTagName("span")[0].innerText;
-        phoneText = callListItems[parseInt(i)].getElementsByTagName("span")[2].innerText;
+        nameText = callListItems[i].getElementsByTagName("span")[0].innerText;
+        phoneText = callListItems[i].getElementsByTagName("span")[2].innerText;
         text = (nameText+" "+phoneText.replace("Tel.: ","")).replace(",", "").toLowerCase();
         if (checkIn(text, words)) hits.push(i);
     }

@@ -45,8 +45,8 @@ function loadConfig() {
     if (!configXML) return;
     let items = configXML.getElementsByTagName("item");
     for (let i=0; i<items.length; i++) {
-        configHashTable[parseNodeValueFromXML(items[parseInt(i)], "configKey")] =
-            parseNodeValueFromXML(items[parseInt(i)], "configValue");
+        configHashTable[parseNodeValueFromXML(items[i], "configKey")] =
+            parseNodeValueFromXML(items[i], "configValue");
     }
 }
 
