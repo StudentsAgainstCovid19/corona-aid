@@ -19,7 +19,7 @@ function openCallList() {
     let searchBar = document.getElementById("searchBar");
     let actionBar = document.getElementById("actionBar");
     if (callList.className.indexOf("callListSlidein") === -1) {
-        searchBar.className =  searchBar.className.replace("searchBarSlideout", "") + " callListSlidein";
+        searchBar.className =  searchBar.className.replace("searchBarSlideout", "") + " searchBarSlidein";
         actionBar.className =  actionBar.className.replace("actionBarSlideout", "") + " actionBarSlidein";
         callList.className = "callListSlidein";
     }
