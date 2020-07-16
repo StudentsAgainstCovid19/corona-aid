@@ -1,45 +1,45 @@
 function toggleCallList() {
-    let callList = document.getElementById("left_bar");
-    let searchBar = document.getElementById("search_bar");
+    let callList = document.getElementById("leftBar");
+    let searchBar = document.getElementById("searchBar");
     let actionBar = document.getElementById("actionBar");
-    if (callList.className === "call_list_slideout") {
-        callList.className = "call_list_slidein";
-        searchBar.className =  searchBar.className.replace("search_bar_slideout", "") + " search_bar_slidein";
+    if (callList.className === "callListSlideout") {
+        callList.className = "callListSlidein";
+        searchBar.className =  searchBar.className.replace("searchBarSlideout", "") + " searchBarSlidein";
         actionBar.className =  actionBar.className.replace("actionBarSlideout", "") + " actionBarSlidein";
     } else {
-        callList.className = "call_list_slideout";
-        searchBar.className =  searchBar.className.replace("search_bar_slidein", "") + " search_bar_slideout";
+        callList.className = "callListSlideout";
+        searchBar.className =  searchBar.className.replace("searchBarSlidein", "") + " searchBarSlideout";
         actionBar.className =  actionBar.className.replace("actionBarSlidein", "") + " actionBarSlideout";
     }
     closeContinueSearch();
 }
 
 function openCallList() {
-    let callList = document.getElementById("left_bar");
-    let searchBar = document.getElementById("search_bar");
+    let callList = document.getElementById("leftBar");
+    let searchBar = document.getElementById("searchBar");
     let actionBar = document.getElementById("actionBar");
-    if (callList.className.indexOf("call_list_slidein") === -1) {
-        searchBar.className =  searchBar.className.replace("search_bar_slideout", "") + " search_bar_slidein";
+    if (callList.className.indexOf("callListSlidein") === -1) {
+        searchBar.className =  searchBar.className.replace("searchBarSlideout", "") + " searchBarSlidein";
         actionBar.className =  actionBar.className.replace("actionBarSlideout", "") + " actionBarSlidein";
-        callList.className = "call_list_slidein";
+        callList.className = "callListSlidein";
     }
 }
 
 
 function slideOpenRightBar() {
-    let detailedView = document.getElementById("right_bar");
+    let detailedView = document.getElementById("rightBar");
     let progressBar = document.getElementById("progressBarDiv");
-    if (detailedView.className.indexOf("detailed_slideout") > -1 || detailedView.className === "floating_object") {
-        detailedView.className = "floating_object detailed_slidein";
+    if (detailedView.className.indexOf("detailedSlideout") > -1 || detailedView.className === "floatingObject") {
+        detailedView.className = "floatingObject detailedSlidein";
         progressBar.className = "progressBarSlidein";
     }
 }
 
 function closeRightBar() {
-    let detailedView = document.getElementById("right_bar");
+    let detailedView = document.getElementById("rightBar");
     let progressBar = document.getElementById("progressBarDiv");
-    if (detailedView.className.indexOf("detailed_slidein") > -1) {
-        detailedView.className = "floating_object detailed_slideout";
+    if (detailedView.className.indexOf("detailedSlidein") > -1) {
+        detailedView.className = "floatingObject detailedSlideout";
         progressBar.className = "progressBarSlideout";
     }
     currentInfectedId = null;
@@ -47,10 +47,10 @@ function closeRightBar() {
 
 function showLoading() {
     let loadingScreen = document.getElementById("loadingScreen");
-    if (loadingScreen.classList.contains("invisible_object")) loadingScreen.classList.remove("invisible_object");
+    if (loadingScreen.classList.contains("invisibleObject")) loadingScreen.classList.remove("invisibleObject");
 }
 
 function hideLoading() {
     let loadingScreen = document.getElementById("loadingScreen");
-    if (!loadingScreen.classList.contains("invisible_object")) loadingScreen.classList.add("invisible_object");
+    if (!loadingScreen.classList.contains("invisibleObject")) loadingScreen.classList.add("invisibleObject");
 }

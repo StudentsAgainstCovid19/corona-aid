@@ -2,7 +2,7 @@ function showNotes() {
     if (!detailedXML) return;
 
     let notesXSL = getXSLT("./xslt_scripts/xslt_notes_popup.xsl");
-    runXSLT(notesXSL, detailedXML, "popup_window");
+    runXSLT(notesXSL, detailedXML, "popupWindow");
     let notesDiv = document.getElementById("notesHistoryDiv");
 
     if (notesDiv) {
@@ -12,17 +12,17 @@ function showNotes() {
 }
 
 function displayPopUp() {
-    let filterOverlay = document.getElementById("global_overlay");
-    let popupWindow = document.getElementById("popup_window");
-    filterOverlay.classList.remove("invisible_object");
-    popupWindow.classList.remove("invisible_object");
+    let filterOverlay = document.getElementById("globalOverlay");
+    let popupWindow = document.getElementById("popupWindow");
+    filterOverlay.classList.remove("invisibleObject");
+    popupWindow.classList.remove("invisibleObject");
 }
 
 function hidePopUp() {
-    let filterOverlay = document.getElementById("global_overlay");
-    let popupWindow = document.getElementById("popup_window");
-    filterOverlay.classList.add("invisible_object");
-    popupWindow.classList.add("invisible_object");
+    let filterOverlay = document.getElementById("globalOverlay");
+    let popupWindow = document.getElementById("popupWindow");
+    filterOverlay.classList.add("invisibleObject");
+    popupWindow.classList.add("invisibleObject");
     popupWindow.innerHTML = "";
 }
 
@@ -34,7 +34,7 @@ function showSymptoms () {
     let xmlDocument = constructSymptomPopupXML();
 
     let symptomsXSL = getXSLT("./xslt_scripts/xslt_edit_symptoms.xsl");
-    runXSLT(symptomsXSL, xmlDocument, "popup_window");
+    runXSLT(symptomsXSL, xmlDocument, "popupWindow");
 
     editSymptomsList = symptomsList;
 
@@ -67,7 +67,7 @@ function showPreExistingIllnesses() {
     if (!detailedXML) return;
     let illnessXSL = getXSLT("./xslt_scripts/xslt_show_illnesses.xsl");
 
-    runXSLT(illnessXSL, detailedXML, "popup_window");
+    runXSLT(illnessXSL, detailedXML, "popupWindow");
     displayPopUp();
 }
 
@@ -97,7 +97,6 @@ function constructSymptomPopupXML() {
     xmlDoc.children[0].appendChild(deepCopyXML(initialSymptoms).children[0]);
     xmlDoc.children[0].appendChild(deepCopyXML(symptomsXML).children[0]);
     xmlDoc.children[0].appendChild(constructIdList().children[0]);
-    console.log(xmlDoc);
     return xmlDoc;
 }
 
@@ -116,7 +115,7 @@ function prescribeTest(id) {
         function(id) {
             const xmlString = "<TestInsertDto><infectedId>"+id+"</infectedId><result>0</result><timestamp>"+Date.now()+"</timestamp></TestInsertDto>";
             postRequest("test", xmlString);
-            document.getElementById("prescribe_test").setAttribute("disabled", "disabled");
+            document.getElementById("prescribeTest").setAttribute("disabled", "disabled");
         }, function (id) { }, id );
 }
 
@@ -128,25 +127,25 @@ function makeConfirmPopup(text, onSubmitCallback, onCancelCallback, parameters, 
                           submitButtonText = "Bestätigen") {
     confirmConfig = [onSubmitCallback, onCancelCallback, parameters];
 
-    const overlay = document.getElementById("transparent_overlay");
-    const textP = document.getElementById("confirm_text");
+    const overlay = document.getElementById("transparentOverlay");
+    const textP = document.getElementById("confirmText");
     textP.innerHTML = text;
     overlay.className = "";
-    let submitButton = document.getElementById("submit_confirm_button");
+    let submitButton = document.getElementById("submitConfirmButton");
     if (hideSubmitButton) {
-        if ( submitButton.classList.contains("invisible_object") ) submitButton.classList.add("invisible_object");
-        setFocus("cancel_confirm_button");
+        if ( submitButton.classList.contains("invisibleObject") ) submitButton.classList.add("invisibleObject");
+        setFocus("cancelConfirmButton");
     } else {
-        submitButton.className = submitButton.className.replace("invisible_object", "");
-        setFocus("submit_confirm_button");
+        submitButton.className = submitButton.className.replace("invisibleObject", "");
+        setFocus("submitConfirmButton");
     }
     submitButton.innerText = submitButtonText;
 
-    let cancelButton = document.getElementById("cancel_confirm_button");
+    let cancelButton = document.getElementById("cancelConfirmButton");
     cancelButton.innerText = cancelButtonText;
 
-    if ( hideCancelButton ) cancelButton.classList.add( "invisible_object" );
-    else if ( cancelButton.classList.contains( "invisible_object" )) cancelButton.classList.remove( "invisible_object" );
+    if ( hideCancelButton ) cancelButton.classList.add( "invisibleObject" );
+    else if ( cancelButton.classList.contains( "invisibleObject" )) cancelButton.classList.remove( "invisibleObject" );
 
     if (blurEffect && !overlay.classList.contains("overlayBlurred")) {
         overlay.classList.add("overlayBlurred");
@@ -154,7 +153,7 @@ function makeConfirmPopup(text, onSubmitCallback, onCancelCallback, parameters, 
         overlay.classList.remove("overlayBlurred");
     }
 
-    document.getElementById("confirm_popup").className = "floating_object";
+    document.getElementById("confirmPopup").className = "floatingObject";
 }
 
 function setFocus(id) {
@@ -174,10 +173,10 @@ function onCancelPopup() {
 }
 
 function hideGenericPopup() {
-    const overlay = document.getElementById("transparent_overlay");
-    overlay.className = "invisible_object";
-    const popup = document.getElementById("confirm_popup");
-    popup.className = "invisible_object";
+    const overlay = document.getElementById("transparentOverlay");
+    overlay.className = "invisibleObject";
+    const popup = document.getElementById("confirmPopup");
+    popup.className = "invisibleObject";
 }
 
 function showSnackbar(message) {
@@ -187,7 +186,7 @@ function showSnackbar(message) {
     snackbar.className = snackbar.className.replace(" showSnackbarAnimation", "");
     setTimeout(function() { snackbar.className += " showSnackbarAnimation"; }, 50);
 
-    let detailedView = document.getElementById("infected_detailed_view_right");
+    let detailedView = document.getElementById("infectedDetailedViewRight");
     detailedView.scrollTop = detailedView.scrollHeight;
 }
 
@@ -205,7 +204,7 @@ function showHelp() {
 
 function closeHelpPopup() {
     let helpPopup = document.getElementById("helpPopup");
-    helpPopup.className = "popupWindowStyle invisible_object";
+    helpPopup.className = "popupWindowStyle invisibleObject";
 
     hidePopUp();
 }
@@ -219,7 +218,7 @@ function openExternalHelpPage(url) {
 }
 
 function closeOverlay() {
-    document.getElementById("districtsPopup").className = "invisible_object";
+    document.getElementById("districtsPopup").className = "invisibleObject";
 }
 
 function showOverlay() {

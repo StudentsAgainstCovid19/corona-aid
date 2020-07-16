@@ -3,7 +3,7 @@ async function searchCallList() {
     window.location.hash = "";
     deleteScrollId();
 
-    let inputField = document.getElementById("search_input");
+    let inputField = document.getElementById("searchInput");
     let words = inputField.value.toLowerCase().split(" ");
     let callListItems = getAllNotHiddenCallBoxes();
     currentCallBoxes = callListItems;
@@ -30,7 +30,7 @@ async function searchCallList() {
 }
 
 function deleteScrollId() {
-    let scrollToDiv = document.getElementById("scroll_to");
+    let scrollToDiv = document.getElementById("scrollTo");
     if (scrollToDiv) {
         scrollToDiv.children[0].removeEventListener("keyup", function(e){});
         scrollToDiv.children[0].removeEventListener("keydown", function(e){});
@@ -42,22 +42,22 @@ function scrollToIndex(index) {
     deleteScrollId();
     openCallList();
     let foundDiv = currentCallBoxes[parseInt(index)];
-    foundDiv.id = "scroll_to";
+    foundDiv.id = "scrollTo";
     let childDiv = foundDiv.childNodes[0];
-    childDiv.className = childDiv.className.replace("found_call_items", "");
+    childDiv.className = childDiv.className.replace("foundCallItems", "");
     setTimeout(function () {
-        childDiv.className += " found_call_items";
+        childDiv.className += " foundCallItems";
     }, 100);
-    window.location.hash = "#scroll_to";
-    addKeyClickListenerToChild("scroll_to");
+    window.location.hash = "#scrollTo";
+    addKeyClickListenerToChild("scrollTo");
     showContinueSearch();
 }
 
 function getAllNotHiddenCallBoxes() {
-    let callListItems = document.getElementsByClassName("call_list_element");
+    let callListItems = document.getElementsByClassName("callListElement");
     if (callListItems.toString().indexOf("HTMLCollection") !== -1) callListItems = Array.prototype.slice.call(callListItems);
     for (let index = callListItems.length - 1; index >= 0; index--) {
-        if (callListItems[parseInt(index)].className.indexOf("hidden_box") !== -1) {
+        if (callListItems[parseInt(index)].className.indexOf("hiddenBox") !== -1) {
             callListItems.splice(index, 1);
         }
     }
@@ -65,10 +65,10 @@ function getAllNotHiddenCallBoxes() {
 }
 
 function noItemFound() {
-    let searchbar = document.getElementById("search_container");
-    searchbar.className = searchbar.className.replace(" no_call_items_found","");
+    let searchbar = document.getElementById("searchContainer");
+    searchbar.className = searchbar.className.replace(" noCallItemsFound","");
     setTimeout(function() {
-        searchbar.className += " no_call_items_found";
+        searchbar.className += " noCallItemsFound";
     }, 100);
     currentlySearched = false;
 }
@@ -81,7 +81,7 @@ function checkIn(str, words) {
 }
 
 function addSearchBarListener() {
-    let searchBar = document.getElementById("search_bar");
+    let searchBar = document.getElementById("searchBar");
     searchBar.addEventListener("keyup", function (event){
         if (event.key === "Enter") searchCallList();
     });
@@ -116,7 +116,7 @@ function addKeyClickListenerToChild(elemId) {
 }
 
 function closeContinueSearch() {
-    document.getElementById("continue_search_buttons").className += " invisible_object";
+    document.getElementById("continueSearchButtons").className += " invisibleObject";
     console.log(); // without, hiding of continue search box is very laggy
 
     if (suppressUpdates) enforceUpdate();
@@ -126,8 +126,8 @@ function closeContinueSearch() {
 function showContinueSearch() {
     suppressUpdates = true;
     updateButtonStates();
-    let continueSearchBar = document.getElementById("continue_search_buttons");
-    continueSearchBar.className = continueSearchBar.className.replace(" invisible_object", "");
+    let continueSearchBar = document.getElementById("continueSearchButtons");
+    continueSearchBar.className = continueSearchBar.className.replace(" invisibleObject", "");
     setTimeout(function (){ closeContinueSearch(); }, parseInt(configHashTable["closeContinueSearchTime"]));
 }
 
@@ -150,8 +150,8 @@ function findLast() {
 function updateButtonStates() {
     let nextButton = document.getElementById("nextSearchButton");
     let lastButton = document.getElementById("lastSearchButton");
-    nextButton.className = nextButton.className.replace("disabled_button", "");
-    lastButton.className = nextButton.className.replace("disabled_button", "");
-    if (currentFoundIndex === 0) lastButton.className += " disabled_button";
-    if (currentFoundIndex >= (foundIndices.length - 1)) nextButton.className += " disabled_button";
+    nextButton.className = nextButton.className.replace("disabledButton", "");
+    lastButton.className = nextButton.className.replace("disabledButton", "");
+    if (currentFoundIndex === 0) lastButton.className += " disabledButton";
+    if (currentFoundIndex >= (foundIndices.length - 1)) nextButton.className += " disabledButton";
 }

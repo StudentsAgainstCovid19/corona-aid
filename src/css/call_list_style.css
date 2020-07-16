@@ -1,4 +1,4 @@
-#left_bar {
+#leftBar {
     display: flex;
     position: fixed;
     overflow-x: visible;
@@ -10,7 +10,7 @@
     outline: none;
 }
 
-#call_list_div {
+#callListDiv {
     overflow: auto;
     overflow-x: visible;
     height: 100%;
@@ -18,13 +18,13 @@
     background-color: white;
 }
 
-.call_list_header {
+.callListHeader {
     margin: 5px 10px 5px 10px;
     justify-content: center;
     border-bottom: 1px black;
 }
 
-.call_list_content {
+.callListContent {
     flex-direction: column;
     margin-top: 10px;
 }
@@ -44,15 +44,15 @@ h2 {
     height: 1px;
 }
 
-.call_list_slidein {
-    animation: slidein_call_div .7s ease-in-out forwards;
+.callListSlidein {
+    animation: slideinCallDiv .7s ease-in-out forwards;
 }
 
-.call_list_slideout {
-    animation: slideout_call_div .7s ease-in-out forwards;
+.callListSlideout {
+    animation: slideoutCallDiv .7s ease-in-out forwards;
 }
 
-@keyframes slidein_call_div {
+@keyframes slideinCallDiv {
     from {
         transform: translate(-100%, 0);
     }
@@ -62,7 +62,7 @@ h2 {
     }
 }
 
-@keyframes slideout_call_div {
+@keyframes slideoutCallDiv {
     from {
         transform: translate(0%, 0);
     }
@@ -72,11 +72,11 @@ h2 {
     }
 }
 
-.search_bar_slidein {
+.searchBarSlidein {
     animation: slideinBar .7s ease-in-out forwards;
 }
 
-.search_bar_slideout {
+.searchBarSlideout {
     animation: slideoutBar .7s ease-in-out forwards;
 }
 
@@ -108,18 +108,18 @@ h2 {
     }
 }
 
-.wellbeing_imagespan {
+.wellbeingImagespan {
     position: relative;
     top: 4px;
     margin-right: 10px;
 }
 
-.wellbeing_indicator {
+.wellbeingIndicator {
     height: 20px;
     width: 20px;
 }
 
-.call_box {
+.callBox {
     color: black;
     border-style: solid;
     background-color: #f2f2f2;
@@ -129,17 +129,17 @@ h2 {
     transition: 0.3s;
 }
 
-.call_box:hover {
+.callBox:hover {
     border-width: 0 0 0 8px;
     background-color: #e6e6e6;
 }
 
-.call_list_element {
+.callListElement {
     border-top: 1px black;
     margin: 5px 0 5px 0;
 }
 
-.call_list_element:hover {
+.callListElement:hover {
     border-width: 0 0 0 10px;
     cursor: pointer;
 }
@@ -164,16 +164,15 @@ h2 {
     border-color: purple;
 }
 
-.done_call_box {
+.doneCallBox {
     background-color: lightgrey;
-
 }
 
-.found_call_items {
-    animation: found_call_item_frames 1.5s;
+.foundCallItems {
+    animation: foundCallItemFrames 1.5s;
 }
 
-@keyframes found_call_item_frames {
+@keyframes foundCallItemFrames {
     from {
         background-color: inherit;
         filter: grayscale(100%);
@@ -190,12 +189,12 @@ h2 {
     }
 }
 
-.no_call_items_found {
-    animation: no_call_items_found_frames 0.2s;
+.noCallItemsFound {
+    animation: noCallItemsFoundFrames 0.2s;
     animation-iteration-count: 5;
 }
 
-@keyframes no_call_items_found_frames {
+@keyframes noCallItemsFoundFrames {
     from {
         background-color: red;
     }
@@ -213,11 +212,11 @@ h2 {
     }
 }
 
-.hidden_box {
+.hiddenBox {
     display: none;
 }
 
-.call_box .tooltiptext {
+.callBox .tooltiptext {
     visibility: hidden;
     width: 120px;
     background-color: black;
@@ -230,7 +229,7 @@ h2 {
     z-index: 100;
 }
 
-.call_box .tooltiptext::after {
+.callBox .tooltiptext::after {
     content: "";
     position: absolute;
     top: 50%;
@@ -242,6 +241,6 @@ h2 {
     z-index: 10;
 }
 
-.call_box:hover .tooltiptext {
+.callBox:hover .tooltiptext {
     visibility: visible;
 }

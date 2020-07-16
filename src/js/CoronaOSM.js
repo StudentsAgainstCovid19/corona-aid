@@ -1,7 +1,7 @@
 function initMap() {
     // OpenLayers takes lon as first argument and then lat
     map = new ol.Map({
-        target: "map_div",
+        target: "mapDiv",
         interactions: ol.interaction.defaults({altShiftDragRotate:false, pinchRotate:false}),
         controls: [],
         loadTilesWhileAnimating: true,
@@ -163,8 +163,6 @@ function getFeatureStyle(feature, resolution)
             // Resolution of map, see: https://gis.stackexchange.com/a/130853
             styleSVGIcon = createPieChart(size, amountDone, amountCalled, resolution);
             pieChartCache.set(key.toString(), styleSVGIcon);
-        } else {
-            console.log("Now caching");
         }
         style = createClusterFromSVG(styleSVGIcon);
     }

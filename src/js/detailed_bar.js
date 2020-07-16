@@ -94,7 +94,7 @@ function setDetailedView(xmlDoc) {
 
         let displayDetailed = getXSLT("./xslt_scripts/xslt_detailed_view.xsl");
 
-        runXSLT(displayDetailed, xmlDoc, "infected_detailed_view_right");
+        runXSLT(displayDetailed, xmlDoc, "infectedDetailedViewRight");
 
         let parseSymptomsXSL = getXSLT("./xslt_scripts/xslt_parse_symptoms.xsl");
         initialSymptoms = runXSLT(parseSymptomsXSL, xmlDoc);
@@ -103,7 +103,7 @@ function setDetailedView(xmlDoc) {
 
         runXSLT(symptomsXSL, initialSymptoms, "symptomsDiv");
 
-        let sympCheckboxes = document.getElementById("symptomsDiv").getElementsByClassName("symptom_checkbox");
+        let sympCheckboxes = document.getElementById("symptomsDiv").getElementsByClassName("symptomCheckbox");
         for ( let i = 0; i < sympCheckboxes.length; i++) {
             let id = parseInt(sympCheckboxes[i].id.replace("symp_",""));
             symptomsList.push(id);
@@ -116,8 +116,6 @@ function deepCopyXML(node) {
     let serializer = new XMLSerializer();
     return parser.parseFromString(serializer.serializeToString(node), "application/xml");
 }
-
-
 
 function failedCall(id) {
     const xmlString = "<History>" +
@@ -150,10 +148,10 @@ function submitDetailView(id, historyItemId = null) {
     let xmlString = "<HistoryItem"+(historyItemId ? "Update" : "Insert")+"Dto>"+
         ( historyItemId ? "<historyItemId>" + historyItemId + "</historyItemId>" : "") +
         "<infectedId>"+id+"</infectedId>"+
-        "<notes>"+document.getElementById("notes_area").value+"</notes>"+
-        "<personalFeeling>"+(document.getElementById("wellbeing_slider").value)+"</personalFeeling>"+
+        "<notes>"+document.getElementById("notesArea").value+"</notes>"+
+        "<personalFeeling>"+(document.getElementById("wellbeingSlider").value)+"</personalFeeling>"+
         "<status>1</status><symptoms>";
-    symptoms = document.getElementsByClassName("symptom_checkbox");
+    symptoms = document.getElementsByClassName("symptomCheckbox");
 
     for (let i = 0; i < symptomsList.length; i++) {
         xmlString += "<symptom>"+parseInt(symptomsList[i])+"</symptom>";
@@ -175,5 +173,5 @@ function submitDetailView(id, historyItemId = null) {
 function clearRightBar() {
     detailBarMode = 0;
     closeRightBar();
-    document.getElementById("infected_detailed_view_right").innerHTML = "";
+    document.getElementById("infectedDetailedViewRight").innerHTML = "";
 }
