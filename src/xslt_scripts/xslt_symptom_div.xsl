@@ -1,6 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <xsl:stylesheet version="1.0" xmlns:xsl="http://www.w3.org/1999/XSL/Transform">
-
+    <xsl:output
+        method="html"
+        version="1.0"
+        encoding="utf-8"/>
     <xsl:template name="dayFormatting">
         <xsl:param name="days"/>
 
@@ -27,7 +30,7 @@
             </xsl:choose>
         </xsl:variable>
         <p id="symptomsTable">
-            <input type="checkbox" class="symptom_checkbox">
+            <input type="checkbox" class="symptomCheckbox">
                 <xsl:attribute name="checked">true</xsl:attribute>
 
                 <xsl:attribute name="id">symp_<xsl:value-of select="id"/></xsl:attribute>

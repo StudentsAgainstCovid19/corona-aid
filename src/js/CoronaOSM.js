@@ -1,7 +1,7 @@
 function initMap() {
     // OpenLayers takes lon as first argument and then lat
     map = new ol.Map({
-        target: "map_div",
+        target: "mapDiv",
         interactions: ol.interaction.defaults({altShiftDragRotate:false, pinchRotate:false}),
         controls: [],
         loadTilesWhileAnimating: true,
@@ -26,9 +26,6 @@ function getStandardCenter() {
 }
 
 function readExt(feature, extensionsNode) {
-    //var parser = new DOMParser();
-    //var extensionXml = parser.parseFromString(extensionsNode, "application/xml");
-
     function parseExtensions(tagName) {
         return extensionsNode.getElementsByTagName(tagName)[0].childNodes[0].nodeValue;
     }
@@ -118,15 +115,7 @@ function mapClickEvent(evt){
 
 }
 
-function closeOverlay() {
-    document.getElementById("districtsPopup").className = "invisible_object";
-}
-
-function showOverlay() {
-    document.getElementById("districtsPopup").className = "";
-}
-
-function getFeatureStyle(feature)
+function getFeatureStyle(feature, resolution)
 {
     let styles = getStyles();
     let size = feature.get("features").length;
@@ -163,13 +152,16 @@ function getFeatureStyle(feature)
             amountDone = getAmountDone(feature.get("features"));
             amountCalled = getAmountCalled(feature.get("features"));
         }
-
         const key = [size, amountDone, amountCalled];
-        styleSVGIcon = pieChartCache.get(key.toString());
-        if (!styleSVGIcon)
-        { // caching did not work due to the fact that styles are disposed if a cluster is reloaded / disposed.
+        let patientsRemainingLimit = parseInt(configHashTable["pieChartsDisableCachingMinRemainingPatients"]); // default: 500
+        if (size-amountDone < patientsRemainingLimit) { // do not cache anymore if minimum of remaining patients is reached
+            styleSVGIcon = pieChartCache.get(key.toString());
+        }
+        if (!styleSVGIcon) {
+            // caching did not work due to the fact that styles are disposed if a cluster is reloaded / disposed.
             // Now we cache the SVG output as openlayers icon by the XSLTProcessor
-            styleSVGIcon = createPieChart(size, amountDone, amountCalled);
+            // Resolution of map, see: https://gis.stackexchange.com/a/130853
+            styleSVGIcon = createPieChart(size, amountDone, amountCalled, resolution);
             pieChartCache.set(key.toString(), styleSVGIcon);
         }
         style = createClusterFromSVG(styleSVGIcon);
@@ -275,53 +267,6 @@ function getType(person) {
         let prioMapping = ["low", "low", "intermediate", "high", "veryhigh"];
         return prioMapping[parseInt(person.getElementsByTagName("priority")[0].childNodes[0].nodeValue)];
     }
-}
-
-function createPieChart(size, amountDone, amountCalled) {
-    if (size === 0) {
-        console.log("Error occurred while creating pie chart.");
-        return null;
-    }
-    let colors = ["green", "purple"];
-    let angles = [0, amountDone / parseFloat(size) * 360, (amountDone + amountCalled) / parseFloat(size) * 360];
-    let xmlString = "<chart><amountRemaining>" + (size - amountDone) + "</amountRemaining><arcs>";
-
-    for (let i = 0; i < colors.length; i++) {
-        let coordinates = calculateCirclePoint(angles[i + 1]);
-
-        xmlString += "<arc>" +
-            "<x>" + coordinates[0] + "</x>" +
-            "<y>" + coordinates[1] + "</y>" +
-            "<color>" + colors[i] + "</color>" +
-            "<angle>" + (angles[i + 1] - angles[i]) + "</angle>" +
-            "</arc>";
-
-    }
-    xmlString += "</arcs></chart>";
-    let xmlParser = new DOMParser();
-    let xmlDoc = xmlParser.parseFromString(xmlString, "application/xml");
-    let pieChartXSL = getXSLT("./xslt_scripts/xslt_pie_chart_gen.xsl");
-    let chart = runXSLT(pieChartXSL, xmlDoc);
-
-    let serializer = new XMLSerializer();
-
-    return new ol.style.Icon({
-        opacity: 1,
-        src: "data:image/svg+xml;utf8," + serializer.serializeToString(chart),
-        scale: parseFloat(configHashTable["pieChartScaleConstant"])
-            + (size-amountDone) * parseFloat(configHashTable["pieChartScaleLinear"])
-    });
-}
-
-function createClusterFromSVG(icon) {
-    return new ol.style.Style({
-        image: icon
-    });
-}
-
-function calculateCirclePoint(angle) {
-    let angleRadians = (angle-90) * Math.PI / 180.0;
-    return [50 + 50*Math.cos(angleRadians), 50 + 50*Math.sin(angleRadians)];
 }
 
 // button listeners for zooming

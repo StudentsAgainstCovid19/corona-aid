@@ -1,0 +1,11 @@
+<?xml encoding="UTF-8"?>
+
+<!ELEMENT History (infectedId,notes,personalFeeling,status,symptoms,
+                   timestamp)>
+<!ELEMENT infectedId (#PCDATA)>
+<!ELEMENT notes EMPTY>
+<!ELEMENT personalFeeling (#PCDATA)>
+<!ELEMENT status (#PCDATA)>
+<!ELEMENT symptoms (symptom)+>
+<!ELEMENT symptom (#PCDATA)>
+<!ELEMENT timestamp (#PCDATA)>

@@ -18,6 +18,7 @@
     border-style: solid;
     border-width: 2px;
     border-radius: 5px;
+    transition: .2s;
 }
 
 #helpListDiv button:hover {
@@ -61,12 +62,12 @@ body {
     font-family: "HelveticaNeue-Light", "Helvetica Neue Light", "Helvetica Neue", Helvetica, Arial, "Lucida Grande", sans-serif;
 }
 
-#helpPopup .cancel_button {
+#helpPopup .cancelButton {
     bottom: 0;
     position: absolute;
 }
 
-.wellbeing_indicator_size {
+.wellbeingIndicatorSize {
     width: 1.5em;
     height: 1.5em;
 }

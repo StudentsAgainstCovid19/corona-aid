@@ -1,7 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <xsl:stylesheet version="1.0" xmlns:xsl="http://www.w3.org/1999/XSL/Transform">
-
-
+    <xsl:output
+        method="html"
+        version="1.0"
+        encoding="utf-8"/>
     <xsl:template name="priority_img_template">
         <xsl:param name="prio"/>
         <xsl:choose>
@@ -14,7 +16,7 @@
 
     <xsl:template match="/">
         <div id="clusteredListOuterDiv">
-        <div id="clustered_list">
+        <div id="clusteredList">
             <xsl:apply-templates select="infected/person">
                 <!-- fill clustered list -->
                 <xsl:sort select="done" order="ascending"/>
@@ -22,7 +24,7 @@
             </xsl:apply-templates>
         </div>
         <div id="closeClusteredListDiv">
-            <button onclick="closeClusteredList();" class="dialogButton cancel_button">Schließen</button>
+            <button onclick="closeClusteredList();" class="dialogButton cancelButton">Schließen</button>
         </div>
         </div>
     </xsl:template>
@@ -35,16 +37,16 @@
             </xsl:call-template>
         </xsl:variable>
 
-        <div class="list_div">
+        <div class="listDiv">
             <xsl:attribute name="onclick">tryAcquireLock(<xsl:value-of select="id"/>)</xsl:attribute>
             <xsl:if test="done = 1">
-                <xsl:attribute name="class">done_div</xsl:attribute>
+                <xsl:attribute name="class">doneDiv</xsl:attribute>
             </xsl:if>
             <p>
                 <span>
-                    <xsl:attribute name="class">wellbeing_imagespan</xsl:attribute>
+                    <xsl:attribute name="class">wellbeingImagespan</xsl:attribute>
                     <img>
-                        <xsl:attribute name="class">wellbeing_indicator</xsl:attribute>
+                        <xsl:attribute name="class">wellbeingIndicator</xsl:attribute>
                         <!-- Todo -->
                         <xsl:attribute name="alt">Wohlbefinden</xsl:attribute>
                         <xsl:attribute name="src">./assets/markers/<xsl:value-of select="$priority_img"/>_prio.svg</xsl:attribute>

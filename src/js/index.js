@@ -45,8 +45,8 @@ function loadConfig() {
     if (!configXML) return;
     let items = configXML.getElementsByTagName("item");
     for (let i=0; i<items.length; i++) {
-        configHashTable[parseNodeValueFromXML(items[parseInt(i)], "configKey")] =
-            parseNodeValueFromXML(items[parseInt(i)], "configValue");
+        configHashTable[parseNodeValueFromXML(items[i], "configKey")] =
+            parseNodeValueFromXML(items[i], "configValue");
     }
 }
 
@@ -56,7 +56,7 @@ function configLoadErrorFn(statusCode) {
             makeConfirmPopup("Die Konfigurationen konnten nicht geladen werden.\n" +
                 "Es werden Standardkonfigurationen ausgewählt.\n" +
                 "Die Website wird vermutlich nicht funktionieren.",
-                null, null, true, "Schließen");
+                null, null, true, true, true, false,"Schließen");
             configHashTable = {"standardLat":"49.013868","standardLon":"8.404346", "clusteredDistance": "200",
                 "pieChartScale":"0.6","markerScale":"0.3","standardZoom":"13","zoomChange":"0.5", "animationDuration" : 200};
             break;
@@ -72,9 +72,9 @@ function serviceUnavailableError() {
         "Gehen Sie einen Kaffee trinken, doch verbrennen Sie sich nicht.\n" +
         "Falls der Fehler in 15 Minuten erneut auftritt, melden Sie sich unter:\n" +
         "<a href=\"mailto:support@corona-aid-ka.de\">support@corona-aid-ka.de</a>", null, null, null, true, "Schließen");
-    document.getElementById("cancel_confirm_button").className += " invisible_object";
-    document.getElementById("search_bar").className += " invisible_object";
-    document.getElementById("zoom_buttons").className += " invisible_object";
+    document.getElementById("cancelConfirmButton").className += " invisibleObject";
+    document.getElementById("searchBar").className += " invisibleObject";
+    document.getElementById("zoomButtons").className += " invisibleObject";
 }
 
 async function runUpdate() {
@@ -92,7 +92,7 @@ async function runUpdate() {
 }
 
 function makeAsyncUpdateProcess() {
-    updatePromise = setInterval(function(){runUpdate();}, configHashTable["frontendRefreshIntervall"]);
+    updatePromise = setInterval(function() { runUpdate(); }, configHashTable["frontendRefreshIntervall"]);
 }
 
 function enforceUpdate() {

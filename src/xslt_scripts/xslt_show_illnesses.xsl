@@ -1,6 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <xsl:stylesheet version="1.0" xmlns:xsl="http://www.w3.org/1999/XSL/Transform">
-
+<xsl:output
+    method="html"
+    version="1.0"
+    encoding="utf-8"/>
     <xsl:template match="InfectedDto">
         <p class="popupHeader">Vorerkrankungen von <xsl:value-of select="concat(surname, ', ', forename)"/></p>
         <div id="listOfIllnesses">
@@ -8,8 +11,8 @@
                 <xsl:sort select="degreeOfDanger" order="descending"/>
             </xsl:apply-templates>
         </div>
-        <div id="close_illnesses_button_div">
-        <button id="close_illnesses_button" class="dialogButton cancel_button" onclick="hidePopUp();">Schließen</button>
+        <div id="closeIllnessesButtonDiv">
+        <button id="closeIllnessesButton" class="dialogButton cancelButton" onclick="hidePopUp();">Schließen</button>
         </div>
     </xsl:template>
 
