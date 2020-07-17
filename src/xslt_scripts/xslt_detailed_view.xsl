@@ -268,7 +268,19 @@
                 <xsl:attribute name="alt">Risiko</xsl:attribute>
             </img>
             <p  id="riskText"><xsl:value-of select="$prio_desc"/></p>
-            <div id="preexistingIllnessButtonDiv"><button id="preexistingIllnessButton" onclick="showPreExistingIllnesses();" class="dialogButton grayButton" >Vorerkrankungen</button></div>
+            <div id="preexistingIllnessButtonDiv">
+                <button id="preexistingIllnessButton" onclick="showPreExistingIllnesses();" class="dialogButton grayButton" >
+                    <xsl:choose>
+                        <xsl:when test="count(initialDiseases/initialDisease) = 0">
+                            <xsl:attribute name="disabled"/>
+                            Keine Vorerkrankungen
+                        </xsl:when>
+                        <xsl:otherwise>
+                            Vorerkrankungen
+                        </xsl:otherwise>
+                    </xsl:choose>
+                </button>
+            </div>
         </div>
 
         <xsl:variable name="lastTestDoneId">
