@@ -9,7 +9,7 @@ function init() {
     calculatePriorities();
     makeAsyncUpdateProcess();
     connectWebSocket();
-    window.addEventListener("beforeunload", e => {
+    window.addEventListener("beforeunload", (e) => {
         if (detailBarMode === 2) {
             // unlock infected
             putRequest("infected/unlock/"+currentInfectedId);
