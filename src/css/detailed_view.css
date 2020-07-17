@@ -500,3 +500,9 @@ input[type="checkbox"] {
 #wellbeingHistorySpaceRight {
     padding-right: 2em;
 }
+
+.disabledButton{
+    background: lightgray;
+    border: 3px solid lightgray;
+    cursor: auto;
+}
