@@ -9,9 +9,16 @@ function init() {
     calculatePriorities();
     makeAsyncUpdateProcess();
     connectWebSocket();
-    window.onbeforeunload = function() {
-        cleanUp();
-    };
+    window.addEventListener("beforeunload", e => {
+        if (detailBarMode === 2) {
+            // unlock infected
+            putRequest("infected/unlock/"+currentInfectedId);
+
+            // Show alert for saved contents
+            e.returnValue = null;
+            return null;
+        }
+    });
     setTimeout(hideLoading, 1000);
 }
 
@@ -100,13 +107,6 @@ function enforceUpdate() {
 
     runUpdate();
     makeAsyncUpdateProcess();
-}
-
-function cleanUp() {
-    if (detailBarMode === 2) {
-        // unlock infected
-        postRequest("infected/unlock/"+currentInfectedId);
-    }
 }
 
 function showProgressBar() {
