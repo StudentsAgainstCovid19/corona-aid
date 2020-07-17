@@ -329,6 +329,7 @@
                 </xsl:when>
                 <xsl:otherwise>
                     <xsl:attribute name="disabled">disabled;</xsl:attribute>
+                    <xsl:attribute name="class">disabledButton dialogButton</xsl:attribute>
                     Test wurde angeordnet
                 </xsl:otherwise>
             </xsl:choose>

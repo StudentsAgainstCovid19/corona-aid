@@ -116,6 +116,9 @@ function prescribeTest(id) {
             const xmlString = "<TestInsertDto><infectedId>"+id+"</infectedId><result>0</result><timestamp>"+Date.now()+"</timestamp></TestInsertDto>";
             postRequest("test", xmlString);
             document.getElementById("prescribeTest").setAttribute("disabled", "disabled");
+            document.getElementById("prescribeTest").classList.remove("grayButton");
+            document.getElementById("prescribeTest").classList.add("disabledButton");
+            console.log(xmlString);
         }, function (id) { }, id );
 }
 
