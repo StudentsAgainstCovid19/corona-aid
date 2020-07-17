@@ -159,11 +159,18 @@
     position: absolute;
     top: 1%;
     right: 1%;
-    width: 200px;
-    height: 20px;
+    width: 250px;
+    height: 25px;
     background-color: transparent;
     display: flex;
     z-index: 5;
+}
+
+#progressBar {
+    border-style: solid;
+    border-radius: 13px;
+    border-width: 1px;
+    border-color: black;
 }
 
 #actionBar {
