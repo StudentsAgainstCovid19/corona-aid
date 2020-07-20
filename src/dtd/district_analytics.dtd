@@ -1,0 +1,16 @@
+<?xml encoding="UTF-8"?>
+
+<!ELEMENT Set (item)*>
+
+<!ELEMENT item (id,name,city,area,postalCode,infected,geometry)>
+<!ELEMENT id (#PCDATA)>
+<!ELEMENT city (#PCDATA)>
+<!ELEMENT area (#PCDATA)>
+<!ELEMENT postalCode (#PCDATA)>
+<!ELEMENT infected (#PCDATA)>
+<!ELEMENT geometry (name,ring)>
+<!ELEMENT ring (point)+>
+<!ELEMENT point (lon,lat)>
+<!ELEMENT lon (#PCDATA)>
+<!ELEMENT lat (#PCDATA)>
+<!ELEMENT name (#PCDATA)>

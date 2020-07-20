@@ -1,0 +1,14 @@
+<?xml encoding="UTF-8"?>
+
+<!ELEMENT List (item)*>
+
+<!ELEMENT item (id,name,city,postalCode,geometry)>
+<!ELEMENT id (#PCDATA)>
+<!ELEMENT city (#PCDATA)>
+<!ELEMENT postalCode (#PCDATA)>
+<!ELEMENT geometry (name,ring)>
+<!ELEMENT ring (point)+>
+<!ELEMENT point (lon,lat)>
+<!ELEMENT lon (#PCDATA)>
+<!ELEMENT lat (#PCDATA)>
+<!ELEMENT name (#PCDATA)>
