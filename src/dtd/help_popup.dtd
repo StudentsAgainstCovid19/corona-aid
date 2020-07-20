@@ -1,0 +1,9 @@
+<?xml encoding="UTF-8"?>
+
+<!ELEMENT helpPages (helpPage)*>
+
+<!ELEMENT helpPage (id,name,operation,path)>
+<!ELEMENT id (#PCDATA)>
+<!ELEMENT name (#PCDATA)>
+<!ELEMENT operation (#PCDATA)>
+<!ELEMENT path (#PCDATA)>
