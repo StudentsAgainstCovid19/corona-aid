@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!DOCTYPE Set SYSTEM "dtd/config.dtd">
+<!DOCTYPE Set SYSTEM "https://www.corona-aid-ka.de/dtd/config.dtd">
 <Set>
     <item>
         <id>3</id>
         <configKey>autoResetOffset</configKey>
-        <configValue>15</configValue>
+        <configValue>900</configValue>
     </item>
     <item>
         <id>4</id>
@@ -24,12 +24,12 @@
     <item>
         <id>7</id>
         <configKey>pieChartScaleConstant</configKey>
-        <configValue>0.4</configValue>
+        <configValue>0.38</configValue>
     </item>
     <item>
         <id>8</id>
         <configKey>markerScale</configKey>
-        <configValue>0.3</configValue>
+        <configValue>0.25</configValue>
     </item>
     <item>
         <id>9</id>
@@ -64,11 +64,16 @@
     <item>
         <id>15</id>
         <configKey>pieChartScaleLinear</configKey>
-        <configValue>0.0005</configValue>
+        <configValue>0.0018</configValue>
     </item>
     <item>
         <id>16</id>
         <configKey>projectionType</configKey>
         <configValue>EPSG:3857</configValue>
+    </item>
+    <item>
+        <id>17</id>
+        <configKey>pieChartsDisableCachingMinRemainingPatients</configKey>
+        <configValue>5000</configValue>
     </item>
 </Set>
