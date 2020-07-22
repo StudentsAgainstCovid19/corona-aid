@@ -1,15 +1,16 @@
-<!DOCTYPE HTML>
-<html lang="de">
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN"
+        "http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="de">
   <head>
-    <meta charset="utf-8" />
-    <meta name="description" content="StudentsAgsinstCovid19 - Overcoming bureaucratic hurdles">
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <meta name="description" content="StudentsAgsinstCovid19 - Overcoming bureaucratic hurdles"/>
     <title>Corona Aid</title>
-    <link rel="shortcut icon" type="image/x-icon" href="./favicon.ico">
+    <link rel="shortcut icon" type="image/x-icon" href="./favicon.ico"/>
 
     <!-- OpenLayers -->
     <link rel="stylesheet" type="text/css"
       href="https://cdn.jsdelivr.net/gh/openlayers/openlayers.github.io@master/en/v6.3.1/css/ol.css" />
-    <script src="https://cdn.jsdelivr.net/gh/openlayers/openlayers.github.io@master/en/v6.3.1/build/ol.js"></script>
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/gh/openlayers/openlayers.github.io@master/en/v6.3.1/build/ol.js"></script>
     <!-- CSS -->
     <link rel="stylesheet" href="./css/interaction_props.css" type="text/css" />
     <link rel="stylesheet" href="./css/call_list_style.css" type="text/css" />
@@ -20,21 +21,21 @@
     <link rel="stylesheet" href="./css/scrollbars.css" type="text/css" />
     <link rel="stylesheet" href="./css/help_style.css" type="text/css" />
     <!-- JS -->
-    <script src="./js/animations.js"></script>
-    <script src="./js/backend_interaction.js"></script>
-    <script src="./js/piecharts.js"></script>
-    <script src="./js/popups.js"></script>
-    <script src="./js/index.js"></script>
-    <script src="./js/shared_variables.js"></script>
-    <script src="./js/clustered_list.js"></script>
-    <script src="./js/detailed_bar.js"></script>
-    <script src="./js/CoronaOSM.js"></script>
-    <script src="./js/call_list.js"></script>
-    <script src="./js/search_call_list.js"></script>
-    <script src="./js/prepare_data.js"></script>
-    <script src="./js/tooltip_position.js"></script>
+    <script type="text/javascript" src="./js/animations.js"></script>
+    <script type="text/javascript" src="./js/backend_interaction.js"></script>
+    <script type="text/javascript" src="./js/piecharts.js"></script>
+    <script type="text/javascript" src="./js/popups.js"></script>
+    <script type="text/javascript" src="./js/index.js"></script>
+    <script type="text/javascript" src="./js/shared_variables.js"></script>
+    <script type="text/javascript" src="./js/clustered_list.js"></script>
+    <script type="text/javascript" src="./js/detailed_bar.js"></script>
+    <script type="text/javascript" src="./js/CoronaOSM.js"></script>
+    <script type="text/javascript" src="./js/call_list.js"></script>
+    <script type="text/javascript" src="./js/search_call_list.js"></script>
+    <script type="text/javascript" src="./js/prepare_data.js"></script>
+    <script type="text/javascript" src="./js/tooltip_position.js"></script>
     <!-- Embed XSLT -->
-    <script src="./js/load_xslt.js"></script>
+    <script type="text/javascript" src="./js/load_xslt.js"></script>
   </head>
   
   <body onload="init();">
@@ -44,7 +45,7 @@
     </div>
     <div id="mapDiv"></div>
     <div id="coronaLogo" class="coronaLogo">
-      <img src="assets/logo.png" alt="Corona Aid Logo" class="coronaLogoImg">
+      <img src="assets/logo.png" alt="Corona Aid Logo" class="coronaLogoImg"/>
     </div>
     <div id="actionBar" class="floatingObject">
         <button onclick="showHelp();" class="spaceAround smallButton">
@@ -60,7 +61,7 @@
         <input id="districts" type="checkbox" onclick="toggleLayerVisibility();"/>
         <label id="showDistrictsLabel" for="districts" class="spaceAround">Zeige Stadtteile</label>
     </div>
-  <div id="progressBarDiv" class="floatingObject"></div>
+    <div id="progressBarDiv" class="floatingObject"></div>
     <div id="rightBar" class="floatingObject">
       <div id="infectedDetailedViewRight"></div>
     </div>
@@ -72,7 +73,7 @@
           <button id="openListButton" onclick="toggleCallList();">
             <img src="./assets/icons/list_button.svg" id="openListSvg" alt="Menü" />
           </button>
-          <input type="text" placeholder="Suche..." id="searchInput">
+          <input type="text" id="searchInput"/>
           <button id="searchButton" onclick="searchCallList();">
             <div class="iconButton">
               <img src="./assets/icons/search_magnifier.svg" alt="Such-Icon"/>
@@ -81,7 +82,7 @@
         </div>
       </div>
 
-      <span id="continueSearchSpan">
+      <div id="continueSearchSpan">
         <div id="continueSearchButtons" class="floatingObject invisibleObject">
           <button class="continueSearchBtn" onclick="closeContinueSearch();">
             <img src="./assets/icons/close_button.svg" alt="Suche schließen" class="closeSearchIcons"/>
@@ -93,7 +94,7 @@
             <img src="./assets/icons/next_button.svg" alt="Nächstes Suchergebnis" class="closeSearchIcons"/>
           </button>
         </div>
-      </span>
+      </div>
     </div>
 
     <div id="zoomButtons" class="floatingObject">
@@ -117,7 +118,7 @@
     </div>
 
     <div id="loadingScreen" class="floatingObject">
-      <span><div id="waitText">Bitte warten...</div></span>
+      <span><span id="waitText">Bitte warten...</span></span>
       <span>
         <img src="favicon.ico" alt="Corona Aid Icon"/>
       </span>
