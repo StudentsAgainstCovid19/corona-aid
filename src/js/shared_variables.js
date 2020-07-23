@@ -28,7 +28,8 @@ var confirmConfig = [null, null, null]; // list for generic confirm popup.
                                         // onCancelCallback and third value are parameters for
                                         // those callbacks
 
-const apiUrl = "https://dev.api.corona-aid-ka.de/";
+const apiUrl = "https://api.corona-aid-ka.de/";
+const apiBaseUrl = "https://corona-aid-ka.de/";
 
 var updateXMLStr = "";
 var suppressUpdates = false;
