@@ -91,7 +91,7 @@ function submitSymptoms() {
 
 function constructSymptomPopupXML() {
     let parser = new DOMParser();
-    let xmlHeaderString = '<?xml version="1.0" encoding="utf-8"?><!DOCTYPE symptomPopupXML SYSTEM "' + apiUrl
+    let xmlHeaderString = '<?xml version="1.0" encoding="utf-8"?><!DOCTYPE symptomPopupXML SYSTEM "' + apiBaseUrl
         + 'dtd/construct_symptom_popup_xml_result.dtd">';
     let xmlDoc = parser.parseFromString(xmlHeaderString + "<symptomPopupXML></symptomPopupXML>", "application/xml");
     xmlDoc.children[0].appendChild(deepCopyXML(initialSymptoms).children[0]);
@@ -118,7 +118,7 @@ function prescribeTest(id) {
             document.getElementById("prescribeTest").setAttribute("disabled", "disabled");
             document.getElementById("prescribeTest").classList.remove("grayButton");
             document.getElementById("prescribeTest").classList.add("disabledButton");
-            console.log(xmlString);
+            // console.log(xmlString);
         }, function (id) { }, id );
 }
 

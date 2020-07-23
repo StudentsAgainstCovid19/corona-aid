@@ -1,6 +1,6 @@
 <?xml encoding="UTF-8"?>
 
-<!ELEMENT List (item)*>
+<!ELEMENT Set (item)*>
 
 <!ELEMENT item (id,name,city,postalCode,geometry)>
 <!ELEMENT id (#PCDATA)>

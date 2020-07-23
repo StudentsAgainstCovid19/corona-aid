@@ -73,14 +73,14 @@ function addHistoryItem(successProbability, infectedId, symptomList) {
             "</symptoms>" + "<timestamp>" + Date.now() + "</timestamp>" +
             "</History>";
     }
-    let xmlHeaderString = '<?xml version="1.0" encoding="utf-8"?><!DOCTYPE History SYSTEM "' + apiUrl
+    let xmlHeaderString = '<?xml version="1.0" encoding="utf-8"?><!DOCTYPE History SYSTEM "' + apiBaseUrl
         + 'dtd/push_history_item.dtd">';
     postRequest("history", xmlHeaderString+xmlString);
 }
 
 function prescribeTestSimulation(infectedId) {
     let xmlString = "<TestInsertDto><infectedId>"+infectedId+"</infectedId><result>0</result><timestamp>"+Date.now()+"</timestamp></TestInsertDto>";
-    let xmlHeaderString = '<?xml version="1.0" encoding="utf-8"?><!DOCTYPE TestInsertDto SYSTEM "' + apiUrl
+    let xmlHeaderString = '<?xml version="1.0" encoding="utf-8"?><!DOCTYPE TestInsertDto SYSTEM "' + apiBaseUrl
     + 'dtd/push_prescribe_test.dtd">';
     postRequest("test/", xmlHeaderString+xmlString);
 }

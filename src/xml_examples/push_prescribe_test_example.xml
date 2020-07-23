@@ -1,11 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE TestInsertDto SYSTEM "https://corona-aid-ka.de/dtd/push_prescribe_test.dtd">
 <TestInsertDto>
-	<infectedId>
-		121
-	</infectedId>
-	<result>
-		0
-	</result>
-	<timestamp>
-		1594332007523
-	</timestamp>
+	<infectedId>427</infectedId>
+	<result>0</result>
+	<timestamp>1595523002547</timestamp>
 </TestInsertDto>

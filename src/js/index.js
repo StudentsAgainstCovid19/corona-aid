@@ -49,6 +49,7 @@ function loadConfig() {
     // init configs
     let configXML = loadXMLDoc(apiUrl+"config", "application/xml", configLoadErrorFn);
 
+
     if (!configXML) return;
     let items = configXML.getElementsByTagName("item");
     for (let i=0; i<items.length; i++) {
@@ -64,8 +65,13 @@ function configLoadErrorFn(statusCode) {
                 "Es werden Standardkonfigurationen ausgewählt.\n" +
                 "Die Website wird vermutlich nicht funktionieren.",
                 null, null, true, true, true, false,"Schließen");
-            configHashTable = {"standardLat":"49.013868","standardLon":"8.404346", "clusteredDistance": "200",
-                "pieChartScale":"0.6","markerScale":"0.3","standardZoom":"13","zoomChange":"0.5", "animationDuration" : 200};
+
+            configHashTable = {"autoResetOffset":"900", "standardLat":"49.013868", "standardLon":"8.404346",
+                "clusteredDistance":"100", "pieChartScaleConstant":"0.38", "markerScale":"0.25", "standardZoom":"13",
+                "zoomChange":"0.5", "animationDuration":"200", "closeContinueSearchTime":"20000",
+                "realtimeRefreshInterval":"15", "frontendRefreshIntervall":"10000", "pieChartScaleLinear":"0.0018",
+                "projectionType":"EPSG:3857", "pieChartsDisableCachingMinRemainingPatients":"5000"
+            };
             break;
         case 502:
         case 503:

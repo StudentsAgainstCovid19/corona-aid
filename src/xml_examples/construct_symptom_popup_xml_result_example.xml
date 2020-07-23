@@ -1,284 +1,126 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE symptomPopupXML SYSTEM "https://corona-aid-ka.de/dtd/construct_symptom_popup_xml_result.dtd">
 <symptomPopupXML>
 	<symptomXML>
-		<surname>
-			Calisir
-		</surname>
-		<forename>
-			Ertugrul
-		</forename>
+		<surname>Helbig</surname>
+		<forename>Helen</forename>
 		<symptoms>
 			<symptom>
-				<id>
-					1
-				</id>
-				<sinceDays>
-					1
-				</sinceDays>
-				<degreeOfDanger>
-					8
-				</degreeOfDanger>
-				<name>
-					Fieber
-				</name>
-				<probability>
-					50
-				</probability>
+				<id>2</id>
+				<sinceDays>1</sinceDays>
+				<degreeOfDanger>5</degreeOfDanger>
+				<name>Kopfschmerzen</name>
+				<probability>50</probability>
 			</symptom>
 			<symptom>
-				<id>
-					2
-				</id>
-				<sinceDays>
-					1
-				</sinceDays>
-				<degreeOfDanger>
-					5
-				</degreeOfDanger>
-				<name>
-					Kopfschmerzen
-				</name>
-				<probability>
-					50
-				</probability>
+				<id>4</id>
+				<sinceDays>1</sinceDays>
+				<degreeOfDanger>1</degreeOfDanger>
+				<name>Verlust des Geschmacks- oder Geruchssinns</name>
+				<probability>62</probability>
 			</symptom>
 			<symptom>
-				<id>
-					3
-				</id>
-				<sinceDays>
-					2
-				</sinceDays>
-				<degreeOfDanger>
-					7
-				</degreeOfDanger>
-				<name>
-					Trockener Husten
-				</name>
-				<probability>
-					25
-				</probability>
+				<id>5</id>
+				<sinceDays>1</sinceDays>
+				<degreeOfDanger>4</degreeOfDanger>
+				<name>Halsschmerzen</name>
+				<probability>17</probability>
 			</symptom>
 			<symptom>
-				<id>
-					4
-				</id>
-				<sinceDays>
-					3
-				</sinceDays>
-				<degreeOfDanger>
-					1
-				</degreeOfDanger>
-				<name>
-					Verlust des Geschmacks- oder Geruchssinns
-				</name>
-				<probability>
-					62
-				</probability>
+				<id>6</id>
+				<sinceDays>1</sinceDays>
+				<degreeOfDanger>3</degreeOfDanger>
+				<name>Müdigkeit und Schwäche</name>
+				<probability>12</probability>
 			</symptom>
 			<symptom>
-				<id>
-					5
-				</id>
-				<sinceDays>
-					1
-				</sinceDays>
-				<degreeOfDanger>
-					4
-				</degreeOfDanger>
-				<name>
-					Halsschmerzen
-				</name>
-				<probability>
-					17
-				</probability>
+				<id>10</id>
+				<sinceDays>1</sinceDays>
+				<degreeOfDanger>8</degreeOfDanger>
+				<name>Schmerzen oder Druckgefühl im Brustbereich</name>
+				<probability>5</probability>
 			</symptom>
 		</symptoms>
 	</symptomXML>
 	<Set>
 		<item>
-			<id>
-				1
-			</id>
-			<name>
-				Fieber
-			</name>
-			<degreeOfDanger>
-				8
-			</degreeOfDanger>
-			<probability>
-				50
-			</probability>
+			<id>1</id>
+			<name>Fieber</name>
+			<degreeOfDanger>8</degreeOfDanger>
+			<probability>50</probability>
 		</item>
 		<item>
-			<id>
-				2
-			</id>
-			<name>
-				Kopfschmerzen
-			</name>
-			<degreeOfDanger>
-				5
-			</degreeOfDanger>
-			<probability>
-				50
-			</probability>
+			<id>2</id>
+			<name>Kopfschmerzen</name>
+			<degreeOfDanger>5</degreeOfDanger>
+			<probability>50</probability>
 		</item>
 		<item>
-			<id>
-				3
-			</id>
-			<name>
-				Trockener Husten
-			</name>
-			<degreeOfDanger>
-				7
-			</degreeOfDanger>
-			<probability>
-				25
-			</probability>
+			<id>3</id>
+			<name>Trockener Husten</name>
+			<degreeOfDanger>7</degreeOfDanger>
+			<probability>25</probability>
 		</item>
 		<item>
-			<id>
-				4
-			</id>
-			<name>
-				Verlust des Geschmacks- oder Geruchssinns
-			</name>
-			<degreeOfDanger>
-				1
-			</degreeOfDanger>
-			<probability>
-				62
-			</probability>
+			<id>4</id>
+			<name>Verlust des Geschmacks- oder Geruchssinns</name>
+			<degreeOfDanger>1</degreeOfDanger>
+			<probability>62</probability>
 		</item>
 		<item>
-			<id>
-				5
-			</id>
-			<name>
-				Halsschmerzen
-			</name>
-			<degreeOfDanger>
-				4
-			</degreeOfDanger>
-			<probability>
-				17
-			</probability>
+			<id>5</id>
+			<name>Halsschmerzen</name>
+			<degreeOfDanger>4</degreeOfDanger>
+			<probability>17</probability>
 		</item>
 		<item>
-			<id>
-				6
-			</id>
-			<name>
-				Müdigkeit und Schwäche
-			</name>
-			<degreeOfDanger>
-				3
-			</degreeOfDanger>
-			<probability>
-				12
-			</probability>
+			<id>6</id>
+			<name>Müdigkeit und Schwäche</name>
+			<degreeOfDanger>3</degreeOfDanger>
+			<probability>12</probability>
 		</item>
 		<item>
-			<id>
-				7
-			</id>
-			<name>
-				Durchfall
-			</name>
-			<degreeOfDanger>
-				6
-			</degreeOfDanger>
-			<probability>
-				8
-			</probability>
+			<id>7</id>
+			<name>Durchfall</name>
+			<degreeOfDanger>6</degreeOfDanger>
+			<probability>8</probability>
 		</item>
 		<item>
-			<id>
-				8
-			</id>
-			<name>
-				Übelkeit und Erbrechen
-			</name>
-			<degreeOfDanger>
-				7
-			</degreeOfDanger>
-			<probability>
-				8
-			</probability>
+			<id>8</id>
+			<name>Übelkeit und Erbrechen</name>
+			<degreeOfDanger>7</degreeOfDanger>
+			<probability>8</probability>
 		</item>
 		<item>
-			<id>
-				9
-			</id>
-			<name>
-				Atembeschwerden und Kurzatmigkeit
-			</name>
-			<degreeOfDanger>
-				10
-			</degreeOfDanger>
-			<probability>
-				5
-			</probability>
+			<id>9</id>
+			<name>Atembeschwerden und Kurzatmigkeit</name>
+			<degreeOfDanger>10</degreeOfDanger>
+			<probability>5</probability>
 		</item>
 		<item>
-			<id>
-				10
-			</id>
-			<name>
-				Schmerzen oder Druckgefühl im Brustbereich
-			</name>
-			<degreeOfDanger>
-				8
-			</degreeOfDanger>
-			<probability>
-				5
-			</probability>
+			<id>10</id>
+			<name>Schmerzen oder Druckgefühl im Brustbereich</name>
+			<degreeOfDanger>8</degreeOfDanger>
+			<probability>5</probability>
 		</item>
 		<item>
-			<id>
-				11
-			</id>
-			<name>
-				Appetitlosigkeit
-			</name>
-			<degreeOfDanger>
-				2
-			</degreeOfDanger>
-			<probability>
-				5
-			</probability>
+			<id>11</id>
+			<name>Appetitlosigkeit</name>
+			<degreeOfDanger>2</degreeOfDanger>
+			<probability>5</probability>
 		</item>
 		<item>
-			<id>
-				12
-			</id>
-			<name>
-				Verlust der Sprach- oder Bewegungsfähigkeit
-			</name>
-			<degreeOfDanger>
-				6
-			</degreeOfDanger>
-			<probability>
-				2
-			</probability>
+			<id>12</id>
+			<name>Verlust der Sprach- oder Bewegungsfähigkeit</name>
+			<degreeOfDanger>6</degreeOfDanger>
+			<probability>2</probability>
 		</item>
 	</Set>
 	<symptomIdList>
-		<symp_id>
-			1
-		</symp_id>
-		<symp_id>
-			3
-		</symp_id>
-		<symp_id>
-			2
-		</symp_id>
-		<symp_id>
-			5
-		</symp_id>
-		<symp_id>
-			4
-		</symp_id>
+		<symp_id>10</symp_id>
+		<symp_id>2</symp_id>
+		<symp_id>5</symp_id>
+		<symp_id>6</symp_id>
+		<symp_id>4</symp_id>
 	</symptomIdList>
 </symptomPopupXML>

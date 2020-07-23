@@ -17,7 +17,8 @@ async function displayClusteredMap(idArray) {
     }
 
     infectedIdList.sort((a, b) => a[0] - b[0]);
-    let xmlString = "<infected>";
+    let xmlString = '<?xml version="1.0"?><!DOCTYPE infected SYSTEM "' + apiBaseUrl + 'dtd/calculate_prio_result.dtd">';
+    xmlString += "<infected>";
     let xmlSerializer = new XMLSerializer();
     for (let i = 0; i<infectedPeople.length && idArray.length > 0; i++) {
         if (idArray[0] === infectedIdList[i][0]) {

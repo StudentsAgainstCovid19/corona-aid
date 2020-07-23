@@ -1,21 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE History SYSTEM "https://corona-aid-ka.de/dtd/push_history_item.dtd">
 <History>
-	<infectedId>
-		122
-	</infectedId>
-	<notes>
-	</notes>
-	<personalFeeling>
-		2
-	</personalFeeling>
-	<status>
-		1
-	</status>
+	<infectedId>857</infectedId>
+	<notes></notes>
+	<personalFeeling>4</personalFeeling>
+	<status>1</status>
 	<symptoms>
-		<symptom>
-			4
-		</symptom>
+		<symptom>2</symptom>
+		<symptom>3</symptom>
+		<symptom>4</symptom>
+		<symptom>10</symptom>
 	</symptoms>
-	<timestamp>
-		1594332065197
-	</timestamp>
+	<timestamp>1595523158922</timestamp>
 </History>
