@@ -7,6 +7,10 @@
 
 This is the frontend of the Corona Aid application, developed by students of the DHBW Karlsruhe as part of a student project.
 
+> Corona Aid ist der Name unseres Projekts. Wir haben einen Prototypen entwickelt, der ausgelasteten Gesundheitsämtern in Zeiten von Covid-19 helfen kann. Die Ämter müssen täglich mit den Patienten in Kontakt treten und z. B. deren Gesundheitszustand erfragen. Diesen Prozess haben wir mithilfe einer interaktiven Kartenanwendung vereinfacht. So wird die Verwaltung von Patientendaten zum Kinderspiel.
+
+What is this project about? Discover more in our [documentary repo](https://github.com/StudentsAgainstCovid19/corona-aid-docs/wiki) (only available in German).
+
 ## Production website
 The website is live here: [www.corona-aid-ka.de](https://www.corona-aid-ka.de)!
 
