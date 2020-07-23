@@ -26,7 +26,7 @@
         <xsl:variable name="subjectiveWellbeingFactor" select="(5-$subjectiveWellbeing)*0.2"/>
         <xsl:variable name="age_value" select="$age div 100.0"/>
 
-        <xsl:value-of select="$subjectiveWellbeingFactor+$symptomsWeight+$preIllnessWeight+$age_value"/>
+        <xsl:value-of select="($subjectiveWellbeingFactor+$symptomsWeight+$preIllnessWeight+$age_value)*1.25"/>
     </xsl:template>
 
     <xsl:template name="prioMarkerSVGName">
@@ -168,7 +168,7 @@
                         0
                     </xsl:when>
                     <xsl:otherwise>
-                        <xsl:value-of select="sum(historyItems/historyItem[$indexOfHistoryItem]/degreeOfDanger)"/>
+                        <xsl:value-of select="sum(/InfectedDto/historyItems/historyItem[$indexOfHistoryItem]/symptoms/symptom/degreeOfDanger)"/>
                     </xsl:otherwise>
                 </xsl:choose>
             </xsl:otherwise>
@@ -176,7 +176,7 @@
     </xsl:template>
 
     <xsl:template name="sumInitialDiseases">
-        <xsl:value-of select="sum(initialDiseases/degreeOfDanger)"/>
+        <xsl:value-of select="sum(/InfectedDto/initialDiseases/initialDisease/degreeOfDanger)"/>
     </xsl:template>
 
     <xsl:template name="getLatestWellbeing">
