@@ -28,7 +28,7 @@
         <xsl:variable name="subjectiveWellbeingFactor" select="(5-$subjectiveWellbeing)*0.2"/>
         <xsl:variable name="age_value" select="$age div 100.0"/>
 
-        <xsl:value-of select="$subjectiveWellbeingFactor+$symptomsWeight+$preIllnessWeight+$age_value"/>
+        <xsl:value-of select="($subjectiveWellbeingFactor+$symptomsWeight+$preIllnessWeight+$age_value)*1.25"/>
     </xsl:template>
 
     <xsl:template name="handleNullability">

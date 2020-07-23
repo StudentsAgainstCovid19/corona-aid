@@ -106,8 +106,8 @@
     overflow: auto;
     height: auto;
     max-height: 70%;
-    display: flex;
     align-items: center;
+    text-align: center;
     justify-content: center;
 }
 
