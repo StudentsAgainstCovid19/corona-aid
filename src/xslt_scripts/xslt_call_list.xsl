@@ -77,7 +77,7 @@
 
                 <h2>Name: </h2>
                 <span><xsl:value-of select="concat(lastname, ', ', firstnames)"/></span>
-                <h2>Zustand:  </h2>
+                <h2>Subj. Zustand:  </h2>
                 <span>
                     <xsl:value-of select="$wellbeing_desc"/>
                 </span>
