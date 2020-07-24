@@ -296,7 +296,7 @@
 
 
 
-        <p id="courseOfDiseaseHeader" class="text">Krankheitsverlauf</p>
+        <p id="courseOfDiseaseHeader" class="text">Testverlauf</p>
             <div id="prescribeTestBorderdiv">
         <div id="prescribeTestDiv" class="flexContainerTestresult">
         <xsl:variable name="testDaysText">
