@@ -501,7 +501,7 @@ input[type="checkbox"] {
     padding-right: 2em;
 }
 
-.disabledButton{
+.disabledButton {
     background: lightgray;
     border: 3px solid lightgray;
     cursor: auto;
