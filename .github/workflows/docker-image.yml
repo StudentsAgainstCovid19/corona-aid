@@ -12,13 +12,13 @@ jobs:
     - uses: actions/checkout@v2
     - name: Build the front-end Docker image
       run: | 
-        docker build . --file Dockerfile -t docker.pkg.github.com/studentsagainstcovid19/corona-aid/corona-aid-frontend:latest
+        docker build . --file Dockerfile -t ghcr.io/studentsagainstcovid19/corona-aid-frontend:latest
         echo "Build completed"
         
-        echo ${GITHUB_TOKEN} | docker login docker.pkg.github.com -u ${GITHUB_REPOSITORY_OWNER} --password-stdin
+        echo ${CR_PAT} | docker login ghcr.io -u ${GITHUB_REPOSITORY_OWNER} --password-stdin
         echo "Login successful"
         
-        docker push docker.pkg.github.com/studentsagainstcovid19/corona-aid/corona-aid-frontend:latest    
+        docker push ghcr.io/studentsagainstcovid19/corona-aid-frontend:latest    
         echo "Push successful"
       env:
-        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        CR_PAT: ${{ secrets.CR_PAT }}
